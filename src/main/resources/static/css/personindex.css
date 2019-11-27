@@ -1,0 +1,151 @@
+@charset "UTF-8";
+.personal{
+	margin-top:40px;
+	margin-bottom:100px;
+}
+.personal .left{
+	width:454px;
+	float:left;
+}
+.personal .right{
+	width:530px;
+	float:right;
+	padding:23px 0 20px 20px;
+	border:1px solid #eee;
+	background:#f2fafe;
+}
+/*左*/
+.prof-name span{
+	color:#888;
+	font-size:16px;
+}
+.prof-name .compe{
+	color:#444;
+	font-size:24px;
+}
+.prof-name .sex{
+	margin-left:30px;
+	margin-right:30px;
+}
+.prof-name .name-left{
+	float:left;
+}
+.prof-name .name-right{
+	float:right;
+	cursor:pointer;
+	margin-top: 6px;
+}
+.left p{
+	color:#888;
+	font-size:16px;
+}
+.left .prof-experience{
+	margin-top:34px;
+	margin-bottom:34px;
+}
+.left .mail{
+	margin-top:34px;
+	margin-bottom:50px;
+}
+.person-btn span{
+	color:#888;
+	cursor:pointer;
+	font-size:16px;
+}
+.person-btn .person-password{
+	margin-right:56px;
+}
+/*右*/
+.right h5{
+	color:#444;
+	font-size:24px;
+	font-weight:normal;
+}
+.right .touxiang{
+	text-align:center;
+	margin-bottom:14px;
+}
+.right .touxiang img{
+	border-radius:50%;
+	border:1px solid rgba(0,0,0,0.15);
+}
+.apply-inform .position{
+	margin-top:14px;
+	margin-bottom:14px;
+}
+.apply-inform{
+	margin-bottom:30px;
+}
+.apply-inform .position .computer{
+	margin-left:66px;
+	margin-right:66px;
+}
+.apply-inform .state .wait{
+	margin-left:66px;
+}
+.apply-inform span,p{
+	color:#888;
+	font-size:14px;
+}
+.apply-icon ul{
+	float:left;
+}
+.apply-icon li{
+	float:left;
+	margin-right:50px;
+}
+.apply-icon li a span{
+	display:block;
+}
+.apply-icon li a .icon-bt{
+	color:#888;
+	margin-top:10px;
+	font-size:14px;
+}
+.apply-icon .ann{
+	color:#888;
+	font-size:16px;
+	margin-top: 30px;
+    	float: left;
+}
+.apply-icon .ann .twelve{
+	color:#fc1919;
+}
+/*HR通知main区域样式开始*/
+.hrnotice{
+	margin-top:20px;
+	margin-bottom:100px;
+}
+.hrnotice-hd{
+	color:#888;
+	margin-bottom:30px;
+}
+.hrnotice-hd a{
+	color:#888;
+}
+.hrnotice-hd span{
+	color:#444;
+}
+.hrnotice-bd h5{
+	color:#444;
+	font-size:22px;
+	font-weight:normal;
+	text-align:center;
+	margin-bottom:20px;
+}
+.hrnotice-content{
+	height:555px;
+	border:1px solid #e8e8e8;
+}
+.hrnotice-bd .attach{
+	margin-left:11px;
+	margin-top:12px;
+}
+.hrnotice-bd .attach span{
+	font-size:14px;
+}
+.hrnotice-bd .attach .down{
+	color:#246bd6;
+	cursor:pointer;
+	margin-left:8px;
+}

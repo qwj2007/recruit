@@ -1,0 +1,27 @@
+server:
+    port: 8083
+spring:
+  application:
+    name: mybatisdemo
+  datasource:
+  #第一个数据源
+    recruit:
+      url: jdbc:mysql://localhost:3306/recruit?serverTimezone=GMT&nullCatalogMeansCurrent=true&characterEncoding=UTF-8&&useSSL=false
+      username: root
+      password: root
+      driver-class-name: com.mysql.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+  #第二个数据源
+    teacher:
+      url: jdbc:mysql://localhost:3306/teacher?serverTimezone=GMT&nullCatalogMeansCurrent=true&characterEncoding=UTF-8&&useSSL=false
+      username: root
+      password: root
+      driver-class-name: com.mysql.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+  thymeleaf:
+    cache: false
+    check-template: true
+    encoding: utf-8
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.recruit.web.pojo

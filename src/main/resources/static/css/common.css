@@ -1,0 +1,317 @@
+﻿@charset "UTF-8";
+/*头部区域样式开始*/
+.header-container{
+	border-bottom:1px solid #efefef;
+}
+.header{
+	height:105px;
+	line-height:105px;
+	position:relative;
+}
+.header-left{
+	float:left;
+}
+.header-left label{
+	color:#aaa;
+	font-size:30px;
+	height: 45px;
+    	line-height: 45px;
+	white-space: nowrap;
+	position: absolute;
+	top: 28px;
+	left: 315px;
+}
+.header-right{
+	float:right;
+}
+.header-right li{
+	float:left;
+	margin-left:40px;
+}
+.header-right li a{
+	font-size:14px;
+}
+/*头部区域样式结束*/
+/*底部样式开始*/
+.footer-container{
+	height:105px;
+	border-top:1px solid #efefef;
+}
+.footer{
+	margin-top:20px;
+	margin-bottom:22px;
+}
+.footer-left{
+	float:left;
+}
+.footer-left .copyright{
+	margin-top:8px;
+	margin-bottom:20px;
+}
+.footer-right{
+	cursor:pointer;
+	float:right;
+}
+/*底部样式结束*/
+/*分页样式开始*/
+.page{
+	margin-top:70px;
+	margin-bottom:24px;
+	margin-left:260px;
+}
+.page li{
+	float:left;
+	margin-right:10px;
+}
+.page li a{
+	color:#fff;
+	width:56px;
+	height:25px;
+	line-height:25px;
+	text-align:center;
+	display:inline-block;
+	background:#ee6d17;
+}
+/*分页样式结束*/
+/*right 开始*/
+.announce-rtt{
+	padding-left:23px;
+	padding-right:23px;
+	border:1px solid #efefef;
+}
+.person-hd .portrait{
+	margin:50px 0;
+}
+.person-hd .portrait .portrait-lt{
+	border:1px solid rgba(0,0,0,0.15);
+	float:left;
+	border-radius:50%;
+	margin-right:24px;
+}
+.person-hd .portrait .portrait-rt{
+	float:right;
+}
+.person-hd .portrait .portrait-rt span{
+	display:block;
+}
+.person-hd .portrait .portrait-rt span .orange{
+	color:#f81d1d;
+	display:inline;
+}
+.person-hd .portrait .portrait-rt .name{
+	margin-top:12px;
+	margin-bottom:16px;
+}
+.person-hd .enter{
+	width:100%;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	background:#ee6d17;
+}
+.person-hd .enter a{
+	color:#fff;
+}
+/*首页样式开始*/
+.person-index{
+    height: 100%;
+	padding-left:23px;
+	padding-right:23px;
+	border:1px solid #efefef;
+}
+.portindex-hd .port{
+	margin:50px 0;
+}
+.portindex-hd .port .port-lt{
+	border:1px solid rgba(0,0,0,0.15);
+	float:left;
+	border-radius:50%;
+	margin-right:24px;
+}
+.portindex-hd .port .port-lt img{
+    border-radius:50%;
+}
+.portindex-hd .port .port-rt{
+	float:right;
+}
+.portindex-hd .port .port-rt span{
+    font-size:14px;
+	display:block;
+}
+.portindex-hd .port .port-rt span .orange{
+	color:#f81d1d;
+	display:inline;
+}
+.portindex-hd .port .port-rt .name{
+	margin-top:12px;
+	margin-bottom:16px;
+}
+.portindex-hd .enter{
+	width:100%;
+	height: 40px;
+	line-height: 40px;
+	text-align:center;
+	background:#ee6d17;
+    font-size: 14px;
+}
+.portindex-hd .enter a{
+	color:#fff;
+}
+.portindex-bd{
+    margin-top:30px;
+}
+.portindex-bd span{
+    font-size: 14px;
+	color:#ee6d17;
+	cursor:pointer;
+}
+.portindex-bd .password{
+	float:left;
+}
+.portindex-bd .exit{
+	float:right;
+}
+/*首页样式结束*/
+.person-bd{
+	margin-top:20px;
+	margin-bottom:30px;
+}
+
+.person-bd span{
+	color:#ee6d17;
+	cursor:pointer;
+}
+.person-bd .password{
+	float:left;
+}
+.person-bd .exit{
+	float:right;
+}
+.announce-rtb{
+	padding:13px 23px;
+	margin-top:20px;
+	border:1px solid #efefef;
+}
+.announce-rtb span{
+	color:#888;
+}
+.announce-rtb a{
+	color:#aaa;
+	float:right;
+}
+/*right 结束*/
+/*left开始*/
+.annnounce{
+	margin-top:20px;
+}
+.annnounce-left{
+	width:753px;
+	float:left;
+}
+.announce-lfh{
+	color:#888;
+}
+.announce-lfh a{
+	color:#888;
+}
+.announce-lfh span{
+	color:#444;
+}
+.announce-lfctit{
+	margin-top:20px;
+	border-bottom:1px solid #efefef;
+}
+.announce-lfctit h5{
+	width:80px;
+	height:26px;
+	line-height:26px;
+	color:#fff;
+	text-align:center;
+	background:#ee6d17;
+}
+.announce-lfcli{
+	margin-top:12px;
+}
+.announce-lfcli li{
+	width:100%;
+	height:34px;
+	line-height:34px;
+	padding-left:14px;
+	padding-right:12px;
+}
+.announce-lfcli li:hover{
+	cursor:pointer;
+	background:#fafafa;
+}
+.announce-lfcli li:nth-child(even){
+	background:#f9f5ee;
+}
+.announce-lfcli li b{
+	float:right;
+	color:#aaa;
+	font-weight:normal;
+}
+.announce-right{
+	float:right;
+}
+/*left结束*/
+/*蓝色版头部区域样式开始*/
+.head-container{
+	height:60px;
+	line-height:60px;
+	background:#1178c3;
+}
+.head-left{
+	float:left;
+}
+.head-right{
+	float:right;
+    font-size:14px;
+}
+.head-right span{
+	color:#fff;
+}
+.head-right a{
+	color:#fff;
+}
+.head-right .per-line{
+	margin-left:6px;
+	margin-right:6px;
+}
+/*蓝色版头部区域样式结束*/
+/*系统管理头部区域样式开始*/
+.syshead-container{
+	height:80px;
+	line-height:80px;
+	background:#2e3137;
+}
+.syshead-left{
+	float:left;
+}
+.syshead-right{
+	float:right;
+	position:relative;
+}
+.syshead-right img{
+	top:34px;
+	left:10px;
+	position:absolute;
+}
+.syshead-right input{
+	width:186px;
+	height:27px;
+	line-height:27px;
+	border:none;
+	color:#e4e4e4;
+	border-radius:100px;
+	background:#22262d;
+	margin-right:38px;
+	padding-left:33px;
+	box-shadow:1px -1px 1px rgba(255,255,255,0.1) inset;
+	-webkit-box-shadow:1px -1px 1px rgba(255,255,255,0.1) inset;
+	-moz-box-shadow:1px -1px 1px rgba(255,255,255,0.1) inset;
+}
+.syshead-right a{
+	color:#e4e4e4;
+}
+/*系统管理头部区域样式结束*/

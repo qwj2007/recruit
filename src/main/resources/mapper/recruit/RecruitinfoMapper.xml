@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.recruit.web.mapper.recruit.RecruitinfoMapper">
+  <resultMap id="BaseResultMap" type="com.recruit.web.pojo.Recruitinfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="contents" jdbcType="VARCHAR" property="contents" />
+    <result column="endTime" jdbcType="TIMESTAMP" property="endtime" />
+    <result column="beginTime" jdbcType="TIMESTAMP" property="begintime" />
+    <result column="departmentname" jdbcType="VARCHAR" property="departmentname" />
+    <result column="isactive" jdbcType="BIT" property="isactive" />
+  </resultMap>
+  <select id="selectRecruitInfos" resultMap="BaseResultMap" resultType="Map">
+    select * from recruitinfo where isactive=1 limit 5
+  </select>
+
+  <select id="selectById" resultMap="BaseResultMap" resultType="Map">
+    select * from recruitinfo where id=1
+  </select>
+</mapper>

@@ -1,0 +1,83 @@
+﻿@charset "UTF-8";
+.recruit{
+	margin-top:30px;
+}
+.recruit-form .recruit-item{
+	float:left;
+	margin-right:48px;
+}
+.recruit-form .recruit-item select,input{
+	width:130px;
+	height:26px;
+	line-height:26px;
+	border-radius:5px;
+	padding-left:10px;
+	border:1px solid #eee;
+}
+.recruit-items{
+	margin-left:15px;
+}
+.recruit-items button{
+	color:#fff;
+	width:61px;
+	height:26px;
+	text-align:center;
+	line-height:26px;
+	border:none;
+	cursor:pointer;
+	font-family:"微软雅黑";
+	background:#ee6d17;
+}
+.recruit-items  .search,.recruit-items  .searchbtn{
+	color:#fff;
+	width:61px;
+	height:26px;
+	text-align:center;
+	line-height:26px;
+	border:none;
+	cursor:pointer;
+	font-family:"微软雅黑";
+	background:#ee6d17;
+}
+/*招聘详情开始*/
+.jobs {
+	margin-top:30px;
+	padding:23px 0;
+	margin-left:15px;
+	border-top:1px solid #efefef;
+	border-bottom:1px solid #efefef;
+}
+.jobs ul{
+	float:left;
+}
+.jobs li{
+	float:left;
+	margin-right:70px;
+}
+.jobs button{
+	color:#fff;
+	float:left;
+	width:80px;
+	height:26px;
+	line-height:26px;
+	text-align:center;
+	background:#ee6d17;
+	border:none;
+	cursor:pointer;
+	font-family: "微软雅黑";
+}
+.job-description{
+	margin-bottom:120px;
+	margin-left:15px;
+}
+.job-description h5{
+	font-size:14px;
+	margin-top:17px;
+	font-weight:normal;
+	margin-bottom:25px;
+}
+.job-description p{
+	color:#888;
+	line-height:30px;
+}
+/*招聘详情结束*/

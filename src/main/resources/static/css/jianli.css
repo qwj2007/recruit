@@ -1,0 +1,224 @@
+﻿@charset "UTF-8";
+/**
+* 
+* @authors (BQ) (you@example.org)
+* @date    2016-07-05 10:14:44
+* @version $Id$
+*/
+
+.resume{
+	margin-top:20px;
+}
+.resume-hd{
+	color:#888;
+	margin-bottom:20px;
+}
+.resume-hd a{
+	color:#888;
+}
+.resume-hd span{
+	color:#444;
+}
+.resume-bdlt{
+	width:206px;
+	float:left;
+	border:1px solid #e8e8e8;
+	margin-bottom: 80px;
+}
+.resume-bdrt{
+	width:794px;
+	float:right;
+}
+/*左*/
+.resume-content h5{
+	color:#fff;
+	height:40px;
+	line-height:40px;
+	background:#278edb;
+	padding-left:15px;
+	font-size:14px;
+	font-weight:normal;
+}
+.resume-content ul{
+	margin-bottom:70px;
+}
+/*.resume-content li{
+	margin-top:20px;
+	margin-left:30px;
+	padding-left:25px;
+	background:url(../images/resume/duihao.png) 0 center no-repeat;
+}*/
+.Illus h5{
+	color:#fff;
+	height:40px;
+	line-height:40px;
+	background:#278edb;
+	padding-left:15px;
+	font-size:14px;
+	font-weight:normal;
+}
+.Illus ul{
+	margin:0 28px 19px 28px;
+	margin-right:-18px;
+}
+.Illus li{
+	float:left;
+	margin-right:18px;
+	margin-top:18px;
+}
+.Illus li span{
+	margin-left:10px;
+}
+/*右*/
+.resume-bdrt h4{
+	font-size:22px;
+	font-weight:normal;
+	padding-bottom:11px;
+	border-bottom:1px solid #eee;
+	margin-bottom: 22px;
+}
+.resume-bdrt table{
+	border-collapse: collapse;
+}
+.resume-bdrt table td{
+	border:1px solid #e8e8e8;
+}
+.resume-bdrt table thead tr{
+	height: 42px;
+}
+.resume-bdrt table td{
+	text-align: center;
+	line-height: 18px;
+}
+/*培训经历,家庭成员表格样式重写*/
+.resume-bdrt .train td,
+.resume-bdrt .family td,
+.resume-bdrt .education td,
+.resume-bdrt .relation td{
+	/*height: 42px;*/
+	height: 42px;
+	padding:12px 15px;
+}
+/*培训经历表格样式重写*/
+.resume-bdrt table td.tl{
+	text-align: left;
+}
+.resume-bdrt table tbody td{
+	padding:22px 17px;
+	color: #888;
+}
+.resume-bdrt table tbody td a{
+	color: #888;
+}
+.resume-bdrt table tbody td a:hover{
+	color: #ee6b17;
+}
+.resume-bdrt h5{
+	background: #f7f7f7;
+	height: 30px;
+	line-height: 30px;
+	padding-left: 10px;
+	margin:10px 0 20px 0;
+}
+.modify select,.modify input{
+	height: 28px;
+	line-height: 28px;
+	color: #444;
+	font-family: "Microsoft Yahei";
+	border:1px solid #eee;
+	padding:0 5px;
+}
+.modify input{
+	width: 330px;
+}
+.modify select{
+	width: 330px;
+	margin-right: 4px;
+}
+.modify textarea{
+	width: 455px;
+	height: 148px;
+	padding: 5px;
+	border:1px solid #eee;
+	color: #444;
+	font-family: "Microsoft Yahei";
+}
+.modify div{
+	margin-bottom: 20px;
+}
+.modify label{
+	display: inline-block;
+	width: 110px;
+	text-align: right;
+	vertical-align: top;
+	line-height: 26px;
+}
+.modSave{
+	text-align: center;
+	padding:25px 0 40px 0;
+}
+.modSave button{
+	width: 140px;
+	height: 30px;
+	border:none;
+	background: #278edb;
+	color: #fff;
+	font-family: "Microsoft Yahei";
+	font-size: 14px;
+}
+/*补充内容*/
+.replenish textarea{
+	width: 794px;
+	height: 127px;
+	border:1px solid #eee;
+	padding:5px;
+	font-family: "Microsoft Yahei";
+	color: #444;
+}
+.replenish .modSave{
+	margin-top: 205px;
+}
+
+/*教育经历*/
+.modify input[type=radio]{
+	padding:0;
+	width: 14px;
+	vertical-align: middle;
+}
+.modify b{
+	margin: 0 20px 0 5px;
+	vertical-align: middle;
+	font-weight: normal;
+}
+.modify .xueli select{
+	width: 330px;
+}
+
+/*个人信息*/
+.information input{
+	width: 260px;
+}
+.information>div>div{
+	float: left;
+	width: 397px;
+}
+.information select{
+	width: 260px;
+}
+.address select{
+	width: 260px;
+}
+.nowAddress input{
+	width: 665px;
+}
+.resume-bdrt .edit{
+	float: right;
+	margin-top: -50px;
+	margin-right: 10px;
+	width: 56px;
+	height: 28px;
+	line-height: 28px;
+	padding-left: 28px;
+	color: #1178c3;
+	background: url(../images/edit.png) no-repeat left center;
+}

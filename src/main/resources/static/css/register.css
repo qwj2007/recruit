@@ -1,0 +1,187 @@
+﻿@charset "UTF-8";
+.register-hd{
+	color:#888;
+	padding:30px 0;
+	border-bottom:1px solid #efefef;
+}
+.register-hd a{
+	color:#888;
+}
+.register-hd span{
+	color:#444;
+}
+.register-bd{
+	/*margin:30px 20px 0 20px;*/
+    margin-top:30px;
+}
+.register-bd .register-steps span{
+	width:326px;
+	height:32px;
+	line-height:32px;
+	text-align:center;
+	/*display:block;*/
+	float:left;
+	color:#aaa;
+	font-size:14px;
+}
+.register-bd .register-steps .stepsOne{
+	background:url(../images/steps01.png) 0 center no-repeat;
+}
+.register-bd .register-steps .stepsOnec{
+	color:#fff;
+	background:url(../images/steps01-1.png) 0 center no-repeat;
+}
+.register-bd .register-steps .stepsTwo{
+	background:url(../images/steps02.png) 0 center no-repeat;
+}
+.register-bd .register-steps .stepsTwou{
+	color:#fff;
+	background:url(../images/steps02-2.png) 0 center no-repeat;
+}
+.register-bd .register-steps .stepsThree{
+	background:url(../images/steps02.png) 0 center no-repeat;
+}
+.register-bd .register-steps .stepsThreeu{
+	color:#fff;
+	background:url(../images/steps02-2.png) 0 center no-repeat;
+}
+.asterisk{
+	color:#ff1c1c;
+}
+.form-items{
+	margin-top:30px;
+}
+.form-item{
+	float:left;
+	margin-right: -9px;	
+	margin-bottom:20px;
+}
+.form-item .prov{
+	float:left;
+}
+.form-item .prov label{
+	float:left;
+	margin:6px 6px 0 6px;
+}
+.form-item .lt{
+	width:106px;
+	float:left;
+	margin-top:10px;
+	text-align: right;
+}
+.form-item .rt{
+	width:235px;
+	float:left;
+	height:36px;
+	line-height:36px;
+	padding-left:6px;
+	border:1px solid #d0d0d0;
+}
+.form-item .se{
+	width:235px;
+	padding-left:6px;
+	font-family:"微软雅黑";
+}
+.form-item .rad{
+	border:none;
+}
+.form-btn{
+	display:block;
+	text-align:center;
+	margin-bottom:50px;
+   
+}
+.form-btn button{
+	width:162px;
+	height:30px;
+	line-height:30px;
+	border:none;
+	color:#fff;
+	font-family: "微软雅黑";
+	text-align:center;
+	cursor:pointer;
+	background:#fd7010;
+     margin-top:30px;
+}
+.registerOne{
+	display:block;
+    width: 600px;
+    margin: 0 auto;
+}
+.registerTwo{
+	display:none;
+}
+.registerTwo .form-items .labels .le{
+    width:500px;
+}
+.registerThree{
+	display:none;
+}
+/*填写账户信息样式开始*/
+.acco-items{
+	margin-top:30px;
+}
+.acco-item{
+	display:block;
+	margin-bottom:20px;
+}
+.acco-item .lt{
+	float:left;
+	width:68px;
+	text-align:right;
+	margin-top:5px;
+}
+.acco-item .rt{
+	float:left;
+	width:192px;
+	height:28px;
+	line-height:28px;
+	padding-left:6px;
+	border:1px solid #eee;
+}
+.account-btn{
+	margin-top:30px;
+	text-align:center;
+	margin-bottom:50px;
+}
+.account-btn button{
+	color:#fff;
+	width:162px;
+	height:30px;
+	line-height:30px;
+	background:#fd7010;
+	border:none;
+	cursor:pointer;
+	font-family: "微软雅黑";
+}
+/*填写账户信息样式结束*/
+/*完成注册样式开始*/
+.complete-register{
+	margin-top:30px;
+	border:1px solid #eee;
+	text-align:center;
+	padding-bottom:100px;
+}
+.complete-register h5{
+	font-size:22px;
+	font-weight:normal;
+	margin:28px 0;
+}
+.agree{
+	margin:10px 0 50px 20px;
+}
+.complete-btn{
+	text-align:center;
+	margin-bottom:50px;
+}
+.complete-btn button{
+	color:#fff;
+	width:162px;
+	height:30px;
+	line-height:30px;
+	background:#fd7010;
+	border:none;
+	font-family: "微软雅黑";
+	cursor:pointer;
+}
+/*完成注册样式结束*/

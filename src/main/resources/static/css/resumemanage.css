@@ -1,0 +1,235 @@
+﻿@charset "UTF-8";
+.resume{
+	margin-top:20px;
+}
+.resume-hd{
+	color:#888;
+	margin-bottom:20px;
+}
+.resume-hd a{
+	color:#888;
+}
+.resume-hd span{
+	color:#444;
+}
+.resume-bdlt{
+	width:206px;
+	float:left;
+	border:1px solid #e8e8e8;
+}
+.resume-bdrt{
+	width:794px;
+	float:right;
+}
+/*左*/
+.resume-content h5{
+	color:#fff;
+	height:40px;
+	line-height:40px;
+	background:#278edb;
+	padding-left:15px;
+	font-size:14px;
+	font-weight:normal;
+}
+.resume-content ul{
+	margin-bottom:70px;
+}
+.resume-content li{
+	margin-top:20px;
+	padding-left:25px;	
+    overflow:hidden;
+}
+.resume-content li img{
+    float:left
+}
+.resume-content li a{
+    margin-left:6px;
+}
+.Illus h5{
+	color:#fff;
+	height:40px;
+	line-height:40px;
+	background:#278edb;
+	padding-left:15px;
+	font-size:14px;
+	font-weight:normal;
+}
+.Illus ul{
+	margin:0 28px 19px 28px;
+	margin-right:-18px;
+}
+.Illus li{
+	float:left;
+	margin-right:18px;
+	margin-top:18px;
+}
+.Illus li span{
+	margin-left:10px;
+}
+/*右*/
+.resume-bdrt h4{
+	font-size:22px;
+	font-weight:normal;
+	padding-bottom:11px;
+	border-bottom:1px solid #eee;
+}
+.per-inform{
+	margin-top:20px;
+	margin-bottom:20px;
+}
+.per-hd{
+	height:30px;
+	line-height:30px;
+	background:#f7f7f7;
+	padding-left:10px;
+	padding-right:10px;
+}
+.per-lt{
+	float:left;
+}
+.per-rt{
+	float:right;
+	cursor:pointer;
+}
+.per-rt span{
+	color:#1178c3;
+}
+.per-tp{
+	margin-top:20px;
+}
+.per-tpl{
+	/*width:649px;
+	float:left;*/
+}
+.per-tpr{
+	width:135px;
+	float:right;
+	margin-right:10px;
+}
+.per-items{
+	margin-right:-50px;
+   width: 670px;
+   float:left;
+}
+.per-item{
+    width: 42%;
+	float:left;
+	margin-right:50px;
+	margin-bottom:20px;
+}
+.PL{
+    width:100%;
+}
+/*.XM .per-item{
+    margin-right:80px;
+}
+.XM .rad{
+    margin-left:72px;
+    margin-right:63px;
+}
+.MZ .RQ{
+    margin-left:72px;
+    margin-right:50px;
+}*/
+.per-bt .per-item{
+	margin-right:73px;
+}
+.per-item .lt{
+	width:120px;
+	float:left;
+	text-align:right;
+	margin-top: 6px;
+}
+.per-item .rt{
+	float:left;
+	/*width:160px;
+	height:28px;
+	padding-left:6px;
+	border:1px solid #eee;*/
+    margin-top: 6px;
+}
+.per-item .te{
+	width:206px;
+}
+.per-item .ema{
+	width:280px;
+}
+.per-item .no{
+	width:660px;
+}
+.rad .rt{
+	margin-top:6px;
+	border:none;
+}
+.per-item .sel{
+	width:72px;
+}
+.pro{
+	float:left;
+}
+.pro label{
+	float:left;
+	margin-left:4px;
+	margin-right:4px;
+	margin-top:6px;
+}
+/*工作（实习）经历*/
+.internship{
+	margin-bottom:32px;
+}
+.inter-bd{
+	margin-top:10px;
+}
+.inter-bd table{
+	text-align:center;
+	border:1px solid #e8e8e8;
+}
+.inter-bd td{
+	padding:14px 29px;
+	border-left:1px solid #e8e8e8;
+	border-top:1px solid #e8e8e8;
+}
+.inter-bd td p{
+	text-align:left;
+}
+.inter-bd tbody td{
+	color:#888;
+}
+.education td{
+	padding:14px 25px;
+}
+.training td{
+	padding:14px 70px;
+}
+.cert td{
+	padding:14px 110px;
+}
+.family td{
+	padding:14px 25px;
+}
+.supple-bd{
+	margin-top:10px;
+}
+.supple-bd textarea{
+	width:794px;
+	height:120px;
+	padding-left:6px;
+	overflow:hidden;
+	border:1px solid #e8e8e8;
+}
+.supple-btn{
+	text-align:center;
+	margin-top:62px;
+	margin-bottom:62px;
+}
+.supple-btn button{
+	color:#fff;
+	border:none;
+	width:140px;
+	height:30px;
+	line-height:30px;
+	cursor:pointer;
+	font-family: "微软雅黑";
+	background:#278edb;
+	font-size:14px;
+}
