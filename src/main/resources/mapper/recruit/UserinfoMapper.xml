@@ -124,12 +124,14 @@
   <select id="getUserInfo" parameterType="java.lang.String" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List" />
-    FROM userinfo where isactice=1
+    FROM userinfo where isactive=1
     <if test="username != null">
-      and username=#{username,jdbcType=VARCHAR},
+      and username=#{username,jdbcType=VARCHAR}
     </if>
     <if test="email != null">
       and email=#{email,jdbcType=VARCHAR}
     </if>
+     limit 1
+
   </select>
 </mapper>

@@ -9,4 +9,16 @@ import com.recruit.web.pojo.Userinfo;
 public interface IUserinfoService {
     Userinfo getUserInfoByNamePwd(String username, String pwd);
     Userinfo  getUserInfo(String username,String email);
+
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(Userinfo record);
+
+    int insertSelective(Userinfo record);
+
+    Userinfo selectByPrimaryKey(Integer id);
+
+    int updateByPrimaryKeySelective(Userinfo record);
+
+    int updateByPrimaryKey(Userinfo record);
 }

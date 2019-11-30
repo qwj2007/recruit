@@ -86,7 +86,6 @@ function trim(str) {
 
 //身份证相关--end
 function registerSteps() {
-    debugger;
     var email;
     var moblie;
     var username;
@@ -199,23 +198,25 @@ function registerSteps() {
     });
 
     $("#stepTwoX").click(function () {
+        debugger
         XM = $('#username').val();
         XB = $('input:radio[name="XB"]:checked').val();
-        MZID = $('#nationality').val();
+        MZID=  $('#nationality option:selected').text()
+       // MZID = $('#nationality').text();
         SFZH = $('#idcard').val();
         NL = $('#NL').val();
         CSRQ = $('#birthday').val();
         JG = $('#JG').val();
-        ZZMMID = $('#ZZMMID').val();
-        HYZKID = $('#HYZKID').val();
+        ZZMMID = $('#ZZMMID option:selected').text();
+        HYZKID = $('#HYZKID option:selected').text();
         RSGXSZD = $('#RSGXSZD').val();
         HKSZD = $('#HKSZD').val();
         LXDH = $('#LXDH').val();
         XJZD = $('#XJZD').val();
         BYXS = $('#BYXS').val();
         SXZY = $('#SXZY').val();
-        XLID = $('#XLID').val();
-        XWID = $('#XWID').val();
+        XLID = $('#XLID option:selected').text();
+        XWID = $('#XWID option:selected').text();
         SFYJS = $('input:radio[name="SFYJS"]:checked').val();
         GZSJ = $('#GZSJ').val();
         DWMC = $('#DWMC').val();
@@ -323,16 +324,40 @@ function registerSteps() {
         if ($("#agree").is(':checked')) {
             $.ajax({
                 type: "POST",
-                url: "Ajax/LoginAjax.ashx?op=reg",
+                url: "/Register/RegisterUserInfo",
                 processData: true,
                 async: false,
                 cache: false,
-                data: { YHM: username, DLMM: password, DZYX: email, XM: XM, XB: XB, CSRQ: CSRQ, NL: NL, MZID: MZID, JG: JG, HYZKID: HYZKID, HKSZD: HKSZD, ZZMMID: ZZMMID, GZSJ: GZSJ, RSGXSZD: RSGXSZD, SFZH: SFZH, XLID: XLID, BYXS: BYXS, SXZY: SXZY, XWID: XWID, BYZY: SXZY, LXDH: LXDH, DWMC: DWMC, ZW: ZW, XJZD: XJZD, SFYJS: SFYJS },
+                data: {
+                    username: username,
+                    pwd: password,
+                    email: email,
+                    truename: XM,
+                    sex: XB,
+                    birthday: CSRQ,
+                    age: NL,
+                    nation: MZID,
+                    nativeplace: JG,
+                    maritalstatus: HYZKID,
+                    registeredresidence: HKSZD,
+                    politicaloutlook: ZZMMID,
+                    workdate: GZSJ,
+                    locationpersonnelrelationship: RSGXSZD,
+                    card: SFZH,
+                    education: XLID,
+                    graduateschool: BYXS,
+                    major: SXZY,
+                    academicdegree: XWID,
+                    phone: LXDH,
+                    companyname: DWMC,
+                    postname: ZW,
+                    nowaddress: XJZD,
+                    isfreshstudent: SFYJS },
                 success: function (data) {
                     // alert(data);
                     if (data == "ok") {
                         alert("注册成功！");
-                        window.location.href = "/Center/personindex.aspx";
+                        window.location.href = "/center/personindex";
                         // document.location.href = "/Center/personindex.aspx";
                         // window.event.returnValue = false;
                     }

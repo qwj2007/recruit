@@ -77,14 +77,15 @@ public class RecruitInfoController {
     public String checkRegistUserInfo(Model model, HttpServletRequest request) {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
-        Userinfo userinfo = userinfoService.getUserInfo(username, "");
+        Userinfo userinfo = userinfoService.getUserInfo(username, null);
         if (userinfo != null) {
             return "1";
         }
-        userinfo = userinfoService.getUserInfo("", email);
+        userinfo = userinfoService.getUserInfo(null, email);
         if (userinfo != null) {
             return "2";
         }
         return "ok";
     }
+
 }

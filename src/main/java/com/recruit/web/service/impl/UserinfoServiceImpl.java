@@ -22,7 +22,37 @@ public class UserinfoServiceImpl implements IUserinfoService{
 
     @Override
     public Userinfo getUserInfo(String username, String email) {
-        Userinfo userinfo= userinfoMapper.getUserInfoByNamePwd(username,email);
+        Userinfo userinfo= userinfoMapper.getUserInfo(username,email);
         return  userinfo;
+    }
+
+    @Override
+    public int deleteByPrimaryKey(Integer id) {
+        return 0;
+    }
+
+    @Override
+    public int insert(Userinfo record) {
+        return 0;
+    }
+
+    @Override
+    public int insertSelective(Userinfo record) {
+     return   userinfoMapper.insertSelective(record);
+    }
+
+    @Override
+    public Userinfo selectByPrimaryKey(Integer id) {
+        return null;
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(Userinfo record) {
+        return 0;
+    }
+
+    @Override
+    public int updateByPrimaryKey(Userinfo record) {
+        return 0;
     }
 }
