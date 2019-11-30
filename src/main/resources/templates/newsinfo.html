@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>通知公告</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/portal.css">
+    <link rel="stylesheet" href="/css/base.css" type="text/css">
+    <link rel="stylesheet" href="/css/common.css" type="text/css">
+    <link rel="stylesheet" href="/css/announcelist.css" type="text/css">
+</head>
+<body>
+<div th:replace="layout/common::topbar"></div>
+<div class="annnounce-details">
+    <div class="annnounce-content container">
+        <div class="article-hd">
+            您的当前位置：<a href="/">首页 ></a>
+            <a href="/center/newslist">通知公告 ></a>
+            <span th:text="${newsinfo.title}"></span>
+        </div>
+        <div class="article-cd">
+            <h4 th:text="${newsinfo.title}"></h4>
+            <div class="subtitle">
+                <p>发布时间：<span th:text="${#dates.format(newsinfo.createtime,'yyyy-MM-dd')}"></span>
+                    <span class="auth"> 作者：<span th:text="${newsinfo.author}"></span></span>
+                    浏览次数：<span th:text="${newsinfo.showcount}"></span>次</p>
+            </div>
+            <div class="regist-way" th:text="${newsinfo.contents}">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div th:replace="layout/common::bottombar"></div>
+</body>
+</html>

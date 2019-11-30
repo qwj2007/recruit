@@ -1,6 +1,6 @@
 <!--顶栏-->
 <nav th:fragment="topbar">
-    <div class="top rekit_c5bab6 rekit_7f6040 rekit_908c9e">
+    <div class="rekit_c5bab6 rekit_7f6040 rekit_908c9e">
         <div class="rekit_1e8090 rekit_dc1e22">
             <div class="rekit_2365cd">
                 <a href="Default.aspx">
@@ -9,16 +9,18 @@
                 <label>招聘频道</label>
             </div>
             <div class="rekit_9b0454">
-                <a href="/Default.aspx" class="">首页</a>
-                <a href="/Center/RecruitList.aspx" class="">招聘信息</a>
-                <a href="/Center/Announcelist.aspx" class="">通知公告</a>
-                <a href="http://www.bjjt.edu.cn" class="" target="_blank">学院官网</a>
+                <a href="/" class="">首页</a>
+                <a href="/center/recruitlist" class="">招聘信息</a>
+                <a href="/center/newslist" class="">通知公告</a>
+                <a href="http://www.baidu.com" class="" target="_blank">官网</a>
             </div>
         </div>
     </div>
 </nav>
+
+
 <nav th:fragment="right">
-    <div class="member" id="login">
+    <div class="member" id="login" th:if="${showLogin}==0">
         <div class="rekit_fdcfc5">
             <label>
                 用户登录</label>
@@ -43,14 +45,34 @@
             </div>
             <div class="rekit_e3396e" style="margin-top: 20px;">
                 <ol style="border: 0">
-                    <li style="width: 50%; float: left; text-align: center;"><a href="Register.aspx"
-                                                                                class="hover">注册新用户</a>
+                    <li style="width: 50%; float: left; text-align: center;"><a href="/center/register"  class="hover">注册新用户</a>
                     </li>
                     <li style="width: 50%; float: left; text-align: center;">
                         <a href="RetrievePwd/RetrievePassword.aspx" class="hover">找回密码</a>
                     </li>
                 </ol>
             </div>
+        </div>
+    </div>
+
+    <div class="person-index" id="show" th:if="${showLogin}==1">
+        <div class="portindex-hd">
+            <div class="port clearFix">
+                <div class="port-lt">
+                    <img src="/image1.png" alt="" width="70" height="70">
+                </div>
+                <div class="port-rt">
+                    <span class="name" th:text="${username}" ></span>
+                    <span>HR 通知 <span class="orange" id="count">（11）</span></span>
+                </div>
+            </div>
+            <div class="enter">
+                <a href="Center/personindex.aspx">进入个人中心</a>
+            </div>
+        </div>
+        <div class="portindex-bd clearFix">
+            <span class="password" onclick="ChangePassword();">修改密码</span>
+            <span class="exit" onclick="logout();">安全退出</span>
         </div>
     </div>
 </nav>

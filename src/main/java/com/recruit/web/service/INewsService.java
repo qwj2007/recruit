@@ -10,4 +10,5 @@ import java.util.List;
  */
 public interface INewsService {
     List<News> selectNews();
+    News selectByPrimaryKey(Integer id);
 }

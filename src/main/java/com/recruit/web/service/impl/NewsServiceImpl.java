@@ -16,8 +16,14 @@ import java.util.List;
 public class NewsServiceImpl implements INewsService {
     @Autowired
     private NewsMapper newsMapper;
+
     @Override
     public List<News> selectNews() {
         return newsMapper.selectNews();
+    }
+
+    @Override
+    public News selectByPrimaryKey(Integer id) {
+        return newsMapper.selectByPrimaryKey(id);
     }
 }

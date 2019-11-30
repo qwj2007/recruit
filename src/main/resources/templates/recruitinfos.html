@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>岗位列表</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/portal.css">
+    <link rel="stylesheet" href="/css/base.css" type="text/css">
+    <link rel="stylesheet" href="/css/common.css" type="text/css">
+    <link rel="stylesheet" href="/css/recruit.css" type="text/css">
+    <style type="text/css">
+        .yonghu {
+            width: 214px;
+        }
+
+        .mima {
+            width: 214px;
+        }
+    </style>
+    <script src="/js/jquery-1.8.0.min.js"></script>
+    <script src="/js/slides.jquery.js"></script>
+    <script type="text/javascript" src="/js/login.js"></script>
+</head>
+<body>
+<div th:replace="layout/common::topbar"></div>
+<div class="annnounce-container">
+    <div class="annnounce container clearFix">
+        <div class="annnounce-left">
+            <div class="announce-lfh">
+                您的当前位置：<a href="/">首页 ></a>
+                <span>岗位信息</span>
+            </div>
+            <div class="announce-lfc">
+
+                    <div class="jobs clearFix">
+                        <ul class="clearFix">
+                            <li>· 岗位：<span th:text="${recruitinfos.title}"></span></li>
+                            <li>所属部门：<span th:text="${recruitinfos.departmentname}"></li>
+                        </ul>
+                        <button id="sq" onclick="ShengQing()" th:if="${showLogin}==1">立即申请</button>
+                    </div>
+                    <div class="job-description" th:text="${recruitinfos.contents}">
+
+                    </div>
+            </div>
+        </div>
+        <div class="announce-right" style="width: 250px">
+            <div th:replace="layout/common::right"></div>
+        </div>
+    </div>
+</div>
+<div th:replace="layout/common::bottombar"></div>
+</body>
+</html>

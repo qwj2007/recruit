@@ -14,7 +14,7 @@
     select * from recruitinfo where isactive=1 limit 5
   </select>
 
-  <select id="selectById" resultMap="BaseResultMap" resultType="Map">
-    select * from recruitinfo where id=1
+  <select id="selectById"  resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select * from recruitinfo where id=#{id}
   </select>
 </mapper>

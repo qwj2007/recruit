@@ -27,8 +27,10 @@ public class RecruitInfoService implements IRecruitInfoService {
     }
 
     @Override
-    public Recruitinfo selectById() {
-        return recruitinfoMapper.selectById();
+    public Recruitinfo selectById(Integer id) {
+        return recruitinfoMapper.selectById(id);
     }
+
+
 
 }

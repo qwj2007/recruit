@@ -3,6 +3,7 @@ package com.recruit.web.service;
 
 
 import com.recruit.web.pojo.Recruitinfo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -13,5 +14,5 @@ import java.util.List;
 
 public interface IRecruitInfoService {
      List<Recruitinfo> selectRecruitInfos();
-     Recruitinfo  selectById();
+     Recruitinfo  selectById(@Param("id") Integer id);
 }

@@ -86,6 +86,7 @@ function trim(str) {
 
 //身份证相关--end
 function registerSteps() {
+    debugger;
     var email;
     var moblie;
     var username;
@@ -144,9 +145,24 @@ function registerSteps() {
                 return false;
             }
         }
+        if(username=="")
+        {
+            alert("用户名不能为空");
+            return false;
+        }
+        if(password=="")
+        {
+            alert('密码不能为空！');
+            return false;
+        }
+        if(email=="")
+        {
+            alert('邮箱不能为空！');
+            return false;
+        }
         var flag = false;
         $.ajax({
-            url: "Ajax/LoginAjax.ashx?op=check&yhm=" + username + "&mm=" + password + "&email=" + email + "",
+            url: "/center/checklogin?username=" + username + "&pwd=" + password + "&email=" + email + "",
             type: "post",
             async: false,
             dataType: "text",
@@ -162,23 +178,8 @@ function registerSteps() {
                         alert(msg);
                         return false;
                     }
-                    if (msg == "2") {
+                    else if (msg == "2") {
                         msg = '邮箱已注册！';
-                        alert(msg);
-                        return false;
-                    }
-                    if (msg == "3") {
-                        msg = '用户名不能为空！';
-                        alert(msg);
-                        return false;
-                    }
-                    if (msg == "4") {
-                        msg = '密码不能为空！';
-                        alert(msg);
-                        return false;
-                    }
-                    if (msg == "5") {
-                        msg = '邮箱不能为空！';
                         alert(msg);
                         return false;
                     }

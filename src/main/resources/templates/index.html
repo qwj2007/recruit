@@ -12,28 +12,30 @@
     <link rel="stylesheet" href="/css/common.css" type="text/css">
     <script src="/js/jquery-1.8.0.min.js"></script>
     <script src="/js/slides.jquery.js"></script>
-
+<script src="/js/login.js"></script>
     <script>
-
+/*
         function userlogin() {
             var userName = document.getElementById("username").value; //账号
             var pwd = document.getElementById("userpwd").value; //密码
-            var parm = { userName: userName, pwd: pwd };
-           /*
+            var parm = { username: userName, pwd: pwd };
+
             $.ajax({
-                url: "Ajax/LoginAjax.ashx?op=login",
+                url: "index/login",
                 type: "post",
                 data: parm,
                 async: false,
                 dataType: "text",
                 success: function (msg) {
-                    if (msg == "okzpyh") {
+
+                    if (msg == "1") {
                         //$('#login').hide();
                         //$('#show').show();
                         //$('#liuser').html("您好！" + userName);
-                        location.href = 'Center/personindex.aspx';
+                        //location.href = 'Center/personindex.aspx';
+                       location.href="";
                     }
-                    else if (msg == "okjzg") {
+                    else if (msg == "0") {
                         location.href = 'Manage/Index.aspx';
                     }
                     else {
@@ -41,7 +43,7 @@
                     }
                 }
             });
-            */
+
         }
         function logout() {
             document.getElementById("username").value = ''; //账号
@@ -50,7 +52,7 @@
             $('#show').hide();
             location.href = '/Manage/Logout.aspx';
         }
-
+*/
         $(document).ready(function () {
             $("#userpwd").keydown(function (e) {
                 var curkey = e.which;
@@ -104,7 +106,6 @@
         <div class="rekit_509602 rekit_280456">
             <div class="rekit_c3ae88 rekit_7f6040 rekit_96a192">
 
-
                 <div th:replace="layout/common::right"></div>
 
                 </div>
@@ -119,13 +120,14 @@
         <div class="rekit_0784cd">
             <div class="rekit_8dc54f">
                 <label>
-                    招聘信息</label><p><a href="/Center/RecruitList.aspx">更多</a> </p>
+                    招聘信息</label><p><a href="/center/recruitlist" >更多</a> </p>
             </div>
             <div class="rekit_b7ce55" id="joblist" th:each="emp:${recruitinfos}">
                 <li class="">
                     <p><b th:text="${#dates.format(emp.begintime,'yyyy-MM-dd')}"></b></p>
-                    <a href="/Center/RecruitDetail.aspx?id=27b780bc-03f4-4190-9bba-72b3458d530e">
-                        <div th:text="${emp.title}"/>
+
+                    <a th:href="@{/center/recruitinfos(id=${emp.id})}"  th:text="${emp.title}" >
+                       dfsdfdsf
                     </a>
                 </li>
             </div>
@@ -134,14 +136,15 @@
             <div class="rekit_8dc54f">
                 <label>
                     通知公告</label><p>
-                <a href="/Center/Announcelist.aspx">更多</a>
+                <a href="/center/newslist">更多</a>
             </p>
             </div>
             <div class="rekit_b7ce55">
                 <li th:each="emp:${news}">
-                    <a href="/Center/Announcedetails.aspx?id=3ce509ce-dcfe-40ee-ae72-1a92589ad5e4">
+                    <a href="/center/recruitinfos.aspx?id=${emp.id}">
                         <span th:text="${emp.title}">2232323232323</span>
                     </a>
+
                 </li>
 
             </div>
