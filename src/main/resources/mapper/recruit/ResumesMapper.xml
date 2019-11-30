@@ -25,12 +25,14 @@
     <result column="workdate" jdbcType="TIMESTAMP" property="workdate" />
     <result column="comanyname" jdbcType="VARCHAR" property="comanyname" />
     <result column="postname" jdbcType="VARCHAR" property="postname" />
+    <result column="photo" jdbcType="VARCHAR" property="photo" />
+    <result column="workage" jdbcType="INTEGER" property="workage" />
   </resultMap>
   <sql id="Base_Column_List">
     id, userid, truename, nation, sex, card, birthday, age, nativeplace, politicaloutlook, 
     maritalstatus, locationpersonnelrelationship, registeredresidence, phone, nowaddress, 
     graduateschool, major, education, academicdegree, isfreshstudent, workdate, comanyname, 
-    postname
+    postname,photo
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -53,7 +55,7 @@
       registeredresidence, phone, nowaddress, 
       graduateschool, major, education, 
       academicdegree, isfreshstudent, workdate, 
-      comanyname, postname)
+      comanyname, postname,photo)
     values (#{userid,jdbcType=INTEGER}, #{truename,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, 
       #{sex,jdbcType=VARCHAR}, #{card,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, 
       #{age,jdbcType=TIMESTAMP}, #{nativeplace,jdbcType=VARCHAR}, #{politicaloutlook,jdbcType=VARCHAR}, 
@@ -61,7 +63,7 @@
       #{registeredresidence,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{nowaddress,jdbcType=VARCHAR}, 
       #{graduateschool,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, 
       #{academicdegree,jdbcType=VARCHAR}, #{isfreshstudent,jdbcType=BIT}, #{workdate,jdbcType=TIMESTAMP}, 
-      #{comanyname,jdbcType=VARCHAR}, #{postname,jdbcType=VARCHAR})
+      #{comanyname,jdbcType=VARCHAR}, #{postname,jdbcType=VARCHAR},#{photo,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.recruit.web.pojo.Resumes">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -135,6 +137,9 @@
       <if test="postname != null">
         postname,
       </if>
+      <if test="photo != null">
+        photo,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userid != null">
@@ -202,6 +207,9 @@
       </if>
       <if test="postname != null">
         #{postname,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        #{photo,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -274,6 +282,9 @@
       <if test="postname != null">
         postname = #{postname,jdbcType=VARCHAR},
       </if>
+      <if test="photo != null">
+        postname = #{photo,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -300,7 +311,12 @@
       isfreshstudent = #{isfreshstudent,jdbcType=BIT},
       workdate = #{workdate,jdbcType=TIMESTAMP},
       comanyname = #{comanyname,jdbcType=VARCHAR},
-      postname = #{postname,jdbcType=VARCHAR}
+      postname = #{postname,jdbcType=VARCHAR},photo=#{photo,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selctResumeByUserId"  parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *,TIMESTAMPDIFF(YEAR,resumes.workdate,now()) workage
+    FROM resumes where userid=#{userid} LIMIT 1
+  </select>
 </mapper>

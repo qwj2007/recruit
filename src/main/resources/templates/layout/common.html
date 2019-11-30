@@ -17,6 +17,28 @@
         </div>
     </div>
 </nav>
+<nav th:fragment="ptopbar">
+    <div class="header">
+        <div class="w950">
+            <div class="logo  fltL">
+                <a href="/" target="_blank" title="返回网站首页">
+                    <img alt="" src="/images/14602126134.PNG">
+                </a>
+            </div>
+            <div class="top_right_re fltR">
+                <div class="top_right">
+                    <div class="header_seach_State fltR">
+                        <span class="header_seach_State_name">你好!</span>
+                        <span class="user_m_line">|</span>
+                        <a href="logout()" class="header_seach_State_a">退出</a>
+                        <span class="user_m_line">|</span>
+                        <a href="/" title="返回网站首页" class="user_m_fanh">返回首页</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
 
 
 <nav th:fragment="right">
@@ -67,7 +89,7 @@
                 </div>
             </div>
             <div class="enter">
-                <a href="Center/personindex.aspx">进入个人中心</a>
+                <a th:href="@{/Register/Personcenter(userid=${userid})}">进入个人中心</a>
             </div>
         </div>
         <div class="portindex-bd clearFix">

@@ -4,12 +4,16 @@ import com.recruit.web.pojo.Resumes;
 import com.recruit.web.pojo.Userinfo;
 import com.recruit.web.service.IResumesService;
 import com.recruit.web.service.IUserinfoService;
+import com.recruit.web.util.CookieManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -27,7 +31,7 @@ public class RegisterController {
 
     @RequestMapping("/RegisterUserInfo")
     @ResponseBody
-    public String Register(HttpServletRequest request) {
+    public String Register(HttpServletRequest request, HttpServletResponse response) {
         Userinfo user = new Userinfo();
         Date date = new Date();
         String username = request.getParameter("username");
@@ -86,12 +90,36 @@ public class RegisterController {
             resumes.setRegisteredresidence(registeredresidence);
             resumes.setSex(sex);
             resumes.setWorkdate(workdate);
-          int result=  resumesService.insertSelective(resumes);
-          if(result==0)
-          {
-              return "注册失败!";
-          }
+            resumes.setPhoto("");
+            int result = resumesService.insertSelective(resumes);
+            if (result == 0) {
+                return "注册失败!";
+            }
+            Cookie cookie = new Cookie("userid", user.getId().toString());
+            cookie.setPath("/");
+            cookie.setDomain(request.getServerName());
+            response.addCookie(cookie);
+            cookie = new Cookie("username", user.getUsername());
+            cookie.setDomain(request.getServerName());
+            cookie.setPath("/");
+            response.addCookie(cookie);
         }
         return "ok";
+    }
+
+    @RequestMapping("/Personcenter")
+    public String PersonIndex(HttpServletRequest request, Model model) {
+        String userid = CookieManager.getInstance().getCookie(request, "userid");
+        if (userid == null) {
+            return "redirect:/";
+        }
+        Resumes resumes = resumesService.selctResumeByUserId(userid);
+        model.addAttribute("resumes", resumes);
+
+        Userinfo userinfo = userinfoService.selectByPrimaryKey(Integer.parseInt(userid));
+        if (userinfo != null) {
+            model.addAttribute("userinfo", userinfo);
+        }
+        return "personindex";
     }
 }

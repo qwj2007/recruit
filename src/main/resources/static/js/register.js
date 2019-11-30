@@ -198,7 +198,6 @@ function registerSteps() {
     });
 
     $("#stepTwoX").click(function () {
-        debugger
         XM = $('#username').val();
         XB = $('input:radio[name="XB"]:checked').val();
         MZID=  $('#nationality option:selected').text()
@@ -357,7 +356,7 @@ function registerSteps() {
                     // alert(data);
                     if (data == "ok") {
                         alert("注册成功！");
-                        window.location.href = "/center/personindex";
+                        window.location.href = "/Register/Personcenter?";
                         // document.location.href = "/Center/personindex.aspx";
                         // window.event.returnValue = false;
                     }

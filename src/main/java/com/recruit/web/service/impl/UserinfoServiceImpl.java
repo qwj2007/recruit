@@ -43,7 +43,8 @@ public class UserinfoServiceImpl implements IUserinfoService{
 
     @Override
     public Userinfo selectByPrimaryKey(Integer id) {
-        return null;
+        Userinfo userinfo= userinfoMapper.selectByPrimaryKey(id);
+        return  userinfo;
     }
 
     @Override

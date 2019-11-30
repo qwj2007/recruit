@@ -48,6 +48,24 @@ public class Resumes {
     private String comanyname;
 
     private String postname;
+    private String photo;
+    private  Integer workage;
+
+    public Integer getWorkage() {
+        return workage;
+    }
+
+    public void setWorkage(Integer workage) {
+        this.workage = workage;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
 
     public Integer getId() {
         return id;

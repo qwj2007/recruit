@@ -1,6 +1,7 @@
 package com.recruit.web.service;
 
 import com.recruit.web.pojo.Resumes;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 作者：qiwj
@@ -18,4 +19,6 @@ public interface IResumesService {
     int updateByPrimaryKeySelective(Resumes record);
 
     int updateByPrimaryKey(Resumes record);
+
+    Resumes selctResumeByUserId( String userid);
 }

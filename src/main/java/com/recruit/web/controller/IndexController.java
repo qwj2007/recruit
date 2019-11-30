@@ -38,8 +38,6 @@ public class IndexController {
     @Autowired
     private IUserinfoService userinfoService;
 
-
-
     @RequestMapping("/")
     public String GetInfos(Model model, HttpServletRequest request) {
         List<Recruitinfo> list = recruitInfoService.selectRecruitInfos();

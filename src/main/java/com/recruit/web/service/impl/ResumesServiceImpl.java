@@ -45,4 +45,9 @@ public class ResumesServiceImpl implements IResumesService {
     public int updateByPrimaryKey(Resumes record) {
         return 0;
     }
+
+    @Override
+    public Resumes selctResumeByUserId(String userid) {
+       return resumesMapper.selctResumeByUserId(userid);
+    }
 }

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>招聘个人中心</title>
+    <link rel="stylesheet" href="/css/base.css" type="text/css">
+    <link rel="stylesheet" href="/css/personindex.css" type="text/css">
+    <link type="text/css" rel="stylesheet" href="/css/layer.css" id="skinlayercss">
+    <link href="/css/m_css.css" type="text/css" rel="stylesheet">
+    <link href="/css/m_header.css" type="text/css" rel="stylesheet">
+    <script src="/js/jquery-1.8.0.min.js" language="javascript"></script>
+    <script src="/js/layer.min.js" language="javascript"></script>
+    <script src="/js/public.js" language="javascript"></script>
+    <script type="text/javascript" src="/js/setday.js"></script>
+    <script type="text/javascript" src="/js/member_public.js"></script>
+</head>
+<body>
+<div th:replace="layout/common::ptopbar"></div>
+<div class="personal-center">
+    <div class="personal container clearFix">
+        <div class="left">
+            <div class="prof-name clearFix">
+                <div class="name-left">
+                    <span class="compe" th:text="${resumes.truename}"></span>
+                    <span class="sex" th:text="${resumes.sex}"></span>
+                    <span th:text="${resumes.age}"></span>岁
+                </div>
+                <div class="name-right" onclick="editResume()">
+                    <img src="/images/person/name-right.png" alt="" width="21" height="20">
+                </div>
+            </div>
+            <p class="prof-experience"><span th:text="${resumes.workage}"></span>年以上工作经验 ｜<span th:text="${resumes.nowaddress}"></span> </p>
+            <p class="tel">手机：<span th:text="${resumes.phone}"></span></p>
+            <p class="mail">邮箱：<span th:text="${userinfo.email}"></span></p>
+            <div class="person-btn">
+                <span class="person-password" onclick="ChangePassword();">修改密码</span>
+                <span onclick="Logout();">安全退出</span>
+            </div>
+        </div>
+        <div class="right">
+            <h5>我的简历</h5>
+            <div class="touxiang">
+                <img src="" alt="" width="106" height="106">
+            </div>
+            <div class="apply-inform">
+                <span class="apply-title">应聘信息：</span>
+                <p class="position">职 &nbsp;&nbsp;&nbsp;&nbsp;位：<span class="computer">国务院</span><span>Entity.ZPGWMC</span></p>
+                <p class="state">状 &nbsp;&nbsp;&nbsp;&nbsp;态：简历筛选<span class="wait">等待筛选</span></p>
+            </div>
+            <div class="apply-icon clearFix">
+                <ul class="clearFix">
+                    <li>
+                        <a href="/Center/AddWorkExperience.aspx?ID=1">
+                                <span class="icon-tp">
+                                    <img src="/images/person/apply-icon01.png" alt="" width="22" height="22">
+                                </span>
+                            <span class="icon-bt">创建</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Preview.aspx?ID=1" target="_blank">
+                                <span class="icon-tp">
+                                    <img src="/images/person/apply-icon02.png" alt="" width="22" height="22">
+                                </span>
+                            <span class="icon-bt">预览</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Center/ResumeManage.aspx?ID=1">
+                                <span class="icon-tp">
+                                    <img src="/images/person/name-right.png" alt="" width="22" height="22">
+                                </span>
+                            <span class="icon-bt">修改</span>
+                        </a>
+                    </li>
+                </ul>
+                <a href="hrnotice.aspx" class="ann">HR 通知 <span class="twelve" id="NoticeCount"></span></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="layout/common::bottombar"></div>
+</body>
+</html>

@@ -20,6 +20,7 @@ public class LoginUtil {
         } else {
             model.addAttribute("showLogin", 1);
             model.addAttribute("username", cookies_name);
+            model.addAttribute("userid", cookies);
         }
         return true;
     }
