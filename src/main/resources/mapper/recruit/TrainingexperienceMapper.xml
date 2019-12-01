@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.recruit.web.mapper.recruit.TrainingexperienceMapper">
+  <resultMap id="BaseResultMap" type="com.recruit.web.pojo.Trainingexperience">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="resumesid" jdbcType="INTEGER" property="resumesid" />
+    <result column="begintime" jdbcType="TIMESTAMP" property="begintime" />
+    <result column="endtime" jdbcType="TIMESTAMP" property="endtime" />
+    <result column="traincomany" jdbcType="VARCHAR" property="traincomany" />
+    <result column="traincontent" jdbcType="VARCHAR" property="traincontent" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="orders" jdbcType="INTEGER" property="orders" />
+    <result column="createuserid" jdbcType="INTEGER" property="createuserid" />
+    <result column="cratetime" jdbcType="TIMESTAMP" property="cratetime" />
+    <result column="updateuserid" jdbcType="INTEGER" property="updateuserid" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="isactive" jdbcType="BIT" property="isactive" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, resumesid, begintime, endtime, traincomany, traincontent, remark, orders, createuserid, 
+    cratetime, updateuserid, updatetime, isactive
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from trainingexperience
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from trainingexperience
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.recruit.web.pojo.Trainingexperience">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into trainingexperience (resumesid, begintime, endtime, 
+      traincomany, traincontent, remark, 
+      orders, createuserid, cratetime, 
+      updateuserid, updatetime, isactive
+      )
+    values (#{resumesid,jdbcType=INTEGER}, #{begintime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, 
+      #{traincomany,jdbcType=VARCHAR}, #{traincontent,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{orders,jdbcType=INTEGER}, #{createuserid,jdbcType=INTEGER}, #{cratetime,jdbcType=TIMESTAMP}, 
+      #{updateuserid,jdbcType=INTEGER}, #{updatetime,jdbcType=TIMESTAMP}, #{isactive,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.recruit.web.pojo.Trainingexperience">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into trainingexperience
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="resumesid != null">
+        resumesid,
+      </if>
+      <if test="begintime != null">
+        begintime,
+      </if>
+      <if test="endtime != null">
+        endtime,
+      </if>
+      <if test="traincomany != null">
+        traincomany,
+      </if>
+      <if test="traincontent != null">
+        traincontent,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="orders != null">
+        orders,
+      </if>
+      <if test="createuserid != null">
+        createuserid,
+      </if>
+      <if test="cratetime != null">
+        cratetime,
+      </if>
+      <if test="updateuserid != null">
+        updateuserid,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="isactive != null">
+        isactive,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="resumesid != null">
+        #{resumesid,jdbcType=INTEGER},
+      </if>
+      <if test="begintime != null">
+        #{begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="traincomany != null">
+        #{traincomany,jdbcType=VARCHAR},
+      </if>
+      <if test="traincontent != null">
+        #{traincontent,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="orders != null">
+        #{orders,jdbcType=INTEGER},
+      </if>
+      <if test="createuserid != null">
+        #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="cratetime != null">
+        #{cratetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null">
+        #{updateuserid,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isactive != null">
+        #{isactive,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.recruit.web.pojo.Trainingexperience">
+    update trainingexperience
+    <set>
+      <if test="resumesid != null">
+        resumesid = #{resumesid,jdbcType=INTEGER},
+      </if>
+      <if test="begintime != null">
+        begintime = #{begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        endtime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="traincomany != null">
+        traincomany = #{traincomany,jdbcType=VARCHAR},
+      </if>
+      <if test="traincontent != null">
+        traincontent = #{traincontent,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="orders != null">
+        orders = #{orders,jdbcType=INTEGER},
+      </if>
+      <if test="createuserid != null">
+        createuserid = #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="cratetime != null">
+        cratetime = #{cratetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null">
+        updateuserid = #{updateuserid,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isactive != null">
+        isactive = #{isactive,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.recruit.web.pojo.Trainingexperience">
+    update trainingexperience
+    set resumesid = #{resumesid,jdbcType=INTEGER},
+      begintime = #{begintime,jdbcType=TIMESTAMP},
+      endtime = #{endtime,jdbcType=TIMESTAMP},
+      traincomany = #{traincomany,jdbcType=VARCHAR},
+      traincontent = #{traincontent,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      orders = #{orders,jdbcType=INTEGER},
+      createuserid = #{createuserid,jdbcType=INTEGER},
+      cratetime = #{cratetime,jdbcType=TIMESTAMP},
+      updateuserid = #{updateuserid,jdbcType=INTEGER},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      isactive = #{isactive,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.recruit.web.mapper.recruit.EducationexperienceMapper">
+  <resultMap id="BaseResultMap" type="com.recruit.web.pojo.Educationexperience">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="resumesid" jdbcType="INTEGER" property="resumesid" />
+    <result column="begintime" jdbcType="TIMESTAMP" property="begintime" />
+    <result column="endtime" jdbcType="TIMESTAMP" property="endtime" />
+    <result column="schoolname" jdbcType="VARCHAR" property="schoolname" />
+    <result column="majorname" jdbcType="VARCHAR" property="majorname" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="academicdegree" jdbcType="VARCHAR" property="academicdegree" />
+    <result column="learningform" jdbcType="VARCHAR" property="learningform" />
+    <result column="orders" jdbcType="INTEGER" property="orders" />
+    <result column="createuserid" jdbcType="INTEGER" property="createuserid" />
+    <result column="cratetime" jdbcType="TIMESTAMP" property="cratetime" />
+    <result column="updateuserid" jdbcType="INTEGER" property="updateuserid" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="isactive" jdbcType="BIT" property="isactive" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, resumesid, begintime, endtime, schoolname, majorname, education, academicdegree, 
+    learningform, orders, createuserid, cratetime, updateuserid, updatetime, isactive
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from educationexperience
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from educationexperience
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.recruit.web.pojo.Educationexperience">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into educationexperience (resumesid, begintime, endtime, 
+      schoolname, majorname, education, 
+      academicdegree, learningform, orders, 
+      createuserid, cratetime, updateuserid, 
+      updatetime, isactive)
+    values (#{resumesid,jdbcType=INTEGER}, #{begintime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, 
+      #{schoolname,jdbcType=VARCHAR}, #{majorname,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, 
+      #{academicdegree,jdbcType=VARCHAR}, #{learningform,jdbcType=VARCHAR}, #{orders,jdbcType=INTEGER}, 
+      #{createuserid,jdbcType=INTEGER}, #{cratetime,jdbcType=TIMESTAMP}, #{updateuserid,jdbcType=INTEGER}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{isactive,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.recruit.web.pojo.Educationexperience">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into educationexperience
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="resumesid != null">
+        resumesid,
+      </if>
+      <if test="begintime != null">
+        begintime,
+      </if>
+      <if test="endtime != null">
+        endtime,
+      </if>
+      <if test="schoolname != null">
+        schoolname,
+      </if>
+      <if test="majorname != null">
+        majorname,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="academicdegree != null">
+        academicdegree,
+      </if>
+      <if test="learningform != null">
+        learningform,
+      </if>
+      <if test="orders != null">
+        orders,
+      </if>
+      <if test="createuserid != null">
+        createuserid,
+      </if>
+      <if test="cratetime != null">
+        cratetime,
+      </if>
+      <if test="updateuserid != null">
+        updateuserid,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="isactive != null">
+        isactive,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="resumesid != null">
+        #{resumesid,jdbcType=INTEGER},
+      </if>
+      <if test="begintime != null">
+        #{begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="schoolname != null">
+        #{schoolname,jdbcType=VARCHAR},
+      </if>
+      <if test="majorname != null">
+        #{majorname,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="academicdegree != null">
+        #{academicdegree,jdbcType=VARCHAR},
+      </if>
+      <if test="learningform != null">
+        #{learningform,jdbcType=VARCHAR},
+      </if>
+      <if test="orders != null">
+        #{orders,jdbcType=INTEGER},
+      </if>
+      <if test="createuserid != null">
+        #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="cratetime != null">
+        #{cratetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null">
+        #{updateuserid,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isactive != null">
+        #{isactive,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.recruit.web.pojo.Educationexperience">
+    update educationexperience
+    <set>
+      <if test="resumesid != null">
+        resumesid = #{resumesid,jdbcType=INTEGER},
+      </if>
+      <if test="begintime != null">
+        begintime = #{begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        endtime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="schoolname != null">
+        schoolname = #{schoolname,jdbcType=VARCHAR},
+      </if>
+      <if test="majorname != null">
+        majorname = #{majorname,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="academicdegree != null">
+        academicdegree = #{academicdegree,jdbcType=VARCHAR},
+      </if>
+      <if test="learningform != null">
+        learningform = #{learningform,jdbcType=VARCHAR},
+      </if>
+      <if test="orders != null">
+        orders = #{orders,jdbcType=INTEGER},
+      </if>
+      <if test="createuserid != null">
+        createuserid = #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="cratetime != null">
+        cratetime = #{cratetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null">
+        updateuserid = #{updateuserid,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isactive != null">
+        isactive = #{isactive,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.recruit.web.pojo.Educationexperience">
+    update educationexperience
+    set resumesid = #{resumesid,jdbcType=INTEGER},
+      begintime = #{begintime,jdbcType=TIMESTAMP},
+      endtime = #{endtime,jdbcType=TIMESTAMP},
+      schoolname = #{schoolname,jdbcType=VARCHAR},
+      majorname = #{majorname,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      academicdegree = #{academicdegree,jdbcType=VARCHAR},
+      learningform = #{learningform,jdbcType=VARCHAR},
+      orders = #{orders,jdbcType=INTEGER},
+      createuserid = #{createuserid,jdbcType=INTEGER},
+      cratetime = #{cratetime,jdbcType=TIMESTAMP},
+      updateuserid = #{updateuserid,jdbcType=INTEGER},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      isactive = #{isactive,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

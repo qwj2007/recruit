@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.recruit.web.mapper.recruit.CertificateMapper">
+  <resultMap id="BaseResultMap" type="com.recruit.web.pojo.Certificate">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="resumesid" jdbcType="INTEGER" property="resumesid" />
+    <result column="certificatedate" jdbcType="TIMESTAMP" property="certificatedate" />
+    <result column="certificatename" jdbcType="VARCHAR" property="certificatename" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="orders" jdbcType="INTEGER" property="orders" />
+    <result column="createuserid" jdbcType="INTEGER" property="createuserid" />
+    <result column="cratetime" jdbcType="TIMESTAMP" property="cratetime" />
+    <result column="updateuserid" jdbcType="INTEGER" property="updateuserid" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="isactive" jdbcType="BIT" property="isactive" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, resumesid, certificatedate, certificatename, remark, orders, createuserid, cratetime, 
+    updateuserid, updatetime, isactive
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from certificate
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from certificate
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.recruit.web.pojo.Certificate">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into certificate (resumesid, certificatedate, certificatename, 
+      remark, orders, createuserid, 
+      cratetime, updateuserid, updatetime, 
+      isactive)
+    values (#{resumesid,jdbcType=INTEGER}, #{certificatedate,jdbcType=TIMESTAMP}, #{certificatename,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{orders,jdbcType=INTEGER}, #{createuserid,jdbcType=INTEGER}, 
+      #{cratetime,jdbcType=TIMESTAMP}, #{updateuserid,jdbcType=INTEGER}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{isactive,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.recruit.web.pojo.Certificate">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into certificate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="resumesid != null">
+        resumesid,
+      </if>
+      <if test="certificatedate != null">
+        certificatedate,
+      </if>
+      <if test="certificatename != null">
+        certificatename,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="orders != null">
+        orders,
+      </if>
+      <if test="createuserid != null">
+        createuserid,
+      </if>
+      <if test="cratetime != null">
+        cratetime,
+      </if>
+      <if test="updateuserid != null">
+        updateuserid,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="isactive != null">
+        isactive,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="resumesid != null">
+        #{resumesid,jdbcType=INTEGER},
+      </if>
+      <if test="certificatedate != null">
+        #{certificatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="certificatename != null">
+        #{certificatename,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="orders != null">
+        #{orders,jdbcType=INTEGER},
+      </if>
+      <if test="createuserid != null">
+        #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="cratetime != null">
+        #{cratetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null">
+        #{updateuserid,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isactive != null">
+        #{isactive,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.recruit.web.pojo.Certificate">
+    update certificate
+    <set>
+      <if test="resumesid != null">
+        resumesid = #{resumesid,jdbcType=INTEGER},
+      </if>
+      <if test="certificatedate != null">
+        certificatedate = #{certificatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="certificatename != null">
+        certificatename = #{certificatename,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="orders != null">
+        orders = #{orders,jdbcType=INTEGER},
+      </if>
+      <if test="createuserid != null">
+        createuserid = #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="cratetime != null">
+        cratetime = #{cratetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null">
+        updateuserid = #{updateuserid,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isactive != null">
+        isactive = #{isactive,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.recruit.web.pojo.Certificate">
+    update certificate
+    set resumesid = #{resumesid,jdbcType=INTEGER},
+      certificatedate = #{certificatedate,jdbcType=TIMESTAMP},
+      certificatename = #{certificatename,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      orders = #{orders,jdbcType=INTEGER},
+      createuserid = #{createuserid,jdbcType=INTEGER},
+      cratetime = #{cratetime,jdbcType=TIMESTAMP},
+      updateuserid = #{updateuserid,jdbcType=INTEGER},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      isactive = #{isactive,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

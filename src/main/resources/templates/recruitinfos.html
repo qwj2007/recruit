@@ -20,6 +20,32 @@
     <script src="/js/jquery-1.8.0.min.js"></script>
     <script src="/js/slides.jquery.js"></script>
     <script type="text/javascript" src="/js/login.js"></script>
+    <script type="text/javascript">
+        function ShengQing() {
+            $.ajax({
+                url: "/resume/applyjob",
+                type: "post",
+                data: { recruitid: '[[${recruitinfos.id}]]' },
+                async: false,
+                dataType: "text",
+                success: function (msg) {
+                    if (msg == "ok") {
+                        alert("申请成功！");
+                        location.href = '/Register/Personcenter?recruitid='+[[${recruitinfos.id}]];
+                    }
+                    else if (msg == "error") {
+                        alert("一人只能申请一个岗位！");
+                    }
+                    else if (msg == "no") {
+                        alert("职位已过期,不能申请！");
+                    }
+                    else {
+                        alert("申请失败！");
+                    }
+                }
+            });
+        }
+    </script>
 </head>
 <body>
 <div th:replace="layout/common::topbar"></div>

@@ -13,6 +13,25 @@
     <script src="/js/public.js" language="javascript"></script>
     <script type="text/javascript" src="/js/setday.js"></script>
     <script type="text/javascript" src="/js/member_public.js"></script>
+    <script type="text/javascript">
+        function ChangePassword() {
+            location.href = '/ChangePassword.aspx';
+        }
+        function Logout() {
+            location.href = '/Manage/Logout.aspx';
+        }
+
+        $(function () {
+            var url = "/resume/getcount";
+            $.post(url, {}, function (data) {
+                $("#NoticeCount").text("（" + data + "）");
+            });
+        });
+
+        function editResume() {
+            location.href = "/Center/EditResume.aspx?id=<%=Entity.ID %>";
+        }
+    </script>
 </head>
 <body>
 <div th:replace="layout/common::ptopbar"></div>
@@ -34,7 +53,8 @@
             <p class="mail">邮箱：<span th:text="${userinfo.email}"></span></p>
             <div class="person-btn">
                 <span class="person-password" onclick="ChangePassword();">修改密码</span>
-                <span onclick="Logout();">安全退出</span>
+               <!-- <span onclick="Logout();">安全退出</span>-->
+                <a href="/index/outlogin">安全退出</a>
             </div>
         </div>
         <div class="right">
@@ -44,11 +64,12 @@
             </div>
             <div class="apply-inform">
                 <span class="apply-title">应聘信息：</span>
-                <p class="position">职 &nbsp;&nbsp;&nbsp;&nbsp;位：<span class="computer">国务院</span><span>Entity.ZPGWMC</span></p>
+                <p class="position">职 &nbsp;&nbsp;&nbsp;&nbsp;位：<span class="computer" th:if="${recruitinfo!=null}" th:text="${recruitinfo.title}"></span><span  th:if="${recruitinfo!=null}" th:text="${recruitinfo.departmentname}"></span></p>
                 <p class="state">状 &nbsp;&nbsp;&nbsp;&nbsp;态：简历筛选<span class="wait">等待筛选</span></p>
             </div>
             <div class="apply-icon clearFix">
                 <ul class="clearFix">
+                    <!--
                     <li>
                         <a href="/Center/AddWorkExperience.aspx?ID=1">
                                 <span class="icon-tp">
@@ -56,7 +77,7 @@
                                 </span>
                             <span class="icon-bt">创建</span>
                         </a>
-                    </li>
+                    </li>-->
                     <li>
                         <a href="/Preview.aspx?ID=1" target="_blank">
                                 <span class="icon-tp">
@@ -74,7 +95,7 @@
                         </a>
                     </li>
                 </ul>
-                <a href="hrnotice.aspx" class="ann">HR 通知 <span class="twelve" id="NoticeCount"></span></a>
+                <a href="hrnotice.aspx" class="ann">HR 通知 <span class="twelve" id="NoticeCount">0</span></a>
             </div>
         </div>
     </div>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.recruit.web.mapper.recruit.HrnoticeMapper">
+  <resultMap id="BaseResultMap" type="com.recruit.web.pojo.Hrnotice">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="contents" jdbcType="VARCHAR" property="contents" />
+    <result column="publishtime" jdbcType="TIMESTAMP" property="publishtime" />
+    <result column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="attach" jdbcType="VARCHAR" property="attach" />
+    <result column="createtimes" jdbcType="TIMESTAMP" property="createtimes" />
+    <result column="createuserid" jdbcType="INTEGER" property="createuserid" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="updateuserid" jdbcType="INTEGER" property="updateuserid" />
+    <result column="isactive" jdbcType="BIT" property="isactive" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, contents, publishtime, userid, attach, createtimes, createuserid, updatetime, 
+    updateuserid, isactive
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hrnotice
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hrnotice
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.recruit.web.pojo.Hrnotice">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hrnotice (title, contents, publishtime, 
+      userid, attach, createtimes, 
+      createuserid, updatetime, updateuserid, 
+      isactive)
+    values (#{title,jdbcType=VARCHAR}, #{contents,jdbcType=VARCHAR}, #{publishtime,jdbcType=TIMESTAMP}, 
+      #{userid,jdbcType=INTEGER}, #{attach,jdbcType=VARCHAR}, #{createtimes,jdbcType=TIMESTAMP}, 
+      #{createuserid,jdbcType=INTEGER}, #{updatetime,jdbcType=TIMESTAMP}, #{updateuserid,jdbcType=INTEGER}, 
+      #{isactive,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.recruit.web.pojo.Hrnotice">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hrnotice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        title,
+      </if>
+      <if test="contents != null">
+        contents,
+      </if>
+      <if test="publishtime != null">
+        publishtime,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="attach != null">
+        attach,
+      </if>
+      <if test="createtimes != null">
+        createtimes,
+      </if>
+      <if test="createuserid != null">
+        createuserid,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="updateuserid != null">
+        updateuserid,
+      </if>
+      <if test="isactive != null">
+        isactive,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="contents != null">
+        #{contents,jdbcType=VARCHAR},
+      </if>
+      <if test="publishtime != null">
+        #{publishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="attach != null">
+        #{attach,jdbcType=VARCHAR},
+      </if>
+      <if test="createtimes != null">
+        #{createtimes,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuserid != null">
+        #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null">
+        #{updateuserid,jdbcType=INTEGER},
+      </if>
+      <if test="isactive != null">
+        #{isactive,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.recruit.web.pojo.Hrnotice">
+    update hrnotice
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="contents != null">
+        contents = #{contents,jdbcType=VARCHAR},
+      </if>
+      <if test="publishtime != null">
+        publishtime = #{publishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="attach != null">
+        attach = #{attach,jdbcType=VARCHAR},
+      </if>
+      <if test="createtimes != null">
+        createtimes = #{createtimes,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuserid != null">
+        createuserid = #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null">
+        updateuserid = #{updateuserid,jdbcType=INTEGER},
+      </if>
+      <if test="isactive != null">
+        isactive = #{isactive,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.recruit.web.pojo.Hrnotice">
+    update hrnotice
+    set title = #{title,jdbcType=VARCHAR},
+      contents = #{contents,jdbcType=VARCHAR},
+      publishtime = #{publishtime,jdbcType=TIMESTAMP},
+      userid = #{userid,jdbcType=INTEGER},
+      attach = #{attach,jdbcType=VARCHAR},
+      createtimes = #{createtimes,jdbcType=TIMESTAMP},
+      createuserid = #{createuserid,jdbcType=INTEGER},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      updateuserid = #{updateuserid,jdbcType=INTEGER},
+      isactive = #{isactive,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectNoticeCountByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT * from hrnotice WHERE isactive=1 and userid=#{userid}
+  </select>
+</mapper>

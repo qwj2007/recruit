@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.recruit.web.mapper.recruit.DeliveryMapper">
+  <resultMap id="BaseResultMap" type="com.recruit.web.pojo.Delivery">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="resumeid" jdbcType="INTEGER" property="resumeid" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="recruitinfoid" jdbcType="INTEGER" property="recruitinfoid" />
+    <result column="isactive" jdbcType="BIT" property="isactive" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, resumeid, createtime, recruitinfoid, isactive
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from delivery
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from delivery
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.recruit.web.pojo.Delivery">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into delivery (resumeid, createtime, recruitinfoid, 
+      isactive)
+    values (#{resumeid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{recruitinfoid,jdbcType=INTEGER}, 
+      #{isactive,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.recruit.web.pojo.Delivery">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into delivery
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="resumeid != null">
+        resumeid,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="recruitinfoid != null">
+        recruitinfoid,
+      </if>
+      <if test="isactive != null">
+        isactive,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="resumeid != null">
+        #{resumeid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recruitinfoid != null">
+        #{recruitinfoid,jdbcType=INTEGER},
+      </if>
+      <if test="isactive != null">
+        #{isactive,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.recruit.web.pojo.Delivery">
+    update delivery
+    <set>
+      <if test="resumeid != null">
+        resumeid = #{resumeid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recruitinfoid != null">
+        recruitinfoid = #{recruitinfoid,jdbcType=INTEGER},
+      </if>
+      <if test="isactive != null">
+        isactive = #{isactive,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.recruit.web.pojo.Delivery">
+    update delivery
+    set resumeid = #{resumeid,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      recruitinfoid = #{recruitinfoid,jdbcType=INTEGER},
+      isactive = #{isactive,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

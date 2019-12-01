@@ -1,9 +1,10 @@
 <!--顶栏-->
+
 <nav th:fragment="topbar">
     <div class="rekit_c5bab6 rekit_7f6040 rekit_908c9e">
         <div class="rekit_1e8090 rekit_dc1e22">
             <div class="rekit_2365cd">
-                <a href="Default.aspx">
+                <a href="/">
                     <img src='/uploadfiles/XiTongPeiZhi/b7102993-869c-4308-8536-f752b39a4df0.png' class='png'/>
                 </a>
                 <label>招聘频道</label>
@@ -29,8 +30,10 @@
                 <div class="top_right">
                     <div class="header_seach_State fltR">
                         <span class="header_seach_State_name">你好!</span>
-                        <span class="user_m_line">|</span>
-                        <a href="logout()" class="header_seach_State_a">退出</a>
+                        <span class="user_m_line" th:text="${resumes.truename}" style="font-size:18px"></span>
+                        <!--
+                        <a href="javascript:void(0)" onclick="logout()" class="header_seach_State_a">退出</a>
+                        -->
                         <span class="user_m_line">|</span>
                         <a href="/" title="返回网站首页" class="user_m_fanh">返回首页</a>
                     </div>
@@ -42,6 +45,14 @@
 
 
 <nav th:fragment="right">
+    <script type="text/javascript">
+        $(function () {
+            var url = "/resume/getcount";
+            $.post(url, {}, function (data) {
+                $("#count").text("（" + data + "）");
+            });
+        });
+    </script>
     <div class="member" id="login" th:if="${showLogin}==0">
         <div class="rekit_fdcfc5">
             <label>

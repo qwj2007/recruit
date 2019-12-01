@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.recruit.web.mapper.recruit.OtherinfosMapper">
+  <resultMap id="BaseResultMap" type="com.recruit.web.pojo.Otherinfos">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="resumesid" jdbcType="INTEGER" property="resumesid" />
+    <result column="contents" jdbcType="VARCHAR" property="contents" />
+    <result column="createuserid" jdbcType="INTEGER" property="createuserid" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateuserid" jdbcType="INTEGER" property="updateuserid" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="isactive" jdbcType="BIT" property="isactive" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, resumesid, contents, createuserid, createtime, updateuserid, updatetime, isactive
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from otherinfos
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from otherinfos
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.recruit.web.pojo.Otherinfos">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into otherinfos (resumesid, contents, createuserid, 
+      createtime, updateuserid, updatetime, 
+      isactive)
+    values (#{resumesid,jdbcType=INTEGER}, #{contents,jdbcType=VARCHAR}, #{createuserid,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updateuserid,jdbcType=INTEGER}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{isactive,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.recruit.web.pojo.Otherinfos">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into otherinfos
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="resumesid != null">
+        resumesid,
+      </if>
+      <if test="contents != null">
+        contents,
+      </if>
+      <if test="createuserid != null">
+        createuserid,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updateuserid != null">
+        updateuserid,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="isactive != null">
+        isactive,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="resumesid != null">
+        #{resumesid,jdbcType=INTEGER},
+      </if>
+      <if test="contents != null">
+        #{contents,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null">
+        #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null">
+        #{updateuserid,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isactive != null">
+        #{isactive,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.recruit.web.pojo.Otherinfos">
+    update otherinfos
+    <set>
+      <if test="resumesid != null">
+        resumesid = #{resumesid,jdbcType=INTEGER},
+      </if>
+      <if test="contents != null">
+        contents = #{contents,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null">
+        createuserid = #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null">
+        updateuserid = #{updateuserid,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isactive != null">
+        isactive = #{isactive,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.recruit.web.pojo.Otherinfos">
+    update otherinfos
+    set resumesid = #{resumesid,jdbcType=INTEGER},
+      contents = #{contents,jdbcType=VARCHAR},
+      createuserid = #{createuserid,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updateuserid = #{updateuserid,jdbcType=INTEGER},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      isactive = #{isactive,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

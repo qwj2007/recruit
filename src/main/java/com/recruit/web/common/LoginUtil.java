@@ -3,7 +3,9 @@ package com.recruit.web.common;
 import com.recruit.web.util.CookieManager;
 import org.springframework.ui.Model;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 作者：qiwj
@@ -23,5 +25,23 @@ public class LoginUtil {
             model.addAttribute("userid", cookies);
         }
         return true;
+    }
+
+    public static String LoginOut(HttpServletRequest request, HttpServletResponse response)
+    {
+        String servername = request.getServerName();
+        Cookie[] cookies = request.getCookies();//这样便可以获取一个cookie数组
+        if (null == cookies) {
+        } else {
+            for (Cookie cookie : cookies) {
+                cookie.setValue(null);
+                cookie.setMaxAge(0);
+                cookie.setPath("/");
+                response.addCookie(cookie);
+            }
+        }
+        CookieManager.getInstance().removeCookie(response, "userid");
+        CookieManager.getInstance().removeCookie(response, "username");
+        return "1";
     }
 }

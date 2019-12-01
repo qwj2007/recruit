@@ -42,7 +42,7 @@ public class IndexController {
     public String GetInfos(Model model, HttpServletRequest request) {
         List<Recruitinfo> list = recruitInfoService.selectRecruitInfos();
         List<News> newslist = newsService.selectNews();
-        LoginUtil.isLogin(request,model);
+        LoginUtil.isLogin(request, model);
         //if(list!=null) {
         model.addAttribute("recruitinfos", list);
         model.addAttribute("news", newslist);
@@ -85,22 +85,26 @@ public class IndexController {
     @RequestMapping("index/loginOut")
     @ResponseBody
     public String Loginout(HttpServletRequest request, HttpServletResponse response) {
+       String str= LoginUtil.LoginOut(request,response);
+        /*
         String servername = request.getServerName();
         Cookie[] cookies = request.getCookies();//这样便可以获取一个cookie数组
-        if (null == cookies){
-    }
-    else {
-            for(Cookie cookie:cookies)
-            {
+        if (null == cookies) {
+        } else {
+            for (Cookie cookie : cookies) {
                 cookie.setValue(null);
                 cookie.setMaxAge(0);
                 cookie.setPath("/");
                 response.addCookie(cookie);
             }
         }
-        CookieManager.getInstance().removeCookie(response,"userid");
-        CookieManager.getInstance().removeCookie(response,"username");
-        return "1";
+        CookieManager.getInstance().removeCookie(response, "userid");
+        CookieManager.getInstance().removeCookie(response, "username");//*/
+        return str;
     }
-
+    @RequestMapping("index/outlogin")
+    public String OutLogin(HttpServletRequest request, HttpServletResponse response) {
+        LoginUtil.LoginOut(request,response);
+        return "redirect:/";
+    }
 }

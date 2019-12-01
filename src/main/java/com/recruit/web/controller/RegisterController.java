@@ -1,7 +1,9 @@
 package com.recruit.web.controller;
 
+import com.recruit.web.pojo.Recruitinfo;
 import com.recruit.web.pojo.Resumes;
 import com.recruit.web.pojo.Userinfo;
+import com.recruit.web.service.IRecruitInfoService;
 import com.recruit.web.service.IResumesService;
 import com.recruit.web.service.IUserinfoService;
 import com.recruit.web.util.CookieManager;
@@ -28,6 +30,9 @@ public class RegisterController {
     private IUserinfoService userinfoService;
     @Autowired
     private IResumesService resumesService;
+
+    @Autowired
+    private IRecruitInfoService recruitInfoService;
 
     @RequestMapping("/RegisterUserInfo")
     @ResponseBody
@@ -112,6 +117,12 @@ public class RegisterController {
         String userid = CookieManager.getInstance().getCookie(request, "userid");
         if (userid == null) {
             return "redirect:/";
+        }
+        String recruitid = request.getParameter("recruitid");
+        if(null!=recruitid&&!"".equals(recruitid))
+        {
+            Recruitinfo recruitinfo = recruitInfoService.selectById(Integer.parseInt(recruitid));
+            model.addAttribute("recruitinfo",recruitinfo);
         }
         Resumes resumes = resumesService.selctResumeByUserId(userid);
         model.addAttribute("resumes", resumes);
