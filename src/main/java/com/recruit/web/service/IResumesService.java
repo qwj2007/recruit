@@ -1,7 +1,11 @@
 package com.recruit.web.service;
 
 import com.recruit.web.pojo.Resumes;
+import com.sun.xml.internal.ws.resources.HttpserverMessages;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.ui.Model;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 作者：qiwj
@@ -21,4 +25,6 @@ public interface IResumesService {
     int updateByPrimaryKey(Resumes record);
 
     Resumes selctResumeByUserId( String userid);
+
+    String PersoncenterCheck(HttpServletRequest request, Model model);
 }

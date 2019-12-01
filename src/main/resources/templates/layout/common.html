@@ -1,7 +1,7 @@
 <!--顶栏-->
 
-<nav th:fragment="topbar">
-    <div class="rekit_c5bab6 rekit_7f6040 rekit_908c9e">
+
+    <div class="rekit_c5bab6 rekit_7f6040 rekit_908c9e" th:fragment="topbar">
         <div class="rekit_1e8090 rekit_dc1e22">
             <div class="rekit_2365cd">
                 <a href="/">
@@ -17,9 +17,9 @@
             </div>
         </div>
     </div>
-</nav>
-<nav th:fragment="ptopbar">
-    <div class="header">
+
+
+    <div class="header" th:fragment="ptopbar">
         <div class="w950">
             <div class="logo  fltL">
                 <a href="/" target="_blank" title="返回网站首页">
@@ -29,8 +29,8 @@
             <div class="top_right_re fltR">
                 <div class="top_right">
                     <div class="header_seach_State fltR">
-                        <span class="header_seach_State_name">你好!</span>
-                        <span class="user_m_line" th:text="${resumes.truename}" style="font-size:18px"></span>
+                        你好!<span class="header_seach_State_name" th:text="${resumes.truename}"></span>
+                        <span class="user_m_line"  style="font-size:18px"></span>
                         <!--
                         <a href="javascript:void(0)" onclick="logout()" class="header_seach_State_a">退出</a>
                         -->
@@ -41,7 +41,7 @@
             </div>
         </div>
     </div>
-</nav>
+
 
 
 <nav th:fragment="right">
@@ -135,4 +135,57 @@
         <p style="color:#C7C7C7;" align="center">客服电话:+86-xxxxxxx</p><br>
     </div>-->
 </nav>
+
+<div class="resume-bdlt" th:fragment="leftbar">
+    <div class="resume-content">
+        <h5>简历内容</h5>
+        <ul>
+            <li>
+                <img src="../images/resume/<%=GRXXTuLi %>.png"/>
+                <a href="/Center/EditResume.aspx?id=<%=entity.ID %>">个人信息</a>
+            </li>
+            <li>
+                <img src="../images/resume/<%=GZJLTuLi %>.png"/>
+                <a href="/Center/EditWorkExperience.aspx?id=<%=entity.ID %>">工作（实习）经历</a>
+            </li>
+            <li>
+                <img src="../images/resume/<%=JYJLTuLi %>.png"/>
+                <a href="/Center/EditEducation.aspx?id=<%=entity.ID %>">教育经历</a>
+            </li>
+            <li>
+                <img src="../images/resume/<%=PXJLTuLi %>.png"/>
+                <a href="/Center/EditTrainedExperienc.aspx?id=<%=entity.ID %>">培训经历</a>
+            </li>
+            <li>
+                <img src="../images/resume/<%=ZSTuLi %>.png"/>
+                <a href="/Center/EditCertificate.aspx?id=<%=entity.ID %>">证书</a>
+            </li>
+            <li>
+                <img src="../images/resume/<%=JTCYTuLi %>.png"/>
+                <a href="/Center/EditFamily.aspx?id=<%=entity.ID %>">家族成员及社会关系</a>
+            </li>
+            <li>
+                <img src="../images/resume/<%=ZPTuLi %>.png"/>
+                <a href="/Center/UpTouXiang.aspx">照片</a>
+            </li>
+            <li>
+                <img src="../images/resume/<%=BCTuLi %>.png"/>
+                <a href="/Center/EditSelfAssessment.aspx?id=<%=entity.ID %>">补充内容</a>
+            </li>
+        </ul>
+    </div>
+    <div class="Illus">
+        <h5>图例说明</h5>
+        <ul class="clearFix">
+            <li>
+                <img src="/images/resume/duihao.png" alt="" width="16" height="16">
+                <span>已填写</span>
+            </li>
+            <li>
+                <img src="/images/resume/Illus02.png" alt="" width="16" height="16">
+                <span>未填写</span>
+            </li>
+        </ul>
+    </div>
+</div>
 

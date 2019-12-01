@@ -1,22 +1,55 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>招聘个人中心</title>
-    <link rel="stylesheet" href="/css/base.css" type="text/css">
-    <link rel="stylesheet" href="/css/personindex.css" type="text/css">
-    <link type="text/css" rel="stylesheet" href="/css/layer.css" id="skinlayercss">
-    <link href="/css/m_css.css" type="text/css" rel="stylesheet">
-    <link href="/css/m_header.css" type="text/css" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
+    <title>个人中心</title>
     <script src="/js/jquery-1.8.0.min.js" language="javascript"></script>
     <script src="/js/layer.min.js" language="javascript"></script>
     <script src="/js/public.js" language="javascript"></script>
     <script type="text/javascript" src="/js/setday.js"></script>
     <script type="text/javascript" src="/js/member_public.js"></script>
+    <link type="text/css" rel="stylesheet" href="/css/layer.css" id="skinlayercss">
+    <link href="/css/m_css.css" type="text/css" rel="stylesheet">
+    <link href="/css/m_header.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/base.css" type="text/css">
+    <link rel="stylesheet" href="/css/personindex.css" type="text/css">
+    <style type="text/css">
+        .rekit_470b42 {
+            height: 100px;
+            position: relative;
+        }
+
+        .rekit_86e5c5 {
+            width: 100%;
+            color: #888;
+            font-size: 12px;
+            position: absolute;
+            top: 25px;
+            left: 0;
+            height: 60px;
+        }
+
+        .rekit_86e5c5 li {
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            float: left;
+            overflow: hidden;
+        }
+
+        .rekit_e8ddfa {
+            position: absolute;
+            top: 10px;
+            right: 0;
+        }
+    </style>
     <script type="text/javascript">
         function ChangePassword() {
             location.href = '/ChangePassword.aspx';
         }
+
         function Logout() {
             location.href = '/Manage/Logout.aspx';
         }
@@ -29,12 +62,23 @@
         });
 
         function editResume() {
-            location.href = "/Center/EditResume.aspx?id=<%=Entity.ID %>";
+            $.ajax({
+                url: "/resume/editresume",
+                type: "post",
+                data: {},
+                async: false,
+                dataType: "text",
+                success: function (msg) {
+                }
+            });
+            location.href = loginhref;
         }
+
     </script>
 </head>
 <body>
 <div th:replace="layout/common::ptopbar"></div>
+<div class="clear"></div>
 <div class="personal-center">
     <div class="personal container clearFix">
         <div class="left">
@@ -44,16 +88,18 @@
                     <span class="sex" th:text="${resumes.sex}"></span>
                     <span th:text="${resumes.age}"></span>岁
                 </div>
-                <div class="name-right" onclick="editResume()">
-                    <img src="/images/person/name-right.png" alt="" width="21" height="20">
+                <div class="name-right">
+                    <a th:href="@{/resume/editresume}">
+                    <img src="/images/person/name-right.png" alt="" width="21" height="20"></a>
                 </div>
             </div>
-            <p class="prof-experience"><span th:text="${resumes.workage}"></span>年以上工作经验 ｜<span th:text="${resumes.nowaddress}"></span> </p>
+            <p class="prof-experience"><span th:text="${resumes.workage}"></span>年以上工作经验 ｜<span
+                    th:text="${resumes.nowaddress}"></span></p>
             <p class="tel">手机：<span th:text="${resumes.phone}"></span></p>
             <p class="mail">邮箱：<span th:text="${userinfo.email}"></span></p>
             <div class="person-btn">
                 <span class="person-password" onclick="ChangePassword();">修改密码</span>
-               <!-- <span onclick="Logout();">安全退出</span>-->
+                <!-- <span onclick="Logout();">安全退出</span>-->
                 <a href="/index/outlogin">安全退出</a>
             </div>
         </div>
@@ -64,7 +110,9 @@
             </div>
             <div class="apply-inform">
                 <span class="apply-title">应聘信息：</span>
-                <p class="position">职 &nbsp;&nbsp;&nbsp;&nbsp;位：<span class="computer" th:if="${recruitinfo!=null}" th:text="${recruitinfo.title}"></span><span  th:if="${recruitinfo!=null}" th:text="${recruitinfo.departmentname}"></span></p>
+                <p class="position">职 &nbsp;&nbsp;&nbsp;&nbsp;位：<span class="computer" th:if="${recruitinfo!=null}"
+                                                                      th:text="${recruitinfo.title}"></span><span
+                        th:if="${recruitinfo!=null}" th:text="${recruitinfo.departmentname}"></span></p>
                 <p class="state">状 &nbsp;&nbsp;&nbsp;&nbsp;态：简历筛选<span class="wait">等待筛选</span></p>
             </div>
             <div class="apply-icon clearFix">

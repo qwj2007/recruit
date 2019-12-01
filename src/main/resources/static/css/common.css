@@ -3,11 +3,7 @@
 .header-container{
 	border-bottom:1px solid #efefef;
 }
-.header{
-	height:105px;
-	line-height:105px;
-	position:relative;
-}
+
 .header-left{
 	float:left;
 }

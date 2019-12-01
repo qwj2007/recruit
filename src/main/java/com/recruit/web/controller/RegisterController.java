@@ -114,6 +114,7 @@ public class RegisterController {
 
     @RequestMapping("/Personcenter")
     public String PersonIndex(HttpServletRequest request, Model model) {
+        /*
         String userid = CookieManager.getInstance().getCookie(request, "userid");
         if (userid == null) {
             return "redirect:/";
@@ -132,5 +133,7 @@ public class RegisterController {
             model.addAttribute("userinfo", userinfo);
         }
         return "personindex";
+        */
+        return  resumesService.PersoncenterCheck(request,model);
     }
 }

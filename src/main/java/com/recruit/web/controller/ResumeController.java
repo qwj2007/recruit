@@ -9,6 +9,7 @@ import com.recruit.web.service.IResumesService;
 import com.recruit.web.util.CookieManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -66,5 +67,11 @@ public class ResumeController {
             return "-1";
         }
         return "ok";
+    }
+    @RequestMapping("/editresume")
+    public String editResume(HttpServletRequest request, Model model)
+    {
+        resumesService.PersoncenterCheck(request,model);
+        return "editresume";
     }
 }
