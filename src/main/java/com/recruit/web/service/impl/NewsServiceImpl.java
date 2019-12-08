@@ -26,4 +26,5 @@ public class NewsServiceImpl implements INewsService {
     public News selectByPrimaryKey(Integer id) {
         return newsMapper.selectByPrimaryKey(id);
     }
+
 }

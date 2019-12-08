@@ -1,18 +1,15 @@
 package com.recruit.web.service.impl;
 
 import com.recruit.web.mapper.recruit.ResumesMapper;
-import com.recruit.web.pojo.Recruitinfo;
-import com.recruit.web.pojo.Resumes;
-import com.recruit.web.pojo.Userinfo;
-import com.recruit.web.service.IRecruitInfoService;
-import com.recruit.web.service.IResumesService;
-import com.recruit.web.service.IUserinfoService;
+import com.recruit.web.pojo.*;
+import com.recruit.web.service.*;
 import com.recruit.web.util.CookieManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * 作者：qiwj
@@ -20,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Service
 public class ResumesServiceImpl implements IResumesService {
+    private String duihao = "duihao.png";
+    private String cuohao = "Illus02.png";
     @Autowired
     private ResumesMapper resumesMapper;
     @Autowired
@@ -29,6 +28,19 @@ public class ResumesServiceImpl implements IResumesService {
 
     @Autowired
     private IRecruitInfoService recruitInfoService;
+    @Autowired
+    private IWorkExperienceService workExperienceService;
+    @Autowired
+    private IEdutionExpericenceService edutionExpericenceService;
+    @Autowired
+    private ITrainService trainService;
+    @Autowired
+    private ICertificateService certificateService;
+    @Autowired
+    private IFamilyService familyService;
+    @Autowired
+    private IOtherInfosService otherInfosService;
+
     @Override
     public int deleteByPrimaryKey(Integer id) {
         return 0;
@@ -36,24 +48,24 @@ public class ResumesServiceImpl implements IResumesService {
 
     @Override
     public int insert(Resumes record) {
-      Integer result = resumesMapper.insert(record);
+        Integer result = resumesMapper.insert(record);
         return result;
     }
 
     @Override
     public int insertSelective(Resumes record) {
-       Integer result= resumesMapper.insertSelective(record);
+        Integer result = resumesMapper.insertSelective(record);
         return result;
     }
 
     @Override
     public Resumes selectByPrimaryKey(Integer id) {
-        return null;
+        return resumesMapper.selectByPrimaryKey(id);
     }
 
     @Override
     public int updateByPrimaryKeySelective(Resumes record) {
-        return 0;
+        return resumesMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
@@ -63,7 +75,7 @@ public class ResumesServiceImpl implements IResumesService {
 
     @Override
     public Resumes selctResumeByUserId(String userid) {
-       return resumesMapper.selctResumeByUserId(userid);
+        return resumesMapper.selctResumeByUserId(userid);
     }
 
     @Override
@@ -73,18 +85,67 @@ public class ResumesServiceImpl implements IResumesService {
             return "redirect:/";
         }
         String recruitid = request.getParameter("recruitid");
-        if(null!=recruitid&&!"".equals(recruitid))
-        {
+        if (null != recruitid && !"".equals(recruitid)) {
             Recruitinfo recruitinfo = recruitInfoService.selectById(Integer.parseInt(recruitid));
-            model.addAttribute("recruitinfo",recruitinfo);
+            model.addAttribute("recruitinfo", recruitinfo);
         }
-        Resumes resumes = resumesService.selctResumeByUserId(userid);
-        model.addAttribute("resumes", resumes);
-
         Userinfo userinfo = userinfoService.selectByPrimaryKey(Integer.parseInt(userid));
         if (userinfo != null) {
             model.addAttribute("userinfo", userinfo);
         }
+        Resumes resumes = resumesService.selctResumeByUserId(userid);
+        ResumePicture resumePicture = new ResumePicture();
+        resumePicture.setPic_train(cuohao);
+        resumePicture.setPic_education(cuohao);
+        resumePicture.setPic_work(cuohao);
+        resumePicture.setPic_personalInfo(cuohao);
+        resumePicture.setPic_certificate(cuohao);
+        resumePicture.setPic_family(cuohao);
+        resumePicture.setPic_ohter(cuohao);
+        resumePicture.setPic_photo(cuohao);
+        if (resumes != null) {
+            model.addAttribute("resumes", resumes);
+            resumePicture.setPic_personalInfo(duihao);
+        }
+
+
+        List<Workexperience> workexperiences = workExperienceService.selectWorkExperienceById(resumes.getId());
+        if (workexperiences != null && workexperiences.size() > 0) {
+            resumePicture.setPic_work(duihao);
+        }
+
+
+        List<Educationexperience> educationexperiences = edutionExpericenceService.selectEducationByResumeid(resumes.getId());
+        if (educationexperiences != null && educationexperiences.size() > 0) {
+            resumePicture.setPic_education(duihao);
+        }
+
+        List<Trainingexperience> trainingexperiences = trainService.selecTrainByResumeId(resumes.getId());
+        if (trainingexperiences != null && trainingexperiences.size() > 0) {
+            resumePicture.setPic_train(duihao);
+        }
+        List<Certificate> certificates = certificateService.selectCertificateByResumeId(resumes.getId());
+        if (certificates != null && certificates.size() > 0) {
+            resumePicture.setPic_certificate(duihao);
+        }
+        List<Family> families=familyService.selectFamilyByResumeId(resumes.getId());
+        if(families!=null&&families.size()>0)
+        {
+            resumePicture.setPic_family(duihao);
+        }
+        if(resumes.getPhoto()!=null&&!"".equals(resumes.getPhoto()))
+        {
+            resumePicture.setPic_photo(duihao);
+        }
+
+        List<Otherinfos> otherinfos=otherInfosService.selectOtherinfosById(resumes.getId());
+        if(otherinfos!=null&&otherinfos.size()>0)
+        {
+            resumePicture.setPic_ohter(duihao);
+        }
+
+        model.addAttribute("resumePicture",resumePicture);
+
         return "personindex";
     }
 }

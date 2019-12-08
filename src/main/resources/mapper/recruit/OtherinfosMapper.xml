@@ -125,4 +125,8 @@
       isactive = #{isactive,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectOtherinfosById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from otherinfos where resumesid=#{resumeid}
+  </select>
 </mapper>

@@ -1,294 +1,295 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.recruit.web.mapper.recruit.ResumesMapper">
-  <resultMap id="BaseResultMap" type="com.recruit.web.pojo.Resumes">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="userid" jdbcType="INTEGER" property="userid" />
-    <result column="truename" jdbcType="VARCHAR" property="truename" />
-    <result column="nation" jdbcType="VARCHAR" property="nation" />
-    <result column="sex" jdbcType="VARCHAR" property="sex" />
-    <result column="card" jdbcType="VARCHAR" property="card" />
-    <result column="birthday" jdbcType="VARCHAR" property="birthday" />
-    <result column="age" jdbcType="TIMESTAMP" property="age" />
-    <result column="nativeplace" jdbcType="VARCHAR" property="nativeplace" />
-    <result column="politicaloutlook" jdbcType="VARCHAR" property="politicaloutlook" />
-    <result column="maritalstatus" jdbcType="VARCHAR" property="maritalstatus" />
-    <result column="locationpersonnelrelationship" jdbcType="VARCHAR" property="locationpersonnelrelationship" />
-    <result column="registeredresidence" jdbcType="VARCHAR" property="registeredresidence" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="nowaddress" jdbcType="VARCHAR" property="nowaddress" />
-    <result column="graduateschool" jdbcType="VARCHAR" property="graduateschool" />
-    <result column="major" jdbcType="VARCHAR" property="major" />
-    <result column="education" jdbcType="VARCHAR" property="education" />
-    <result column="academicdegree" jdbcType="VARCHAR" property="academicdegree" />
-    <result column="isfreshstudent" jdbcType="BIT" property="isfreshstudent" />
-    <result column="workdate" jdbcType="TIMESTAMP" property="workdate" />
-    <result column="comanyname" jdbcType="VARCHAR" property="comanyname" />
-    <result column="postname" jdbcType="VARCHAR" property="postname" />
-    <result column="photo" jdbcType="VARCHAR" property="photo" />
-    <result column="workage" jdbcType="INTEGER" property="workage" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.recruit.web.pojo.Resumes">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="userid" jdbcType="INTEGER" property="userid"/>
+        <result column="truename" jdbcType="VARCHAR" property="truename"/>
+        <result column="nation" jdbcType="VARCHAR" property="nation"/>
+        <result column="sex" jdbcType="VARCHAR" property="sex"/>
+        <result column="card" jdbcType="VARCHAR" property="card"/>
+        <result column="birthday" jdbcType="VARCHAR" property="birthday"/>
+        <result column="age" jdbcType="TIMESTAMP" property="age"/>
+        <result column="nativeplace" jdbcType="VARCHAR" property="nativeplace"/>
+        <result column="politicaloutlook" jdbcType="VARCHAR" property="politicaloutlook"/>
+        <result column="maritalstatus" jdbcType="VARCHAR" property="maritalstatus"/>
+        <result column="locationpersonnelrelationship" jdbcType="VARCHAR" property="locationpersonnelrelationship"/>
+        <result column="registeredresidence" jdbcType="VARCHAR" property="registeredresidence"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="nowaddress" jdbcType="VARCHAR" property="nowaddress"/>
+        <result column="graduateschool" jdbcType="VARCHAR" property="graduateschool"/>
+        <result column="major" jdbcType="VARCHAR" property="major"/>
+        <result column="education" jdbcType="VARCHAR" property="education"/>
+        <result column="academicdegree" jdbcType="VARCHAR" property="academicdegree"/>
+        <result column="isfreshstudent" jdbcType="BIT" property="isfreshstudent"/>
+        <result column="workdate" jdbcType="TIMESTAMP" property="workdate"/>
+        <result column="comanyname" jdbcType="VARCHAR" property="comanyname"/>
+        <result column="postname" jdbcType="VARCHAR" property="postname"/>
+        <result column="photo" jdbcType="VARCHAR" property="photo"/>
+        <result column="workage" jdbcType="INTEGER" property="workage"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, userid, truename, nation, sex, card, birthday, age, nativeplace, politicaloutlook, 
     maritalstatus, locationpersonnelrelationship, registeredresidence, phone, nowaddress, 
     graduateschool, major, education, academicdegree, isfreshstudent, workdate, comanyname, 
     postname,photo
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from resumes
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from resumes
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from resumes
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.recruit.web.pojo.Resumes">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into resumes (userid, truename, nation, 
-      sex, card, birthday, 
-      age, nativeplace, politicaloutlook, 
-      maritalstatus, locationpersonnelrelationship, 
-      registeredresidence, phone, nowaddress, 
-      graduateschool, major, education, 
-      academicdegree, isfreshstudent, workdate, 
-      comanyname, postname,photo)
-    values (#{userid,jdbcType=INTEGER}, #{truename,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=VARCHAR}, #{card,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, 
-      #{age,jdbcType=TIMESTAMP}, #{nativeplace,jdbcType=VARCHAR}, #{politicaloutlook,jdbcType=VARCHAR}, 
-      #{maritalstatus,jdbcType=VARCHAR}, #{locationpersonnelrelationship,jdbcType=VARCHAR}, 
-      #{registeredresidence,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{nowaddress,jdbcType=VARCHAR}, 
-      #{graduateschool,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, 
-      #{academicdegree,jdbcType=VARCHAR}, #{isfreshstudent,jdbcType=BIT}, #{workdate,jdbcType=TIMESTAMP}, 
-      #{comanyname,jdbcType=VARCHAR}, #{postname,jdbcType=VARCHAR},#{photo,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.recruit.web.pojo.Resumes">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into resumes
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userid != null">
-        userid,
-      </if>
-      <if test="truename != null">
-        truename,
-      </if>
-      <if test="nation != null">
-        nation,
-      </if>
-      <if test="sex != null">
-        sex,
-      </if>
-      <if test="card != null">
-        card,
-      </if>
-      <if test="birthday != null">
-        birthday,
-      </if>
-      <if test="age != null">
-        age,
-      </if>
-      <if test="nativeplace != null">
-        nativeplace,
-      </if>
-      <if test="politicaloutlook != null">
-        politicaloutlook,
-      </if>
-      <if test="maritalstatus != null">
-        maritalstatus,
-      </if>
-      <if test="locationpersonnelrelationship != null">
-        locationpersonnelrelationship,
-      </if>
-      <if test="registeredresidence != null">
-        registeredresidence,
-      </if>
-      <if test="phone != null">
-        phone,
-      </if>
-      <if test="nowaddress != null">
-        nowaddress,
-      </if>
-      <if test="graduateschool != null">
-        graduateschool,
-      </if>
-      <if test="major != null">
-        major,
-      </if>
-      <if test="education != null">
-        education,
-      </if>
-      <if test="academicdegree != null">
-        academicdegree,
-      </if>
-      <if test="isfreshstudent != null">
-        isfreshstudent,
-      </if>
-      <if test="workdate != null">
-        workdate,
-      </if>
-      <if test="comanyname != null">
-        comanyname,
-      </if>
-      <if test="postname != null">
-        postname,
-      </if>
-      <if test="photo != null">
-        photo,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userid != null">
-        #{userid,jdbcType=INTEGER},
-      </if>
-      <if test="truename != null">
-        #{truename,jdbcType=VARCHAR},
-      </if>
-      <if test="nation != null">
-        #{nation,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null">
-        #{sex,jdbcType=VARCHAR},
-      </if>
-      <if test="card != null">
-        #{card,jdbcType=VARCHAR},
-      </if>
-      <if test="birthday != null">
-        #{birthday,jdbcType=VARCHAR},
-      </if>
-      <if test="age != null">
-        #{age,jdbcType=TIMESTAMP},
-      </if>
-      <if test="nativeplace != null">
-        #{nativeplace,jdbcType=VARCHAR},
-      </if>
-      <if test="politicaloutlook != null">
-        #{politicaloutlook,jdbcType=VARCHAR},
-      </if>
-      <if test="maritalstatus != null">
-        #{maritalstatus,jdbcType=VARCHAR},
-      </if>
-      <if test="locationpersonnelrelationship != null">
-        #{locationpersonnelrelationship,jdbcType=VARCHAR},
-      </if>
-      <if test="registeredresidence != null">
-        #{registeredresidence,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="nowaddress != null">
-        #{nowaddress,jdbcType=VARCHAR},
-      </if>
-      <if test="graduateschool != null">
-        #{graduateschool,jdbcType=VARCHAR},
-      </if>
-      <if test="major != null">
-        #{major,jdbcType=VARCHAR},
-      </if>
-      <if test="education != null">
-        #{education,jdbcType=VARCHAR},
-      </if>
-      <if test="academicdegree != null">
-        #{academicdegree,jdbcType=VARCHAR},
-      </if>
-      <if test="isfreshstudent != null">
-        #{isfreshstudent,jdbcType=BIT},
-      </if>
-      <if test="workdate != null">
-        #{workdate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="comanyname != null">
-        #{comanyname,jdbcType=VARCHAR},
-      </if>
-      <if test="postname != null">
-        #{postname,jdbcType=VARCHAR},
-      </if>
-      <if test="photo != null">
-        #{photo,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.recruit.web.pojo.Resumes">
-    update resumes
-    <set>
-      <if test="userid != null">
-        userid = #{userid,jdbcType=INTEGER},
-      </if>
-      <if test="truename != null">
-        truename = #{truename,jdbcType=VARCHAR},
-      </if>
-      <if test="nation != null">
-        nation = #{nation,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null">
-        sex = #{sex,jdbcType=VARCHAR},
-      </if>
-      <if test="card != null">
-        card = #{card,jdbcType=VARCHAR},
-      </if>
-      <if test="birthday != null">
-        birthday = #{birthday,jdbcType=VARCHAR},
-      </if>
-      <if test="age != null">
-        age = #{age,jdbcType=TIMESTAMP},
-      </if>
-      <if test="nativeplace != null">
-        nativeplace = #{nativeplace,jdbcType=VARCHAR},
-      </if>
-      <if test="politicaloutlook != null">
-        politicaloutlook = #{politicaloutlook,jdbcType=VARCHAR},
-      </if>
-      <if test="maritalstatus != null">
-        maritalstatus = #{maritalstatus,jdbcType=VARCHAR},
-      </if>
-      <if test="locationpersonnelrelationship != null">
-        locationpersonnelrelationship = #{locationpersonnelrelationship,jdbcType=VARCHAR},
-      </if>
-      <if test="registeredresidence != null">
-        registeredresidence = #{registeredresidence,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        phone = #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="nowaddress != null">
-        nowaddress = #{nowaddress,jdbcType=VARCHAR},
-      </if>
-      <if test="graduateschool != null">
-        graduateschool = #{graduateschool,jdbcType=VARCHAR},
-      </if>
-      <if test="major != null">
-        major = #{major,jdbcType=VARCHAR},
-      </if>
-      <if test="education != null">
-        education = #{education,jdbcType=VARCHAR},
-      </if>
-      <if test="academicdegree != null">
-        academicdegree = #{academicdegree,jdbcType=VARCHAR},
-      </if>
-      <if test="isfreshstudent != null">
-        isfreshstudent = #{isfreshstudent,jdbcType=BIT},
-      </if>
-      <if test="workdate != null">
-        workdate = #{workdate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="comanyname != null">
-        comanyname = #{comanyname,jdbcType=VARCHAR},
-      </if>
-      <if test="postname != null">
-        postname = #{postname,jdbcType=VARCHAR},
-      </if>
-      <if test="photo != null">
-        postname = #{photo,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.recruit.web.pojo.Resumes">
+    <insert id="insert" parameterType="com.recruit.web.pojo.Resumes">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into resumes (userid, truename, nation,
+        sex, card, birthday,
+        age, nativeplace, politicaloutlook,
+        maritalstatus, locationpersonnelrelationship,
+        registeredresidence, phone, nowaddress,
+        graduateschool, major, education,
+        academicdegree, isfreshstudent, workdate,
+        comanyname, postname,photo)
+        values (#{userid,jdbcType=INTEGER}, #{truename,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR},
+        #{sex,jdbcType=VARCHAR}, #{card,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR},
+        #{age,jdbcType=TIMESTAMP}, #{nativeplace,jdbcType=VARCHAR}, #{politicaloutlook,jdbcType=VARCHAR},
+        #{maritalstatus,jdbcType=VARCHAR}, #{locationpersonnelrelationship,jdbcType=VARCHAR},
+        #{registeredresidence,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{nowaddress,jdbcType=VARCHAR},
+        #{graduateschool,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR},
+        #{academicdegree,jdbcType=VARCHAR}, #{isfreshstudent,jdbcType=BIT}, #{workdate,jdbcType=TIMESTAMP},
+        #{comanyname,jdbcType=VARCHAR}, #{postname,jdbcType=VARCHAR},#{photo,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.recruit.web.pojo.Resumes">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into resumes
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userid != null">
+                userid,
+            </if>
+            <if test="truename != null">
+                truename,
+            </if>
+            <if test="nation != null">
+                nation,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="card != null">
+                card,
+            </if>
+            <if test="birthday != null">
+                birthday,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="nativeplace != null">
+                nativeplace,
+            </if>
+            <if test="politicaloutlook != null">
+                politicaloutlook,
+            </if>
+            <if test="maritalstatus != null">
+                maritalstatus,
+            </if>
+            <if test="locationpersonnelrelationship != null">
+                locationpersonnelrelationship,
+            </if>
+            <if test="registeredresidence != null">
+                registeredresidence,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="nowaddress != null">
+                nowaddress,
+            </if>
+            <if test="graduateschool != null">
+                graduateschool,
+            </if>
+            <if test="major != null">
+                major,
+            </if>
+            <if test="education != null">
+                education,
+            </if>
+            <if test="academicdegree != null">
+                academicdegree,
+            </if>
+            <if test="isfreshstudent != null">
+                isfreshstudent,
+            </if>
+            <if test="workdate != null">
+                workdate,
+            </if>
+            <if test="comanyname != null">
+                comanyname,
+            </if>
+            <if test="postname != null">
+                postname,
+            </if>
+            <if test="photo != null">
+                photo,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userid != null">
+                #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="truename != null">
+                #{truename,jdbcType=VARCHAR},
+            </if>
+            <if test="nation != null">
+                #{nation,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="card != null">
+                #{card,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                #{birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=TIMESTAMP},
+            </if>
+            <if test="nativeplace != null">
+                #{nativeplace,jdbcType=VARCHAR},
+            </if>
+            <if test="politicaloutlook != null">
+                #{politicaloutlook,jdbcType=VARCHAR},
+            </if>
+            <if test="maritalstatus != null">
+                #{maritalstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="locationpersonnelrelationship != null">
+                #{locationpersonnelrelationship,jdbcType=VARCHAR},
+            </if>
+            <if test="registeredresidence != null">
+                #{registeredresidence,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="nowaddress != null">
+                #{nowaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="graduateschool != null">
+                #{graduateschool,jdbcType=VARCHAR},
+            </if>
+            <if test="major != null">
+                #{major,jdbcType=VARCHAR},
+            </if>
+            <if test="education != null">
+                #{education,jdbcType=VARCHAR},
+            </if>
+            <if test="academicdegree != null">
+                #{academicdegree,jdbcType=VARCHAR},
+            </if>
+            <if test="isfreshstudent != null">
+                #{isfreshstudent,jdbcType=BIT},
+            </if>
+            <if test="workdate != null">
+                #{workdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="comanyname != null">
+                #{comanyname,jdbcType=VARCHAR},
+            </if>
+            <if test="postname != null">
+                #{postname,jdbcType=VARCHAR},
+            </if>
+            <if test="photo != null">
+                #{photo,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.recruit.web.pojo.Resumes">
+        update resumes
+        <set>
+            <if test="userid != null">
+                userid = #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="truename != null">
+                truename = #{truename,jdbcType=VARCHAR},
+            </if>
+            <if test="nation != null">
+                nation = #{nation,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="card != null">
+                card = #{card,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=TIMESTAMP},
+            </if>
+            <if test="nativeplace != null">
+                nativeplace = #{nativeplace,jdbcType=VARCHAR},
+            </if>
+            <if test="politicaloutlook != null">
+                politicaloutlook = #{politicaloutlook,jdbcType=VARCHAR},
+            </if>
+            <if test="maritalstatus != null">
+                maritalstatus = #{maritalstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="locationpersonnelrelationship != null">
+                locationpersonnelrelationship = #{locationpersonnelrelationship,jdbcType=VARCHAR},
+            </if>
+            <if test="registeredresidence != null">
+                registeredresidence = #{registeredresidence,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="nowaddress != null">
+                nowaddress = #{nowaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="graduateschool != null">
+                graduateschool = #{graduateschool,jdbcType=VARCHAR},
+            </if>
+            <if test="major != null">
+                major = #{major,jdbcType=VARCHAR},
+            </if>
+            <if test="education != null">
+                education = #{education,jdbcType=VARCHAR},
+            </if>
+            <if test="academicdegree != null">
+                academicdegree = #{academicdegree,jdbcType=VARCHAR},
+            </if>
+            <if test="isfreshstudent != null">
+                isfreshstudent = #{isfreshstudent,jdbcType=BIT},
+            </if>
+            <if test="workdate != null">
+                workdate = #{workdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="comanyname != null">
+                comanyname = #{comanyname,jdbcType=VARCHAR},
+            </if>
+            <if test="postname != null">
+                postname = #{postname,jdbcType=VARCHAR},
+            </if>
+            <if test="photo != null">
+                postname = #{photo,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.recruit.web.pojo.Resumes">
     update resumes
     set userid = #{userid,jdbcType=INTEGER},
       truename = #{truename,jdbcType=VARCHAR},
@@ -315,8 +316,12 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="selctResumeByUserId"  parameterType="java.lang.String" resultMap="BaseResultMap">
-    select *,TIMESTAMPDIFF(YEAR,resumes.workdate,now()) workage
-    FROM resumes where userid=#{userid} LIMIT 1
+    <select id="selctResumeByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+
+
+select *,TIMESTAMPDIFF(YEAR,resumes.workdate,now()) workage,userinfo.email
+
+    FROM resumes resumes INNER JOIN userinfo userinfo on resumes.userid=userinfo.id and userinfo.isactive=1
+    where resumes.userid=#{userid} LIMIT 1
   </select>
 </mapper>

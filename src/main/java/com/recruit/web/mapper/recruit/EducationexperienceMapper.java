@@ -2,6 +2,8 @@ package com.recruit.web.mapper.recruit;
 
 import com.recruit.web.pojo.Educationexperience;
 
+import java.util.List;
+
 public interface EducationexperienceMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface EducationexperienceMapper {
     int updateByPrimaryKeySelective(Educationexperience record);
 
     int updateByPrimaryKey(Educationexperience record);
+
+   List<Educationexperience> selectEducationByResumeid(Integer id);
 }

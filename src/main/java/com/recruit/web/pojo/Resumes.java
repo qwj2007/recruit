@@ -49,7 +49,16 @@ public class Resumes {
 
     private String postname;
     private String photo;
-    private  Integer workage;
+    private Integer workage;
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public Integer getWorkage() {
         return workage;

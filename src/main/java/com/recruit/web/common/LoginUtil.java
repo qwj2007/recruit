@@ -29,7 +29,6 @@ public class LoginUtil {
 
     public static String LoginOut(HttpServletRequest request, HttpServletResponse response)
     {
-        String servername = request.getServerName();
         Cookie[] cookies = request.getCookies();//这样便可以获取一个cookie数组
         if (null == cookies) {
         } else {

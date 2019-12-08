@@ -2,6 +2,8 @@ package com.recruit.web.mapper.recruit;
 
 import com.recruit.web.pojo.Workexperience;
 
+import java.util.List;
+
 public interface WorkexperienceMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface WorkexperienceMapper {
     int updateByPrimaryKeySelective(Workexperience record);
 
     int updateByPrimaryKey(Workexperience record);
+
+    List<Workexperience> selectWorkExperienceById(Integer resumeid);
 }

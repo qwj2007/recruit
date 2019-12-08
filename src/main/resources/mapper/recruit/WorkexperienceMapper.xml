@@ -185,4 +185,8 @@
       isactive = #{isactive,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectWorkExperienceById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from workexperience where resumesid=#{resumeid}
+  </select>
 </mapper>

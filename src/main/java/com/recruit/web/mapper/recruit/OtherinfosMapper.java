@@ -2,6 +2,8 @@ package com.recruit.web.mapper.recruit;
 
 import com.recruit.web.pojo.Otherinfos;
 
+import java.util.List;
+
 public interface OtherinfosMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,5 @@ public interface OtherinfosMapper {
     int updateByPrimaryKeySelective(Otherinfos record);
 
     int updateByPrimaryKey(Otherinfos record);
+    List<Otherinfos> selectOtherinfosById(Integer id);
 }

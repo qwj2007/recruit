@@ -161,4 +161,8 @@
       isactive = #{isactive,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectCertificateByResumeId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from certificate where resumesid=#{resumeid}
+  </select>
 </mapper>

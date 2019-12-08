@@ -141,35 +141,36 @@
         <h5>简历内容</h5>
         <ul>
             <li>
-                <img src="../images/resume/<%=GRXXTuLi %>.png"/>
+
+                <img  th:src="@{'../images/resume/'+${resumePicture.Pic_personalInfo}}"/>
                 <a href="/Center/EditResume.aspx?id=<%=entity.ID %>">个人信息</a>
             </li>
             <li>
-                <img src="../images/resume/<%=GZJLTuLi %>.png"/>
+                <img  th:src="@{'../images/resume/'+${resumePicture.Pic_work}}"/>
                 <a href="/Center/EditWorkExperience.aspx?id=<%=entity.ID %>">工作（实习）经历</a>
             </li>
             <li>
-                <img src="../images/resume/<%=JYJLTuLi %>.png"/>
+                <img  th:src="@{'../images/resume/'+${resumePicture.Pic_education}}"/>
                 <a href="/Center/EditEducation.aspx?id=<%=entity.ID %>">教育经历</a>
             </li>
             <li>
-                <img src="../images/resume/<%=PXJLTuLi %>.png"/>
+                <img  th:src="@{'../images/resume/'+${resumePicture.Pic_train}}"/>
                 <a href="/Center/EditTrainedExperienc.aspx?id=<%=entity.ID %>">培训经历</a>
             </li>
             <li>
-                <img src="../images/resume/<%=ZSTuLi %>.png"/>
+                <img  th:src="@{'../images/resume/'+${resumePicture.Pic_certificate}}"/>
                 <a href="/Center/EditCertificate.aspx?id=<%=entity.ID %>">证书</a>
             </li>
             <li>
-                <img src="../images/resume/<%=JTCYTuLi %>.png"/>
+                <img  th:src="@{'../images/resume/'+${resumePicture.Pic_family}}"/>
                 <a href="/Center/EditFamily.aspx?id=<%=entity.ID %>">家族成员及社会关系</a>
             </li>
             <li>
-                <img src="../images/resume/<%=ZPTuLi %>.png"/>
+                <img  th:src="@{'../images/resume/'+${resumePicture.Pic_photo}}"/>
                 <a href="/Center/UpTouXiang.aspx">照片</a>
             </li>
             <li>
-                <img src="../images/resume/<%=BCTuLi %>.png"/>
+                <img  th:src="@{'../images/resume/'+${resumePicture.Pic_ohter}}"/>
                 <a href="/Center/EditSelfAssessment.aspx?id=<%=entity.ID %>">补充内容</a>
             </li>
         </ul>

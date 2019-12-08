@@ -49,11 +49,11 @@ public class UserinfoServiceImpl implements IUserinfoService{
 
     @Override
     public int updateByPrimaryKeySelective(Userinfo record) {
-        return 0;
+        return userinfoMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
     public int updateByPrimaryKey(Userinfo record) {
-        return 0;
+        return userinfoMapper.updateByPrimaryKey(record);
     }
 }
