@@ -88,6 +88,6 @@
       createtime = #{createtime,jdbcType=TIMESTAMP},
       recruitinfoid = #{recruitinfoid,jdbcType=INTEGER},
       isactive = #{isactive,jdbcType=BIT}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER} and isactive=1
   </update>
 </mapper>

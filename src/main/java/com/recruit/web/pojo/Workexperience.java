@@ -7,9 +7,9 @@ public class Workexperience {
 
     private Integer resumesid;
 
-    private Date begintime;
+    private String begintime;
 
-    private Date endtime;
+    private String endtime;
 
     private String postname;
 
@@ -45,19 +45,19 @@ public class Workexperience {
         this.resumesid = resumesid;
     }
 
-    public Date getBegintime() {
+    public String getBegintime() {
         return begintime;
     }
 
-    public void setBegintime(Date begintime) {
+    public void setBegintime(String begintime) {
         this.begintime = begintime;
     }
 
-    public Date getEndtime() {
+    public String getEndtime() {
         return endtime;
     }
 
-    public void setEndtime(Date endtime) {
+    public void setEndtime(String endtime) {
         this.endtime = endtime;
     }
 

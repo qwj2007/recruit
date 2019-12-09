@@ -103,10 +103,12 @@ public class RegisterController {
             Cookie cookie = new Cookie("userid", user.getId().toString());
             cookie.setPath("/");
             cookie.setDomain(request.getServerName());
+            cookie.setMaxAge(-1);
             response.addCookie(cookie);
             cookie = new Cookie("username", user.getUsername());
             cookie.setDomain(request.getServerName());
             cookie.setPath("/");
+            cookie.setMaxAge(-1);
             response.addCookie(cookie);
         }
         return "ok";

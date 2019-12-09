@@ -209,6 +209,6 @@
   </update>
 
   <select id="selectEducationByResumeid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select * from educationexperience where resumesid=#{resumeid}
+    select * from educationexperience where resumesid=#{resumeid} and isactive=1
   </select>
 </mapper>

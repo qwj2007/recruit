@@ -10,4 +10,17 @@ import java.util.List;
  */
 public interface IWorkExperienceService {
    List<Workexperience>  selectWorkExperienceById(Integer resumeid);
+   Workexperience selectByPrimaryKey(Integer id);
+
+   int deleteByPrimaryKey(Integer id);
+
+   int insert(Workexperience record);
+
+   int insertSelective(Workexperience record);
+
+   int updateByPrimaryKeySelective(Workexperience record);
+
+   int updateByPrimaryKey(Workexperience record);
+
+
 }

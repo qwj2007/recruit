@@ -187,6 +187,6 @@
   </update>
 
     <select id="selectFamilyByResumeId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select * from family where resumesid=#{resumeid}
+    select * from family where resumesid=#{resumeid} and isactive=1
   </select>
 </mapper>

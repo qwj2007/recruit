@@ -188,6 +188,6 @@
 
 
   <select id="selecTrainByResumeId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select * from trainingexperience where resumesid=#{resumeid}
+    select * from trainingexperience where resumesid=#{resumeid} and isactive=1
   </select>
 </mapper>

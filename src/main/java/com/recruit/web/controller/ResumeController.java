@@ -1,13 +1,7 @@
 package com.recruit.web.controller;
 
-import com.recruit.web.pojo.Delivery;
-import com.recruit.web.pojo.Hrnotice;
-import com.recruit.web.pojo.Resumes;
-import com.recruit.web.pojo.Userinfo;
-import com.recruit.web.service.IDeliveryService;
-import com.recruit.web.service.IHrnoticeService;
-import com.recruit.web.service.IResumesService;
-import com.recruit.web.service.IUserinfoService;
+import com.recruit.web.pojo.*;
+import com.recruit.web.service.*;
 import com.recruit.web.util.CookieManager;
 import javafx.scene.Parent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -36,6 +32,8 @@ public class ResumeController {
     private IDeliveryService deliveryService;
     @Autowired
     private IUserinfoService userinfoService;
+    @Autowired
+    private IWorkExperienceService workExperienceService;
 
 
     @RequestMapping("/getcount")
@@ -82,6 +80,85 @@ public class ResumeController {
         return "editresume";
     }
 
+    @RequestMapping("/addwork")
+    @ResponseBody
+    public String addWork(HttpServletRequest request, Model model) throws ParseException {
+        String resumeid = request.getParameter("resumesid");
+        String id = request.getParameter("id");
+        String begintime = request.getParameter("kssj");
+        String endtime = request.getParameter("jssj");
+        String postname = request.getParameter("zw");
+        String job = request.getParameter("gzdw");
+        String workcontent = request.getParameter("gznr");
+        String userid = CookieManager.getInstance().getCookie(request, "userid");
+        Workexperience workexperience = new Workexperience();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        workexperience.setBegintime(begintime);
+        workexperience.setCratetime(new Date());
+        workexperience.setCreateuserid(Integer.parseInt(userid));
+        workexperience.setEndtime(endtime);
+        workexperience.setIsactive(true);
+        workexperience.setJob(job);
+        workexperience.setOrders(1);
+        workexperience.setPostname(postname);
+        workexperience.setResumesid(Integer.parseInt(resumeid));
+        workexperience.setUpdatetime(new Date());
+        workexperience.setUpdateuserid(Integer.parseInt(userid));
+        workexperience.setUpdatetime(new Date());
+        workexperience.setWorkcontent(workcontent);
+
+        int result = 0;
+        if (id != null && id != "" && Integer.parseInt(id) > 0) {
+            workexperience.setId(Integer.parseInt(id));
+            result = workExperienceService.updateByPrimaryKeySelective(workexperience);
+        } else {
+            result = workExperienceService.insertSelective(workexperience);
+        }
+        model.addAttribute("id", workexperience.getId());
+
+        if (result > 0) {
+            return workexperience.getId().toString();
+        }
+        return "0";
+    }
+
+    @RequestMapping("/deleteWork")
+    public String deleteWork(HttpServletRequest request, Model model) {
+        String id = request.getParameter("id");
+        Workexperience workexperience = workExperienceService.selectByPrimaryKey(Integer.parseInt(id));
+        if (workexperience != null) {
+            workexperience.setIsactive(false);
+        }
+        Integer result = workExperienceService.updateByPrimaryKeySelective(workexperience);
+        String url = "redirect:/resume/editworkexperience?resumesid=" + workexperience.getResumesid();
+        return url;
+    }
+
+    /*
+    * 工作经历
+    * */
+    @RequestMapping("/editworkexperience")
+    public String editworkexperience(HttpServletRequest request, Model model) {
+        resumesService.PersoncenterCheck(request, model);
+        String resumeid = request.getParameter("resumesid");
+        model.addAttribute("resumesid", resumeid);
+        String id = request.getParameter("id");
+        model.addAttribute("id", id);
+        if (resumeid != null && !"".equals(resumeid)) {
+            List<Workexperience> workexperiences = workExperienceService.selectWorkExperienceById(Integer.parseInt(resumeid));
+            model.addAttribute("workexperiences", workexperiences != null ? workexperiences : new Workexperience());
+        }
+        if (id != null && !"".equals(id) && Integer.parseInt(id) > 0) {
+            Workexperience workexperience = workExperienceService.selectByPrimaryKey(Integer.parseInt(id));
+            model.addAttribute("workModel", workexperience);
+
+        } else {
+            model.addAttribute("workModel", new Workexperience());
+        }
+
+        return "editworkexperience";
+    }
+
     @RequestMapping("/updateresume")
     @ResponseBody
     @Transactional
@@ -115,7 +192,7 @@ public class ResumeController {
             resumes.setPhone(phone);
             resumes.setNowaddress(xjzd);
             resumes.setId(id);
-           Integer i= resumesService.updateByPrimaryKeySelective(resumes);
+            Integer i = resumesService.updateByPrimaryKeySelective(resumes);
             Userinfo userinfo = userinfoService.selectByPrimaryKey(resumes.getUserid());
             resumes.setEmail(dzyx);
             userinfoService.updateByPrimaryKey(userinfo);

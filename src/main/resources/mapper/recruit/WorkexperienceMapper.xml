@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="com.recruit.web.pojo.Workexperience">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="resumesid" jdbcType="INTEGER" property="resumesid" />
-    <result column="begintime" jdbcType="TIMESTAMP" property="begintime" />
-    <result column="endtime" jdbcType="TIMESTAMP" property="endtime" />
+    <result column="begintime" jdbcType="VARCHAR" property="begintime" />
+    <result column="endtime" jdbcType="VARCHAR" property="endtime" />
     <result column="postname" jdbcType="VARCHAR" property="postname" />
     <result column="job" jdbcType="VARCHAR" property="job" />
     <result column="workcontent" jdbcType="VARCHAR" property="workcontent" />
@@ -39,7 +39,7 @@
       orders, createuserid, cratetime, 
       updateuserid, updatetime, isactive
       )
-    values (#{resumesid,jdbcType=INTEGER}, #{begintime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, 
+    values (#{resumesid,jdbcType=INTEGER}, #{begintime,jdbcType=VARCHAR}, #{endtime,jdbcType=VARCHAR},
       #{postname,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, #{workcontent,jdbcType=VARCHAR}, 
       #{orders,jdbcType=INTEGER}, #{createuserid,jdbcType=INTEGER}, #{cratetime,jdbcType=TIMESTAMP}, 
       #{updateuserid,jdbcType=INTEGER}, #{updatetime,jdbcType=TIMESTAMP}, #{isactive,jdbcType=BIT}
@@ -134,10 +134,10 @@
         resumesid = #{resumesid,jdbcType=INTEGER},
       </if>
       <if test="begintime != null">
-        begintime = #{begintime,jdbcType=TIMESTAMP},
+        begintime = #{begintime,jdbcType=VARCHAR},
       </if>
       <if test="endtime != null">
-        endtime = #{endtime,jdbcType=TIMESTAMP},
+        endtime = #{endtime,jdbcType=VARCHAR},
       </if>
       <if test="postname != null">
         postname = #{postname,jdbcType=VARCHAR},
@@ -172,8 +172,8 @@
   <update id="updateByPrimaryKey" parameterType="com.recruit.web.pojo.Workexperience">
     update workexperience
     set resumesid = #{resumesid,jdbcType=INTEGER},
-      begintime = #{begintime,jdbcType=TIMESTAMP},
-      endtime = #{endtime,jdbcType=TIMESTAMP},
+      begintime = #{begintime,jdbcType=VARCHAR},
+      endtime = #{endtime,jdbcType=VARCHAR},
       postname = #{postname,jdbcType=VARCHAR},
       job = #{job,jdbcType=VARCHAR},
       workcontent = #{workcontent,jdbcType=VARCHAR},
@@ -187,6 +187,6 @@
   </update>
 
   <select id="selectWorkExperienceById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select * from workexperience where resumesid=#{resumeid}
+    select * from workexperience where resumesid=#{resumeid} and isactive=1
   </select>
 </mapper>

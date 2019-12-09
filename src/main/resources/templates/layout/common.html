@@ -143,15 +143,16 @@
             <li>
 
                 <img  th:src="@{'../images/resume/'+${resumePicture.Pic_personalInfo}}"/>
-                <a href="/Center/EditResume.aspx?id=<%=entity.ID %>">个人信息</a>
+                <a href="/resume/editresume">个人信息</a>
             </li>
             <li>
                 <img  th:src="@{'../images/resume/'+${resumePicture.Pic_work}}"/>
-                <a href="/Center/EditWorkExperience.aspx?id=<%=entity.ID %>">工作（实习）经历</a>
+                <a th:href="@{/resume/editworkexperience(resumesid=${resumes.id})}">工作（实习）经历</a>
+
             </li>
             <li>
                 <img  th:src="@{'../images/resume/'+${resumePicture.Pic_education}}"/>
-                <a href="/Center/EditEducation.aspx?id=<%=entity.ID %>">教育经历</a>
+                <a th:href="@{/resume/editworkexperience(id=${resumes.id})}">教育经历</a>
             </li>
             <li>
                 <img  th:src="@{'../images/resume/'+${resumePicture.Pic_train}}"/>
