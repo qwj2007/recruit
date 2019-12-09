@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>简历管理</title>
+    <style type="text/css">
+        .rekit_470b42 {
+            height: 100px;
+            position: relative;
+        }
+
+        .rekit_86e5c5 {
+            width: 100%;
+            color: #888;
+            font-size: 12px;
+            position: absolute;
+            top: 25px;
+            left: 0;
+            height: 60px;
+        }
+
+        .rekit_86e5c5 li {
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            float: left;
+            overflow: hidden;
+        }
+
+        .rekit_e8ddfa {
+            position: absolute;
+            top: 10px;
+            right: 0;
+        }
+    </style>
+    <script src="/js/jquery-1.8.0.min.js" language="javascript"></script>
+    <script src="/js/layer.min.js" language="javascript"></script>
+    <script src="/js/public.js" language="javascript"></script>
+    <script type="text/javascript" src="/js/setday.js"></script>
+    <script type="text/javascript" src="/js/member_public.js"></script>
+    <script src="/js/calendar.js" type="text/javascript"></script>
+    <script src="/js/ens.js" type="text/javascript"></script>
+    <link href="/css/jscal2.css" type="text/css" rel="stylesheet">
+    <link href="/css/jianli.css" rel="stylesheet"/>
+    <link href="/css/layer.css" rel="stylesheet"/>
+
+    <link type="text/css" rel="stylesheet" href="/css/layer.css" id="skinlayercss">
+    <link href="/css/m_css.css" type="text/css" rel="stylesheet">
+    <link href="/css/m_header.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/base.css" type="text/css">
+    <link rel="stylesheet" href="/css/resumemanage.css" type="text/css">
+    <link rel="stylesheet" href="/css/common.css" type="text/css">
+    <link href="/css/jscal2.css" type="text/css" rel="stylesheet">
+    <script src="/js/calendar.js" type="text/javascript"></script>
+    <script src="/js/ens.js" type="text/javascript"></script>
+    <link type="text/css" rel="stylesheet" href="/css/layer.css">
+    <link href="/css/jianli.css" rel="stylesheet"/>
+    <link href="/css/jscal2.css" type="text/css" rel="stylesheet">
+    <script src="/js/calendar.js" type="text/javascript"></script>
+    <script src="/js/ens.js" type="text/javascript"></script>
+    <link type="text/css" rel="stylesheet" href="/css/layer.css" >
+    <link href="/css/jianli.css" rel="stylesheet"/>
+    <link href="/css/layer.css" rel="stylesheet"/>
+    <script type="text/javascript">
+        function AddJiaoYuJingLi(flag) {
+            debugger;
+            var kssj = $('#gzsj').val();
+            var jssj = $('#jssj').val();
+            var XXMC = $('#XXMC').val();
+            var ZY = $('#ZY').val();
+            var XLID = $('#XLID option:selected').text();
+            var XWID = $('#XWID option:selected').text();
+            var XXXS = $('#XXXS').val();
+            $.ajax({
+                type: "POST",
+                url: "/resume/addEducation?resumesid=[[${resumesid}]]&id=[[${id}]]",
+                processData: true,
+                data: {
+                    kssj: kssj,
+                    jssj: jssj,
+                    xxmc: XXMC,
+                    zy: ZY,
+                    xlid: XLID,
+                    xwid: XWID,
+                    xxxs: XXXS,
+                },
+                success: function (data) {
+                    if (Number(data)>0) {
+                        alert("保存成功！");
+                        if (flag == '1') {
+                            window.location.href = '/resume/editeducation?resumesid=[[${resumesid}]]';
+                        } else {
+                            window.location.href = '/resume/resumemanager?resumesid=[[${resumesid}]]';
+                        }
+                    }
+                    else if (data == "0") {
+                        alert("保存失败！");
+                    }
+                    else {
+                        alert(data);
+                    }
+                }
+            });
+        }
+    </script>
+
+</head>
+<body>
+<div th:replace="layout/common::ptopbar"></div>
+<div class="clear"></div>
+<div class="resume-container">
+    <div class="resume container">
+        <div class="resume-hd">
+            您的当前位置：
+            <a href="/">首页</a>
+            <a href="/Register/Personcenter">> 个人中心 > </a>
+            <span>简历管理</span>
+        </div>
+        <div class="resume-bd clearFix">
+            <!--左-->
+            <div th:replace="layout/common::leftbar">
+            </div>
+            <!--右-->
+            <div class="resume-bdrt">
+                <div class="clear"></div>
+                <div class="resume-bdrt">
+                    <h4>教育经历</h4>
+                    <table class="education">
+                        <thead>
+                        <tr>
+                            <td style="width: 161px; ">时间</td>
+                            <td style="width: 130px; ">学校名称</td>
+                            <td style="width: 120px; ">所学专业</td>
+                            <td style="width: 100px; ">学历</td>
+                            <td style="width: 100px; ">学位</td>
+                            <td style="width: 100px; ">学习形式</td>
+                            <td style="width: 102px; ">操作</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="emp:${educations}">
+                            <td><span th:text="${emp.begintime}"></span>-<span th:text="${emp.endtime}"></span></td>
+                            <td th:text="${emp.schoolname}"></td>
+                            <td th:text="${emp.majorname}"></td>
+                            <td th:text="${emp.education}"></td>
+                            <td th:text="${emp.academicdegree}"></td>
+                            <td th:text="${emp.learningform}"></td>
+                            <td>
+                                <a th:href="@{/resume/editeducation(resumesid=${emp.resumesid},id=${emp.id})}" th:text="修改"></a>|
+                                <a th:href="@{/resume/deleteEdu(resumesid=${emp.resumesid},id=${emp.id})}"  th:text="删除"></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <h5>新增教育经历</h5>
+                    <div class="modify">
+                        <div>
+                            <label>开始时间：</label>
+                            <input type="text" name="kssj" id="gzsj" size="40" class="info_text" th:value="${educationModel.begintime}" />
+                            <script type="text/javascript">
+                                Calendar.setup({
+                                    weekNumbers: true,
+                                    inputField: "gzsj",
+                                    trigger: "gzsj",
+                                    dateFormat: "%Y-%m-%d",
+                                    showTime: false,
+                                    onSelect: function () { this.hide(); }
+                                });
+                            </script>
+                        </div>
+                        <div>
+                            <label>结束时间：</label>
+                            <input type="text" name="jssj" id="jssj" size="40" class="info_text" th:value="${educationModel.endtime}" />
+                            <script type="text/javascript">
+                                Calendar.setup({
+                                    weekNumbers: true,
+                                    inputField: "jssj",
+                                    trigger: "jssj",
+                                    dateFormat: "%Y-%m-%d",
+                                    showTime: false,
+                                    onSelect: function () { this.hide(); }
+                                });
+                            </script>
+                        </div>
+                        <div>
+                            <label>学校名称：</label>
+                            <input type="text" name="XXMC" id="XXMC" th:value="${educationModel.schoolname}">
+                        </div>
+                        <div class="xueli">
+                            <label>专业名称：</label>
+                            <input type="text" name="ZY" id="ZY" th:value="${educationModel.majorname}"/>
+                        </div>
+                        <div class="xueli">
+                            <label>学历：</label>
+                            <select name="XLID" class="rt se" id="XLID">
+                                <option value="研究生或以上" th:field="*{educationModel.education}">研究生或以上</option>
+                                <option value="大学本科" th:field="*{educationModel.education}">大学本科</option>
+                                <option value="大学专科" th:field="*{educationModel.education}">大学专科</option>
+                                <option value="大学专科以下" th:field="*{educationModel.education}">大学专科以下</option>
+                            </select>
+
+                        </div>
+                        <div class="xueli">
+                            <label>学位：</label>
+                            <select name="XWID" class="rt se" id="XWID">
+                                <option value="4b68d5db-1a83-439e-8417-1e91eb3d5978" th:field="*{educationModel.academicdegree}">名誉博士</option>
+                                <option value="923a3abb-e665-43a7-ab9a-641155c3eae1" th:field="*{educationModel.academicdegree}">博士</option>
+                                <option value="c63b488b-0871-4d79-93a7-e65e4e5f7a18" th:field="*{educationModel.academicdegree}">哲学博士学位</option>
+                                <option value="c1e7db9d-18d5-4615-a2b9-60ab8eab16b9" th:field="*{educationModel.academicdegree}">经济学博士学位</option>
+                                <option value="c8b0d931-b8c3-4109-b73a-54964da37ddd" th:field="*{educationModel.academicdegree}">法学博士学位</option>
+                                <option value="9ca29ed0-277c-4b04-aa5e-655d9b417ca1" th:field="*{educationModel.academicdegree}">教育学博士学位</option>
+                                <option value="64546e87-4d38-452c-a61a-b0f83e6a78df" th:field="*{educationModel.academicdegree}">文学博士学位</option>
+                                <option value="79f46ad0-d69f-4841-8e42-166e83aa4993" th:field="*{educationModel.academicdegree}">历史学博士学位</option>
+                                <option value="467ef4ee-cf68-4c14-b1cb-051ff1e44a5e" th:field="*{educationModel.academicdegree}">理学博士学位</option>
+                                <option value="5d59864d-646d-4a8f-9759-4bd827b829f4" th:field="*{educationModel.academicdegree}">工学博士学位</option>
+                                <option value="a4de0f9e-75f7-4345-a0d8-6f49d13df168" th:field="*{educationModel.academicdegree}">农学博士学位</option>
+                                <option value="964272a0-bad1-47f5-b874-9cda2c16c525" th:field="*{educationModel.academicdegree}">医学博士学位</option>
+                                <option value="28363a5e-05a9-4903-ace7-d16a32d9c2a2" th:field="*{educationModel.academicdegree}">军事学博士学位</option>
+                                <option value="c63bf128-e3b3-456d-9438-4df6b1e32b93" th:field="*{educationModel.academicdegree}">管理学博士学位</option>
+                                <option value="a93e12de-9952-4226-8e91-016651bef109" th:field="*{educationModel.academicdegree}">临床医学博士专业学位</option>
+                                <option value="eb453c5b-0988-49a6-8202-561dce5a54ba" th:field="*{educationModel.academicdegree}">兽医博士专业学位</option>
+                                <option value="2bdfba35-3c3a-4c95-9988-7dbc054f6549" th:field="*{educationModel.academicdegree}">口腔医学博士专业学位</option>
+                                <option value="c9ac8084-6723-4a32-b2d4-8732ac0ad198" th:field="*{educationModel.academicdegree}">硕士</option>
+                                <option value="ba335821-65f2-43b2-87de-8d70f8c94ca1" th:field="*{educationModel.academicdegree}">哲学硕士学位</option>
+                                <option value="fd4476ca-0a93-42be-aa17-fe76661091da" th:field="*{educationModel.academicdegree}">经济学硕士学位</option>
+                                <option value="8652b3ad-a12f-402e-8d3a-9c442bb37e01" th:field="*{educationModel.academicdegree}">法学硕士学位</option>
+                                <option value="065d37a9-df14-4d51-ab0c-d02596c1f636" th:field="*{educationModel.academicdegree}">教育学硕士学位</option>
+                                <option value="e74c7188-e0ff-41d5-8d22-fcd75b4e8cec" th:field="*{educationModel.academicdegree}">文学硕士学位</option>
+                                <option value="09029b67-02a9-4071-a1bc-6afee739cca7" th:field="*{educationModel.academicdegree}">历史学硕士学位</option>
+                                <option value="e47ebb27-c221-4ae2-b38f-d6e33306ffe7" th:field="*{educationModel.academicdegree}">理学硕士学位</option>
+                                <option value="71021f4c-0bdd-4c31-973b-7afd6ce820c9" th:field="*{educationModel.academicdegree}">工学硕士学位</option>
+                                <option value="35f5ccd9-1d9e-4fa3-ab93-e0d3c3fecefa" th:field="*{educationModel.academicdegree}">农学硕士学位</option>
+                                <option value="2e0d7150-5393-440c-93ae-d50eb79f20a8" th:field="*{educationModel.academicdegree}">医学硕士学位</option>
+                                <option value="a139f475-8d04-40d8-8b1b-1aad3a4e2481" th:field="*{educationModel.academicdegree}">军事学硕士学位</option>
+                                <option value="cd3abd8c-1021-467b-93f3-8f4779fd20fc" th:field="*{educationModel.academicdegree}">管理学硕士学位</option>
+                                <option value="1adf6478-1c1d-47f8-86c4-56e44b1350da" th:field="*{educationModel.academicdegree}">法律硕士专业学位</option>
+                                <option value="6498b423-490e-48ee-a5da-17fa3fb10465" th:field="*{educationModel.academicdegree}">教育硕士专业学位</option>
+                                <option value="8a069806-b233-45a9-a8a5-c5bb5a1a9577" th:field="*{educationModel.academicdegree}">工程硕士专业学位</option>
+                                <option value="c1410e5d-3e71-48a0-b039-408ffb6cb93f" th:field="*{educationModel.academicdegree}">建筑学硕士专业学位</option>
+                                <option value="860f1f97-4b3a-4119-a751-7f38ed654353" th:field="*{educationModel.academicdegree}">临床学硕士专业学位</option>
+                                <option value="7f926769-5fb0-4784-b891-745d2f9e1b64" th:field="*{educationModel.academicdegree}">工商管理硕士专业学位</option>
+                                <option value="fe1385b9-9bff-457d-a5d2-64bfaaa766fc" th:field="*{educationModel.academicdegree}">农业推广硕士专业学位</option>
+                                <option value="d35421bc-0704-4697-9075-7a4765707333" th:field="*{educationModel.academicdegree}">兽医硕士专业学位</option>
+                                <option value="2c5ed187-4a0d-45e7-8b3a-f22918e475a7" th:field="*{educationModel.academicdegree}">公共管理硕士专业学位</option>
+                                <option value="a7d04356-064e-48de-838b-a9e887712bb7" th:field="*{educationModel.academicdegree}">口腔医学硕士专业学位</option>
+                                <option value="a56d113f-de12-487c-9eb6-cc3ea9a13218" th:field="*{educationModel.academicdegree}">公共卫生硕士专业学位</option>
+                                <option value="747c8c49-3c43-49e5-a2e2-e743a4f596ba" th:field="*{educationModel.academicdegree}">军事硕士专业学位</option>
+                                <option value="4a03b31d-1cb4-4bc8-a8cb-cd81e4c10e95" th:field="*{educationModel.academicdegree}">学士</option>
+                                <option value="a21dc93e-31eb-4940-b433-de58d213af36" th:field="*{educationModel.academicdegree}">哲学学士学位</option>
+                                <option value="12d77709-536c-4484-9486-82c58eb2c590" th:field="*{educationModel.academicdegree}">经济学学士学位</option>
+                                <option value="c181bb2e-60fd-4d76-b940-c2f7893783e4" th:field="*{educationModel.academicdegree}">法学学士学位</option>
+                                <option value="486afe00-01a4-448e-8fd1-bd903b879550" th:field="*{educationModel.academicdegree}">教育学学士学位</option>
+                                <option value="2348bb6e-e54c-43ab-84a5-16db47444d6f" th:field="*{educationModel.academicdegree}">文学学士学位</option>
+                                <option value="cefb9be4-7499-408c-8410-d0f00ee793f3" th:field="*{educationModel.academicdegree}">历史学学士学位</option>
+                                <option value="04802376-704f-452a-93ad-3954c92f123d" th:field="*{educationModel.academicdegree}">理学学士学位</option>
+                                <option value="7b63e774-73b4-40fe-9597-5b13fb781cac" th:field="*{educationModel.academicdegree}">工学学士学位</option>
+                                <option value="d05b399e-a984-46bf-937c-04a99d3d44a2" th:field="*{educationModel.academicdegree}">农学学士学位</option>
+                                <option value="612f3ee8-bf54-4638-a96f-4bd16f1bb301" th:field="*{educationModel.academicdegree}">医学学士学位</option>
+                                <option value="cd8ecae1-a0ed-4ec2-b47a-1d8a27b5f9d4" th:field="*{educationModel.academicdegree}">军事学学士学位</option>
+                                <option value="5c07ccc0-2085-402a-a58c-50648e30bedd" th:field="*{educationModel.academicdegree}">管理学学士学位</option>
+                                <option value="b1119a73-3aaf-427d-aef2-7ebeaf1c3683" th:field="*{educationModel.academicdegree}">建筑学学士专业学位</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>状态：</label>
+                            <select name="XXXS" id="XXXS">
+                                <option></option>
+                                <option value="在职" th:field="*{educationModel.learningform}" >在职</option>
+                                <option value="全日制" th:field="*{educationModel.learningform}" >全日制</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modSave">
+                        <button onclick="AddJiaoYuJingLi(1)">保存并继续添加</button>
+                        <button onclick="AddJiaoYuJingLi(0)">保存</button>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="layout/common::bottombar"></div>
+</body>
+</html>

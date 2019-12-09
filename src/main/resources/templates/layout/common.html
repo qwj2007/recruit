@@ -152,11 +152,11 @@
             </li>
             <li>
                 <img  th:src="@{'../images/resume/'+${resumePicture.Pic_education}}"/>
-                <a th:href="@{/resume/editworkexperience(id=${resumes.id})}">教育经历</a>
+                <a th:href="@{/resume/editeducation(resumesid=${resumes.id})}">教育经历</a>
             </li>
             <li>
                 <img  th:src="@{'../images/resume/'+${resumePicture.Pic_train}}"/>
-                <a href="/Center/EditTrainedExperienc.aspx?id=<%=entity.ID %>">培训经历</a>
+                <a th:href="@{/resume/editetrain(resumesid=${resumes.id})}">培训经历</a>
             </li>
             <li>
                 <img  th:src="@{'../images/resume/'+${resumePicture.Pic_certificate}}"/>

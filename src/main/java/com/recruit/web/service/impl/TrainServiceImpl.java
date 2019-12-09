@@ -20,4 +20,34 @@ public class TrainServiceImpl implements ITrainService {
     public List<Trainingexperience> selecTrainByResumeId(Integer id) {
         return trainService.selecTrainByResumeId(id);
     }
+
+    @Override
+    public int deleteByPrimaryKey(Integer id) {
+        return trainService.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int insert(Trainingexperience record) {
+        return trainService.insert(record);
+    }
+
+    @Override
+    public int insertSelective(Trainingexperience record) {
+        return trainService.insertSelective(record);
+    }
+
+    @Override
+    public Trainingexperience selectByPrimaryKey(Integer id) {
+        return trainService.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(Trainingexperience record) {
+        return trainService.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public int updateByPrimaryKey(Trainingexperience record) {
+        return trainService.updateByPrimaryKey(record);
+    }
 }

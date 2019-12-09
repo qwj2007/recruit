@@ -34,6 +34,10 @@ public class ResumeController {
     private IUserinfoService userinfoService;
     @Autowired
     private IWorkExperienceService workExperienceService;
+    @Autowired
+    private IEdutionExpericenceService edutionExpericenceService;
+    @Autowired
+    private ITrainService trainService;
 
 
     @RequestMapping("/getcount")
@@ -202,4 +206,168 @@ public class ResumeController {
         }
 
     }
+
+    @RequestMapping("/addEducation")
+    @ResponseBody
+    public String addEducation(HttpServletRequest request, Model model)
+    {
+
+        Educationexperience educationexperience=new Educationexperience();
+        String resumeid = request.getParameter("resumesid");
+        String id = request.getParameter("id");
+        String begintime = request.getParameter("kssj");
+        String endtime = request.getParameter("jssj");
+        String majorname = request.getParameter("zy");
+        String schoolname = request.getParameter("xxmc");
+        String education=request.getParameter("xlid");
+        String academicdegree=request.getParameter("xwid");
+        String learningform=request.getParameter("xxxs");
+        String userid = CookieManager.getInstance().getCookie(request, "userid");
+
+
+        educationexperience.setBegintime(begintime);
+        educationexperience.setCratetime(new Date());
+        educationexperience.setCreateuserid(Integer.parseInt(userid));
+        educationexperience.setEndtime(endtime);
+        educationexperience.setIsactive(true);
+        educationexperience.setAcademicdegree(academicdegree);
+        educationexperience.setEducation(education);
+        educationexperience.setLearningform(learningform);
+        educationexperience.setMajorname(majorname);
+        educationexperience.setOrders(1);
+        educationexperience.setResumesid(Integer.parseInt(resumeid));
+        educationexperience.setUpdateuserid(Integer.parseInt(userid));
+        educationexperience.setSchoolname(schoolname);
+        educationexperience.setUpdatetime(new Date());
+
+
+        int result = 0;
+        if (id != null && id != "" && Integer.parseInt(id) > 0) {
+            educationexperience.setId(Integer.parseInt(id));
+            result = edutionExpericenceService.updateByPrimaryKeySelective(educationexperience);
+        } else {
+            result = edutionExpericenceService.insertSelective(educationexperience);
+        }
+        model.addAttribute("id", educationexperience.getId());
+
+        if (result > 0) {
+            return educationexperience.getId().toString();
+        }
+        return "0";
+    }
+    /*
+    *教育经历
+    * */
+    @RequestMapping("/editeducation")
+    public String editeducation(HttpServletRequest request, Model model) {
+        resumesService.PersoncenterCheck(request, model);
+        String resumeid = request.getParameter("resumesid");
+        model.addAttribute("resumesid", resumeid);
+        String id = request.getParameter("id");
+        model.addAttribute("id", id);
+        if (resumeid != null && !"".equals(resumeid)) {
+            List<Educationexperience> educationexperiences = edutionExpericenceService.selectEducationByResumeid(Integer.parseInt(resumeid));
+            model.addAttribute("educations", educationexperiences);
+        }
+        if (id != null && !"".equals(id) && Integer.parseInt(id) > 0) {
+            Educationexperience educationexperience = edutionExpericenceService.selectByPrimaryKey(Integer.parseInt(id));
+            model.addAttribute("educationModel", educationexperience);
+
+        } else {
+            model.addAttribute("educationModel", new Educationexperience());
+        }
+        return "editeducation";
+    }
+
+    @RequestMapping("/deleteEdu")
+
+    public String deleteEdu(HttpServletRequest request, Model model) {
+        String id = request.getParameter("id");
+        Educationexperience educationexperience = edutionExpericenceService.selectByPrimaryKey(Integer.parseInt(id));
+        if (educationexperience != null) {
+            educationexperience.setIsactive(false);
+        }
+        Integer result = edutionExpericenceService.updateByPrimaryKeySelective(educationexperience);
+        String url = "redirect:/resume/editeducation?resumesid=" + educationexperience.getResumesid();
+        return url;
+    }
+
+    /*
+    * 培训经历
+    * */
+    @RequestMapping("/editetrain")
+    public String editTrain(HttpServletRequest request, Model model)
+    {
+        resumesService.PersoncenterCheck(request, model);
+        String resumeid = request.getParameter("resumesid");
+        model.addAttribute("resumesid", resumeid);
+        String id = request.getParameter("id");
+        model.addAttribute("id", id);
+        if (resumeid != null && !"".equals(resumeid)) {
+            List<Trainingexperience> trainingexperiences = trainService.selecTrainByResumeId(Integer.parseInt(resumeid));
+            model.addAttribute("trains", trainingexperiences);
+        }
+        if (id != null && !"".equals(id) && Integer.parseInt(id) > 0) {
+            Trainingexperience trainingexperience = trainService.selectByPrimaryKey(Integer.parseInt(id));
+            model.addAttribute("trainModel", trainingexperience);
+
+        } else {
+            model.addAttribute("trainModel", new Trainingexperience());
+        }
+        return "edittrain";
+    }
+
+    @RequestMapping("/deleteTrain")
+    public String deleteTrain(HttpServletRequest request, Model model) {
+        String id = request.getParameter("id");
+        Trainingexperience Trainingexperience = trainService.selectByPrimaryKey(Integer.parseInt(id));
+        if (Trainingexperience != null) {
+            Trainingexperience.setIsactive(false);
+        }
+        Integer result = trainService.updateByPrimaryKeySelective(Trainingexperience);
+        String url = "redirect:/resume/editTrain?resumesid=" + Trainingexperience.getResumesid();
+        return url;
+    }
+
+    @RequestMapping("/addTrain")
+    @ResponseBody
+    public String addTrain(HttpServletRequest request, Model model)
+    {
+        Trainingexperience trainingexperience=new Trainingexperience();
+        String resumeid = request.getParameter("resumesid");
+        String id = request.getParameter("id");
+        String begintime = request.getParameter("pxkssj");
+        String endtime = request.getParameter("pxjssj");
+        String traincompany = request.getParameter("pxdw");
+        String traincontent = request.getParameter("pxnr");
+        String userid = CookieManager.getInstance().getCookie(request, "userid");
+        trainingexperience.setBegintime(begintime);
+        trainingexperience.setCratetime(new Date());
+        trainingexperience.setCreateuserid(Integer.parseInt(userid));
+        trainingexperience.setEndtime(endtime);
+        trainingexperience.setIsactive(true);
+        trainingexperience.setOrders(1);
+        trainingexperience.setResumesid(Integer.parseInt(resumeid));
+        trainingexperience.setUpdateuserid(Integer.parseInt(userid));
+        trainingexperience.setTraincomany(traincompany);
+        trainingexperience.setTraincontent(traincontent);
+
+        trainingexperience.setUpdatetime(new Date());
+        int result = 0;
+        if (id != null && id != "" && Integer.parseInt(id) > 0) {
+            trainingexperience.setId(Integer.parseInt(id));
+            result = trainService.updateByPrimaryKeySelective(trainingexperience);
+        } else {
+            result = trainService.insertSelective(trainingexperience);
+        }
+        model.addAttribute("id", trainingexperience.getId());
+
+        if (result > 0) {
+            return trainingexperience.getId().toString();
+        }
+        return "0";
+    }
+
+
+
 }

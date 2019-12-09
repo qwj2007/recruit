@@ -10,4 +10,17 @@ import java.util.List;
  */
 public interface IEdutionExpericenceService {
     List<Educationexperience> selectEducationByResumeid(Integer id);
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(Educationexperience record);
+
+    int insertSelective(Educationexperience record);
+
+    Educationexperience selectByPrimaryKey(Integer id);
+
+    int updateByPrimaryKeySelective(Educationexperience record);
+
+    int updateByPrimaryKey(Educationexperience record);
+
+
 }
