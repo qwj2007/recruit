@@ -1,9 +1,12 @@
 package com.recruit.web.mapper.recruit;
 
 import com.recruit.web.pojo.Family;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
+@Mapper
 public interface FamilyMapper {
     int deleteByPrimaryKey(Integer id);
 

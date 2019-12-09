@@ -160,11 +160,12 @@
             </li>
             <li>
                 <img  th:src="@{'../images/resume/'+${resumePicture.Pic_certificate}}"/>
-                <a href="/Center/EditCertificate.aspx?id=<%=entity.ID %>">证书</a>
+
+                <a th:href="@{/resume/editcetificate(resumesid=${resumes.id})}">证书</a>
             </li>
             <li>
                 <img  th:src="@{'../images/resume/'+${resumePicture.Pic_family}}"/>
-                <a href="/Center/EditFamily.aspx?id=<%=entity.ID %>">家族成员及社会关系</a>
+                <a th:href="@{/resume/editfamily(resumesid=${resumes.id})}">家族成员及社会关系</a>
             </li>
             <li>
                 <img  th:src="@{'../images/resume/'+${resumePicture.Pic_photo}}"/>

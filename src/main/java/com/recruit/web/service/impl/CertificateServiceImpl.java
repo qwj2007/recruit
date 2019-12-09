@@ -20,4 +20,34 @@ public class CertificateServiceImpl implements ICertificateService {
     public List<Certificate> selectCertificateByResumeId(Integer id) {
         return certificateMapper.selectCertificateByResumeId(id);
     }
+
+    @Override
+    public int deleteByPrimaryKey(Integer id) {
+        return certificateMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int insert(Certificate record) {
+        return certificateMapper.insert(record);
+    }
+
+    @Override
+    public int insertSelective(Certificate record) {
+        return certificateMapper.insertSelective(record);
+    }
+
+    @Override
+    public Certificate selectByPrimaryKey(Integer id) {
+        return certificateMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(Certificate record) {
+        return certificateMapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public int updateByPrimaryKey(Certificate record) {
+        return certificateMapper.updateByPrimaryKey(record);
+    }
 }

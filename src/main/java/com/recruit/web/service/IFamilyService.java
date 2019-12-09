@@ -10,4 +10,15 @@ import java.util.List;
  */
 public interface IFamilyService {
    List<Family> selectFamilyByResumeId(int id);
+   int deleteByPrimaryKey(Integer id);
+
+   int insert(Family record);
+
+   int insertSelective(Family record);
+
+   Family selectByPrimaryKey(Integer id);
+
+   int updateByPrimaryKeySelective(Family record);
+
+   int updateByPrimaryKey(Family record);
 }

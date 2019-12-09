@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>简历管理</title>
+    <style type="text/css">
+        .rekit_470b42 {
+            height: 100px;
+            position: relative;
+        }
+
+        .rekit_86e5c5 {
+            width: 100%;
+            color: #888;
+            font-size: 12px;
+            position: absolute;
+            top: 25px;
+            left: 0;
+            height: 60px;
+        }
+
+        .rekit_86e5c5 li {
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            float: left;
+            overflow: hidden;
+        }
+
+        .rekit_e8ddfa {
+            position: absolute;
+            top: 10px;
+            right: 0;
+        }
+    </style>
+    <script src="/js/jquery-1.8.0.min.js" language="javascript"></script>
+    <script src="/js/layer.min.js" language="javascript"></script>
+    <script src="/js/public.js" language="javascript"></script>
+    <script type="text/javascript" src="/js/setday.js"></script>
+    <script type="text/javascript" src="/js/member_public.js"></script>
+    <script src="/js/calendar.js" type="text/javascript"></script>
+    <script src="/js/ens.js" type="text/javascript"></script>
+    <link href="/css/jscal2.css" type="text/css" rel="stylesheet">
+    <link href="/css/jianli.css" rel="stylesheet"/>
+    <link href="/css/layer.css" rel="stylesheet"/>
+
+    <link type="text/css" rel="stylesheet" href="/css/layer.css" id="skinlayercss">
+    <link href="/css/m_css.css" type="text/css" rel="stylesheet">
+    <link href="/css/m_header.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/base.css" type="text/css">
+    <link rel="stylesheet" href="/css/resumemanage.css" type="text/css">
+    <link rel="stylesheet" href="/css/common.css" type="text/css">
+    <link href="/css/jscal2.css" type="text/css" rel="stylesheet">
+    <script src="/js/calendar.js" type="text/javascript"></script>
+    <script src="/js/ens.js" type="text/javascript"></script>
+    <link type="text/css" rel="stylesheet" href="/css/layer.css">
+    <link href="/css/jianli.css" rel="stylesheet"/>
+    <link href="/css/jscal2.css" type="text/css" rel="stylesheet">
+    <script src="/js/calendar.js" type="text/javascript"></script>
+    <script src="/js/ens.js" type="text/javascript"></script>
+    <link type="text/css" rel="stylesheet" href="/css/layer.css">
+    <link href="/css/jianli.css" rel="stylesheet"/>
+    <link href="/css/layer.css" rel="stylesheet"/>
+    <script type="text/javascript">
+        function AddFamily(flag) {
+
+            var CW = $('#CW').val();
+            var XM = $('#XM').val();
+            var CSNY = $('#CSNY').val();
+            var ZZMMID = $('#ZZMMID option:selected').text();
+            var GZDW = $('#GZDW').val();
+            var ZW = $('#ZW').val();
+            $.ajax({
+                type: "POST",
+                url: "/resume/addfamily?resumesid=[[${resumesid}]]&id=[[${id}]]",
+                processData: true,
+                data: {
+                    CW: CW,
+                    XM: XM,
+                    CSNY: CSNY,
+                    ZZMMID: ZZMMID,
+                    GZDW: GZDW,
+                    ZW: ZW
+                },
+                success: function (data) {
+                    var result = eval('(' + data + ')');
+                    if (Number(data)>0) {
+                        alert("保存成功");
+                        if (flag == '1') {
+                            window.location.href = '/resume/editfamily?resumesid=[[${resumesid}]]';
+                        } else {
+                            window.location.href = '/resume/resumemanager?resumesid=[[${resumesid}]]';
+                        }
+                    }
+                    else {
+                        alert("保存失败");
+                    }
+
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<div th:replace="layout/common::ptopbar"></div>
+<div class="clear"></div>
+<div class="resume-container">
+    <div class="resume container">
+        <div class="resume-hd">
+            您的当前位置：
+            <a href="/">首页</a>
+            <a href="/Register/Personcenter">> 个人中心 > </a>
+            <span>简历管理</span>
+        </div>
+        <div class="resume-bd clearFix">
+            <!--左-->
+            <div th:replace="layout/common::leftbar">
+            </div>
+            <!--右-->
+            <div class="resume-bdrt">
+                <div class="clear"></div>
+                <div class="resume-bdrt">
+                    <h4>家庭成员及社会关系</h4>
+                    <table class="family">
+                        <thead>
+                        <tr>
+                            <td style="width: 161px; ">称谓</td>
+                            <td style="width: 130px; ">姓名</td>
+                            <td style="width: 120px; ">出生日期</td>
+                            <td style="width: 100px; ">政治面貌</td>
+                            <td style="width: 100px; ">工作单位</td>
+                            <td style="width: 100px; ">职务</td>
+                            <td style="width: 102px; ">操作</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="emp:${families}">
+                            <td><span th:text="${emp.appellation}"></span></td>
+                            <td th:text="${emp.username}"></td>
+                            <td th:text="${emp.birthday}"></td>
+                            <td th:text="${emp.politicaloutlook}"></td>
+                            <td th:text="${emp.companyname}"></td>
+                            <td th:text="${emp.job}"></td>
+                            <td>
+                                <a th:href="@{/resume/editfamily(resumesid=${emp.resumesid},id=${emp.id})}" th:text="修改"></a>|
+                                <a th:href="@{/resume/delfamily(resumesid=${emp.resumesid},id=${emp.id})}"  th:text="删除"></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <h5>新增家庭成员</h5>
+                    <div class="modify">
+                        <div>
+                            <label>称谓：</label>
+                            <input type="text" name="" id="CW" th:value="${familyModel.appellation}">
+                        </div>
+                        <div>
+                            <label>姓名：</label>
+                            <input type="text" name="" id="XM"  th:value="${familyModel.username}">
+                        </div>
+                        <div>
+                            <label>出生日期：</label>
+                            <input type="text" name="CSNY" id="CSNY"  th:value="${familyModel.birthday}" />
+                            <script type="text/javascript">
+                                Calendar.setup({
+                                    weekNumbers: true,
+                                    inputField: "CSNY",
+                                    trigger: "CSNY",
+                                    dateFormat: "%Y-%m-%d",
+                                    showTime: false,
+                                    onSelect: function () { this.hide(); }
+                                });
+                            </script>
+                        </div>
+                        <div>
+                            <label>政治面貌：</label>
+
+                            <select name="ZZMMID" class="rt se" id="ZZMMID">
+                                <option value="中国共产党党员" th:field="*{familyModel.politicaloutlook}">中国共产党党员</option>
+                                <option value="中国共产党预备党员" th:field="*{familyModel.politicaloutlook}">中国共产党预备党员</option>
+                                <option value="中国共产主义青年团团员" th:field="*{familyModel.politicaloutlook}">中国共产主义青年团团员</option>
+                                <option value="中国国民党革命委员会会员" th:field="*{familyModel.politicaloutlook}">中国国民党革命委员会会员</option>
+                                <option value="中国民主同盟盟员" th:field="*{familyModel.politicaloutlook}">中国民主同盟盟员</option>
+                                <option value="中国民主建国会会员" th:field="*{familyModel.politicaloutlook}">中国民主建国会会员</option>
+                                <option value="中国民主促进会会员" th:field="*{familyModel.politicaloutlook}">中国民主促进会会员</option>
+                                <option value="中国农工民主党党员" th:field="*{familyModel.politicaloutlook}">中国农工民主党党员</option>
+                                <option value="中国致公党党员" th:field="*{familyModel.politicaloutlook}">中国致公党党员</option>
+                                <option value="九三学社社员" th:field="*{familyModel.politicaloutlook}">九三学社社员</option>
+                                <option value="台湾民主自治同盟盟员" th:field="*{familyModel.politicaloutlook}">台湾民主自治同盟盟员</option>
+                                <option value="无党派民主人士" th:field="*{familyModel.politicaloutlook}">无党派民主人士</option>
+                                <option value="群众" th:field="*{familyModel.politicaloutlook}">群众</option>
+                            </select>
+
+                        </div>
+                        <div>
+                            <label>工作单位：</label>
+                            <input type="text" name="GZDW" id="GZDW" th:value="${familyModel.companyname}" />
+                        </div>
+                        <div>
+                            <label>职务：</label>
+                            <input type="text" name="ZW" id="ZW" th:value="${familyModel.job}" />
+                        </div>
+                    </div>
+                    <div class="modSave">
+                        <button onclick="AddFamily(1)">保存并继续添加</button>
+                        <button onclick="AddFamily(0)">保存</button>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="layout/common::bottombar"></div>
+</body>
+</html>

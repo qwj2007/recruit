@@ -38,6 +38,12 @@ public class ResumeController {
     private IEdutionExpericenceService edutionExpericenceService;
     @Autowired
     private ITrainService trainService;
+    @Autowired
+    private ICertificateService certificateService;
+    @Autowired
+    private IFamilyService familyService;
+    @Autowired
+    private IOtherInfosService otherInfosService;
 
 
     @RequestMapping("/getcount")
@@ -209,19 +215,18 @@ public class ResumeController {
 
     @RequestMapping("/addEducation")
     @ResponseBody
-    public String addEducation(HttpServletRequest request, Model model)
-    {
+    public String addEducation(HttpServletRequest request, Model model) {
 
-        Educationexperience educationexperience=new Educationexperience();
+        Educationexperience educationexperience = new Educationexperience();
         String resumeid = request.getParameter("resumesid");
         String id = request.getParameter("id");
         String begintime = request.getParameter("kssj");
         String endtime = request.getParameter("jssj");
         String majorname = request.getParameter("zy");
         String schoolname = request.getParameter("xxmc");
-        String education=request.getParameter("xlid");
-        String academicdegree=request.getParameter("xwid");
-        String learningform=request.getParameter("xxxs");
+        String education = request.getParameter("xlid");
+        String academicdegree = request.getParameter("xwid");
+        String learningform = request.getParameter("xxxs");
         String userid = CookieManager.getInstance().getCookie(request, "userid");
 
 
@@ -255,6 +260,7 @@ public class ResumeController {
         }
         return "0";
     }
+
     /*
     *教育经历
     * */
@@ -296,8 +302,7 @@ public class ResumeController {
     * 培训经历
     * */
     @RequestMapping("/editetrain")
-    public String editTrain(HttpServletRequest request, Model model)
-    {
+    public String editTrain(HttpServletRequest request, Model model) {
         resumesService.PersoncenterCheck(request, model);
         String resumeid = request.getParameter("resumesid");
         model.addAttribute("resumesid", resumeid);
@@ -331,9 +336,8 @@ public class ResumeController {
 
     @RequestMapping("/addTrain")
     @ResponseBody
-    public String addTrain(HttpServletRequest request, Model model)
-    {
-        Trainingexperience trainingexperience=new Trainingexperience();
+    public String addTrain(HttpServletRequest request, Model model) {
+        Trainingexperience trainingexperience = new Trainingexperience();
         String resumeid = request.getParameter("resumesid");
         String id = request.getParameter("id");
         String begintime = request.getParameter("pxkssj");
@@ -369,5 +373,154 @@ public class ResumeController {
     }
 
 
+    /*
+    * 证书
+    * */
+    @RequestMapping("/editcetificate")
+    public String editcetificate(HttpServletRequest request, Model model) {
+        resumesService.PersoncenterCheck(request, model);
+        String resumeid = request.getParameter("resumesid");
+        model.addAttribute("resumesid", resumeid);
+        String id = request.getParameter("id");
+        model.addAttribute("id", id);
+        if (resumeid != null && !"".equals(resumeid)) {
+            List<Certificate> certificates = certificateService.selectCertificateByResumeId(Integer.parseInt(resumeid));
+            model.addAttribute("certificates", certificates);
+        }
+        if (id != null && !"".equals(id) && Integer.parseInt(id) > 0) {
+            Certificate certificate = certificateService.selectByPrimaryKey(Integer.parseInt(id));
+            model.addAttribute("cetificateModel", certificate);
 
+        } else {
+            model.addAttribute("cetificateModel", new Certificate());
+        }
+        return "editcetificate";
+    }
+
+    @RequestMapping("/deleteceti")
+    public String deleteCetificate(HttpServletRequest request, Model model) {
+        String id = request.getParameter("id");
+        Certificate certificate = certificateService.selectByPrimaryKey(Integer.parseInt(id));
+        if (certificate != null) {
+            certificate.setIsactive(false);
+        }
+        Integer result = certificateService.updateByPrimaryKeySelective(certificate);
+        String url = "redirect:/resume/editTrain?resumesid=" + certificate.getResumesid();
+        return url;
+    }
+
+    @RequestMapping("/addcetificate")
+    @ResponseBody
+    public String addCetificate(HttpServletRequest request, Model model) {
+
+        Certificate certificate = new Certificate();
+        String resumeid = request.getParameter("resumesid");
+        String id = request.getParameter("id");
+        String ZSMC = request.getParameter("ZSMC");
+        String rq = request.getParameter("rq");
+
+        String userid = CookieManager.getInstance().getCookie(request, "userid");
+        certificate.setCertificatedate(rq);
+        certificate.setCratetime(new Date());
+        certificate.setCreateuserid(Integer.parseInt(userid));
+        certificate.setCertificatename(ZSMC);
+        certificate.setIsactive(true);
+        certificate.setOrders(1);
+        certificate.setResumesid(Integer.parseInt(resumeid));
+        certificate.setUpdateuserid(Integer.parseInt(userid));
+        certificate.setUpdatetime(new Date());
+        int result = 0;
+        if (id != null && id != "" && Integer.parseInt(id) > 0) {
+            certificate.setId(Integer.parseInt(id));
+            result = certificateService.updateByPrimaryKeySelective(certificate);
+        } else {
+            result = certificateService.insertSelective(certificate);
+        }
+        model.addAttribute("id", certificate.getId());
+
+        if (result > 0) {
+            return certificate.getId().toString();
+        }
+        return "0";
+    }
+
+
+    /*
+    * 家庭成员
+    * */
+    @RequestMapping("/editfamily")
+    public String editFamily(HttpServletRequest request, Model model) {
+
+        resumesService.PersoncenterCheck(request, model);
+        String resumeid = request.getParameter("resumesid");
+        model.addAttribute("resumesid", resumeid);
+        String id = request.getParameter("id");
+        model.addAttribute("id", id);
+        if (resumeid != null && !"".equals(resumeid)) {
+            List<Family> families = familyService.selectFamilyByResumeId(Integer.parseInt(resumeid));
+            model.addAttribute("families", families);
+        }
+        if (id != null && !"".equals(id) && Integer.parseInt(id) > 0) {
+            Family family = familyService.selectByPrimaryKey(Integer.parseInt(id));
+            model.addAttribute("familyModel", family);
+
+        } else {
+            model.addAttribute("familyModel", new Family());
+        }
+        return "editfamily";
+    }
+
+    @RequestMapping("/delfamily")
+    public String delfamily(HttpServletRequest request, Model model) {
+        String id = request.getParameter("id");
+        Family family = familyService.selectByPrimaryKey(Integer.parseInt(id));
+        if (family != null) {
+            family.setIsactive(false);
+        }
+        Integer result = familyService.updateByPrimaryKeySelective(family);
+        String url = "redirect:/resume/editfamily?resumesid=" + family.getResumesid();
+        return url;
+    }
+
+    @RequestMapping("/addfamily")
+    @ResponseBody
+    public String addFamily(HttpServletRequest request, Model model) {
+
+        Family family = new Family();
+        String resumeid = request.getParameter("resumesid");
+        String id = request.getParameter("id");
+
+        String username = request.getParameter("XM");
+        String ZZMM = request.getParameter("ZZMMID");
+        String companyname = request.getParameter("GZDW");
+        String jobname = request.getParameter("ZW");
+        String cw = request.getParameter("CW");
+        String birthday = request.getParameter("CSNY");
+        String userid = CookieManager.getInstance().getCookie(request, "userid");
+        family.setAppellation(cw);
+        family.setCratetime(new Date());
+        family.setCreateuserid(Integer.parseInt(userid));
+        family.setUsername(username);
+        family.setIsactive(true);
+        family.setBirthday(birthday);
+        family.setPoliticaloutlook(ZZMM);
+        family.setCompanyname(companyname);
+        family.setJob(jobname);
+        family.setResumesid(Integer.parseInt(resumeid));
+        family.setUpdateuserid(Integer.parseInt(userid));
+        family.setUpdatetime(new Date());
+        int result = 0;
+        if (id != null && id != "" && Integer.parseInt(id) > 0) {
+            family.setId(Integer.parseInt(id));
+            result = familyService.updateByPrimaryKeySelective(family);
+        } else {
+            result = familyService.insertSelective(family);
+        }
+        model.addAttribute("id", family.getId());
+
+        if (result > 0) {
+            return family.getId().toString();
+        }
+        return "0";
+    }
 }

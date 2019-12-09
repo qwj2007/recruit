@@ -11,7 +11,7 @@ public class Family {
 
     private String username;
 
-    private Date birthday;
+    private String birthday;
 
     private String politicaloutlook;
 
@@ -61,11 +61,11 @@ public class Family {
         this.username = username == null ? null : username.trim();
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 

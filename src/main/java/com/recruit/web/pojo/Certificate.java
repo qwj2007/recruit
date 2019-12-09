@@ -7,7 +7,7 @@ public class Certificate {
 
     private Integer resumesid;
 
-    private Date certificatedate;
+    private String certificatedate;
 
     private String certificatename;
 
@@ -41,11 +41,11 @@ public class Certificate {
         this.resumesid = resumesid;
     }
 
-    public Date getCertificatedate() {
+    public String getCertificatedate() {
         return certificatedate;
     }
 
-    public void setCertificatedate(Date certificatedate) {
+    public void setCertificatedate(String certificatedate) {
         this.certificatedate = certificatedate;
     }
 

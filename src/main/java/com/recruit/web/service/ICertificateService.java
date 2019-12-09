@@ -10,4 +10,15 @@ import java.util.List;
  */
 public interface ICertificateService {
     List<Certificate> selectCertificateByResumeId(Integer id);
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(Certificate record);
+
+    int insertSelective(Certificate record);
+
+    Certificate selectByPrimaryKey(Integer id);
+
+    int updateByPrimaryKeySelective(Certificate record);
+
+    int updateByPrimaryKey(Certificate record);
 }

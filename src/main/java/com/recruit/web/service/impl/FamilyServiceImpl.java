@@ -20,4 +20,34 @@ public class FamilyServiceImpl implements IFamilyService {
     public List<Family> selectFamilyByResumeId(int id) {
         return familyMapper.selectFamilyByResumeId(id);
     }
+
+    @Override
+    public int deleteByPrimaryKey(Integer id) {
+        return familyMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int insert(Family record) {
+        return familyMapper.insert(record);
+    }
+
+    @Override
+    public int insertSelective(Family record) {
+        return familyMapper.insertSelective(record);
+    }
+
+    @Override
+    public Family selectByPrimaryKey(Integer id) {
+        return familyMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(Family record) {
+        return familyMapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public int updateByPrimaryKey(Family record) {
+        return familyMapper.updateByPrimaryKey(record);
+    }
 }
