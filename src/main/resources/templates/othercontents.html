@@ -61,7 +61,7 @@
                 success: function (data) {
                     if ( Number(data)>0) {
                         alert("添加成功！");
-                        window.location.href = '/resume/resumemanager?resumesid=[[${resumesid}]]';
+                        window.location.href = '/resume/resumemanger?resumesid=[[${resumesid}]]';
                     }
                     else if (data == "0") {
                         alert("保存失败！");

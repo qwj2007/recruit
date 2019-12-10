@@ -10,14 +10,14 @@ function userlogin() {
         async: false,
         dataType: "text",
         success: function (msg) {
-
-            if (msg == "1") {
+            if (Number(msg)>0) {
                 //$('#login').hide();
                 //$('#show').show();
                 //$('#liuser').html("您好！" + userName);
                 //location.href = 'Center/personindex.aspx';
                 //location.href="";
-                location.reload()
+               //location.reload()
+                window.location.href="/Register/Personcenter";
             }
             else if (msg == "0") {
                 location.href = 'Manage/Index.aspx';

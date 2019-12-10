@@ -78,7 +78,7 @@ public class IndexController {
 
             // CookieManager.getInstance().saveCookie(response, "userid",userinfo.getId().toString());
             // CookieManager.getInstance().saveCookie(response, "username",userinfo.getUsername().toString());
-            result = "1";
+            result = userinfo.getId().toString();
         }
         return result;
     }

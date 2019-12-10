@@ -90,4 +90,11 @@
       isactive = #{isactive,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER} and isactive=1
   </update>
+<select id="selectDeliveryByResumesId" parameterType="java.lang.Integer"  resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from delivery
+  where resumeid = #{resumeid,jdbcType=INTEGER} AND  isactive=1 order by id DESC limit 1
+</select>
+
 </mapper>

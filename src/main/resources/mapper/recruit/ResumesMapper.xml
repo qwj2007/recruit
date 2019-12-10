@@ -30,16 +30,16 @@
         <result column="email" jdbcType="VARCHAR" property="email"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, userid, truename, nation, sex, card, birthday, age, nativeplace, politicaloutlook, 
+    resumes.id, userid, truename, nation, sex, card, birthday, age, nativeplace, politicaloutlook,
     maritalstatus, locationpersonnelrelationship, registeredresidence, phone, nowaddress, 
     graduateschool, major, education, academicdegree, isfreshstudent, workdate, comanyname, 
-    postname,photo
+    postname,photo,email
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from resumes
-        where id = #{id,jdbcType=INTEGER}
+        from resumes resumes INNER JOIN userinfo userinfo on resumes.userid=userinfo.id and userinfo.isactive=1
+        where resumes.id = #{id,jdbcType=INTEGER} LIMIT 1
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from resumes

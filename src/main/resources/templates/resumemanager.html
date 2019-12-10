@@ -1,10 +1,430 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>简历管理</title>
+    <style type="text/css">
+        .rekit_470b42 {
+            height: 100px;
+            position: relative;
+        }
+
+        .rekit_86e5c5 {
+            width: 100%;
+            color: #888;
+            font-size: 12px;
+            position: absolute;
+            top: 25px;
+            left: 0;
+            height: 60px;
+        }
+
+        .rekit_86e5c5 li {
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            float: left;
+            overflow: hidden;
+        }
+
+        .rekit_e8ddfa {
+            position: absolute;
+            top: 10px;
+            right: 0;
+        }
+    </style>
+    <script src="/js/jquery-1.8.0.min.js" language="javascript"></script>
+    <script src="/js/layer.min.js" language="javascript"></script>
+    <script src="/js/public.js" language="javascript"></script>
+    <script type="text/javascript" src="/js/setday.js"></script>
+    <script type="text/javascript" src="/js/member_public.js"></script>
+    <script src="/js/calendar.js" type="text/javascript"></script>
+    <script src="/js/ens.js" type="text/javascript"></script>
+    <link href="/css/jscal2.css" type="text/css" rel="stylesheet">
+    <link href="/css/jianli.css" rel="stylesheet"/>
+    <link href="/css/layer.css" rel="stylesheet"/>
+
+    <link type="text/css" rel="stylesheet" href="/css/layer.css" id="skinlayercss">
+    <link href="/css/m_css.css" type="text/css" rel="stylesheet">
+    <link href="/css/m_header.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/base.css" type="text/css">
+    <link rel="stylesheet" href="/css/resumemanage.css" type="text/css">
+    <link rel="stylesheet" href="/css/common.css" type="text/css">
+    <link href="/css/jscal2.css" type="text/css" rel="stylesheet">
+    <script src="/js/calendar.js" type="text/javascript"></script>
+    <script src="/js/ens.js" type="text/javascript"></script>
+    <link type="text/css" rel="stylesheet" href="/css/layer.css">
+    <link href="/css/jianli.css" rel="stylesheet"/>
+    <link href="/css/jscal2.css" type="text/css" rel="stylesheet">
+    <script src="/js/calendar.js" type="text/javascript"></script>
+    <script src="/js/ens.js" type="text/javascript"></script>
+    <link type="text/css" rel="stylesheet" href="/css/layer.css">
+    <link href="/css/jianli.css" rel="stylesheet"/>
+    <link href="/css/layer.css" rel="stylesheet"/>
+    <script type="text/javascript">
+        function editResume() {
+            location.href = "/resume/editresume";
+        }
+
+        function EditWorkExperience() {
+            location.href = "/resume/editworkexperience?resumesid=[[${resumes.id}]]";
+        }
+
+        function EditEducation() {
+            location.href = "/resume/editeducation?resumesid=[[${resumes.id}]]";
+        }
+
+        function EditTrainedExperienc() {
+            location.href = "/resume/editetrain？resumesid=[[${resumes.id}]]";
+        }
+
+        function EditCertificate() {
+            location.href = "/resume/editcetificate?resumesid=[[${resumes.id}]]";
+        }
+
+        function EditFamily() {
+            location.href = "/resume/editfamily?resumesid=[[${resumes.id}]]";
+        }
+
+        function EditSelfAssessment() {
+            location.href = "/resume/editothers?resumesid=[[${resumes.id}]]";
+        }
+    </script>
 </head>
 <body>
+<div th:replace="layout/common::ptopbar"></div>
+<div class="clear"></div>
+<div class="resume-container">
+    <div class="resume container">
+        <div class="resume-hd">
+            您的当前位置：
+            <a href="/">首页</a>
+            <a href="/Register/Personcenter">> 个人中心 > </a>
+            <span>简历管理</span>
+        </div>
+        <div class="resume-bd clearFix">
+            <!--左-->
+            <div th:replace="layout/common::leftbar">
+            </div>
+            <!--右-->
+            <div class="resume-bdrt">
+                <div class="clear"></div>
+                <div class="resume-bdrt">
+                    <h4>我的简历</h4>
+                    <!--个人信息s-->
+                    <form action="" method="post">
+                        <div class="per-inform">
+                            <div class="per-hd clearFix">
+                                <div class="per-lt">
+                                    <span>个人信息</span>
+                                </div>
+                                <div class="per-rt">
+                                    <img src="/images/resume/xiugai.png" alt="" width="18" height="17">
+                                    <span onclick="editResume()">修改</span>
+                                </div>
+                            </div>
+                            <div class="per-bd">
+                                <div class="per-tp clearFix">
+                                    <div class="per-tpl">
+                                        <div class="per-items clearFix">
+                                            <div class="per-item clearFix">
+                                                <div class="lt">
+                                                    <label>姓名：</label>
+                                                </div>
+                                                <div class="rt" th:text="${resumes.truename}"></div>
+                                            </div>
+                                            <div class="per-item rad clearFix">
+                                                <div class="lt">
+                                                    <label>是否应届生：</label>
+                                                </div>
+                                                <div class="rt"><span th:if="${resumes.isfreshstudent}"></span><span
+                                                        th:text="是"></span>
+                                                    <span th:if="${!resumes.isfreshstudent}"></span><span
+                                                            th:text="否"></span></div>
+                                            </div>
+                                            <div class="per-item clearFix">
+                                                <div class="lt">
+                                                    <label>性别：</label>
+                                                </div>
+                                                <div class="rt" th:text="${resumes.sex}"></div>
+                                            </div>
+                                            <div class="per-item clearFix">
+                                                <div class="lt">
+                                                    <label>民族：</label>
+                                                </div>
+                                                <div class="rt" th:text="${resumes.politicaloutlook}"></div>
+                                            </div>
+                                            <div class="per-item clearFix">
+                                                <div class="lt">
+                                                    <label>出生日期：</label>
+                                                </div>
+                                                <div class="rt" th:text="${resumes.birthday}">
 
+                                                </div>
+                                            </div>
+                                            <div class="per-item clearFix">
+                                                <div class="lt">
+                                                    <label>年龄：</label>
+                                                </div>
+                                                <div class="rt" th:text="${resumes.age}"></div>
+                                            </div>
+                                            <div class="per-item clearFix">
+                                                <div class="lt">
+                                                    <label>身份证号：</label>
+                                                </div>
+                                                <div class="rt" th:text="${resumes.card}"></div>
+                                            </div>
+                                            <div class="per-item JG clearFix">
+                                                <div class="lt">
+                                                    <label>籍贯：</label>
+                                                </div>
+                                                <div class="rt" th:text="${resumes.nativeplace}"></div>
+                                            </div>
+                                            <div class="per-item clearFix">
+                                                <div class="lt">
+                                                    <label>婚姻状况：</label>
+                                                </div>
+                                                <div class="rt" th:text="${resumes.maritalstatus}"></div>
+                                            </div>
+                                            <div class="per-item clearFix">
+                                                <div class="lt">
+                                                    <label>政治面貌：</label>
+                                                </div>
+                                                <div class="rt" th:text="${resumes.politicaloutlook}"></div>
+                                            </div>
+                                            <div class="per-item clearFix">
+                                                <div class="lt">
+                                                    <label>人事关系所在地：</label>
+                                                </div>
+                                                <div class="rt"
+                                                     th:text="${resumes.locationpersonnelrelationship}"></div>
+                                            </div>
+                                            <div class="per-item clearFix">
+                                                <div class="lt">
+                                                    <label>联系电话：</label>
+                                                </div>
+                                                <div class="rt" th:text="${resumes.phone}"></div>
+                                            </div>
+                                            <div class="per-item clearFix">
+                                                <div class="lt">
+                                                    <label>电子邮件：</label>
+                                                </div>
+                                                <div class="rt" th:text="${resumes.email}"></div>
+                                            </div>
+                                            <div class="per-item PL clearFix">
+                                                <div class="lt">
+                                                    <label>现居住地：</label>
+                                                </div>
+                                                <div class="rt" th:text="${resumes.nowaddress}"><%=Entity.XJZD %></div>
+                                            </div>
+                                        </div>
+                                        <div class="per-tpr">
+                                            <img th:src="${resumes.photo}" alt="" width="135" height="174">
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--个人信息e-->
+                        <!--工作（实习）经历s-->
+                        <div class="internship">
+                            <div class="per-hd clearFix">
+                                <div class="per-lt">
+                                    <span>工作（实习）经历</span>
+                                </div>
+                                <div class="per-rt">
+                                    <img src="/images/resume/xiugai.png" alt="" width="18" height="17">
+                                    <span onclick="EditWorkExperience()">修改</span>
+                                </div>
+                            </div>
+                            <div class="inter-bd">
+                                <table style="width: 795px;">
+                                    <thead>
+                                    <tr>
+                                        <td>时间</td>
+                                        <td>单位名称</td>
+                                        <td>职务</td>
+                                        <td>工作内容</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="emp:${workexperiences}">
+                                        <td><span th:text="${emp.begintime}"></span>-<span
+                                                th:text="${emp.endtime}"></span></td>
+                                        <td th:text="${emp.postname}"></td>
+                                        <td th:text="${emp.job}"></td>
+                                        <td th:text="${emp.workcontent}"></td>
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                        <!--工作（实习）经历e-->
+                        <!--教育经历s-->
+                        <div class="internship education">
+                            <div class="per-hd clearFix">
+                                <div class="per-lt">
+                                    <span>教育经历</span>
+                                </div>
+                                <div class="per-rt">
+                                    <img src="/images/resume/xiugai.png" alt="" width="18" height="17">
+                                    <span onclick="EditEducation()">修改</span>
+                                </div>
+                            </div>
+                            <div class="inter-bd">
+                                <table style="width: 795px;">
+                                    <thead>
+                                    <tr>
+                                        <td>时间</td>
+                                        <td>学校名称</td>
+                                        <td>所学专业</td>
+                                        <td>学历</td>
+                                        <td>学位</td>
+                                        <td>学习形式</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="emp:${educationexperiences}">
+                                        <td><span th:text="${emp.begintime}"></span>-<span
+                                                th:text="${emp.endtime}"></span></td>
+                                        <td th:text="${emp.schoolname}"></td>
+                                        <td th:text="${emp.majorname}"></td>
+                                        <td th:text="${emp.education}"></td>
+                                        <td th:text="${emp.academicdegree}"></td>
+                                        <td th:text="${emp.learningform}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--教育经历e-->
+                        <!--培训经历s-->
+                        <div class="internship training">
+                            <div class="per-hd clearFix">
+                                <div class="per-lt">
+                                    <span>培训经历</span>
+                                </div>
+                                <div class="per-rt">
+                                    <img src="/images/resume/xiugai.png" alt="" width="18" height="17">
+                                    <span onclick="EditTrainedExperienc()">修改</span>
+                                </div>
+                            </div>
+                            <div class="inter-bd">
+                                <table style="width: 795px;">
+                                    <thead>
+                                    <tr>
+                                        <td>时间</td>
+                                        <td>培训地点（机构）</td>
+                                        <td>培训内容</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="emp:${trainingexperiences}">
+                                        <td><span th:text="${emp.begintime}"></span>-<span
+                                                th:text="${emp.endtime}"></span></td>
+                                        <td th:text="${emp.traincomany}"></td>
+                                        <td th:text="${emp.traincontent}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--培训经历e-->
+                        <!--证书s-->
+                        <div class="internship cert">
+                            <div class="per-hd clearFix">
+                                <div class="per-lt">
+                                    <span>证书</span>
+                                </div>
+                                <div class="per-rt">
+                                    <img src="/images/resume/xiugai.png" alt="" width="18" height="17">
+                                    <span onclick="EditCertificate()">修改</span>
+                                </div>
+                            </div>
+                            <div class="inter-bd">
+                                <table style="width: 795px;">
+                                    <thead>
+                                    <tr>
+                                        <td>时间</td>
+                                        <td>证书名称</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="emp:${certificates}">
+                                        <td th:text="${emp.certificatedate}"></td>
+                                        <td th:text="${emp.certificatename}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--证书e-->
+                        <!--家族成员及社会关系s-->
+                        <div class="internship family">
+                            <div class="per-hd clearFix">
+                                <div class="per-lt">
+                                    <span>家族成员及社会关系</span>
+                                </div>
+                                <div class="per-rt">
+                                    <img src="/images/resume/xiugai.png" alt="" width="18" height="17">
+                                    <span onclick="EditFamily()">修改</span>
+                                </div>
+                            </div>
+                            <div class="inter-bd">
+                                <table style="width: 795px;">
+                                    <thead>
+                                    <tr>
+                                        <td>称谓</td>
+                                        <td>姓名</td>
+                                        <td>出生日期</td>
+                                        <td>政治面貌</td>
+                                        <td>工作单位</td>
+                                        <td>职务</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="emp:${families}">
+                                        <td th:text="${emp.appellation}"></td>
+                                        <td th:text="${emp.username}"></td>
+                                        <td th:text="${emp.birthday}"></td>
+                                        <td th:text="${emp.politicaloutlook}"></td>
+                                        <td th:text="${emp.companyname}"></td>
+                                        <td th:text="${emp.job}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--家族成员及社会关系e-->
+                        <!--补充内容s-->
+                        <div class="supple">
+                            <div class="per-hd clearFix">
+                                <div class="per-lt">
+                                    <span>补充内容</span>
+                                </div>
+                                <div class="per-rt">
+                                    <img src="/images/resume/xiugai.png" alt="" width="18" height="17">
+                                    <span onclick="EditSelfAssessment()">修改</span>
+                                </div>
+                            </div>
+                            <div class="supple-bd" th:text="${otherinfos.contents}">
+
+                            </div>
+
+                        </div>
+                        <!--补充内容e-->
+                    </form>
+
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="layout/common::bottombar"></div>
 </body>
 </html>

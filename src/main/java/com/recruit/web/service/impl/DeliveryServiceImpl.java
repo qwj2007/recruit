@@ -45,4 +45,9 @@ public class DeliveryServiceImpl implements IDeliveryService {
     public int updateByPrimaryKey(Delivery record) {
         return 0;
     }
+
+    @Override
+    public Delivery selectDeliveryByResumesId(Integer resumeid) {
+        return deliveryMapper.selectDeliveryByResumesId(resumeid);
+    }
 }

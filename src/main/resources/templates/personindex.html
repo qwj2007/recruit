@@ -106,7 +106,7 @@
         <div class="right">
             <h5>我的简历</h5>
             <div class="touxiang">
-                <img src="" alt="" width="106" height="106">
+                <img th:src="${resumes.photo}"  alt="" width="106" height="106"/>
             </div>
             <div class="apply-inform">
                 <span class="apply-title">应聘信息：</span>
@@ -117,15 +117,6 @@
             </div>
             <div class="apply-icon clearFix">
                 <ul class="clearFix">
-                    <!--
-                    <li>
-                        <a href="/Center/AddWorkExperience.aspx?ID=1">
-                                <span class="icon-tp">
-                                    <img src="/images/person/apply-icon01.png" alt="" width="22" height="22">
-                                </span>
-                            <span class="icon-bt">创建</span>
-                        </a>
-                    </li>-->
                     <li>
                         <a href="/Preview.aspx?ID=1" target="_blank">
                                 <span class="icon-tp">
@@ -135,7 +126,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/Center/ResumeManage.aspx?ID=1">
+                        <a th:href="@{/resume/resumemanger(resumesid=${resumes.id})}">
                                 <span class="icon-tp">
                                     <img src="/images/person/name-right.png" alt="" width="22" height="22">
                                 </span>

@@ -22,6 +22,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.function.IntPredicate;
 
 /**
  * 作者：qiwj
@@ -614,8 +615,6 @@ public class ResumeController {
         return "uploadpicture";
     }
 
-    @Value("${FILE_SERVER_URL}")
-    private String FILE_SERVER_URL;
 
     /*
     * 上传照片
@@ -639,29 +638,41 @@ public class ResumeController {
                 System.out.println(newFile.getAbsolutePath());
                 // 上传图片到 -》 “绝对路径”
                 file.transferTo(newFile);
-                resumes.setPhoto("../images/upload/"+filename);
+                resumes.setPhoto("../images/upload/" + filename);
                 resumesService.updateByPrimaryKeySelective(resumes);
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-/*
-        if (!file.isEmpty()) {
-            //String ndnd=  Thread.currentThread().getContextClassLoader().getResource("").toURI().getPath();
-            //文件保存路径
-            //String filePath="D:/recruit/src/main/resources/static/images/upload/"+file.getOriginalFilename();
-            // String filePath = request.getSession().getServletContext().getRealPath("/") + "/images/upload/"
-            //  + file.getOriginalFilename();
-            // 转存文件
-            // file.transferTo(new File(filePath));
-            String realPath = request.getSession().getServletContext().getRealPath("/");
+        return "redirect:/resume/resumemanger?resumesid=" + id;
+    }
 
-           // this.getServletContext().getRealPath("/WEB-INF/upload");
-            String filename = FileUpload.upload(file, filepath,request);
-            resumes.setPhoto(filename);
-            resumesService.updateByPrimaryKeySelective(resumes);
-        }//*/
-        return "redirect:/resumemanager?resumesid=" + id;
+    @RequestMapping("/resumemanger")
+    public String resumeManager(HttpServletRequest request, Model model) {
+        resumesService.PersoncenterCheck(request, model);
+        String resumeid = request.getParameter("resumesid");
+        model.addAttribute("resumesid", resumeid);
+        String id = request.getParameter("id");
+        model.addAttribute("id", id);
+
+        Resumes resumes = resumesService.selectByPrimaryKey(Integer.parseInt(resumeid));
+        model.addAttribute("resumes", resumes);
+        List<Workexperience> workexperiences = workExperienceService.selectWorkExperienceById(Integer.parseInt(resumeid));
+        model.addAttribute("workexperiences", workexperiences);
+        List<Educationexperience> educationexperiences = edutionExpericenceService.selectEducationByResumeid(Integer.parseInt(resumeid));
+        model.addAttribute("educationexperiences", educationexperiences);
+        List<Trainingexperience> trainingexperiences = trainService.selecTrainByResumeId(Integer.parseInt(resumeid));
+        model.addAttribute("trainingexperiences", trainingexperiences);
+        List<Certificate> certificates = certificateService.selectCertificateByResumeId(Integer.parseInt(resumeid));
+        model.addAttribute("certificates", certificates);
+        List<Family> families = familyService.selectFamilyByResumeId(Integer.parseInt(resumeid));
+        model.addAttribute("families", families);
+        List<Otherinfos> otherinfos = otherInfosService.selectOtherinfosById(Integer.parseInt(resumeid));
+        if(otherinfos!=null&&otherinfos.size()>0){
+            model.addAttribute("otherinfos", otherinfos.get(0));
+        }
+
+        return "resumemanager";
     }
 }

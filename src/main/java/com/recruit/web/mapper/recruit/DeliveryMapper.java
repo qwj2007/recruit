@@ -14,4 +14,6 @@ public interface DeliveryMapper {
     int updateByPrimaryKeySelective(Delivery record);
 
     int updateByPrimaryKey(Delivery record);
+
+    Delivery selectDeliveryByResumesId(Integer resumeid);
 }

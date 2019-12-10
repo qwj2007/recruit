@@ -40,6 +40,8 @@ public class ResumesServiceImpl implements IResumesService {
     private IFamilyService familyService;
     @Autowired
     private IOtherInfosService otherInfosService;
+    @Autowired
+    private IDeliveryService deliveryService;
 
     @Override
     public int deleteByPrimaryKey(Integer id) {
@@ -106,15 +108,18 @@ public class ResumesServiceImpl implements IResumesService {
         if (resumes != null) {
             model.addAttribute("resumes", resumes);
             resumePicture.setPic_personalInfo(duihao);
+
+            Integer resumesid = resumes.getId();
+            Delivery delivery = deliveryService.selectDeliveryByResumesId(resumesid);
+            if (delivery != null) {
+                Recruitinfo recruitinfo = recruitInfoService.selectById(delivery.getRecruitinfoid());
+                model.addAttribute("recruitinfo", recruitinfo);
+            }
         }
-
-
         List<Workexperience> workexperiences = workExperienceService.selectWorkExperienceById(resumes.getId());
         if (workexperiences != null && workexperiences.size() > 0) {
             resumePicture.setPic_work(duihao);
         }
-
-
         List<Educationexperience> educationexperiences = edutionExpericenceService.selectEducationByResumeid(resumes.getId());
         if (educationexperiences != null && educationexperiences.size() > 0) {
             resumePicture.setPic_education(duihao);
@@ -128,23 +133,18 @@ public class ResumesServiceImpl implements IResumesService {
         if (certificates != null && certificates.size() > 0) {
             resumePicture.setPic_certificate(duihao);
         }
-        List<Family> families=familyService.selectFamilyByResumeId(resumes.getId());
-        if(families!=null&&families.size()>0)
-        {
+        List<Family> families = familyService.selectFamilyByResumeId(resumes.getId());
+        if (families != null && families.size() > 0) {
             resumePicture.setPic_family(duihao);
         }
-        if(resumes.getPhoto()!=null&&!"".equals(resumes.getPhoto()))
-        {
+        if (resumes.getPhoto() != null && !"".equals(resumes.getPhoto())) {
             resumePicture.setPic_photo(duihao);
         }
-
-        List<Otherinfos> otherinfos=otherInfosService.selectOtherinfosById(resumes.getId());
-        if(otherinfos!=null&&otherinfos.size()>0)
-        {
+        List<Otherinfos> otherinfos = otherInfosService.selectOtherinfosById(resumes.getId());
+        if (otherinfos != null && otherinfos.size() > 0) {
             resumePicture.setPic_ohter(duihao);
         }
-
-        model.addAttribute("resumePicture",resumePicture);
+        model.addAttribute("resumePicture", resumePicture);
 
         return "personindex";
     }
