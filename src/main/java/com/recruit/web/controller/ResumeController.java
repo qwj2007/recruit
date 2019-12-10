@@ -523,4 +523,69 @@ public class ResumeController {
         }
         return "0";
     }
+
+    /*
+    * 其他内容
+    * */
+    @RequestMapping("/addothers")
+    @ResponseBody
+    public String addotherinfos(HttpServletRequest request, Model model) {
+        Otherinfos otherinfos = new Otherinfos();
+        String resumeid = request.getParameter("resumesid");
+        String id = request.getParameter("id");
+        String contents = request.getParameter("zwpj");
+        String userid = CookieManager.getInstance().getCookie(request, "userid");
+        otherinfos.setContents(contents);
+        otherinfos.setCreatetime(new Date());
+        otherinfos.setCreateuserid(Integer.parseInt(userid));
+        otherinfos.setIsactive(true);
+        otherinfos.setResumesid(Integer.parseInt(resumeid));
+        otherinfos.setUpdateuserid(Integer.parseInt(userid));
+        otherinfos.setUpdatetime(new Date());
+        int result = 0;
+        List<Otherinfos> otherinfosList = otherInfosService.selectOtherinfosById(Integer.parseInt(resumeid));
+        if(otherinfosList!=null&&otherinfosList.size()>0)
+        {
+            otherinfos.setId(otherinfosList.get(0).getId());
+            result = otherInfosService.updateByPrimaryKeySelective(otherinfos);
+        }
+        else{
+            result = otherInfosService.insertSelective(otherinfos);
+        }
+        model.addAttribute("id", otherinfos.getId());
+
+        if (result > 0) {
+            return otherinfos.getId().toString();
+        }
+        return "0";
+    }
+
+    @RequestMapping("/editothers")
+    public String editotherifos(HttpServletRequest request, Model model) {
+        resumesService.PersoncenterCheck(request, model);
+        String resumeid = request.getParameter("resumesid");
+        model.addAttribute("resumesid", resumeid);
+        String id = request.getParameter("id");
+        model.addAttribute("id", id);
+        if (resumeid != null && !"".equals(resumeid)) {
+            List<Otherinfos> otherinfos = otherInfosService.selectOtherinfosById(Integer.parseInt(resumeid));
+            if(otherinfos!=null&&otherinfos.size()>0)
+            {
+                model.addAttribute("otherinfoModel",otherinfos.get(0));
+            }
+            else{
+                model.addAttribute("otherinfoModel", new Otherinfos());
+            }
+
+        }
+        /*
+        if (id != null && !"".equals(id) && Integer.parseInt(id) > 0) {
+            Otherinfos otherinfos = otherInfosService.selectByPrimaryKey(Integer.parseInt(id));
+            model.addAttribute("otherinfoModel", otherinfos);
+
+        } else {
+            model.addAttribute("otherinfoModel", new Otherinfos());
+        }*/
+        return "othercontents";
+    }
 }

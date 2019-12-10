@@ -173,7 +173,7 @@
             </li>
             <li>
                 <img  th:src="@{'../images/resume/'+${resumePicture.Pic_ohter}}"/>
-                <a href="/Center/EditSelfAssessment.aspx?id=<%=entity.ID %>">补充内容</a>
+                <a th:href="@{/resume/editothers(resumesid=${resumes.id})}">补充内容</a>
             </li>
         </ul>
     </div>

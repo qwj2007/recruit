@@ -69,10 +69,10 @@
             var CSNY = $('#CSNY').val();
             var ZZMMID = $('#ZZMMID option:selected').text();
             var GZDW = $('#GZDW').val();
-            var ZW = $('#ZW').val();
+            var ZW = $('#ZW').val();?resumesid=[[${resumesid}]]&id=[[${id}]]
             $.ajax({
                 type: "POST",
-                url: "/resume/addfamily?resumesid=[[${resumesid}]]&id=[[${id}]]",
+                url: "/resume/addfamily",
                 processData: true,
                 data: {
                     CW: CW,
