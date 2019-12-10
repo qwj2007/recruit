@@ -92,7 +92,7 @@
         <div class="portindex-hd">
             <div class="port clearFix">
                 <div class="port-lt">
-                    <img src="/image1.png" alt="" width="70" height="70">
+                    <img alt="" width="70" height="70" th:src="${photourl}">
                 </div>
                 <div class="port-rt">
                     <span class="name" th:text="${username}" ></span>
@@ -126,14 +126,6 @@
             </div>
         </div>
     </div>
-
-    <!--
-    <div class="foot" style="background-color:#323232 ;margin-top: 20px;">
-        <br><br>
-        <p style="color: #C7C7C7" align="center"><span style="color: #556666;">destiny@XuRuiBiao.com</span>&nbsp;&nbsp;xiaosha</p><br>
-        <p style="color:#556666" align="center" ;>XXXX公司注册</p><br>
-        <p style="color:#C7C7C7;" align="center">客服电话:+86-xxxxxxx</p><br>
-    </div>-->
 </nav>
 
 <div class="resume-bdlt" th:fragment="leftbar">
@@ -169,7 +161,7 @@
             </li>
             <li>
                 <img  th:src="@{'../images/resume/'+${resumePicture.Pic_photo}}"/>
-                <a href="/Center/UpTouXiang.aspx">照片</a>
+                <a th:href="@{/resume/uploadpicture(resumesid=${resumes.id})}">照片</a>
             </li>
             <li>
                 <img  th:src="@{'../images/resume/'+${resumePicture.Pic_ohter}}"/>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>简历管理</title>
+
+    <style type="text/css">
+        .rekit_470b42 {
+            height: 100px;
+            position: relative;
+        }
+
+        .rekit_86e5c5 {
+            width: 100%;
+            color: #888;
+            font-size: 12px;
+            position: absolute;
+            top: 25px;
+            left: 0;
+            height: 60px;
+        }
+
+        .rekit_86e5c5 li {
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            float: left;
+            overflow: hidden;
+        }
+
+        .rekit_e8ddfa {
+            position: absolute;
+            top: 10px;
+            right: 0;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/base.css" type="text/css">
+    <link rel="stylesheet" href="/css/resumemanage.css" type="text/css">
+    <link href="../css/common.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/imgareaselect.css" type="text/css">
+    <link href="/css/jianli.css" rel="stylesheet"/>
+    <link type="text/css" rel="stylesheet" href="/css/layer.css">
+    <link href="/css/m_css.css" type="text/css" rel="stylesheet">
+    <link href="/css/m_header.css" type="text/css" rel="stylesheet">
+    <script src="/js/jquery-1.8.0.min.js" language="javascript"></script>
+    <script src="/js/layer.min.js" language="javascript"></script>
+    <link type="text/css" rel="stylesheet" href="/js/skin/layer.css" id="skinlayercss">
+    <script src="/js/public.js" language="javascript"></script>
+    <script type="text/javascript" src="/js/setday.js"></script>
+    <script type="text/javascript" src="/js/member_public.js"></script>
+    <script>
+        function setImagePreview(docFileId, docImgBoxId, docImgId, inputId) {
+            var docFile = document.getElementById(docFileId);
+            var docImgBox = document.getElementById(docImgBoxId);
+            var docImg = document.getElementById(docImgId);
+            if (docFile.files && docFile.files[0]) {
+                //火狐下，直接设img属性
+                //docImg.style.display = 'block';
+                //docImg.style.width = '300px';
+                //docImg.style.height = '200px';
+
+                //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式
+                docImg.src = window.URL.createObjectURL(docFile.files[0]);
+                if (inputId != undefined)
+                    document.getElementById(inputId).value = docImg.src;
+
+            }
+            else {
+                //IE下，使用滤镜
+                docFile.select();
+                var imgSrc = document.selection.createRange().text;
+
+                //必须设置初始大小
+                //docImgBox.style.width = "300px";
+                //docImgBox.style.height = "200px";
+
+                //图片异常的捕捉，防止用户修改后缀来伪造图片
+                try {
+                    docImgBox.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+                    docImgBox.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+                    if (inputId != undefined)
+                        document.getElementById(inputId).value = imgSrc;
+                }
+                catch (e) {
+                    alert("您上传的图片格式不正确，请重新选择!");
+                    return false;
+                }
+                //docImg.style.display = 'none';
+                document.selection.empty();
+            }
+        }
+    </script>
+</head>
+<body>
+<div th:replace="layout/common::ptopbar"></div>
+<div class="clear"></div>
+<div class="resume-container">
+    <div class="resume container">
+        <div class="resume-hd">
+            您的当前位置：
+            <a href="/">首页</a>
+            <a href="/Register/Personcenter">> 个人中心 > </a>
+            <span>简历管理</span>
+        </div>
+        <div class="resume-bd clearFix">
+            <!--左-->
+            <div th:replace="layout/common::leftbar">
+            </div>
+            <!--右-->
+            <div class="resume-bdrt">
+                <div class="clear"></div>
+                <div class="resume-bdrt">
+                    <form id="formXiTongGuanLiJiBenXinXi" method="post" enctype="multipart/form-data"
+                        th:action="@{/resume/uploadimage(resumesid=${resumesid})}">
+                        <div class="fltR mt12">
+                            <div class="member_right_h1 fltL"><h4 class="member_right_span fltL per-lt">上传照片</h4></div>
+                            <div class="resume_box_list">
+                                <div class="search_con fl">
+                                    <div class="resume_Prompt" style="margin-top: 0px;">
+                                        提示：有时因页面缓存问题，上传后照片不能及时更新请击刷新页面即可
+                                    </div>
+                                    <div class="clear"></div>
+                                    <div class="oppic_img_cont">
+                                        <div class="uppic_sc_box">
+                                            <div class="uploader_sc_gs">
+                                                支持，jpg,jpeg,png,文件格式，最大不要超过
+                                                2 M
+                                            </div>
+                                            <div class="uploader_sc">
+                                                <div class="oppic_img_big">
+                                                    <div class="oppic_img_big_img">
+                                                        <input id="ZP" type="file" name="file"
+                                                               accept=".jpg,.png,.bmp,.gif" style="display: none"
+                                                               onchange="setImagePreview('ZP', 'ZpBox', 'Zp_hid','inputZP')"/>
+                                                        <div id="ZpBox">
+                                                            <img id="Zp_hid"  th:src="${resumes.photo}"
+                                                                 style="width: 80px; height: 100px; cursor: pointer;"
+                                                                 alt="图片" title="点击设置图片"
+                                                                 onclick="$('#ZP').click();"/>
+                                                        </div>
+                                                        <input id="inputZP" name="PTDBTP" type="hidden"
+                                                               th:value="${resumes.photo}"/>
+                                                    </div>
+                                                    <div class="oppic_img_big_p">标准头像80×100</div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="uppic_pb">
+                                            <button class="uppic_pb_bth" style="cursor: pointer;" onclick="upimg()">
+                                                保存头像
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="layout/common::bottombar"></div>
+</body>
+</html>

@@ -14,45 +14,6 @@
     <script src="/js/slides.jquery.js"></script>
 <script src="/js/login.js"></script>
     <script>
-/*
-        function userlogin() {
-            var userName = document.getElementById("username").value; //账号
-            var pwd = document.getElementById("userpwd").value; //密码
-            var parm = { username: userName, pwd: pwd };
-
-            $.ajax({
-                url: "index/login",
-                type: "post",
-                data: parm,
-                async: false,
-                dataType: "text",
-                success: function (msg) {
-
-                    if (msg == "1") {
-                        //$('#login').hide();
-                        //$('#show').show();
-                        //$('#liuser').html("您好！" + userName);
-                        //location.href = 'Center/personindex.aspx';
-                       location.href="";
-                    }
-                    else if (msg == "0") {
-                        location.href = 'Manage/Index.aspx';
-                    }
-                    else {
-                        alert("登录失败！");
-                    }
-                }
-            });
-
-        }
-        function logout() {
-            document.getElementById("username").value = ''; //账号
-            document.getElementById("userpwd").value = ''; //密码
-            $('#login').show();
-            $('#show').hide();
-            location.href = '/Manage/Logout.aspx';
-        }
-*/
         $(document).ready(function () {
             $("#userpwd").keydown(function (e) {
                 var curkey = e.which;

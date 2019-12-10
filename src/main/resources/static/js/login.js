@@ -51,7 +51,7 @@ function logout() {
                 //$('#liuser').html("您好！" + userName);
                 //location.href = 'Center/personindex.aspx';
                 //location.href="";
-                location.reload();
+                window.location.reload();
             }
             else if (msg == "0") {
                 location.href = 'Manage/Index.aspx';

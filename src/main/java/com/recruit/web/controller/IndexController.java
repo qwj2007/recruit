@@ -65,7 +65,6 @@ public class IndexController {
         Userinfo userinfo = userinfoService.getUserInfoByNamePwd(username, pwd);
         String result = "0";
         if (userinfo != null) {
-
             Cookie cookie = new Cookie("userid", userinfo.getId().toString());
             cookie.setPath("/");
             cookie.setDomain(request.getServerName());
@@ -88,20 +87,6 @@ public class IndexController {
     @ResponseBody
     public String Loginout(HttpServletRequest request, HttpServletResponse response) {
        String str= LoginUtil.LoginOut(request,response);
-        /*
-        String servername = request.getServerName();
-        Cookie[] cookies = request.getCookies();//这样便可以获取一个cookie数组
-        if (null == cookies) {
-        } else {
-            for (Cookie cookie : cookies) {
-                cookie.setValue(null);
-                cookie.setMaxAge(0);
-                cookie.setPath("/");
-                response.addCookie(cookie);
-            }
-        }
-        CookieManager.getInstance().removeCookie(response, "userid");
-        CookieManager.getInstance().removeCookie(response, "username");//*/
         return str;
     }
     @RequestMapping("index/outlogin")

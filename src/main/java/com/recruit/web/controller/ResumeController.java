@@ -3,15 +3,21 @@ package com.recruit.web.controller;
 import com.recruit.web.pojo.*;
 import com.recruit.web.service.*;
 import com.recruit.web.util.CookieManager;
-import javafx.scene.Parent;
+import com.recruit.web.util.FileUpload;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -544,12 +550,10 @@ public class ResumeController {
         otherinfos.setUpdatetime(new Date());
         int result = 0;
         List<Otherinfos> otherinfosList = otherInfosService.selectOtherinfosById(Integer.parseInt(resumeid));
-        if(otherinfosList!=null&&otherinfosList.size()>0)
-        {
+        if (otherinfosList != null && otherinfosList.size() > 0) {
             otherinfos.setId(otherinfosList.get(0).getId());
             result = otherInfosService.updateByPrimaryKeySelective(otherinfos);
-        }
-        else{
+        } else {
             result = otherInfosService.insertSelective(otherinfos);
         }
         model.addAttribute("id", otherinfos.getId());
@@ -569,11 +573,9 @@ public class ResumeController {
         model.addAttribute("id", id);
         if (resumeid != null && !"".equals(resumeid)) {
             List<Otherinfos> otherinfos = otherInfosService.selectOtherinfosById(Integer.parseInt(resumeid));
-            if(otherinfos!=null&&otherinfos.size()>0)
-            {
-                model.addAttribute("otherinfoModel",otherinfos.get(0));
-            }
-            else{
+            if (otherinfos != null && otherinfos.size() > 0) {
+                model.addAttribute("otherinfoModel", otherinfos.get(0));
+            } else {
                 model.addAttribute("otherinfoModel", new Otherinfos());
             }
 
@@ -587,5 +589,79 @@ public class ResumeController {
             model.addAttribute("otherinfoModel", new Otherinfos());
         }*/
         return "othercontents";
+    }
+
+    @RequestMapping("/uploadpicture")
+    public String uploadpicture(HttpServletRequest request, Model model) {
+        String defaultImageUrl = "../images/14600639898.jpg";
+        resumesService.PersoncenterCheck(request, model);
+        String resumeid = request.getParameter("resumesid");
+        model.addAttribute("resumesid", resumeid);
+        String id = request.getParameter("id");
+        model.addAttribute("id", id);
+        Resumes resumes = resumesService.selectByPrimaryKey(Integer.parseInt(resumeid));
+
+        if (resumes != null) {
+            if (resumes.getPhoto().trim().equals("") || resumes.getPhoto().equals(null)) {
+                resumes.setPhoto(defaultImageUrl);
+            }
+            model.addAttribute("resumes", resumes);
+        } else {
+            resumes = new Resumes();
+            resumes.setPhoto(defaultImageUrl);
+            model.addAttribute("resumes", resumes);
+        }
+        return "uploadpicture";
+    }
+
+    @Value("${FILE_SERVER_URL}")
+    private String FILE_SERVER_URL;
+
+    /*
+    * 上传照片
+    * */
+    @RequestMapping("/uploadimage")
+    public String uploadimage(HttpServletRequest request, Model model,
+                              @RequestParam("file") MultipartFile file) throws Exception {
+        String id = request.getParameter("resumesid");
+        Resumes resumes = resumesService.selectByPrimaryKey(Integer.parseInt(id));
+        // 拿到文件名
+        String filename = file.getOriginalFilename();
+        // 存放上传图片的文件夹
+        File fileDir = FileUpload.getImgDirFile();
+        // 输出文件夹绝对路径  -- 这里的绝对路径是相当于当前项目的路径而不是“容器”路径
+        System.out.println(fileDir.getAbsolutePath());
+        try {
+            if (!file.isEmpty()) {
+                // 构建真实的文件路径
+                String realFilePath = fileDir.getAbsolutePath() + File.separator + filename;
+                File newFile = new File(realFilePath);
+                System.out.println(newFile.getAbsolutePath());
+                // 上传图片到 -》 “绝对路径”
+                file.transferTo(newFile);
+                resumes.setPhoto("../images/upload/"+filename);
+                resumesService.updateByPrimaryKeySelective(resumes);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+/*
+        if (!file.isEmpty()) {
+            //String ndnd=  Thread.currentThread().getContextClassLoader().getResource("").toURI().getPath();
+            //文件保存路径
+            //String filePath="D:/recruit/src/main/resources/static/images/upload/"+file.getOriginalFilename();
+            // String filePath = request.getSession().getServletContext().getRealPath("/") + "/images/upload/"
+            //  + file.getOriginalFilename();
+            // 转存文件
+            // file.transferTo(new File(filePath));
+            String realPath = request.getSession().getServletContext().getRealPath("/");
+
+           // this.getServletContext().getRealPath("/WEB-INF/upload");
+            String filename = FileUpload.upload(file, filepath,request);
+            resumes.setPhoto(filename);
+            resumesService.updateByPrimaryKeySelective(resumes);
+        }//*/
+        return "redirect:/resumemanager?resumesid=" + id;
     }
 }
