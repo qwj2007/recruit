@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><title>
+    个人简历预览
+</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!--[if IE 6]>
+    <script src="Scripts/png.js"></script><![endif]-->
+    <link rel="stylesheet" href="/css/global.css" type="text/css">
+    <link rel="stylesheet" href="/css/portal.css" type="text/css">
+    <style>
+        .rekit_e050bb table td.bg {
+            font-weight: bold;
+        }
+    </style>
+    <link href="/css/m_css.css" type="text/css" rel="stylesheet">
+    <script src="/js/jquery-1.8.0.min.js"></script>
+    <script src="/js/member_public.js"></script>
+    <script src="/js/rc.print.js"></script>
+    <script type="text/javascript">
+        function ZhaoPinJianLiPrint() {
+            $("#ZhaoPinJianLiDetail").printArea();
+        }
+    </script>
+
+</head>
+<body>
+<div class="rekit_c5bab6">
+    <div class="rekit_1e8090 rekit_d8f185" style="padding-bottom:15px;"><span
+            style="float:right;margin-top:25px;"><a onclick="ZhaoPinJianLiPrint()" style="cursor:pointer"
+                                                    class="member_index_resume_t_cz_bth">打印</a></span><span
+            style="float:right;margin-top:25px;">
+
+        </span>
+    </div>
+</div>
+<div id="ZhaoPinJianLiDetail" class="rekit_c5bab6">
+    <div class="rekit_1e8090 rekit_e050bb" id="print">
+        <table border="1" cellpadding="0" cellspacing="0">
+            <tr>
+                <td colspan="6" class="bg"><span th:text="${resumes.truename}"></span>的简历</td>
+                <td rowspan="5">
+                    <img th:src="${resumes.photo}" width="80" height="100"
+                         onerror="showImgDelay(this,'/images/14600639898.jpg',2);"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="bg">姓名</td>
+                <td style="width: 180px;" th:text="${resumes.truename}"></td>
+                <td class="bg">性别</td>
+                <td th:text="${resumes.sex}"></td>
+                <td class="bg">出生年月</td>
+                <td th:text="${resumes.birthday}">
+                </td>
+            </tr>
+            <tr>
+                <td class="bg">民族</td>
+                <td th:text="${resumes.nation}"></td>
+                <td class="bg">籍贯</td>
+                <td th:text="${resumes.nativeplace}"></td>
+                <td class="bg">户口所在地</td>
+                <td th:text="${resumes.registeredresidence}"></td>
+            </tr>
+            <tr>
+                <td class="bg">邮箱</td>
+                <td th:text="${resumes.email}"></td>
+                <td class="bg">婚姻状况</td>
+                <td th:text="${resumes.maritalstatus}"></td>
+                <td class="bg">年龄</td>
+                <td th:text="${resumes.age}"></td>
+            </tr>
+            <tr>
+                <td class="bg">政治面貌</td>
+                <td th:text="${resumes.politicaloutlook}"></td>
+                <td class="bg">参加工作时间</td>
+                <td th:text="${resumes.workdate}">
+                </td>
+                <td class="bg">人事关系所在地</td>
+                <td th:text="${resumes.locationpersonnelrelationship}"></td>
+            </tr>
+            <tr>
+                <td class="bg">现居住地</td>
+                <td colspan="2" th:text="${resumes.nowaddress}"></td>
+                <td class="bg">身份证</td>
+                <td colspan="3" th:text="${resumes.card}"></td>
+            </tr>
+            <tr>
+                <td class="bg">学历</td>
+                <td colspan="3" th:text="${resumes.education}"></td>
+                <td class="bg">毕业院校</td>
+                <td colspan="2" th:text="${resumes.graduateschool}"></td>
+            </tr>
+            <tr>
+                <td class="bg">学位</td>
+                <td colspan="3" th:text="${resumes.academicdegree}"></td>
+                <td class="bg">毕业专业</td>
+                <td colspan="2" th:text="${resumes.major}"></td>
+            </tr>
+            <tr>
+                <td class="bg">申请岗位</td>
+                <td colspan="4" th:text="${recruitinfo.title}"></td>
+                <td class="bg">联系电话</td>
+                <td th:text="${resumes.phone}"></td>
+            </tr>
+            <tr>
+                <td class="bg">现工作单位</td>
+                <td colspan="4" th:text="${resumes.comanyname}"></td>
+                <td class="bg">职务</td>
+                <td th:text="${resumes.postname}"></td>
+            </tr>
+            <tr>
+                <td style="width:14%;" th:rowspan="${workcount}" class="bg" th:if="${workcount}>1">工作经历
+                </td>
+                <td class="bg" style="width:20%;">时间</td>
+                <td colspan="3" class="bg" style="width:40%;">工作单位</td>
+                <td colspan="2" class="bg" style="width:26%;">职务</td>
+            </tr>
+            <tr th:each="emp:${workexperiences}" th:if="${workcount}>1">
+                <td colspan="6" cellspacing="0" cellpadding="0" style="padding: 0px;margin: 0px;border: 0px;">
+                    <table border="0" rules="all" style="border-collapse:collapse;margin: 0px; padding:0px;border: 0px" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td style="width: 23.3%"><span th:text="${emp.begintime}"></span>-<span
+                                    th:text="${emp.endtime}"></span></td>
+                            <td th:text="${emp.postname}" style="width:46.7%"></td>
+                            <td th:text="${emp.job}"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="text-align: left">
+                                <span style="font-size:12px;margin:0px;padding:0px;font-weight:bold;">工作内容：</span>
+                                <span th:text="${emp.workcontent}"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+
+            </tr>
+
+            <tr th:if="${traincount}>1">
+                <td th:rowspan="${traincount}" class="bg">培训经历</td>
+                <td class="bg">时间</td>
+                <td colspan="3" class="bg">培训单位</td>
+                <td colspan="2" class="bg">培训内容</td>
+            </tr>
+
+            <tr th:each="emp:${trainingexperiences}" th:if="${traincount}>1">
+                <td style="width: 180px;"><span th:text="${emp.begintime}"></span>-<span
+                        th:text="${emp.endtime}"></span></td>
+                <td colspan="3" th:text="${emp.traincomany}"></td>
+                <td colspan="2" th:text="${emp.traincontent}"></td>
+            </tr>
+
+
+            <tr th:if="${educount}>1">
+                <td th:rowspan="${educount}" class="bg">教育经历</td>
+                <td class="bg">时间</td>
+                <td class="bg">学校名称</td>
+                <td class="bg">所学专业</td>
+                <td class="bg">学历</td>
+                <td class="bg">学位</td>
+                <td class="bg">学习形式</td>
+            </tr>
+
+            <tr th:each="emp:${educationexperiences}" th:if="${educount}>1">
+                <td><span th:text="${emp.begintime}"></span>-<span
+                        th:text="${emp.endtime}"></span></td>
+                <td th:text="${emp.schoolname}"></td>
+                <td th:text="${emp.majorname}"></td>
+                <td th:text="${emp.education}"></td>
+                <td th:text="${emp.academicdegree}"></td>
+                <td th:text="${emp.learningform}"></td>
+            </tr>
+
+
+            <tr th:if="${certificatescount}>1">
+                <td  th:rowspan="${certificatescount}" class="bg">证书</td>
+                <td colspan="2" class="bg">时间</td>
+                <td colspan="4" class="bg">证书名称</td>
+            </tr>
+
+            <tr th:each="emp:${certificates}" th:if="${certificatescount}>1">
+                <td colspan="2" th:text="${emp.certificatedate}"></td>
+                <td colspan="4" th:text="${emp.certificatename}"></td>
+            </tr>
+
+            <tr th:if="${familycount}>1">
+                <td  th:rowspan="${familycount}" class="bg">家庭成员
+                </td>
+                <td class="bg">称谓</td>
+                <td class="bg">姓名</td>
+                <td class="bg">出生年月</td>
+                <td colspan="2" class="bg">工作单位</td>
+                <td class="bg">职务</td>
+            </tr>
+
+            <tr th:each="emp:${families}" th:if="${familycount}>1">
+                <td th:text="${emp.appellation}"></td>
+                <td th:text="${emp.username}"></td>
+                <td th:text="${emp.birthday}"></td>
+                <td colspan="2" th:text="${emp.companyname}"></td>
+                <td th:text="${emp.job}"></td>
+            </tr>
+
+
+            <tr>
+                <td class="bg">补充内容</td>
+                <td colspan="6" th:text="${otherinfos.contents}"></td>
+            </tr>
+            <tr>
+                <td colspan="7">
+                    <div class="rekit_2b2a63">
+                        <label class="bg">承诺书</label>
+                        <p style="padding: 0 13px;" class="bg">
+                            本人承诺所填写个人情况及提供的所有材料、证书均属实，无任何虚假情况。如存在不实内容，本人愿意承担一切后果。</p>
+                        <p>
+                        <ul>
+                        <li class="bg">承诺人：<span th:text="${resumes.truename}"></span></li>
+                            <li>
+                            </li>
+                            <li></li>
+                        </ul>
+                        </p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+<div class="rekit_0c8a97"></div>
+</body>
+</html>

@@ -2,6 +2,7 @@ package com.recruit.web.controller;
 
 import com.recruit.web.pojo.*;
 import com.recruit.web.service.*;
+import com.recruit.web.service.impl.RecruitInfoService;
 import com.recruit.web.util.CookieManager;
 import com.recruit.web.util.FileUpload;
 
@@ -51,6 +52,8 @@ public class ResumeController {
     private IFamilyService familyService;
     @Autowired
     private IOtherInfosService otherInfosService;
+    @Autowired
+    private IRecruitInfoService recruitInfoService;
 
 
     @RequestMapping("/getcount")
@@ -669,10 +672,60 @@ public class ResumeController {
         List<Family> families = familyService.selectFamilyByResumeId(Integer.parseInt(resumeid));
         model.addAttribute("families", families);
         List<Otherinfos> otherinfos = otherInfosService.selectOtherinfosById(Integer.parseInt(resumeid));
-        if(otherinfos!=null&&otherinfos.size()>0){
+        if (otherinfos != null && otherinfos.size() > 0) {
             model.addAttribute("otherinfos", otherinfos.get(0));
         }
 
         return "resumemanager";
+    }
+
+    @RequestMapping("/preview")
+    public String preview(HttpServletRequest request, Model model) {
+        resumesService.PersoncenterCheck(request, model);
+        String resumeid = request.getParameter("resumesid");
+        model.addAttribute("resumesid", resumeid);
+
+        Resumes resumes = resumesService.selectByPrimaryKey(Integer.parseInt(resumeid));
+        if (resumes != null) {
+            if (resumes.getPhoto() == null || resumes.getPhoto() == "") {
+                resumes.setPhoto("/images/14600639898.jpg");
+            }
+            model.addAttribute("resumes", resumes);
+            Delivery delivery = deliveryService.selectDeliveryByResumesId(Integer.parseInt(resumeid));
+            Recruitinfo recruitinfo = recruitInfoService.selectById(delivery.getRecruitinfoid());
+            if (recruitinfo != null) {
+                model.addAttribute("recruitinfo", recruitinfo);
+            }
+        } else {
+            resumes = new Resumes();
+            resumes.setPhoto("/images/14600639898.jpg");
+        }
+
+        //工作经历
+        List<Workexperience> workexperiences = workExperienceService.selectWorkExperienceById(Integer.parseInt(resumeid));
+        model.addAttribute("workexperiences", workexperiences);
+        model.addAttribute("workcount", 1 + workexperiences.size());
+//培训经历
+        List<Trainingexperience> trainingexperiencelist = trainService.selecTrainByResumeId(Integer.parseInt(resumeid));
+        model.addAttribute("trainingexperiences", trainingexperiencelist);
+        model.addAttribute("traincount",  1 + trainingexperiencelist.size());
+//学习经历
+        List<Educationexperience> educationexperiences = edutionExpericenceService.selectEducationByResumeid(Integer.parseInt(resumeid));
+        model.addAttribute("educationexperiences", educationexperiences);
+        model.addAttribute("educount", 1 + educationexperiences.size());
+        //证书
+        List<Certificate> certificates=certificateService.selectCertificateByResumeId(Integer.parseInt(resumeid));
+        model.addAttribute("certificates", certificates);
+        model.addAttribute("certificatescount",  1 + certificates.size());
+//家庭成员
+        List<Family> familylist=familyService.selectFamilyByResumeId(Integer.parseInt(resumeid));
+        model.addAttribute("families", familylist);
+        model.addAttribute("familycount",  1 + familylist.size());
+        //补充内容
+       List<Otherinfos> otherinfos= otherInfosService.selectOtherinfosById(Integer.parseInt(resumeid));
+       if(otherinfos.size()>0) {
+           model.addAttribute("otherinfos", otherinfos.get(0));
+       }
+        return "preview";
     }
 }
