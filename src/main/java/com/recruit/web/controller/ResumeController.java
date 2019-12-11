@@ -2,12 +2,9 @@ package com.recruit.web.controller;
 
 import com.recruit.web.pojo.*;
 import com.recruit.web.service.*;
-import com.recruit.web.service.impl.RecruitInfoService;
 import com.recruit.web.util.CookieManager;
 import com.recruit.web.util.FileUpload;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
@@ -23,8 +19,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.function.IntPredicate;
-
 /**
  * 作者：qiwj
  * 时间：2019/11/1
@@ -708,24 +702,64 @@ public class ResumeController {
 //培训经历
         List<Trainingexperience> trainingexperiencelist = trainService.selecTrainByResumeId(Integer.parseInt(resumeid));
         model.addAttribute("trainingexperiences", trainingexperiencelist);
-        model.addAttribute("traincount",  1 + trainingexperiencelist.size());
+        model.addAttribute("traincount", 1 + trainingexperiencelist.size());
 //学习经历
         List<Educationexperience> educationexperiences = edutionExpericenceService.selectEducationByResumeid(Integer.parseInt(resumeid));
         model.addAttribute("educationexperiences", educationexperiences);
         model.addAttribute("educount", 1 + educationexperiences.size());
         //证书
-        List<Certificate> certificates=certificateService.selectCertificateByResumeId(Integer.parseInt(resumeid));
+        List<Certificate> certificates = certificateService.selectCertificateByResumeId(Integer.parseInt(resumeid));
         model.addAttribute("certificates", certificates);
-        model.addAttribute("certificatescount",  1 + certificates.size());
+        model.addAttribute("certificatescount", 1 + certificates.size());
 //家庭成员
-        List<Family> familylist=familyService.selectFamilyByResumeId(Integer.parseInt(resumeid));
+        List<Family> familylist = familyService.selectFamilyByResumeId(Integer.parseInt(resumeid));
         model.addAttribute("families", familylist);
-        model.addAttribute("familycount",  1 + familylist.size());
+        model.addAttribute("familycount", 1 + familylist.size());
         //补充内容
-       List<Otherinfos> otherinfos= otherInfosService.selectOtherinfosById(Integer.parseInt(resumeid));
-       if(otherinfos.size()>0) {
-           model.addAttribute("otherinfos", otherinfos.get(0));
-       }
+        List<Otherinfos> otherinfos = otherInfosService.selectOtherinfosById(Integer.parseInt(resumeid));
+        if (otherinfos.size() > 0) {
+            model.addAttribute("otherinfos", otherinfos.get(0));
+        }
         return "preview";
+    }
+
+    @RequestMapping("/changepassword")
+    public String changepassword(HttpServletRequest request, Model model) {
+        resumesService.PersoncenterCheck(request, model);
+        return "changepassword";
+    }
+
+    @RequestMapping("/editpwd")
+    @ResponseBody
+    public String editpwd(HttpServletRequest request, Model model) {
+        resumesService.PersoncenterCheck(request, model);
+        String userid = CookieManager.getInstance().getCookie(request, "userid");
+        String oldpassword = request.getParameter("oldpassword");
+        String password = request.getParameter("password");
+        String repassword = request.getParameter("repassword");
+        Userinfo userinfo = userinfoService.selectByPrimaryKey(Integer.parseInt(userid));
+        if("".equals(oldpassword)){
+            return "QSRXMM";
+        }
+        if("".equals(password)){
+            return "SRXMM";
+        }
+        if("".equals(repassword)){
+            return "SRQRMM";
+        }
+        if(userinfo==null)
+        {
+            return "YHBCZ";//用户不存在
+        }
+        else if(!userinfo.getPwd().equals(oldpassword)){
+            return "YSMMCW";//原始密码错误
+        }
+        userinfo.setPwd(password);
+       Integer result= userinfoService.updateByPrimaryKey(userinfo);
+       if(result>0){
+           return "OK";
+       }
+       return "NO";
+
     }
 }
