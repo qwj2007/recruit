@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +20,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
 /**
  * 作者：qiwj
  * 时间：2019/11/1
@@ -686,11 +688,20 @@ public class ResumeController {
             }
             model.addAttribute("resumes", resumes);
             Delivery delivery = deliveryService.selectDeliveryByResumesId(Integer.parseInt(resumeid));
-            Recruitinfo recruitinfo = recruitInfoService.selectById(delivery.getRecruitinfoid());
-            if (recruitinfo != null) {
-                model.addAttribute("recruitinfo", recruitinfo);
+            if (delivery != null) {
+                Recruitinfo recruitinfo = recruitInfoService.selectById(delivery.getRecruitinfoid());
+                if (recruitinfo != null) {
+                    model.addAttribute("recruitinfo", recruitinfo);
+                }
+                else {
+                    model.addAttribute("recruitinfo", new Recruitinfo());
+                }
+            }
+            else{
+                model.addAttribute("recruitinfo", new Recruitinfo());
             }
         } else {
+            model.addAttribute("recruitinfo", new Recruitinfo());
             resumes = new Resumes();
             resumes.setPhoto("/images/14600639898.jpg");
         }
@@ -720,6 +731,9 @@ public class ResumeController {
         if (otherinfos.size() > 0) {
             model.addAttribute("otherinfos", otherinfos.get(0));
         }
+        else{
+            model.addAttribute("otherinfos", new Otherinfos());
+        }
         return "preview";
     }
 
@@ -738,28 +752,26 @@ public class ResumeController {
         String password = request.getParameter("password");
         String repassword = request.getParameter("repassword");
         Userinfo userinfo = userinfoService.selectByPrimaryKey(Integer.parseInt(userid));
-        if("".equals(oldpassword)){
+        if ("".equals(oldpassword)) {
             return "QSRXMM";
         }
-        if("".equals(password)){
+        if ("".equals(password)) {
             return "SRXMM";
         }
-        if("".equals(repassword)){
+        if ("".equals(repassword)) {
             return "SRQRMM";
         }
-        if(userinfo==null)
-        {
+        if (userinfo == null) {
             return "YHBCZ";//用户不存在
-        }
-        else if(!userinfo.getPwd().equals(oldpassword)){
+        } else if (!userinfo.getPwd().equals(oldpassword)) {
             return "YSMMCW";//原始密码错误
         }
         userinfo.setPwd(password);
-       Integer result= userinfoService.updateByPrimaryKey(userinfo);
-       if(result>0){
-           return "OK";
-       }
-       return "NO";
+        Integer result = userinfoService.updateByPrimaryKey(userinfo);
+        if (result > 0) {
+            return "OK";
+        }
+        return "NO";
 
     }
 }

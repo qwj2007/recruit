@@ -119,7 +119,7 @@
     select
     <include refid="Base_Column_List" />
     from userinfo
-    where username = #{username} and pwd=#{pwd} and isactive=1
+    where (username = #{username} or email=#{username}) and pwd=#{pwd} and isactive=1
   </select>
   <select id="getUserInfo" parameterType="java.lang.String" resultMap="BaseResultMap">
     SELECT
@@ -129,8 +129,8 @@
       and username=#{username,jdbcType=VARCHAR}
     </if>
     <if test="email != null">
-      and email=#{email,jdbcType=VARCHAR}
-    </if>
+    and email=#{email,jdbcType=VARCHAR}
+  </if>
      limit 1
 
   </select>

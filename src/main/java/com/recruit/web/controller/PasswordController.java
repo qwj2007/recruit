@@ -1,14 +1,28 @@
 package com.recruit.web.controller;
 
+import com.recruit.web.pojo.Emailset;
+import com.recruit.web.pojo.Userinfo;
+import com.recruit.web.service.IEmailsetService;
+import com.recruit.web.service.IUserinfoService;
+import com.recruit.web.util.EncodeBase64;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.activation.DataHandler;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Properties;
+import javax.mail.BodyPart;
+import javax.mail.Multipart;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMultipart;
 
 /**
  * 作者：qiwj
@@ -17,51 +31,81 @@ import java.util.Properties;
 @Controller
 @RequestMapping("password")
 public class PasswordController {
+    @Autowired
+    private IUserinfoService userinfoService;
+    @Autowired
+    private IEmailsetService emailsetService;
+
     @RequestMapping("/sendemail")
-    public String SendEmail() throws Exception {
-        
-        Properties props = new Properties();
-        props.setProperty("mail.smtp.auth", "true");
-        props.setProperty("mail.transport.protocol", "smtp");
-        props.put("mail.smtp.host", "smtp.163.com");// smtp服务器地址
-        Session session = Session.getInstance(props);
-        session.setDebug(true);
-        Message msg = new MimeMessage(session);
-        msg.setSubject("这是一个测试程序....");
-        msg.setText("你好!这是我的第一个javamail程序---WQ");
-        msg.setFrom(new InternetAddress("XXXXXXXXXXX@163.com"));//发件人邮箱(我的163邮箱)
-        msg.setRecipient(Message.RecipientType.TO,new InternetAddress("XXXXXXXXXXX@qq.com")); //收件人邮箱(我的QQ邮箱)
-        msg.saveChanges();
+    @ResponseBody
+    public String SendEmail(HttpServletRequest request) throws Exception {
+        String email = request.getParameter("email");
+        Userinfo userinfo = userinfoService.getUserInfo(null, email);
+        Emailset emailset = emailsetService.selectOneEmail();
+        String gotoEmail = gotoEmail(email);//跳转到邮箱登录页面
+        if (userinfo != null) {
+            String Url = "http://" + request.getServerName() + ":" + request.getServerPort() + "/password/modifypassword?email=" + EncodeBase64.encodeBase64(email);
 
-        Transport transport = session.getTransport();
-        transport.connect("XXXXXXXXXX@163.com", "XXXXXXXXX");//发件人邮箱,授权码(可以在邮箱设置中获取到授权码的信息)
+            String strHref = EncodeBase64.encodeBase64(Url);
+            StringBuilder sb = new StringBuilder();
+            sb.append("亲爱的用户 " + email + "：您好！<br/><br/>");
+            sb.append("  请点击下面链接进行密码重置：<br /><br /><table><tr><td>");
+            sb.append("<a href=" + Url + ">重置密码" + strHref + "</a>");
+            sb.append("</td></tr></table>");
+            sb.append("<hr>");
+            Properties props = new Properties();
+            props.setProperty("mail.smtp.auth", "true");
+            props.setProperty("mail.transport.protocol", "smtp");
+            props.put("mail.smtp.host", emailset.getSendservice());// smtp服务器地址
+            Session session = Session.getInstance(props);
+            session.setDebug(true);
+            Message msg = new MimeMessage(session);
+            msg.setSubject("重置密码");
+            //设置html格式
+            Multipart mp = new MimeMultipart("related");
+            BodyPart bodyPart = new MimeBodyPart();
+            bodyPart.setDataHandler(new DataHandler(sb.toString(), "text/html;charset=UTF-8"));
 
-        transport.sendMessage(msg, msg.getAllRecipients());
-        transport.close();
+            mp.addBodyPart(bodyPart);
+            msg.setContent(mp);// 设置邮件内容对象
 
-        return "1";
+            //msg.setText(sb.toString());
+            //msg.setContent("rer",sb.toString());
+            msg.setFrom(new InternetAddress(emailset.getEmailaddress()));//发件人邮箱(我的163邮箱)
+            msg.setRecipient(Message.RecipientType.TO, new InternetAddress(userinfo.getEmail())); //收件人邮箱(我的QQ邮箱)
+            msg.saveChanges();
+
+            Transport transport = session.getTransport();
+            transport.connect(emailset.getEmailaddress(), emailset.getEmailpwd());//发件人邮箱,授权码(可以在邮箱设置中获取到授权码的信息)
+
+            transport.sendMessage(msg, msg.getAllRecipients());
+            transport.close();
+        } else {
+            return "0";
+        }
+        return "http://" + gotoEmail;
     }
 
     private String gotoEmail(String mail) {
         String strmail = mail.split("@")[1];
         strmail = strmail.toLowerCase();
-        if (strmail == "163.com") {
+        if (strmail.equals("163.com")) {
             return "mail.163.com";
-        } else if (strmail == "vip.163.com") {
+        } else if (strmail.equals("vip.163.com")) {
             return "vip.163.com";
-        } else if (strmail == "126.com") {
+        } else if (strmail.equals("126.com")) {
             return "mail.126.com";
         } else if (strmail == "qq.com" || strmail == "vip.qq.com" || strmail == "foxmail.com") {
             return "mail.qq.com";
-        } else if (strmail == "gmail.com") {
+        } else if (strmail.equals("gmail.com")) {
             return "mail.google.com";
-        } else if (strmail == "sohu.com") {
+        } else if (strmail.equals("sohu.com")) {
             return "mail.sohu.com";
-        } else if (strmail == "tom.com") {
+        } else if (strmail.equals("tom.com")) {
             return "mail.tom.com";
-        } else if (strmail == "vip.sina.com") {
+        } else if (strmail.equals("vip.sina.com")) {
             return "vip.sina.com";
-        } else if (strmail == "sina.com.cn" || strmail == "sina.com") {
+        } else if (strmail.equals("sina.com.cn") || strmail.equals("sina.com")) {
             return "mail.sina.com.cn";
         } else if (strmail == "tom.com") {
             return "mail.tom.com";
@@ -92,4 +136,35 @@ public class PasswordController {
         }
     }
 
+    @RequestMapping("/retrievePassword")
+    public String RetrievePassword() {
+        return "retrievepassword";
+    }
+
+    @RequestMapping("/modifypassword")
+    public String modifypassword(HttpServletRequest request, Model model) throws Exception {
+        String email = request.getParameter("email");
+        String de_email = EncodeBase64.decodeBase64(email);
+        model.addAttribute("email", de_email);
+        return "modifypassword";
+    }
+
+    @RequestMapping("/editPwd")
+    @ResponseBody
+    public String editPwd(HttpServletRequest request, Model model) {
+        String email = request.getParameter("email");
+        String pwd = request.getParameter("pwd");
+        Userinfo userinfo = userinfoService.getUserInfo(null, email);
+        if (userinfo == null) {
+            return "0";
+        }
+        userinfo.setPwd(pwd);
+        Integer result = userinfoService.updateByPrimaryKey(userinfo);
+        if (result > 0) {
+            return "1";
+        } else {
+            return "2";
+        }
+
+    }
 }

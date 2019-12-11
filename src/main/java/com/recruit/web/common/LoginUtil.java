@@ -41,7 +41,7 @@ public class LoginUtil {
             model.addAttribute("username", username);
             model.addAttribute("userid", userid);
            Resumes resumes= staticresume.selctResumeByUserId(userid);
-           model.addAttribute("photourl",resumes.getPhoto());
+           model.addAttribute("photourl",resumes!=null?resumes.getPhoto():"");
 
         }
         return true;

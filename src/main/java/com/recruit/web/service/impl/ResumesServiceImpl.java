@@ -115,34 +115,37 @@ public class ResumesServiceImpl implements IResumesService {
                 Recruitinfo recruitinfo = recruitInfoService.selectById(delivery.getRecruitinfoid());
                 model.addAttribute("recruitinfo", recruitinfo);
             }
-        }
-        List<Workexperience> workexperiences = workExperienceService.selectWorkExperienceById(resumes.getId());
-        if (workexperiences != null && workexperiences.size() > 0) {
-            resumePicture.setPic_work(duihao);
-        }
-        List<Educationexperience> educationexperiences = edutionExpericenceService.selectEducationByResumeid(resumes.getId());
-        if (educationexperiences != null && educationexperiences.size() > 0) {
-            resumePicture.setPic_education(duihao);
-        }
+            List<Workexperience> workexperiences = workExperienceService.selectWorkExperienceById(resumes.getId());
+            if (workexperiences != null && workexperiences.size() > 0) {
+                resumePicture.setPic_work(duihao);
+            }
+            List<Educationexperience> educationexperiences = edutionExpericenceService.selectEducationByResumeid(resumes.getId());
+            if (educationexperiences != null && educationexperiences.size() > 0) {
+                resumePicture.setPic_education(duihao);
+            }
 
-        List<Trainingexperience> trainingexperiences = trainService.selecTrainByResumeId(resumes.getId());
-        if (trainingexperiences != null && trainingexperiences.size() > 0) {
-            resumePicture.setPic_train(duihao);
-        }
-        List<Certificate> certificates = certificateService.selectCertificateByResumeId(resumes.getId());
-        if (certificates != null && certificates.size() > 0) {
-            resumePicture.setPic_certificate(duihao);
-        }
-        List<Family> families = familyService.selectFamilyByResumeId(resumes.getId());
-        if (families != null && families.size() > 0) {
-            resumePicture.setPic_family(duihao);
-        }
-        if (resumes.getPhoto() != null && !"".equals(resumes.getPhoto())) {
-            resumePicture.setPic_photo(duihao);
-        }
-        List<Otherinfos> otherinfos = otherInfosService.selectOtherinfosById(resumes.getId());
-        if (otherinfos != null && otherinfos.size() > 0) {
-            resumePicture.setPic_ohter(duihao);
+            List<Trainingexperience> trainingexperiences = trainService.selecTrainByResumeId(resumes.getId());
+            if (trainingexperiences != null && trainingexperiences.size() > 0) {
+                resumePicture.setPic_train(duihao);
+            }
+            List<Certificate> certificates = certificateService.selectCertificateByResumeId(resumes.getId());
+            if (certificates != null && certificates.size() > 0) {
+                resumePicture.setPic_certificate(duihao);
+            }
+            List<Family> families = familyService.selectFamilyByResumeId(resumes.getId());
+            if (families != null && families.size() > 0) {
+                resumePicture.setPic_family(duihao);
+            }
+            if (resumes.getPhoto() != null && !"".equals(resumes.getPhoto())) {
+                resumePicture.setPic_photo(duihao);
+            }
+            List<Otherinfos> otherinfos = otherInfosService.selectOtherinfosById(resumes.getId());
+            if (otherinfos != null && otherinfos.size() > 0) {
+                resumePicture.setPic_ohter(duihao);
+            }
+        } else {
+            resumes = new Resumes();
+            model.addAttribute("resumes", resumes);
         }
         model.addAttribute("resumePicture", resumePicture);
 

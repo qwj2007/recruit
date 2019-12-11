@@ -20,7 +20,7 @@ function userlogin() {
                 window.location.href="/Register/Personcenter";
             }
             else if (msg == "0") {
-                location.href = 'Manage/Index.aspx';
+                location.href = '/Manage/Index.aspx';
             }
             else {
                 alert("登录失败！");
