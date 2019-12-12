@@ -1,8 +1,7 @@
 package com.recruit.web.service;
 
 import com.recruit.web.pojo.Resumes;
-import com.sun.xml.internal.ws.resources.HttpserverMessages;
-import org.apache.ibatis.annotations.Param;
+
 import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpServletRequest;

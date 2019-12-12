@@ -11,7 +11,7 @@
     <groupId>com.recruit</groupId>
     <artifactId>web</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>war</packaging><!--打成war包-->
     <name>recruitweb</name>
     <description>Demo project for Spring Boot</description>
 
@@ -28,6 +28,19 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--配置外部tomcat配置-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
@@ -94,9 +107,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
     </dependencies>
 
     <build>
+        <finalName>recruitweb</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

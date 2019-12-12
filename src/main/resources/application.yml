@@ -2,7 +2,7 @@ server:
     port: 8083
 spring:
   application:
-    name: mybatisdemo
+    name: recruitweb
   datasource:
   #第一个数据源
     recruit:

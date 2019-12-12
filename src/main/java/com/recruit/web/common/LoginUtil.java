@@ -2,7 +2,6 @@ package com.recruit.web.common;
 
 import com.recruit.web.pojo.Resumes;
 import com.recruit.web.service.IResumesService;
-import com.recruit.web.service.impl.ResumesServiceImpl;
 import com.recruit.web.util.CookieManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
