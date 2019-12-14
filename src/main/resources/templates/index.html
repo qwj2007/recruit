@@ -100,7 +100,7 @@
             </div>
             <div class="rekit_b7ce55">
                 <li th:each="emp:${news}">
-                    <a href="/center/recruitinfos.aspx?id=${emp.id}">
+                    <a th:href="@{/center/newsinfo(id=${emp.id})}">
                         <span th:text="${emp.title}">2232323232323</span>
                     </a>
 
