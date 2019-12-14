@@ -128,7 +128,7 @@
                 success: function (data) {
                     if (data == "ok") {
                         alert("保存成功！");
-                        document.location.href = "/resume/resumemanger?id=[[${resumes.id}]]";
+                        document.location.href = "/resume/resumemanger?resumesid=[[${resumes.id}]]";
                     }
                     else {
                         alert(data);
