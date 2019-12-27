@@ -91,7 +91,10 @@ public class ResumeController {
 
     @RequestMapping("/editresume")
     public String editResume(HttpServletRequest request, Model model) {
-        resumesService.PersoncenterCheck(request, model);
+        String str = resumesService.PersoncenterCheck(request, model);
+        if (str.equals("0")) {
+            return "redirect:/";
+        }
 
         return "editresume";
     }
@@ -155,7 +158,10 @@ public class ResumeController {
     * */
     @RequestMapping("/editworkexperience")
     public String editworkexperience(HttpServletRequest request, Model model) {
-        resumesService.PersoncenterCheck(request, model);
+        String str = resumesService.PersoncenterCheck(request, model);
+        if (str.equals("0")) {
+            return "redirect:/";
+        }
         String resumeid = request.getParameter("resumesid");
         model.addAttribute("resumesid", resumeid);
         String id = request.getParameter("id");
@@ -272,7 +278,10 @@ public class ResumeController {
     * */
     @RequestMapping("/editeducation")
     public String editeducation(HttpServletRequest request, Model model) {
-        resumesService.PersoncenterCheck(request, model);
+        String str = resumesService.PersoncenterCheck(request, model);
+        if (str.equals("0")) {
+            return "redirect:/";
+        }
         String resumeid = request.getParameter("resumesid");
         model.addAttribute("resumesid", resumeid);
         String id = request.getParameter("id");
@@ -309,7 +318,10 @@ public class ResumeController {
     * */
     @RequestMapping("/editetrain")
     public String editTrain(HttpServletRequest request, Model model) {
-        resumesService.PersoncenterCheck(request, model);
+        String str = resumesService.PersoncenterCheck(request, model);
+        if (str.equals("0")) {
+            return "redirect:/";
+        }
         String resumeid = request.getParameter("resumesid");
         model.addAttribute("resumesid", resumeid);
         String id = request.getParameter("id");
@@ -384,7 +396,10 @@ public class ResumeController {
     * */
     @RequestMapping("/editcetificate")
     public String editcetificate(HttpServletRequest request, Model model) {
-        resumesService.PersoncenterCheck(request, model);
+        String str = resumesService.PersoncenterCheck(request, model);
+        if (str.equals("0")) {
+            return "redirect:/";
+        }
         String resumeid = request.getParameter("resumesid");
         model.addAttribute("resumesid", resumeid);
         String id = request.getParameter("id");
@@ -457,7 +472,10 @@ public class ResumeController {
     @RequestMapping("/editfamily")
     public String editFamily(HttpServletRequest request, Model model) {
 
-        resumesService.PersoncenterCheck(request, model);
+        String str = resumesService.PersoncenterCheck(request, model);
+        if (str.equals("0")) {
+            return "redirect:/";
+        }
         String resumeid = request.getParameter("resumesid");
         model.addAttribute("resumesid", resumeid);
         String id = request.getParameter("id");
@@ -566,7 +584,10 @@ public class ResumeController {
 
     @RequestMapping("/editothers")
     public String editotherifos(HttpServletRequest request, Model model) {
-        resumesService.PersoncenterCheck(request, model);
+        String str = resumesService.PersoncenterCheck(request, model);
+        if (str.equals("0")) {
+            return "redirect:/";
+        }
         String resumeid = request.getParameter("resumesid");
         model.addAttribute("resumesid", resumeid);
         String id = request.getParameter("id");
@@ -594,7 +615,10 @@ public class ResumeController {
     @RequestMapping("/uploadpicture")
     public String uploadpicture(HttpServletRequest request, Model model) {
         String defaultImageUrl = "../images/14600639898.jpg";
-        resumesService.PersoncenterCheck(request, model);
+        String str = resumesService.PersoncenterCheck(request, model);
+        if (str.equals("0")) {
+            return "redirect:/";
+        }
         String resumeid = request.getParameter("resumesid");
         model.addAttribute("resumesid", resumeid);
         String id = request.getParameter("id");
@@ -649,7 +673,10 @@ public class ResumeController {
 
     @RequestMapping("/resumemanger")
     public String resumeManager(HttpServletRequest request, Model model) {
-        resumesService.PersoncenterCheck(request, model);
+        String str = resumesService.PersoncenterCheck(request, model);
+        if (str.equals("0")) {
+            return "redirect:/";
+        }
         String resumeid = request.getParameter("resumesid");
         model.addAttribute("resumesid", resumeid);
         String id = request.getParameter("id");
@@ -677,7 +704,10 @@ public class ResumeController {
 
     @RequestMapping("/preview")
     public String preview(HttpServletRequest request, Model model) {
-        resumesService.PersoncenterCheck(request, model);
+        String str = resumesService.PersoncenterCheck(request, model);
+        if (str.equals("0")) {
+            return "redirect:/";
+        }
         String resumeid = request.getParameter("resumesid");
         model.addAttribute("resumesid", resumeid);
 
@@ -692,12 +722,10 @@ public class ResumeController {
                 Recruitinfo recruitinfo = recruitInfoService.selectById(delivery.getRecruitinfoid());
                 if (recruitinfo != null) {
                     model.addAttribute("recruitinfo", recruitinfo);
-                }
-                else {
+                } else {
                     model.addAttribute("recruitinfo", new Recruitinfo());
                 }
-            }
-            else{
+            } else {
                 model.addAttribute("recruitinfo", new Recruitinfo());
             }
         } else {
@@ -730,8 +758,7 @@ public class ResumeController {
         List<Otherinfos> otherinfos = otherInfosService.selectOtherinfosById(Integer.parseInt(resumeid));
         if (otherinfos.size() > 0) {
             model.addAttribute("otherinfos", otherinfos.get(0));
-        }
-        else{
+        } else {
             model.addAttribute("otherinfos", new Otherinfos());
         }
         return "preview";
@@ -739,14 +766,20 @@ public class ResumeController {
 
     @RequestMapping("/changepassword")
     public String changepassword(HttpServletRequest request, Model model) {
-        resumesService.PersoncenterCheck(request, model);
+        String str = resumesService.PersoncenterCheck(request, model);
+        if (str.equals("0")) {
+            return "redirect:/";
+        }
         return "changepassword";
     }
 
     @RequestMapping("/editpwd")
     @ResponseBody
     public String editpwd(HttpServletRequest request, Model model) {
-        resumesService.PersoncenterCheck(request, model);
+        String str = resumesService.PersoncenterCheck(request, model);
+        if (str.equals("0")) {
+            return "redirect:/";
+        }
         String userid = CookieManager.getInstance().getCookie(request, "userid");
         String oldpassword = request.getParameter("oldpassword");
         String password = request.getParameter("password");

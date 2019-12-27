@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="layout/commoncss::common_head(~{::title},~{::style})">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>简历管理</title>
     <style type="text/css">
@@ -33,37 +33,15 @@
             right: 0;
         }
     </style>
-    <script src="/js/jquery-1.8.0.min.js" language="javascript"></script>
-    <script src="/js/layer.min.js" language="javascript"></script>
-    <script src="/js/public.js" language="javascript"></script>
-    <script type="text/javascript" src="/js/setday.js"></script>
-    <script type="text/javascript" src="/js/member_public.js"></script>
-    <script src="/js/calendar.js" type="text/javascript"></script>
-    <script src="/js/ens.js" type="text/javascript"></script>
-    <link href="/css/jscal2.css" type="text/css" rel="stylesheet">
-    <link href="/css/jianli.css" rel="stylesheet"/>
-    <link href="/css/layer.css" rel="stylesheet"/>
+</head>
 
-    <link type="text/css" rel="stylesheet" href="/css/layer.css" id="skinlayercss">
-    <link href="/css/m_css.css" type="text/css" rel="stylesheet">
-    <link href="/css/m_header.css" type="text/css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/base.css" type="text/css">
-    <link rel="stylesheet" href="/css/resumemanage.css" type="text/css">
-    <link rel="stylesheet" href="/css/common.css" type="text/css">
-    <link href="/css/jscal2.css" type="text/css" rel="stylesheet">
-    <script src="/js/calendar.js" type="text/javascript"></script>
-    <script src="/js/ens.js" type="text/javascript"></script>
-    <link type="text/css" rel="stylesheet" href="/css/layer.css">
-    <link href="/css/jianli.css" rel="stylesheet"/>
-    <link href="/css/jscal2.css" type="text/css" rel="stylesheet">
-    <script src="/js/calendar.js" type="text/javascript"></script>
-    <script src="/js/ens.js" type="text/javascript"></script>
-    <link type="text/css" rel="stylesheet" href="/css/layer.css">
-    <link href="/css/jianli.css" rel="stylesheet"/>
-    <link href="/css/layer.css" rel="stylesheet"/>
+<body>
+<!--使用公有js-->
+<div th:replace="layout/commonjs::common_js(~{::script})">
+    <!--每个页面自己的js-->
     <script type="text/javascript">
+        var rooturl='[[${#httpServletRequest.getContextPath()}]]';
         function AddFamily(flag) {
-
             var CW = $('#CW').val();
             var XM = $('#XM').val();
             var CSNY = $('#CSNY').val();
@@ -72,7 +50,7 @@
             var ZW = $('#ZW').val();
             $.ajax({
                 type: "POST",
-                url: "/resume/addfamily?resumesid=[[${resumesid}]]&id=[[${id}]]",
+                url: rooturl+"/resume/addfamily?resumesid=[[${resumesid}]]&id=[[${id}]]",
                 processData: true,
                 data: {
                     CW: CW,
@@ -87,9 +65,9 @@
                     if (Number(data)>0) {
                         alert("保存成功");
                         if (flag == '1') {
-                            window.location.href = '/resume/editfamily?resumesid=[[${resumesid}]]';
+                            window.location.href =rooturl+ '/resume/editfamily?resumesid=[[${resumesid}]]';
                         } else {
-                            window.location.href = '/resume/resumemanger?resumesid=[[${resumesid}]]';
+                            window.location.href =rooturl+ '/resume/resumemanger?resumesid=[[${resumesid}]]';
                         }
                     }
                     else {
@@ -100,16 +78,16 @@
             });
         }
     </script>
-</head>
-<body>
+</div>
+
 <div th:replace="layout/common::ptopbar"></div>
 <div class="clear"></div>
 <div class="resume-container">
     <div class="resume container">
         <div class="resume-hd">
             您的当前位置：
-            <a href="/">首页</a>
-            <a href="/Register/Personcenter">> 个人中心 > </a>
+            <a th:href="@{/}">首页</a>
+            <a th:href="@{/Register/Personcenter}">> 个人中心 > </a>
             <span>简历管理</span>
         </div>
         <div class="resume-bd clearFix">

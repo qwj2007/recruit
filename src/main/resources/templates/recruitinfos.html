@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="layout/commoncss::common_head(~{::title},~{::style})">
     <meta charset="UTF-8">
     <title>岗位列表</title>
-    <link rel="stylesheet" href="/css/global.css">
-    <link rel="stylesheet" href="/css/portal.css">
-    <link rel="stylesheet" href="/css/base.css" type="text/css">
-    <link rel="stylesheet" href="/css/common.css" type="text/css">
-    <link rel="stylesheet" href="/css/recruit.css" type="text/css">
+
     <style type="text/css">
         .yonghu {
             width: 214px;
@@ -17,13 +13,16 @@
             width: 214px;
         }
     </style>
-    <script src="/js/jquery-1.8.0.min.js"></script>
-    <script src="/js/slides.jquery.js"></script>
-    <script type="text/javascript" src="/js/login.js"></script>
+
+
+</head>
+<body>
+<div th:replace="layout/commonjs::common_js(~{::script})">
     <script type="text/javascript">
+        var rooturl='[[${#httpServletRequest.getContextPath()}]]';
         function ShengQing() {
             $.ajax({
-                url: "/resume/applyjob",
+                url: rooturl+"/resume/applyjob",
                 type: "post",
                 data: { recruitid: '[[${recruitinfos.id}]]' },
                 async: false,
@@ -31,7 +30,7 @@
                 success: function (msg) {
                     if (msg == "ok") {
                         alert("申请成功！");
-                        location.href = '/Register/Personcenter?recruitid='+[[${recruitinfos.id}]];
+                        location.href = rooturl+'/Register/Personcenter?recruitid='+[[${recruitinfos.id}]];
                     }
                     else if (msg == "error") {
                         alert("一人只能申请一个岗位！");
@@ -46,14 +45,13 @@
             });
         }
     </script>
-</head>
-<body>
+</div>
 <div th:replace="layout/common::topbar"></div>
 <div class="annnounce-container">
     <div class="annnounce container clearFix">
         <div class="annnounce-left">
             <div class="announce-lfh">
-                您的当前位置：<a href="/">首页 ></a>
+                您的当前位置：<a th:href="@{/}">首页 ></a>
                 <span>岗位信息</span>
             </div>
             <div class="announce-lfc">

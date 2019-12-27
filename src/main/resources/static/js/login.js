@@ -2,9 +2,9 @@ function userlogin() {
     var userName = document.getElementById("username").value; //账号
     var pwd = document.getElementById("userpwd").value; //密码
     var parm = { username: userName, pwd: pwd };
-
+    var url=getContextPath();
     $.ajax({
-        url: "/index/login",
+        url: url+"/index/login",
         type: "post",
         data: parm,
         async: false,
@@ -17,10 +17,10 @@ function userlogin() {
                 //location.href = 'Center/personindex.aspx';
                 //location.href="";
                //location.reload()
-                window.location.href="/Register/Personcenter";
+                window.location.href=url+"/Register/Personcenter";
             }
             else if (msg == "0") {
-                location.href = '/Manage/Index.aspx';
+                location.href = url+'/Manage/Index.aspx';
             }
             else {
                 alert("登录失败！");
@@ -30,13 +30,14 @@ function userlogin() {
 
 }
 function logout() {
+    var url=getContextPath();
     $("#username").val("");
     $("#userpwd").val("");
     //document.getElementById("username").value = ''; //账号
     //document.getElementById("userpwd").value = ''; //密码
 
     $.ajax({
-        url: "/index/loginOut",
+        url: url+"/index/loginOut",
         type: "post",
         //data: parm,
         async: false,
@@ -54,7 +55,7 @@ function logout() {
                 window.location.reload();
             }
             else if (msg == "0") {
-                location.href = 'Manage/Index.aspx';
+                location.href = url+'Manage/Index.aspx';
             }
 
         }

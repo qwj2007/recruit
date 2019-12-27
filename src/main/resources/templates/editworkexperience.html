@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="layout/commoncss::common_head(~{::title},~{::style})">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>简历管理</title>
     <style type="text/css">
@@ -33,29 +33,12 @@
             right: 0;
         }
     </style>
-    <script src="/js/jquery-1.8.0.min.js" language="javascript"></script>
-    <script src="/js/layer.min.js" language="javascript"></script>
-    <script src="/js/public.js" language="javascript"></script>
-    <script type="text/javascript" src="/js/setday.js"></script>
-    <script type="text/javascript" src="/js/member_public.js"></script>
-    <script src="/js/calendar.js" type="text/javascript"></script>
-    <script src="/js/ens.js" type="text/javascript"></script>
-    <link href="/css/jscal2.css" type="text/css" rel="stylesheet">
-    <link href="/css/jianli.css" rel="stylesheet"/>
-    <link href="/css/layer.css" rel="stylesheet"/>
 
-    <link type="text/css" rel="stylesheet" href="/css/layer.css" id="skinlayercss">
-    <link href="/css/m_css.css" type="text/css" rel="stylesheet">
-    <link href="/css/m_header.css" type="text/css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/base.css" type="text/css">
-    <link rel="stylesheet" href="/css/resumemanage.css" type="text/css">
-    <link rel="stylesheet" href="/css/common.css" type="text/css">
-    <link href="/css/jscal2.css" type="text/css" rel="stylesheet">
-    <script src="/js/calendar.js" type="text/javascript"></script>
-    <script src="/js/ens.js" type="text/javascript"></script>
-    <link type="text/css" rel="stylesheet" href="/css/layer.css">
-    <link href="/css/jianli.css" rel="stylesheet"/>
+</head>
+<body>
+<div th:replace="layout/commonjs::common_js(~{::script})">
     <script type="text/javascript">
+        var rooturl='[[${#httpServletRequest.getContextPath()}]]';
         function AddGongZuoJingLi(flag) {
             var kssj = $('#gzsj').val();
             var jssj = $('#jssj').val();
@@ -64,16 +47,16 @@
             var gznr = $('#gznr').val();
             $.ajax({
                 type: "POST",
-                url: "/resume/addwork?resumesid=[[${resumesid}]]&id=[[${id}]]",
+                url: rooturl+"/resume/addwork?resumesid=[[${resumesid}]]&id=[[${id}]]",
                 processData: true,
                 data: {kssj: kssj, jssj: jssj, gzdw: gzdw, zw: zw, gznr: gznr},
                 success: function (data) {
                     if (Number(data) > 0) {
                         alert("保存成功！");
                         if (flag == '1') {
-                            window.location.href = '/resume/editworkexperience?resumesid=[[${resumesid}]]';
+                            window.location.href = rooturl+'/resume/editworkexperience?resumesid=[[${resumesid}]]';
                         } else {
-                             window.location.href = '/resume/resumemanger?resumesid=[[${resumesid}]]';
+                            window.location.href = rooturl+'/resume/resumemanger?resumesid=[[${resumesid}]]';
                         }
 
                     }
@@ -87,11 +70,11 @@
             });
         }
 
-        function del(id,resumesid) {
-            $.post("/resume/deleteWork", {id: id,resumesid:resumesid}, function (data) {
+        function del(id, resumesid) {
+            $.post(rooturl+"/resume/deleteWork", {id: id, resumesid: resumesid}, function (data) {
                 if (data == "1") {
                     alert("删除成功！");
-                    window.location.href = '/resume/editworkexperience?resumesid='+resumesid;
+                    window.location.href = rooturl+'/resume/editworkexperience?resumesid=' + resumesid;
                 }
                 else {
                     alert("删除失败！");
@@ -99,17 +82,15 @@
             });
         }
     </script>
-
-</head>
-<body>
+</div>
 <div th:replace="layout/common::ptopbar"></div>
 <div class="clear"></div>
 <div class="resume-container">
     <div class="resume container">
         <div class="resume-hd">
             您的当前位置：
-            <a href="/">首页</a>
-            <a href="/Register/Personcenter">> 个人中心 > </a>
+            <a th:href="@{/}">首页</a>
+            <a th:href="@{/Register/Personcenter}">> 个人中心 > </a>
             <span>简历管理</span>
         </div>
         <div class="resume-bd clearFix">
@@ -141,8 +122,10 @@
                             <td th:text="${emp.job}"></td>
                             <td class="tl" th:text="${emp.workcontent}"></td>
                             <td>
-                                <a th:href="@{/resume/editworkexperience(resumesid=${emp.resumesid},id=${emp.id})}" th:text="修改"></a>|
-                                <a th:href="@{/resume/deleteWork(resumesid=${emp.resumesid},id=${emp.id})}"  th:text="删除"></a>
+                                <a th:href="@{/resume/editworkexperience(resumesid=${emp.resumesid},id=${emp.id})}"
+                                   th:text="修改"></a>|
+                                <a th:href="@{/resume/deleteWork(resumesid=${emp.resumesid},id=${emp.id})}"
+                                   th:text="删除"></a>
 
                             </td>
                         </tr>

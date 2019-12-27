@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="common_head(title,links)">
+    <meta charset="UTF-8">
+    <title th:replace="${title}"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <link th:href="@{/css/jscal2.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{/css/jianli.css}" rel="stylesheet"/>
+    <link th:href="@{/css/layer.css}" rel="stylesheet"/>    <
+    <link th:href="@{/css/m_css.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{/css/m_header.css}" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/base.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/resumemanage.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/common.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/portal.css}">
+    <link rel="stylesheet" th:href="@{/css/personindex.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login.css}" type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/recruit.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/register.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/imgareaselect.css}" type="text/css">
+    <th:block th:replace="${links}" />
+</head>
+<body>
+
+</body>
+</html>

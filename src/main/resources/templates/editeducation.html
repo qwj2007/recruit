@@ -1,110 +1,83 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="layout/commoncss::common_head(~{::title},~{})">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>简历管理</title>
-    <style type="text/css">
-        .rekit_470b42 {
-            height: 100px;
-            position: relative;
-        }
+</head>
+<style type="text/css">
+    .rekit_470b42 {
+        height: 100px;
+        position: relative;
+    }
 
-        .rekit_86e5c5 {
-            width: 100%;
-            color: #888;
-            font-size: 12px;
-            position: absolute;
-            top: 25px;
-            left: 0;
-            height: 60px;
-        }
+    .rekit_86e5c5 {
+        width: 100%;
+        color: #888;
+        font-size: 12px;
+        position: absolute;
+        top: 25px;
+        left: 0;
+        height: 60px;
+    }
 
-        .rekit_86e5c5 li {
-            width: 100%;
-            height: 30px;
-            line-height: 30px;
-            float: left;
-            overflow: hidden;
-        }
+    .rekit_86e5c5 li {
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        float: left;
+        overflow: hidden;
+    }
 
-        .rekit_e8ddfa {
-            position: absolute;
-            top: 10px;
-            right: 0;
-        }
-    </style>
-    <script src="/js/jquery-1.8.0.min.js" language="javascript"></script>
-    <script src="/js/layer.min.js" language="javascript"></script>
-    <script src="/js/public.js" language="javascript"></script>
-    <script type="text/javascript" src="/js/setday.js"></script>
-    <script type="text/javascript" src="/js/member_public.js"></script>
-    <script src="/js/calendar.js" type="text/javascript"></script>
-    <script src="/js/ens.js" type="text/javascript"></script>
-    <link href="/css/jscal2.css" type="text/css" rel="stylesheet">
-    <link href="/css/jianli.css" rel="stylesheet"/>
-    <link href="/css/layer.css" rel="stylesheet"/>
+    .rekit_e8ddfa {
+        position: absolute;
+        top: 10px;
+        right: 0;
+    }
+</style>
+<div th:replace="layout/commonjs::common_js(~{})"></div>
+<script type="text/javascript">
+    var rooturl=[[${#httpServletRequest.getContextPath()}]];
+    function AddJiaoYuJingLi(flag) {
 
-    <link type="text/css" rel="stylesheet" href="/css/layer.css" id="skinlayercss">
-    <link href="/css/m_css.css" type="text/css" rel="stylesheet">
-    <link href="/css/m_header.css" type="text/css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/base.css" type="text/css">
-    <link rel="stylesheet" href="/css/resumemanage.css" type="text/css">
-    <link rel="stylesheet" href="/css/common.css" type="text/css">
-    <link href="/css/jscal2.css" type="text/css" rel="stylesheet">
-    <script src="/js/calendar.js" type="text/javascript"></script>
-    <script src="/js/ens.js" type="text/javascript"></script>
-    <link type="text/css" rel="stylesheet" href="/css/layer.css">
-    <link href="/css/jianli.css" rel="stylesheet"/>
-    <link href="/css/jscal2.css" type="text/css" rel="stylesheet">
-    <script src="/js/calendar.js" type="text/javascript"></script>
-    <script src="/js/ens.js" type="text/javascript"></script>
-    <link type="text/css" rel="stylesheet" href="/css/layer.css" >
-    <link href="/css/jianli.css" rel="stylesheet"/>
-    <link href="/css/layer.css" rel="stylesheet"/>
-    <script type="text/javascript">
-        function AddJiaoYuJingLi(flag) {
-            debugger;
-            var kssj = $('#gzsj').val();
-            var jssj = $('#jssj').val();
-            var XXMC = $('#XXMC').val();
-            var ZY = $('#ZY').val();
-            var XLID = $('#XLID option:selected').text();
-            var XWID = $('#XWID option:selected').text();
-            var XXXS = $('#XXXS').val();
-            $.ajax({
-                type: "POST",
-                url: "/resume/addEducation?resumesid=[[${resumesid}]]&id=[[${id}]]",
-                processData: true,
-                data: {
-                    kssj: kssj,
-                    jssj: jssj,
-                    xxmc: XXMC,
-                    zy: ZY,
-                    xlid: XLID,
-                    xwid: XWID,
-                    xxxs: XXXS,
-                },
-                success: function (data) {
-                    if (Number(data)>0) {
-                        alert("保存成功！");
-                        if (flag == '1') {
-                            window.location.href = '/resume/editeducation?resumesid=[[${resumesid}]]';
-                        } else {
-                            window.location.href = '/resume/resumemanger?resumesid=[[${resumesid}]]';
-                        }
-                    }
-                    else if (data == "0") {
-                        alert("保存失败！");
-                    }
-                    else {
-                        alert(data);
+        var kssj = $('#gzsj').val();
+        var jssj = $('#jssj').val();
+        var XXMC = $('#XXMC').val();
+        var ZY = $('#ZY').val();
+        var XLID = $('#XLID option:selected').text();
+        var XWID = $('#XWID option:selected').text();
+        var XXXS = $('#XXXS').val();
+        $.ajax({
+            type: "POST",
+            url: rooturl+"/resume/addEducation?resumesid=[[${resumesid}]]&id=[[${id}]]",
+            processData: true,
+            data: {
+                kssj: kssj,
+                jssj: jssj,
+                xxmc: XXMC,
+                zy: ZY,
+                xlid: XLID,
+                xwid: XWID,
+                xxxs: XXXS,
+            },
+            success: function (data) {
+                if (Number(data)>0) {
+                    alert("保存成功！");
+                    if (flag == '1') {
+                        window.location.href = rooturl+'/resume/editeducation?resumesid=[[${resumesid}]]';
+                    } else {
+                        window.location.href = rooturl+'/resume/resumemanger?resumesid=[[${resumesid}]]';
                     }
                 }
-            });
-        }
-    </script>
-
-</head>
+                else if (data == "0") {
+                    alert("保存失败！");
+                }
+                else {
+                    alert(data);
+                }
+            }
+        });
+    }
+</script>
 <body>
 <div th:replace="layout/common::ptopbar"></div>
 <div class="clear"></div>
@@ -112,8 +85,8 @@
     <div class="resume container">
         <div class="resume-hd">
             您的当前位置：
-            <a href="/">首页</a>
-            <a href="/Register/Personcenter">> 个人中心 > </a>
+            <a th:href="@{/}">首页</a>
+            <a th:href="@{/Register/Personcenter}">> 个人中心 > </a>
             <span>简历管理</span>
         </div>
         <div class="resume-bd clearFix">

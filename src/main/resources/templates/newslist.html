@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="layout/commoncss::common_head(~{::title},~{})">
     <meta charset="UTF-8">
     <title>通知公告</title>
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/portal.css">
     <link rel="stylesheet" href="/css/base.css" type="text/css">
     <link rel="stylesheet" href="/css/common.css" type="text/css">
-    <script src="/js/jquery-1.8.0.min.js"></script>
-    <script src="/js/slides.jquery.js"></script>
-    <script type="text/javascript" src="js/login.js"></script>
 </head>
 <body>
+<div th:replace="layout/commonjs::common_js(~{::script})">
+    <script src="/js/slides.jquery.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
+</div>
 <div th:replace="layout/common::topbar"></div>
 <div class="annnounce-container">
     <div class="annnounce container clearFix">
         <div class="annnounce-left">
             <div class="announce-lfh">
-                您的当前位置：<a href="/">首页 > </a>
+                您的当前位置：<a th:href="@{/}">首页 > </a>
                 <span>通知公告</span>
             </div>
             <div class="announce-lfc">

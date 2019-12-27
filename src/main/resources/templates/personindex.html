@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="layout/commoncss::common_head(~{::title},~{})">
     <meta charset="UTF-8">
     <title>招聘个人中心</title>
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
     <title>个人中心</title>
-    <script src="/js/jquery-1.8.0.min.js" language="javascript"></script>
-    <script src="/js/layer.min.js" language="javascript"></script>
-    <script src="/js/public.js" language="javascript"></script>
-    <script type="text/javascript" src="/js/setday.js"></script>
-    <script type="text/javascript" src="/js/member_public.js"></script>
-    <link type="text/css" rel="stylesheet" href="/css/layer.css" id="skinlayercss">
-    <link href="/css/m_css.css" type="text/css" rel="stylesheet">
-    <link href="/css/m_header.css" type="text/css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/base.css" type="text/css">
-    <link rel="stylesheet" href="/css/personindex.css" type="text/css">
+</head>
+
+<body>
+<div th:replace="layout/commonjs::common_js(~{})">
+</div>
+<div>
     <style type="text/css">
         .rekit_470b42 {
             height: 100px;
@@ -46,16 +42,18 @@
         }
     </style>
     <script type="text/javascript">
+        debugger
+        var rooturl='[[${#httpServletRequest.getContextPath()}]]';
         function ChangePassword() {
-            location.href = '/resume/changepassword';
+            location.href = rooturl+'/resume/changepassword';
         }
 
         function Logout() {
-            location.href = '/Manage/Logout.aspx';
+            location.href = rooturl+'/Manage/Logout.aspx';
         }
 
         $(function () {
-            var url = "/resume/getcount";
+            var url = rooturl+"/resume/getcount";
             $.post(url, {}, function (data) {
                 $("#NoticeCount").text("（" + data + "）");
             });
@@ -63,7 +61,7 @@
 
         function editResume() {
             $.ajax({
-                url: "/resume/editresume",
+                url: rooturl+"/resume/editresume",
                 type: "post",
                 data: {},
                 async: false,
@@ -75,8 +73,7 @@
         }
 
     </script>
-</head>
-<body>
+</div>
 <div th:replace="layout/common::ptopbar"></div>
 <div class="clear"></div>
 <div class="personal-center">

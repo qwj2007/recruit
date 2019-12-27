@@ -84,7 +84,7 @@ public class ResumesServiceImpl implements IResumesService {
     public String PersoncenterCheck(HttpServletRequest request, Model model) {
         String userid = CookieManager.getInstance().getCookie(request, "userid");
         if (userid == null) {
-            return "redirect:/";
+            return "0";
         }
         String recruitid = request.getParameter("recruitid");
         if (null != recruitid && !"".equals(recruitid)) {
@@ -149,6 +149,6 @@ public class ResumesServiceImpl implements IResumesService {
         }
         model.addAttribute("resumePicture", resumePicture);
 
-        return "personindex";
+        return "1";
     }
 }

@@ -1,32 +1,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>
-    用户注册
-</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <!--[if IE 6]>
-    <script src="/Scripts/png.js"></script><![endif]-->
-    <link rel="stylesheet" href="/css/global.css" type="text/css">
-    <link rel="stylesheet" href="/css/portal.css" type="text/css">
+<head th:replace="layout/commoncss::common_head(~{::title},~{::style})">
 
-    <title>北京交通运输职业学院</title>
-    <meta name="keywords" content="注册,找工作,人才,工作,求职,招聘,简历,跳槽,高薪,面试,应聘,兼职">
-    <meta name="description" content="北京交通运输职业学院为个人提供最全最新最准确的校区职位招聘信息，为校区提供全方位的人力资源服务，帮助个人求职者快速的找到工作。">
-    <script src="/js/jquery-1.8.0.min.js" type="text/javascript"></script>
 
-    <script src="/js/public.js" type="text/javascript"></script>
-    <script src="/js/reg_ajax.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="/css/css.css" type="text/css">
-    <link rel="stylesheet" href="/css/login.css" type="text/css">
-    <link rel="stylesheet" href="/css/global.css" type="text/css">
-    <link rel="stylesheet" href="/css/portal.css" type="text/css">
-    <link rel="stylesheet" href="/css/base.css" type="text/css">
-    <link rel="stylesheet" href="/css/common.css" type="text/css">
-    <link rel="stylesheet" href="/css/register.css" type="text/css">
-    <script src="/js/register.js"></script>
-    <link href="/css/jscal2.css" type="text/css" rel="stylesheet">
-    <script src="/js/calendar.js" type="text/javascript"></script>
-    <script src="/js/ens.js" type="text/javascript"></script>
-    <style type="text/css"></style>
+    <title>注册</title>
+
     <style type="text/css">
         #stepThreeX {
             color: #fff;
@@ -41,7 +18,12 @@
     </style>
 </head>
 <body>
-<div  th:replace="layout/common::topbar">
+<div th:replace="layout/commonjs::common_js(~{::script})">
+    <!--[if IE 6]>
+    <script src="/Scripts/png.js"></script><![endif]-->
+    <script src="/js/register.js"></script>
+</div>
+<div th:replace="layout/common::topbar">
 </div>
 <div class="register-bd container">
     <div class="register-steps clearFix">

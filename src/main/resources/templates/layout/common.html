@@ -1,59 +1,60 @@
 <!--顶栏-->
 
 
-    <div class="rekit_c5bab6 rekit_7f6040 rekit_908c9e" th:fragment="topbar">
-        <div class="rekit_1e8090 rekit_dc1e22">
-            <div class="rekit_2365cd">
-                <a href="/">
-                    <img src='/uploadfiles/XiTongPeiZhi/b7102993-869c-4308-8536-f752b39a4df0.png' class='png'/>
-                </a>
-                <label>招聘频道</label>
-            </div>
-            <div class="rekit_9b0454">
-                <a href="/" class="">首页</a>
-                <a href="/center/recruitlist" class="">招聘信息</a>
-                <a href="/center/newslist" class="">通知公告</a>
-                <a href="http://www.baidu.com" class="" target="_blank">官网</a>
-            </div>
+<div class="rekit_c5bab6 rekit_7f6040 rekit_908c9e" th:fragment="topbar">
+    <div class="rekit_1e8090 rekit_dc1e22">
+        <div class="rekit_2365cd">
+            <a href="/">
+                <img th:src="@{/uploadfiles/XiTongPeiZhi/b7102993-869c-4308-8536-f752b39a4df0.png}" class='png'/>
+            </a>
+            <label>招聘频道</label>
+        </div>
+        <div class="rekit_9b0454">
+            <a th:href="${#httpServletRequest.getContextPath()}" class="">首页</a>
+            <a th:href="@{/center/recruitlist}" class="">招聘信息</a>
+            <a th:href="@{/center/newslist}" class="">通知公告</a>
+            <a href="http://www.baidu.com" class="" target="_blank">官网</a>
         </div>
     </div>
+</div>
 
 
-    <div class="header" th:fragment="ptopbar">
-        <div class="w950">
-            <div class="logo  fltL">
-                <a href="/" target="_blank" title="返回网站首页">
-                    <img alt="" src="/images/14602126134.PNG">
-                </a>
-            </div>
-            <div class="top_right_re fltR">
-                <div class="top_right">
-                    <div class="header_seach_State fltR">
-                        你好!<span class="header_seach_State_name" th:text="${resumes.truename}"></span>
-                        <span class="user_m_line"  style="font-size:18px"></span>
-                        <!--
-                        <a href="javascript:void(0)" onclick="logout()" class="header_seach_State_a">退出</a>
-                        -->
-                        <span class="user_m_line">|</span>
-                        <a href="/" title="返回网站首页" class="user_m_fanh">返回首页</a>
-                    </div>
+<div class="header" th:fragment="ptopbar">
+    <div class="w950">
+        <div class="logo  fltL">
+            <a th:href="@{/}" target="_blank" title="返回网站首页" class="">
+                <img alt="" th:src="@{/images/14602126134.PNG}">
+            </a>
+        </div>
+        <div class="top_right_re fltR">
+            <div class="top_right">
+                <div class="header_seach_State fltR">
+                    你好!<span class="header_seach_State_name" th:text="${resumes.truename}"></span>
+                    <span class="user_m_line" style="font-size:18px"></span>
+                    <!--
+                    <a href="javascript:void(0)" onclick="logout()" class="header_seach_State_a">退出</a>
+                    -->
+                    <span class="user_m_line">|</span>
+                    <a th:href="@{/}" title="返回网站首页" class="user_m_fanh">返回首页</a>
+
                 </div>
             </div>
         </div>
     </div>
-
+</div>
 
 
 <nav th:fragment="right">
-    <script type="text/javascript">
+    <script  th:inline="javascript">
+        var urls = [[${#httpServletRequest.getContextPath()}]];
         $(function () {
-            var url = "/resume/getcount";
+            url = urls + "/resume/getcount";
             $.post(url, {}, function (data) {
                 $("#count").text("（" + data + "）");
             });
         });
         function ChangePassword() {
-            location.href = '/resume/changepassword';
+            location.href =urls+ '/resume/changepassword';
         }
     </script>
     <div class="member" id="login" th:if="${showLogin}==0">
@@ -81,10 +82,10 @@
             </div>
             <div class="rekit_e3396e" style="margin-top: 20px;">
                 <ol style="border: 0">
-                    <li style="width: 50%; float: left; text-align: center;"><a href="/center/register"  class="hover">注册新用户</a>
+                    <li style="width: 50%; float: left; text-align: center;"><a th:href="@{/center/register}" class="hover">注册新用户</a>
                     </li>
                     <li style="width: 50%; float: left; text-align: center;">
-                        <a href="/password/retrievePassword" class="hover">找回密码</a>
+                        <a th:href="@{/password/retrievePassword}" class="hover">找回密码</a>
                     </li>
                 </ol>
             </div>
@@ -98,7 +99,7 @@
                     <img alt="" width="70" height="70" th:src="${photourl}">
                 </div>
                 <div class="port-rt">
-                    <span class="name" th:text="${username}" ></span>
+                    <span class="name" th:text="${username}"></span>
                     <span>HR 通知 <span class="orange" id="count">（11）</span></span>
                 </div>
             </div>
@@ -125,7 +126,7 @@
             </div>
             <div class="rekit_e8ddfa">
                 <a href="http://bszs.conac.cn/sitename?method=show&id=09ECC5E241486724E053022819AC98EE" target="_blank">
-                    <img src="/images/blue.png"/></a>
+                    <img th:src="@{/images/blue.png}"/></a>
             </div>
         </div>
     </div>
@@ -137,37 +138,37 @@
         <ul>
             <li>
 
-                <img  th:src="@{'../images/resume/'+${resumePicture.Pic_personalInfo}}"/>
-                <a href="/resume/editresume">个人信息</a>
+                <img th:src="@{'../images/resume/'+${resumePicture.Pic_personalInfo}}"/>
+                <a th:href="@{/resume/editresume}">个人信息</a>
             </li>
             <li>
-                <img  th:src="@{'../images/resume/'+${resumePicture.Pic_work}}"/>
+                <img th:src="@{'../images/resume/'+${resumePicture.Pic_work}}"/>
                 <a th:href="@{/resume/editworkexperience(resumesid=${resumes.id})}">工作（实习）经历</a>
 
             </li>
             <li>
-                <img  th:src="@{'../images/resume/'+${resumePicture.Pic_education}}"/>
+                <img th:src="@{'../images/resume/'+${resumePicture.Pic_education}}"/>
                 <a th:href="@{/resume/editeducation(resumesid=${resumes.id})}">教育经历</a>
             </li>
             <li>
-                <img  th:src="@{'../images/resume/'+${resumePicture.Pic_train}}"/>
+                <img th:src="@{'../images/resume/'+${resumePicture.Pic_train}}"/>
                 <a th:href="@{/resume/editetrain(resumesid=${resumes.id})}">培训经历</a>
             </li>
             <li>
-                <img  th:src="@{'../images/resume/'+${resumePicture.Pic_certificate}}"/>
+                <img th:src="@{'../images/resume/'+${resumePicture.Pic_certificate}}"/>
 
                 <a th:href="@{/resume/editcetificate(resumesid=${resumes.id})}">证书</a>
             </li>
             <li>
-                <img  th:src="@{'../images/resume/'+${resumePicture.Pic_family}}"/>
+                <img th:src="@{'../images/resume/'+${resumePicture.Pic_family}}"/>
                 <a th:href="@{/resume/editfamily(resumesid=${resumes.id})}">家族成员及社会关系</a>
             </li>
             <li>
-                <img  th:src="@{'../images/resume/'+${resumePicture.Pic_photo}}"/>
+                <img th:src="@{'../images/resume/'+${resumePicture.Pic_photo}}"/>
                 <a th:href="@{/resume/uploadpicture(resumesid=${resumes.id})}">照片</a>
             </li>
             <li>
-                <img  th:src="@{'../images/resume/'+${resumePicture.Pic_ohter}}"/>
+                <img th:src="@{'../images/resume/'+${resumePicture.Pic_ohter}}"/>
                 <a th:href="@{/resume/editothers(resumesid=${resumes.id})}">补充内容</a>
             </li>
         </ul>
@@ -176,11 +177,11 @@
         <h5>图例说明</h5>
         <ul class="clearFix">
             <li>
-                <img src="/images/resume/duihao.png" alt="" width="16" height="16">
+                <img th:src="@{/images/resume/duihao.png}" alt="" width="16" height="16">
                 <span>已填写</span>
             </li>
             <li>
-                <img src="/images/resume/Illus02.png" alt="" width="16" height="16">
+                <img th:src="@{/images/resume/Illus02.png}" alt="" width="16" height="16">
                 <span>未填写</span>
             </li>
         </ul>

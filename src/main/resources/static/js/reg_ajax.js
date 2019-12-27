@@ -1,6 +1,6 @@
 ﻿
 
-
+var rooturl=getContextPath();
 function checkreg(type) {
     $(".reg_cur").removeClass("reg_cur");
     $("#reg" + type).addClass("reg_cur");

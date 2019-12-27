@@ -136,6 +136,11 @@ public class RegisterController {
         }
         return "personindex";
         */
-        return  resumesService.PersoncenterCheck(request,model);
+        String str=  resumesService.PersoncenterCheck(request,model);
+        if(str.equals("0")){
+            return "redirect:/";}
+        else{
+            return "personindex";
+        }
     }
 }
