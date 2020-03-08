@@ -17,4 +17,10 @@ public interface IRecruitInfoService {
      Recruitinfo  selectById(@Param("id") Integer id);
 
      List<Recruitinfo>  selectAllRecruitInfos();
+
+     Integer updateByPrimaryKeySelective(Recruitinfo record);
+
+     Integer insertSelective(Recruitinfo recruitinfo);
+
+    Integer updateBatch(List<Integer> ids);
 }

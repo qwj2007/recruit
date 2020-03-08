@@ -1,9 +1,9 @@
 package com.recruit.web.pojo;
 
-import java.util.Date;
+
 
 public class Recruitinfo {
-    private Integer id;
+    private Integer id=0;
 
     private String title;
 
@@ -71,18 +71,5 @@ public class Recruitinfo {
 
     public void setIsactive(Boolean isactive) {
         this.isactive = isactive;
-    }
-
-    @Override
-    public String toString() {
-        return "Recruitinfo{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", contents='" + contents + '\'' +
-                ", endtime=" + endtime +
-                ", begintime=" + begintime +
-                ", departmentname='" + departmentname + '\'' +
-                ", isactive=" + isactive +
-                '}';
     }
 }

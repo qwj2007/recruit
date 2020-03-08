@@ -20,27 +20,27 @@
         <label class="layui-form-label">标题</label>
         <div class="layui-input-block">
             <input type="text" name="title" class="layui-input UserName" id="title"
-                   placeholder="请输入标题">
+                   placeholder="请输入标题" th:value="${recruitinfo.title}"/>
+            <input type="hidden" id="id" th:value="${recruitinfo.id}"/>
         </div>
     </div>
     <div class="layui-form-item layui-row layui-col-xs12">
         <label class="layui-form-label">开始时间</label>
         <div class="layui-input-block">
-
-            <input type="text" class="layui-input" id="begintime" placeholder="yyyy-MM-dd">
+            <input type="text" class="layui-input" id="begintime" placeholder="yyyy-MM-dd" th:value="${recruitinfo.begintime}">
         </div>
     </div>
     <div class="layui-form-item layui-row layui-col-xs12">
         <label class="layui-form-label">结束时间</label>
         <div class="layui-input-block">
 
-            <input type="text" class="layui-input" id="endtime" placeholder="yyyy-MM-dd">
+            <input type="text" class="layui-input" id="endtime" placeholder="yyyy-MM-dd" th:value="${recruitinfo.endtime}">
         </div>
     </div>
     <div class="layui-form-item layui-row layui-col-xs12">
         <label class="layui-form-label">内容</label>
         <div class="layui-input-block">
-            <textarea placeholder="请输入招聘内容" name="contents" class="layui-textarea Remark"></textarea>
+            <textarea placeholder="请输入招聘内容" name="contents" id="contents" class="layui-textarea Remark" th:text="${recruitinfo.contents}"></textarea>
         </div>
     </div>
     <div class="layui-form-item layui-row layui-col-xs12">

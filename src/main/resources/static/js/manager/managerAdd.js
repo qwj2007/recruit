@@ -14,47 +14,38 @@ layui.use(['form', 'layer','laydate'], function () {
         ,format: 'yyyy-MM-dd'
     });
     form.on("submit(addManager)", function (data) {
+
         //获取防伪标记
         $.ajax({
             type: 'POST',
-            url:urls+ '/manager/edit/',
+            url:urls+ '/manager/editrecruit',
             data: {
-                Id: $("#Id").val(),  //主键
-                UserName: $(".UserName").val(), 
-                RoleId: $(".RoleId").val(),  
-                NickName: $(".NickName").val(),  
-                Mobile: $(".Mobile").val(), 
-                Email: $(".Email").val(), 
-                IsLock: $(".IsLock").get(0).checked,  
-                Remark: $(".Remark").val()
+                id: $("#id").val(),//主键
+                title: $("#title").val(),
+                begintime: $("#begintime").val(),
+                endtime: $("#endtime").val(),
+                contents: $("#contents").val()
             },
             dataType: "json",
             headers: {
-                "X-CSRF-TOKEN-yilezhu": $("input[name='AntiforgeryKey_yilezhu']").val()
+               // "X-CSRF-TOKEN": $("input[name='AntiforgeryKey']").val()
             },
             success: function (res) {//res为相应体,function为回调函数
                 var alertIndex;
-                if (res.ResultCode === 0) {
-                     alertIndex = layer.alert(res.ResultMsg, { icon: 1 }, function () {
-                        layer.closeAll("iframe");
-                        //刷新父页面
-                        parent.location.reload();
-                        top.layer.close(alertIndex);
-                    });
-                    //$("#res").click();//调用重置按钮将表单数据清空
-                } else if (res.ResultCode === 102) {
-                    alertIndex = layer.alert(res.ResultMsg, { icon: 5 }, function () {
+                if(res.resultCode=="1"||res.resultCode=="0"){
+                    alertIndex = layer.alert(res.msg, { icon: 1 }, function () {
                         layer.closeAll("iframe");
                         //刷新父页面
                         parent.location.reload();
                         top.layer.close(alertIndex);
                     });
                 }
-                else {
-                    layer.alert(res.ResultMsg, { icon: 5 });
+                else{
+                    layer.alert("操作异常", { icon: 5 });
                 }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
+                debugger
                 layer.alert('操作失败！！！' + XMLHttpRequest.status + "|" + XMLHttpRequest.readyState + "|" + textStatus, { icon: 5 });
             }
         });

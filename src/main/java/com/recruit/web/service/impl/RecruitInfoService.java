@@ -37,5 +37,20 @@ public class RecruitInfoService implements IRecruitInfoService {
         return list;
     }
 
+    @Override
+    public Integer updateByPrimaryKeySelective(Recruitinfo record) {
+      return   recruitinfoMapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public Integer insertSelective(Recruitinfo recruitinfo) {
+        return recruitinfoMapper.insertSelective(recruitinfo);
+    }
+
+    @Override
+    public Integer updateBatch(List<Integer> ids) {
+        return recruitinfoMapper.updateBatch(ids);
+    }
+
 
 }

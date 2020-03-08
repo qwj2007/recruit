@@ -47,31 +47,22 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
 
     //添加用户
     function addManager(edit) {
-        var urls=getContextPath();
-debugger
+        var urls=getContextPath()+"/manager/edit";
         var tit = "添加招聘信息";
         if (edit) {
             tit = "编辑招聘信息";
+            urls+="?id="+edit.id;
+        }
+        else{
+            urls+="?id=0";
         }
         var index = layui.layer.open({
             title: tit,
             type: 2,
             anim: 1,
             area: ['500px', '90%'],
-            content: urls+"/manager/edit/",
+            content: urls,
             success: function (layero, index) {
-                var body = layui.layer.getChildFrame('body', index);
-                if (edit) {
-                    body.find("#Id").val(edit.Id);
-                    body.find(".UserName").val(edit.UserName);
-                    body.find(".NickName").val(edit.NickName);
-                    body.find(".RoleId").val(edit.RoleId);
-                    body.find(".Mobile").val(edit.Mobile);
-                    body.find(".Email").val(edit.Email);
-                    body.find("input:checkbox[name='IsLock']").prop("checked", edit.IsLock);
-                    body.find(".Remark").text(edit.Remark);
-                    form.render();
-                }
             }
         });
     }
@@ -83,14 +74,14 @@ debugger
     $(".delAll_btn").click(function () {
         var checkStatus = table.checkStatus('managerListTable'),
             data = checkStatus.data,
-            managerId = [];
+            ids = [];
         if (data.length > 0) {
             for (var i in data) {
-                managerId.push(data[i].Id);
+                ids.push(data[i].id);
             }
-            layer.confirm('确定删除选中的用户？', { icon: 3, title: '提示信息' }, function (index) {
+            layer.confirm('确定删除选中的招聘信息么？', { icon: 3, title: '提示信息' }, function (index) {
                 //获取防伪标记
-                del(managerId);
+                del(ids.join(','));
             });
         } else {
             layer.msg("请选择需要删除的用户");
@@ -105,8 +96,8 @@ debugger
         if (layEvent === 'edit') { //编辑
             addManager(data);
         } else if (layEvent === 'del') { //删除
-            layer.confirm('确定删除此用户？', { icon: 3, title: '提示信息' }, function (index) {
-                del(data.Id);
+            layer.confirm('确定删除此招聘信息？', { icon: 3, title: '提示信息' }, function (index) {
+                del(data.id);
             });
         }
     });
@@ -134,18 +125,19 @@ debugger
         });
     });
 
-    function del(managerId) {
+    function del(id) {
+        var urls=getContextPath();
         $.ajax({
             type: 'POST',
-            url: '/Manager/Delete/',
-            data: { managerId: managerId },
+            url: urls+'/manager/deleteRecurit/',
+            data: { id: id },
             dataType: "json",
             headers: {
-                "X-CSRF-TOKEN-yilezhu": $("input[name='AntiforgeryKey_yilezhu']").val()
+                //"X-CSRF-TOKEN-yilezhu": $("input[name='AntiforgeryKey_yilezhu']").val()
             },
             success: function (data) {//res为相应体,function为回调函数
-                layer.msg(data.ResultMsg, {
-                    time: 2000 //20s后自动关闭
+                layer.msg(data.msg, {
+                    time: 1000 //1s后自动关闭
                 }, function () {
                     tableIns.reload();
                     layer.close(index);

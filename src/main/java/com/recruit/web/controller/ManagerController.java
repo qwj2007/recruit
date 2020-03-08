@@ -18,8 +18,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -68,23 +70,91 @@ public class ManagerController {
 
         return "manager/recruitlist";
     }
+
     @RequestMapping("edit")
-    public String editRecruit()
-    {
+    public String editRecruitPage(HttpServletRequest request, Model model) {
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        Recruitinfo recruitinfo = recruitInfoService.selectById(id);
+        if (recruitinfo == null) {
+            recruitinfo = new Recruitinfo();
+        }
+        model.addAttribute("recruitinfo", recruitinfo);
         return "manager/recruitedit";
     }
+
+    @RequestMapping("editrecruit")
+    @ResponseBody
+    public String editRecruitInfo(HttpServletRequest request) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String title = request.getParameter("title");
+        String contents = request.getParameter("contents");
+        String begintime = request.getParameter("begintime");
+        String endtime = request.getParameter("endtime");
+        Recruitinfo recruitinfo = new Recruitinfo();
+        recruitinfo.setBegintime(begintime);
+        recruitinfo.setContents(contents);
+        recruitinfo.setEndtime(endtime);
+        recruitinfo.setIsactive(true);
+        recruitinfo.setTitle(title);
+        recruitinfo.setId(id);
+        Integer count = 0;
+        ResultMsg msg = new ResultMsg();
+        if (id > 0) {
+            count = recruitInfoService.updateByPrimaryKeySelective(recruitinfo);
+
+
+        } else {
+            count = recruitInfoService.insertSelective(recruitinfo);
+        }
+        if (count > 0) {
+            msg.setMsg("操作成功");
+            msg.setResultCode("1");
+
+        } else {
+            msg.setMsg("操作失败");
+            msg.setResultCode("0");
+        }
+        String jsons = JSON.toJSONString(msg);
+        return jsons;
+    }
+
+    @ResponseBody
+    @RequestMapping("deleteRecurit")
+    public String deleteRecurit(HttpServletRequest request) {
+
+        String ids=request.getParameter("id");
+        List<Integer> idss=new ArrayList<>();
+        for (String idd :ids.split(",")){
+             idss.add(Integer.parseInt(idd));
+        }
+        /*
+        Recruitinfo model = recruitInfoService.selectById(id);
+        model.setIsactive(false);
+        Integer i = recruitInfoService.updateByPrimaryKeySelective(model);*/
+      Integer i=  recruitInfoService.updateBatch(idss);
+        ResultMsg msg = new ResultMsg();
+        if (i > 0) {
+            msg.setMsg("操作成功");
+            msg.setResultCode("1");
+        } else {
+            msg.setMsg("操作失败");
+            msg.setResultCode("0");
+        }
+        return JSON.toJSONString(msg);
+    }
+
+
     @RequestMapping("loadRecruitData")
     @ResponseBody
-    public String loadRecruitList()
-    {
+    public String loadRecruitList() {
         List<Recruitinfo> list = recruitInfoService.selectAllRecruitInfos();
-        TableDataModel tableDataModel=new TableDataModel();
+        TableDataModel tableDataModel = new TableDataModel();
         tableDataModel.setCount(list.size());
         tableDataModel.setMsg("操作成功");
         tableDataModel.setData(list);
-        String jsons=JSON.toJSONString(tableDataModel);
+        String jsons = JSON.toJSONString(tableDataModel);
         System.out.println(jsons);
-        return  jsons;
+        return jsons;
     }
 
     @RequestMapping("newsinfo")
