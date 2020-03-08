@@ -15,4 +15,5 @@ import java.util.List;
 public interface RecruitinfoMapper {
     List<Recruitinfo> selectRecruitInfos();
     Recruitinfo selectById(@Param("id") Integer id);
+    List<Recruitinfo> selectAllRecruitInfos();
 }

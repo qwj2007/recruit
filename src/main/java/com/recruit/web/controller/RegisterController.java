@@ -116,26 +116,6 @@ public class RegisterController {
 
     @RequestMapping("/Personcenter")
     public String PersonIndex(HttpServletRequest request, Model model) {
-        /*
-        String userid = CookieManager.getInstance().getCookie(request, "userid");
-        if (userid == null) {
-            return "redirect:/";
-        }
-        String recruitid = request.getParameter("recruitid");
-        if(null!=recruitid&&!"".equals(recruitid))
-        {
-            Recruitinfo recruitinfo = recruitInfoService.selectById(Integer.parseInt(recruitid));
-            model.addAttribute("recruitinfo",recruitinfo);
-        }
-        Resumes resumes = resumesService.selctResumeByUserId(userid);
-        model.addAttribute("resumes", resumes);
-
-        Userinfo userinfo = userinfoService.selectByPrimaryKey(Integer.parseInt(userid));
-        if (userinfo != null) {
-            model.addAttribute("userinfo", userinfo);
-        }
-        return "personindex";
-        */
         String str=  resumesService.PersoncenterCheck(request,model);
         if(str.equals("0")){
             return "redirect:/";}
@@ -143,4 +123,6 @@ public class RegisterController {
             return "personindex";
         }
     }
+
+
 }

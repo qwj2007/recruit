@@ -9,9 +9,9 @@ public class Recruitinfo {
 
     private String contents;
 
-    private Date endtime;
+    private String endtime;
 
-    private Date begintime;
+    private String begintime;
 
     private String departmentname;
 
@@ -41,19 +41,19 @@ public class Recruitinfo {
         this.contents = contents == null ? null : contents.trim();
     }
 
-    public Date getEndtime() {
+    public String getEndtime() {
         return endtime;
     }
 
-    public void setEndtime(Date endtime) {
+    public void setEndtime(String endtime) {
         this.endtime = endtime;
     }
 
-    public Date getBegintime() {
+    public String getBegintime() {
         return begintime;
     }
 
-    public void setBegintime(Date begintime) {
+    public void setBegintime(String begintime) {
         this.begintime = begintime;
     }
 

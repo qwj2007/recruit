@@ -1,6 +1,3 @@
-<!--顶栏-->
-
-
 <div class="rekit_c5bab6 rekit_7f6040 rekit_908c9e" th:fragment="topbar">
     <div class="rekit_1e8090 rekit_dc1e22">
         <div class="rekit_2365cd">
@@ -10,7 +7,7 @@
             <label>招聘频道</label>
         </div>
         <div class="rekit_9b0454">
-            <a th:href="${#httpServletRequest.getContextPath()}" class="">首页</a>
+            <a th:href="${#httpServletRequest.getContextPath()+'/'}" class="">首页</a>
             <a th:href="@{/center/recruitlist}" class="">招聘信息</a>
             <a th:href="@{/center/newslist}" class="">通知公告</a>
             <a href="http://www.baidu.com" class="" target="_blank">官网</a>
@@ -45,6 +42,7 @@
 
 
 <nav th:fragment="right">
+
     <script  th:inline="javascript">
         var urls = [[${#httpServletRequest.getContextPath()}]];
         $(function () {

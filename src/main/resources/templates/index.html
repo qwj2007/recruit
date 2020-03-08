@@ -85,7 +85,7 @@
         </div>
         <div class="rekit_b7ce55" id="joblist" th:each="emp:${recruitinfos}">
             <li class="">
-                <p><b th:text="${#dates.format(emp.begintime,'yyyy-MM-dd')}"></b></p>
+                <p><b th:text="${emp.begintime}"></b></p>
 
                 <a th:href="@{/center/recruitinfos(id=${emp.id})}" th:text="${emp.title}">
                     dfsdfdsf

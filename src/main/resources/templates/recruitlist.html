@@ -30,7 +30,7 @@
                         <ul class="clearFix">
 
                                 <li th:each="emp:${recruitinfos}">
-                                    <p><b th:text="${#dates.format(emp.begintime,'yyyy-MM-dd')}"></b></p>
+                                    <p><b th:text="${emp.begintime}"></b></p>
 
                                     <a th:href="@{/center/recruitinfos(id=${emp.id})}" th:text="${emp.title}"></a>
                                 </li>

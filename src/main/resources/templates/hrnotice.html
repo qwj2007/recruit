@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/commoncss::common_head(~{::title},~{})">
+    <meta charset="UTF-8">
+    <title>HR通知</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/portal.css">
+    <link rel="stylesheet" href="/css/base.css" type="text/css">
+    <link rel="stylesheet" href="/css/common.css" type="text/css">
+    <link rel="stylesheet" href="/css/announcelist.css" type="text/css">
+</head>
+<body>
+<div th:replace="layout/commonjs::common_js(~{::script})">
+    <script src="/js/slides.jquery.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
+
+
+</div>
+<div th:replace="layout/common::topbar"></div>
+<div class="annnounce-container">
+    <div class="annnounce container clearFix">
+        <div class="annnounce-left">
+            <div class="announce-lfh">
+                您的当前位置：<a th:href="@{/}">首页 > </a>
+                <span>HR通知</span>
+            </div>
+            <div class="announce-lfc">
+                <div class="announce-lfctit">
+                    <h5>HR通知</h5>
+                </div>
+                <div class="announce-lfcli">
+                    <ul class="clearFix">
+                        <!--信息列表-->
+                        <ul class="clearFix">
+                            <li th:each="emp:${newslist}">
+                                <p><b th:text="${#dates.format(emp.createtime,'yyyy-MM-dd')}"></b></p>
+                                <!--  <a href="/Center/Announcedetails.aspx?id=3ce509ce-dcfe-40ee-ae72-1a92589ad5e4">
+                                      <span th:text="${emp.title}">2232323232323</span>
+                                  </a>-->
+                                <a th:href="@{/center/newsinfo(id=${emp.id})}" th:text="${emp.title}"></a>
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="announce-right" style="width: 250px">
+            <div th:replace="layout/common::right"></div>
+        </div>
+    </div>
+</div>
+<div th:replace="layout/common::bottombar"></div>
+</div>
+</body>
+</html>

@@ -10,17 +10,12 @@ function userlogin() {
         async: false,
         dataType: "text",
         success: function (msg) {
+            debugger
             if (Number(msg)>0) {
-                //$('#login').hide();
-                //$('#show').show();
-                //$('#liuser').html("您好！" + userName);
-                //location.href = 'Center/personindex.aspx';
-                //location.href="";
-               //location.reload()
                 window.location.href=url+"/Register/Personcenter";
             }
-            else if (msg == "0") {
-                location.href = url+'/Manage/Index.aspx';
+            else if (msg == "manager") {
+                location.href = url+'/manager/index';
             }
             else {
                 alert("登录失败！");

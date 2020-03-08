@@ -2,17 +2,11 @@ package com.recruit.web.controller;
 
 
 import com.recruit.web.common.LoginUtil;
-import com.recruit.web.pojo.News;
-import com.recruit.web.pojo.Recruitinfo;
-import com.recruit.web.pojo.Teacher;
-import com.recruit.web.pojo.Userinfo;
-import com.recruit.web.service.INewsService;
-import com.recruit.web.service.IRecruitInfoService;
-import com.recruit.web.service.ITeacherService;
-import com.recruit.web.service.IUserinfoService;
-import com.recruit.web.util.CookieManager;
+import com.recruit.web.pojo.*;
+import com.recruit.web.service.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.expression.spel.ast.NullLiteral;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +16,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+
 
 /**
  * 作者：qiwj
@@ -37,6 +32,8 @@ public class IndexController {
     private INewsService newsService;
     @Autowired
     private IUserinfoService userinfoService;
+    @Autowired
+    private IEmployeeService employeeService;
 
     @RequestMapping("/")
     public String GetInfos(Model model, HttpServletRequest request) {
@@ -79,6 +76,21 @@ public class IndexController {
             // CookieManager.getInstance().saveCookie(response, "userid",userinfo.getId().toString());
             // CookieManager.getInstance().saveCookie(response, "username",userinfo.getUsername().toString());
             result = userinfo.getId().toString();
+        } else {
+            Employee employee = employeeService.getEmployeeByUserIdPwd(username.trim(), pwd.trim());
+            if (employee != null) {
+                Cookie cookie = new Cookie("employeeid", employee.getUserid());
+                cookie.setPath("/");
+                cookie.setDomain(request.getServerName());
+                cookie.setMaxAge(-1);//-1表示关闭浏览器，cookie就失效。
+                response.addCookie(cookie);
+                cookie = new Cookie("employeename", employee.getTruename());
+                cookie.setDomain(request.getServerName());
+                cookie.setPath("/");
+                cookie.setMaxAge(-1);
+                response.addCookie(cookie);
+                result = "manager";
+            }
         }
         return result;
     }
@@ -86,12 +98,13 @@ public class IndexController {
     @RequestMapping("index/loginOut")
     @ResponseBody
     public String Loginout(HttpServletRequest request, HttpServletResponse response) {
-       String str= LoginUtil.LoginOut(request,response);
+        String str = LoginUtil.LoginOut(request, response);
         return str;
     }
+
     @RequestMapping("index/outlogin")
     public String OutLogin(HttpServletRequest request, HttpServletResponse response) {
-        LoginUtil.LoginOut(request,response);
+        LoginUtil.LoginOut(request, response);
         return "redirect:/";
     }
 }

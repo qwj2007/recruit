@@ -15,4 +15,6 @@ import java.util.List;
 public interface IRecruitInfoService {
      List<Recruitinfo> selectRecruitInfos();
      Recruitinfo  selectById(@Param("id") Integer id);
+
+     List<Recruitinfo>  selectAllRecruitInfos();
 }
