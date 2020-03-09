@@ -2,6 +2,7 @@ package com.recruit.web.mapper.recruit;
 
 import com.recruit.web.pojo.News;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface NewsMapper {
     int updateByPrimaryKey(News record);
 
     List<News> selectNews();
+    List<News>  selectNewInfos();
+    Integer updateBatch(@Param("id") List<Integer> id);
 }

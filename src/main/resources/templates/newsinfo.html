@@ -3,7 +3,7 @@
 <head th:replace="layout/commoncss::common_head(~{::title},~{::link})">
     <meta charset="UTF-8">
     <title>通知公告</title>
-    <link rel="stylesheet" href="/css/announcelist.css" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/announcelist.css}" type="text/css">
 </head>
 <body>
 <div th:replace="layout/common::topbar"></div>

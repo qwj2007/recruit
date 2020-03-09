@@ -27,4 +27,29 @@ public class NewsServiceImpl implements INewsService {
         return newsMapper.selectByPrimaryKey(id);
     }
 
+    @Override
+    public List<News> selectNewInfos() {
+        return newsMapper.selectNewInfos();
+    }
+
+    @Override
+    public int insertSelective(News record) {
+        return newsMapper.insertSelective(record);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(News record) {
+        return newsMapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public int updateByPrimaryKey(News record) {
+        return newsMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public Integer updateBatch(List<Integer> id) {
+        return newsMapper.updateBatch(id);
+    }
+
 }

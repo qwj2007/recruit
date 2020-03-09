@@ -129,4 +129,17 @@
   <select id="selectNews" resultMap="BaseResultMap" resultType="Map">
     select * from news where isactive=1 limit 5
   </select>
+
+  <select id="selectNewInfos" resultMap="BaseResultMap" resultType="Map">
+    select * from news where isactive=1
+  </select>
+
+  <update id="updateBatch">
+    update news
+    set isactive = 0
+    where id in
+    <foreach collection="id" open="(" close=")" separator="," item="id" index="i">
+      #{id}
+    </foreach>
+  </update>
 </mapper>
