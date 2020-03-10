@@ -3,6 +3,8 @@ package com.recruit.web.mapper.recruit;
 import com.recruit.web.pojo.Resumes;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface ResumesMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -17,4 +19,6 @@ public interface ResumesMapper {
     int updateByPrimaryKey(Resumes record);
 
     Resumes selctResumeByUserId(@Param("userid") String userid);
+
+    List<Resumes> selectResumeAll();
 }

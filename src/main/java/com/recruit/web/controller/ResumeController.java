@@ -704,9 +704,13 @@ public class ResumeController {
 
     @RequestMapping("/preview")
     public String preview(HttpServletRequest request, Model model) {
-        String str = resumesService.PersoncenterCheck(request, model);
-        if (str.equals("0")) {
-            return "redirect:/";
+        String type = request.getParameter("type");
+
+        if (type == null || "".equals(type)) {
+            String str = resumesService.PersoncenterCheck(request, model);
+            if (str.equals("0")) {
+                return "redirect:/";
+            }
         }
         String resumeid = request.getParameter("resumesid");
         model.addAttribute("resumesid", resumeid);
@@ -807,4 +811,6 @@ public class ResumeController {
         return "NO";
 
     }
+
+
 }

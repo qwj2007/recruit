@@ -151,4 +151,9 @@ public class ResumesServiceImpl implements IResumesService {
 
         return "1";
     }
+
+    @Override
+    public List<Resumes> selectResumeAll() {
+        return resumesMapper.selectResumeAll();
+    }
 }

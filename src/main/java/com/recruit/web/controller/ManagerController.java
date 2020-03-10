@@ -4,9 +4,8 @@ package com.recruit.web.controller;
 import com.alibaba.fastjson.JSON;
 import com.recruit.web.common.LoginUtil;
 import com.recruit.web.pojo.*;
-import com.recruit.web.service.IMenuService;
-import com.recruit.web.service.INewsService;
-import com.recruit.web.service.IRecruitInfoService;
+import com.recruit.web.service.*;
+import com.recruit.web.service.impl.DeliveryStatusServiceImpl;
 import com.recruit.web.util.ClientIp;
 import com.recruit.web.util.CookieManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +38,10 @@ public class ManagerController {
     private IRecruitInfoService recruitInfoService;
     @Autowired
     private INewsService newsService;
+    @Autowired
+    private IResumesService resumesService;
+    @Autowired
+    private IDeliveryStatusService deliveryStatusService;
 
     @RequestMapping("/index")
     public String Index(HttpServletRequest request, Model model) {
@@ -147,7 +150,7 @@ public class ManagerController {
 
     @ResponseBody
     @RequestMapping("deleteNews")
-    public String deleteNews(HttpServletRequest request){
+    public String deleteNews(HttpServletRequest request) {
         String ids = request.getParameter("id");
         List<Integer> idss = new ArrayList<>();
         for (String idd : ids.split(",")) {
@@ -239,6 +242,48 @@ public class ManagerController {
         }
         model.addAttribute("news", news);
         return "manager/newsedit";
+    }
+
+
+    @RequestMapping("loadresumeList")
+    @ResponseBody
+    public String getResumeList() {
+        List<Resumes> list = resumesService.selectResumeAll();
+        TableDataModel tableDataModel = new TableDataModel();
+        tableDataModel.setCount(list.size());
+        tableDataModel.setMsg("操作成功");
+        tableDataModel.setCode("0");
+        tableDataModel.setData(list);
+        String jsons = JSON.toJSONString(tableDataModel);
+        System.out.println(jsons);
+        // String str = "{\"code\":\"0\",\"count\":11,\"data\":[{\"academicdegree\":\"名誉博士\",\"age\":19,\"applyworkname\":\"软件开发\",\"education\":\"研究生或以上\",\"id\":7,\"locationpersonnelrelationship\":\"山东淄博\",\"nation\":\"初婚\",\"registeredresidence\":\"dsfds\",\"sex\":\"男\",\"truename\":\"dfdsf\"},{\"academicdegree\":\"名誉博士\",\"age\":19,\"education\":\"研究生或以上\",\"id\":7,\"locationpersonnelrelationship\":\"山东淄博\",\"nation\":\"初婚\",\"registeredresidence\":\"dsfds\",\"sex\":\"男\",\"truename\":\"dfdsf\"},{\"academicdegree\":\"管理学博士学位\",\"age\":19,\"applyworkname\":\"软件开发\",\"education\":\"大学本科\",\"id\":9,\"locationpersonnelrelationship\":\"打发erere\",\"nation\":\"汉族\",\"registeredresidence\":\"是的发顺丰\",\"sex\":\"男\",\"truename\":\"张三\"},{\"academicdegree\":\"管理学博士学位\",\"age\":19,\"applyworkname\":\"销售顾问\",\"education\":\"大学本科\",\"id\":9,\"locationpersonnelrelationship\":\"打发erere\",\"nation\":\"汉族\",\"registeredresidence\":\"是的发顺丰\",\"sex\":\"男\",\"truename\":\"张三\"},{\"academicdegree\":\"名誉博士\",\"age\":19,\"education\":\"研究生或以上\",\"id\":1,\"locationpersonnelrelationship\":\"s'da'f'd'sa'fa's'd'f\",\"nation\":\"汉族\",\"registeredresidence\":\"打发斯蒂芬\",\"sex\":\"男\",\"truename\":\"大声道\"},{\"academicdegree\":\"名誉博士\",\"age\":19,\"education\":\"研究生或以上\",\"id\":2,\"locationpersonnelrelationship\":\"s'da'f'd'sa'fa's'd'f\",\"nation\":\"汉族\",\"registeredresidence\":\"打发斯蒂芬\",\"sex\":\"男\",\"truename\":\"大声道\"},{\"academicdegree\":\"名誉博士\",\"age\":19,\"education\":\"研究生或以上\",\"id\":3,\"locationpersonnelrelationship\":\"s'da'f'd'sa'fa's'd'f\",\"nation\":\"汉族\",\"registeredresidence\":\"打发斯蒂芬\",\"sex\":\"男\",\"truename\":\"大声道\"},{\"academicdegree\":\"名誉博士\",\"age\":19,\"education\":\"研究生或以上\",\"id\":4,\"locationpersonnelrelationship\":\"s'da'f'd'sa'fa's'd'f\",\"nation\":\"汉族\",\"registeredresidence\":\"打发斯蒂芬\",\"sex\":\"男\",\"truename\":\"大声道\"},{\"academicdegree\":\"名誉博士\",\"age\":19,\"education\":\"研究生或以上\",\"id\":5,\"locationpersonnelrelationship\":\"s'da'f'd'sa'fa's'd'f\",\"nation\":\"汉族\",\"registeredresidence\":\"打发斯蒂芬\",\"sex\":\"男\",\"truename\":\"大声道1\"},{\"academicdegree\":\"名誉博士\",\"age\":19,\"education\":\"研究生或以上\",\"id\":6,\"locationpersonnelrelationship\":\"s'da'f'd'sa'fa's'd'f\",\"nation\":\"汉族\",\"registeredresidence\":\"打发斯蒂芬\",\"sex\":\"男\",\"truename\":\"大声道22\"},{\"academicdegree\":\"名誉博士\",\"age\":31,\"education\":\"研究生或以上\",\"id\":10,\"locationpersonnelrelationship\":\"第三方第三方\",\"nation\":\"汉族\",\"registeredresidence\":\"第三方第三方水电费第三方\",\"sex\":\"男\",\"truename\":\"小王\"}],\"msg\":\"操作成功\"}\n";
+        return jsons;
+    }
+
+    @RequestMapping("resumeList")
+    public String resumeList() {
+        return "manager/resumeList";
+    }
+
+    @RequestMapping("passornopass")
+    @ResponseBody
+    public String passornopass(HttpServletRequest request) {
+        String infos = request.getParameter("infos");
+        String type = request.getParameter("status");
+        String jsons = "";
+        Integer status = 0;
+        switch (type) {
+            case "1":
+                status=0;
+                jsons = "你的简历没有通过初选";
+                break;
+            case "0":
+                status=1;
+                jsons = "祝贺你，你的简历通过初选";
+                break;
+        }
+        jsons = deliveryStatusService.passornopass(infos, jsons, status,request);
+        return jsons;
     }
 }
 

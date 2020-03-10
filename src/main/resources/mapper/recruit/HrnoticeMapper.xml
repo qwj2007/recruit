@@ -9,9 +9,9 @@
     <result column="userid" jdbcType="INTEGER" property="userid" />
     <result column="attach" jdbcType="VARCHAR" property="attach" />
     <result column="createtimes" jdbcType="TIMESTAMP" property="createtimes" />
-    <result column="createuserid" jdbcType="INTEGER" property="createuserid" />
+    <result column="createuserid" jdbcType="VARCHAR" property="createuserid" />
     <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
-    <result column="updateuserid" jdbcType="INTEGER" property="updateuserid" />
+    <result column="updateuserid" jdbcType="VARCHAR" property="updateuserid" />
     <result column="isactive" jdbcType="BIT" property="isactive" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -98,13 +98,13 @@
         #{createtimes,jdbcType=TIMESTAMP},
       </if>
       <if test="createuserid != null">
-        #{createuserid,jdbcType=INTEGER},
+        #{createuserid,jdbcType=VARCHAR},
       </if>
       <if test="updatetime != null">
         #{updatetime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateuserid != null">
-        #{updateuserid,jdbcType=INTEGER},
+        #{updateuserid,jdbcType=VARCHAR},
       </if>
       <if test="isactive != null">
         #{isactive,jdbcType=BIT},

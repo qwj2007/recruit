@@ -5,6 +5,7 @@ import com.recruit.web.pojo.Resumes;
 import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 
 /**
@@ -27,4 +28,6 @@ public interface IResumesService {
     Resumes selctResumeByUserId( String userid);
 
     String PersoncenterCheck(HttpServletRequest request, Model model);
+
+    List<Resumes> selectResumeAll();
 }

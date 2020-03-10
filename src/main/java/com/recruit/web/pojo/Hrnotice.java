@@ -17,11 +17,11 @@ public class Hrnotice {
 
     private Date createtimes;
 
-    private Integer createuserid;
+    private String createuserid;
 
     private Date updatetime;
 
-    private Integer updateuserid;
+    private String updateuserid;
 
     private Boolean isactive;
 
@@ -81,11 +81,11 @@ public class Hrnotice {
         this.createtimes = createtimes;
     }
 
-    public Integer getCreateuserid() {
+    public String getCreateuserid() {
         return createuserid;
     }
 
-    public void setCreateuserid(Integer createuserid) {
+    public void setCreateuserid(String createuserid) {
         this.createuserid = createuserid;
     }
 
@@ -97,11 +97,11 @@ public class Hrnotice {
         this.updatetime = updatetime;
     }
 
-    public Integer getUpdateuserid() {
+    public String getUpdateuserid() {
         return updateuserid;
     }
 
-    public void setUpdateuserid(Integer updateuserid) {
+    public void setUpdateuserid(String updateuserid) {
         this.updateuserid = updateuserid;
     }
 

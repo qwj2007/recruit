@@ -1,6 +1,6 @@
 package com.recruit.web.pojo;
 
-import java.util.Date;
+
 
 public class Resumes {
     private Integer id;
@@ -51,6 +51,34 @@ public class Resumes {
     private String photo;
     private Integer workage;
     private String email;
+
+    private String applyworkname;
+    private  Integer deliveryid;
+    private Integer recruitinfoid;
+
+    public Integer getDeliveryid() {
+        return deliveryid;
+    }
+
+    public void setDeliveryid(Integer deliveryid) {
+        this.deliveryid = deliveryid;
+    }
+
+    public Integer getRecruitinfoid() {
+        return recruitinfoid;
+    }
+
+    public void setRecruitinfoid(Integer recruitinfoid) {
+        this.recruitinfoid = recruitinfoid;
+    }
+
+    public String getApplyworkname() {
+        return applyworkname;
+    }
+
+    public void setApplyworkname(String applyworkname) {
+        this.applyworkname = applyworkname;
+    }
 
     public String getEmail() {
         return email;
