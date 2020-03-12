@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.recruit.web.mapper.recruit.NavigationMapper">
+  <resultMap id="BaseResultMap" type="com.recruit.web.pojo.Navigation">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="orders" jdbcType="INTEGER" property="orders" />
+    <result column="isdisplay" jdbcType="BIT" property="isdisplay" />
+    <result column="isacive" jdbcType="BIT" property="isactive" />
+    <result column="createuserid" jdbcType="INTEGER" property="createuserid" />
+    <result column="createtime" jdbcType="DATE" property="createtime" />
+    <result column="updateuserid" jdbcType="INTEGER" property="updateuserid" />
+    <result column="updatetime" jdbcType="DATE" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, url, orders, isdisplay, isactive, createuserid, createtime, updateuserid,
+    updatetime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from navigation
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectNavigation" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"></include>
+    from navigation where isactive=1 and isdisplay=1
+    ORDER  by orders  limit 5
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from navigation
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.recruit.web.pojo.Navigation">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into navigation (name, url, orders, 
+      isdisplay, isactive, createuserid,
+      createtime, updateuserid, updatetime
+      )
+    values (#{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{orders,jdbcType=INTEGER}, 
+      #{isdisplay,jdbcType=BIT}, #{isactive,jdbcType=BIT}, #{createuserid,jdbcType=INTEGER},
+      #{createtime,jdbcType=DATE}, #{updateuserid,jdbcType=INTEGER}, #{updatetime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.recruit.web.pojo.Navigation">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into navigation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="orders != null">
+        orders,
+      </if>
+      <if test="isdisplay != null">
+        isdisplay,
+      </if>
+      <if test="isactive != null">
+        isactive,
+      </if>
+      <if test="createuserid != null">
+        createuserid,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updateuserid != null">
+        updateuserid,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="orders != null">
+        #{orders,jdbcType=INTEGER},
+      </if>
+      <if test="isdisplay != null">
+        #{isdisplay,jdbcType=BIT},
+      </if>
+      <if test="isactive != null">
+        #{isactive,jdbcType=BIT},
+      </if>
+      <if test="createuserid != null">
+        #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="updateuserid != null">
+        #{updateuserid,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.recruit.web.pojo.Navigation">
+    update navigation
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="orders != null">
+        orders = #{orders,jdbcType=INTEGER},
+      </if>
+      <if test="isdisplay != null">
+        isdisplay = #{isdisplay,jdbcType=BIT},
+      </if>
+      <if test="isactive != null">
+        isactive = #{isactive,jdbcType=BIT},
+      </if>
+      <if test="createuserid != null">
+        createuserid = #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="updateuserid != null">
+        updateuserid = #{updateuserid,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.recruit.web.pojo.Navigation">
+    update navigation
+    set name = #{name,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      orders = #{orders,jdbcType=INTEGER},
+      isdisplay = #{isdisplay,jdbcType=BIT},
+      isactive = #{isactive,jdbcType=BIT},
+      createuserid = #{createuserid,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=DATE},
+      updateuserid = #{updateuserid,jdbcType=INTEGER},
+      updatetime = #{updatetime,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

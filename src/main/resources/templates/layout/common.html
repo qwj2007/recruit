@@ -6,11 +6,12 @@
             </a>
             <label>招聘频道</label>
         </div>
-        <div class="rekit_9b0454">
-            <a th:href="${#httpServletRequest.getContextPath()+'/'}" class="">首页</a>
-            <a th:href="@{/center/recruitlist}" class="">招聘信息</a>
-            <a th:href="@{/center/newslist}" class="">通知公告</a>
-            <a href="http://www.baidu.com" class="" target="_blank">官网</a>
+
+        <div  class="rekit_9b0454">
+            <a th:each="emp:${menus}" th:href="${emp.url}" class="" th:text="${emp.name}">
+
+            </a>
+
         </div>
     </div>
 </div>

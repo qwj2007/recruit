@@ -1,16 +1,16 @@
 function userlogin() {
+
     var userName = document.getElementById("username").value; //账号
     var pwd = document.getElementById("userpwd").value; //密码
     var parm = { username: userName, pwd: pwd };
     var url=getContextPath();
     $.ajax({
-        url: url+"/index/login",
+        url: "/index/login",
         type: "post",
         data: parm,
         async: false,
         dataType: "text",
         success: function (msg) {
-            debugger
             if (Number(msg)>0) {
                 window.location.href=url+"/Register/Personcenter";
             }

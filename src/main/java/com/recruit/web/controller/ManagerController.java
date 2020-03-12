@@ -42,6 +42,8 @@ public class ManagerController {
     private IResumesService resumesService;
     @Autowired
     private IDeliveryStatusService deliveryStatusService;
+    @Autowired
+    private INavigationService navigationService;
 
     @RequestMapping("/index")
     public String Index(HttpServletRequest request, Model model) {
@@ -274,16 +276,93 @@ public class ManagerController {
         Integer status = 0;
         switch (type) {
             case "1":
-                status=0;
+                status = 0;
                 jsons = "你的简历没有通过初选";
                 break;
             case "0":
-                status=1;
+                status = 1;
                 jsons = "祝贺你，你的简历通过初选";
                 break;
         }
-        jsons = deliveryStatusService.passornopass(infos, jsons, status,request);
+        jsons = deliveryStatusService.passornopass(infos, jsons, status, request);
         return jsons;
+    }
+
+    @RequestMapping("navicationList")
+    public String navicationList() {
+        String url = "/manager/navicationList";
+        return url;
+    }
+
+    @RequestMapping("loadNavication")
+    @ResponseBody
+    public String loadNavication() {
+        List<Navigation> list = navigationService.selectNavigation();
+        TableDataModel tableDataModel = new TableDataModel();
+        tableDataModel.setCount(list.size());
+        tableDataModel.setMsg("操作成功");
+        tableDataModel.setCode("0");
+        tableDataModel.setData(list);
+        String jsons = JSON.toJSONString(tableDataModel);
+        System.out.println(jsons);
+        return jsons;
+    }
+
+    @RequestMapping("navicationEdit")
+    public String navicationEdit() {
+        return "/manager/navicationedit";
+    }
+
+    @RequestMapping("editnnavication")
+    @ResponseBody
+    public String editnnavication(HttpServletRequest request) {
+        Navigation navigation = new Navigation();
+        String name = request.getParameter("name");
+        String url = request.getParameter("url");
+        String dis = request.getParameter("isdisplay");
+        Boolean isdisplay = false;
+        if (dis.equals("1")) {
+            isdisplay = true;
+        }
+        Integer orders = Integer.parseInt(request.getParameter("orders"));
+        navigation.setName(name);
+        navigation.setCreatetime(new Date());
+        navigation.setIsactive(true);
+        navigation.setIsdisplay(isdisplay);
+        navigation.setOrders(orders);
+        int i = navigationService.insertSelective(navigation);
+        ResultMsg msg = new ResultMsg();
+        if (i > 0) {
+            msg.setMsg("操作成功");
+            msg.setResultCode("1");
+        } else {
+            msg.setMsg("操作失败");
+            msg.setResultCode("0");
+        }
+        String jsons = JSON.toJSONString(msg);
+        return jsons;
+    }
+
+    @ResponseBody
+    @RequestMapping("deleteNavication")
+    public String deleteNavication(HttpServletRequest request) {
+        String ids = request.getParameter("id");
+        Navigation navigation = navigationService.selectByPrimaryKey(Integer.parseInt(ids));
+        ResultMsg msg = new ResultMsg();
+        if (navigation != null) {
+            navigation.setIsdisplay(false);
+            navigation.setIsactive(false);
+            Integer i = navigationService.updateByPrimaryKeySelective(navigation);
+            if (i > 0) {
+                msg.setMsg("操作成功");
+                msg.setResultCode("1");
+            } else {
+                msg.setMsg("操作失败");
+                msg.setResultCode("0");
+            }
+        }
+
+        return JSON.toJSONString(msg);
     }
 }
 

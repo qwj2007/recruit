@@ -45,14 +45,15 @@
                         <dd><a href="javascript:;" data-url="/Manager/ChangePassword/"><i class="seraph icon-xiugai"
                                                                                           data-icon="icon-xiugai"></i><cite>修改密码</cite></a>
                         </dd>
-                        <dd><a href="javascript:;" class="showNotice"><i
+                        <dd  style="display: none"><a href="javascript:;" class="showNotice"><i
                                 class="layui-icon">&#xe645;</i><cite>系统公告</cite><span
                                 class="layui-badge-dot"></span></a></dd>
                         <dd pc><a href="javascript:;" class="functionSetting"><i class="layui-icon">&#xe620;</i><cite>功能设定</cite><span
                                 class="layui-badge-dot"></span></a></dd>
                         <dd pc><a href="javascript:;" class="changeSkin"><i
                                 class="layui-icon">&#xe61b;</i><cite>更换皮肤</cite></a></dd>
-                        <dd><a href="/Account/SignOut" class="signOut"><i class="seraph icon-tuichu"></i><cite>退出</cite></a>
+                        <dd><a href="javascript:void(0)" class="signOut" onclick="logout();">
+                            <i class="seraph icon-tuichu"></i><cite>退出</cite></a>
                         </dd>
                     </dl>
                 </li>
@@ -108,11 +109,12 @@
 <!-- 移动导航 -->
 <div class="site-tree-mobile"><i class="layui-icon">&#xe602;</i></div>
 <div class="site-mobile-shade"></div>
-<script th:src="@{/js/contextpath.js}" ></script>
+<script th:src="@{/js/contextpath.js}" th:inline="javascript" ></script>
 <script type="text/javascript" th:src="@{/layui/layui.js}" ></script>
 <script type="text/javascript" th:src="@{/js/index.js}" ></script>
 <script type="text/javascript" th:src="@{/js/cache.js}"></script>
 <script type="text/javascript" th:src="@{/js/bodyTab.js}"></script>
+<script th:src="@{/js/login.js}"></script>
 
 </body>
 </html>
