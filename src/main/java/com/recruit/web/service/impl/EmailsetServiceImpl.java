@@ -26,7 +26,7 @@ public class EmailsetServiceImpl implements IEmailsetService {
 
     @Override
     public int insertSelective(Emailset record) {
-        return 0;
+        return emailsetMapper.insertSelective(record);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class EmailsetServiceImpl implements IEmailsetService {
 
     @Override
     public int updateByPrimaryKeySelective(Emailset record) {
-        return 0;
+        return emailsetMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override

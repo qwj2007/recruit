@@ -17,6 +17,13 @@
     from emailset
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <select id="selectEmial"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from emailset  limit 1
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from emailset
     where id = #{id,jdbcType=INTEGER}

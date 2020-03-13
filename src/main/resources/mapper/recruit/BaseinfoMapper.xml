@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.recruit.web.mapper.recruit.BaseinfoMapper">
+  <resultMap id="BaseResultMap" type="com.recruit.web.pojo.Baseinfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="logourl" jdbcType="VARCHAR" property="logourl" />
+    <result column="systemtitle" jdbcType="VARCHAR" property="systemtitle" />
+    <result column="footinfo" jdbcType="VARCHAR" property="footinfo" />
+    <result column="isactive" jdbcType="BIT" property="isactive" />
+    <result column="createtime" jdbcType="DATE" property="createtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, logourl, systemtitle, footinfo, isactive, createtime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from baseinfo
+  where id = #{id,jdbcType=INTEGER}
+</select>
+  <select id="selectBaseInfo"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from baseinfo
+    where isactive=1 limit 1
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from baseinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.recruit.web.pojo.Baseinfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into baseinfo (logourl, systemtitle, footinfo, 
+      isactive, createtime)
+    values (#{logourl,jdbcType=VARCHAR}, #{systemtitle,jdbcType=VARCHAR}, #{footinfo,jdbcType=VARCHAR}, 
+      #{isactive,jdbcType=BIT}, #{createtime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.recruit.web.pojo.Baseinfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into baseinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="logourl != null">
+        logourl,
+      </if>
+      <if test="systemtitle != null">
+        systemtitle,
+      </if>
+      <if test="footinfo != null">
+        footinfo,
+      </if>
+      <if test="isactive != null">
+        isactive,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="logourl != null">
+        #{logourl,jdbcType=VARCHAR},
+      </if>
+      <if test="systemtitle != null">
+        #{systemtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="footinfo != null">
+        #{footinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="isactive != null">
+        #{isactive,jdbcType=BIT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.recruit.web.pojo.Baseinfo">
+    update baseinfo
+    <set>
+      <if test="logourl != null">
+        logourl = #{logourl,jdbcType=VARCHAR},
+      </if>
+      <if test="systemtitle != null">
+        systemtitle = #{systemtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="footinfo != null">
+        footinfo = #{footinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="isactive != null">
+        isactive = #{isactive,jdbcType=BIT},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.recruit.web.pojo.Baseinfo">
+    update baseinfo
+    set logourl = #{logourl,jdbcType=VARCHAR},
+      systemtitle = #{systemtitle,jdbcType=VARCHAR},
+      footinfo = #{footinfo,jdbcType=VARCHAR},
+      isactive = #{isactive,jdbcType=BIT},
+      createtime = #{createtime,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

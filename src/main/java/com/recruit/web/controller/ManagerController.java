@@ -8,21 +8,23 @@ import com.recruit.web.service.*;
 import com.recruit.web.service.impl.DeliveryStatusServiceImpl;
 import com.recruit.web.util.ClientIp;
 import com.recruit.web.util.CookieManager;
+import com.recruit.web.util.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.*;
+import java.io.*;
 
 
 /**
@@ -44,6 +46,10 @@ public class ManagerController {
     private IDeliveryStatusService deliveryStatusService;
     @Autowired
     private INavigationService navigationService;
+    @Autowired
+    private IBaseInfoService baseInfoService;
+    @Autowired
+    private IEmailsetService emailsetService;
 
     @RequestMapping("/index")
     public String Index(HttpServletRequest request, Model model) {
@@ -364,6 +370,101 @@ public class ManagerController {
 
         return JSON.toJSONString(msg);
     }
+
+    @RequestMapping("baseinfo")
+    public String getBaseInfo(HttpServletRequest request, Model model) {
+        Baseinfo baseinfo = baseInfoService.selectBaseInfo();
+        if (baseinfo == null) {
+            baseinfo = new Baseinfo();
+        }
+        model.addAttribute("baseinfo", baseinfo);
+        return "manager/baseinfo";
+    }
+
+    /**
+     * 个人信息上传
+     *
+     * @return {Result}
+     */
+    @RequestMapping(value = "/uploadimage", method = {RequestMethod.POST})
+    @ResponseBody
+    public Object headImg(@RequestParam(value = "file", required = false) MultipartFile file,
+                          HttpServletRequest request, HttpServletResponse response) throws Exception {
+        return FileUpload.headImg(file, request, response);
+    }
+
+    @RequestMapping(value = "editbaseinfo", method = {RequestMethod.POST})
+    @ResponseBody
+    public String editbaseinfo(HttpServletRequest request) {
+        Baseinfo baseinfo = new Baseinfo();
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        String logourl = request.getParameter("logourl");
+        String systemtitle = request.getParameter("systemtitle");
+        String footinfo = request.getParameter("footinfo");
+        baseinfo.setIsactive(true);
+        baseinfo.setFootinfo(footinfo);
+        baseinfo.setId(id);
+        baseinfo.setLogourl(logourl);
+        baseinfo.setSystemtitle(systemtitle);
+        int count = 0;
+        if (id > 0) {
+            count = baseInfoService.updateByPrimaryKeySelective(baseinfo);
+        } else {
+            count = baseInfoService.insertSelective(baseinfo);
+        }
+        ResultMsg msg = new ResultMsg();
+        if (count > 0) {
+            msg.setMsg("操作成功");
+            msg.setResultCode("1");
+        } else {
+            msg.setMsg("操作失败");
+            msg.setResultCode("0");
+        }
+        return JSON.toJSONString(msg);
+    }
+
+    @RequestMapping("emailinfo")
+    public String getEmail(HttpServletRequest request,Model model) {
+        Emailset emailset = emailsetService.selectOneEmail();
+        if(emailset==null){
+            emailset=new Emailset();
+        }
+        model.addAttribute("emailinfo",emailset);
+        return "manager/email";
+    }
+
+
+    @RequestMapping(value = "editemail", method = {RequestMethod.POST})
+    @ResponseBody
+    public String editemail(HttpServletRequest request) {
+        Emailset emailset = new Emailset();
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        String emailaddress = request.getParameter("emailaddress");
+        String emailpwd = request.getParameter("emailpwd");
+        String sendservice = request.getParameter("sendservice");
+        String contents = request.getParameter("contents");
+        emailset.setContents(contents);
+        emailset.setEmailaddress(emailaddress);
+        emailset.setId(id);
+        emailset.setSendservice(sendservice);
+        emailset.setEmailpwd(emailpwd);
+        int count = 0;
+        if (id > 0) {
+            count = emailsetService.updateByPrimaryKeySelective(emailset);
+        } else {
+            count = emailsetService.insertSelective(emailset);
+        }
+        ResultMsg msg = new ResultMsg();
+        if (count > 0) {
+            msg.setMsg("操作成功");
+            msg.setResultCode("1");
+        } else {
+            msg.setMsg("操作失败");
+            msg.setResultCode("0");
+        }
+        return JSON.toJSONString(msg);
+    }
+
 }
 
 
