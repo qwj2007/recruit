@@ -9,7 +9,7 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
     //招聘信息
     var tableIns = table.render({
         elem: '#managerList',
-        url: urls + '/manager/loadEmployee/',
+        url: urls + '/manage/loadEmployee/',
         cellMinWidth: 95,
         page: true,
         height: "full-125",
@@ -60,7 +60,7 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
 
     //添加用户
     function addManager(edit) {
-        var urls = getContextPath() + "/manager/eidtEmployeepage";
+        var urls = getContextPath() + "/manage/eidtEmployeepage";
         var tit = "添加用户";
         if (edit) {
             tit = "编辑用户";
@@ -141,7 +141,7 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
         var urls = getContextPath();
         $.ajax({
             type: 'POST',
-            url: urls + '/manager/deleteEmployee/',
+            url: urls + '/manage/deleteEmployee/',
             data: {id: id},
             dataType: "json",
             headers: {
@@ -165,7 +165,7 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
         var urls = getContextPath();
         $.ajax({
             type: 'POST',
-            url: urls + '/manager/updatePwd/',
+            url: urls + '/manage/updatePwd/',
             data: {id: id},
             dataType: "json",
             headers: {

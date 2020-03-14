@@ -41,7 +41,7 @@ layui.use(['form', 'layer', 'upload'], function () {
         //获取防伪标记
         $.ajax({
             type: 'POST',
-            url: '/Manager/ManagerInfo/',
+            url: '/Manage/ManagerInfo/',
             data: data.field,
             dataType: "json",
             headers: {

@@ -13,7 +13,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'upload', 'layedit'], function ()
         //获取防伪标记
         $.ajax({
             type: 'POST',
-            url: urls + '/manager/editemail',
+            url: urls + '/manage/editemail',
             data: {
                 id: $("#id").val(),
                 emailaddress: $("#emailaddress").val(),//主键

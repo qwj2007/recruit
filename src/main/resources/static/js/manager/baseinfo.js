@@ -10,7 +10,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'upload', 'layedit'], function ()
     var index = layedit.build('footinfo', {height: 180, border: 1}); //建立编辑器
     var uploadInst = upload.render({
         elem: '#logourl'
-        , url: urls + '/manager/uploadimage' //改成您自己的上传接口
+        , url: urls + '/manage/uploadimage' //改成您自己的上传接口
         , before: function (obj) {
             //预读本地文件示例，不支持ie8
             obj.preview(function (index, file, result) {
@@ -48,7 +48,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'upload', 'layedit'], function ()
         //获取防伪标记
         $.ajax({
             type: 'POST',
-            url: urls + '/manager/editbaseinfo',
+            url: urls + '/manage/editbaseinfo',
             data: {
                 id: $("#id").val(),
                 logourl: $("#hid_logourl").val(),//主键

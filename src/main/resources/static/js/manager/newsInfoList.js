@@ -9,7 +9,7 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
     //招聘信息
     var tableIns = table.render({
         elem: '#managerList',
-        url: urls + '/manager/loadNewsInfos/',
+        url: urls + '/manage/loadNewsInfos/',
         cellMinWidth: 95,
         page: true,
         height: "full-125",
@@ -50,7 +50,7 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
 
     //添加用户
     function addManager(edit) {
-        var urls = getContextPath() + "/manager/eidtnewspage";
+        var urls = getContextPath() + "/manage/eidtnewspage";
         var tit = "添加公告";
         if (edit) {
             tit = "编辑公告";
@@ -111,7 +111,7 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
         var urls = getContextPath();
         $.ajax({
             type: 'POST',
-            url: urls + '/manager/deleteNews/',
+            url: urls + '/manage/deleteNews/',
             data: {id: id},
             dataType: "json",
             headers: {

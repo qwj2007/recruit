@@ -8,7 +8,7 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
     //招聘信息
     var tableIns = table.render({
         elem: '#managerList',
-        url: urls + '/manager/loadNavication/',
+        url: urls + '/manage/loadNavication/',
         cellMinWidth: 95,
         page: true,
         height: "full-125",
@@ -38,7 +38,7 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
 
     //添加
     function addManager(edit) {
-        var urls = getContextPath() + "/manager/navicationEdit";
+        var urls = getContextPath() + "/manage/navicationEdit";
         var tit = "添加招聘信息";
         if (edit) {
             tit = "编辑招聘信息";
@@ -121,7 +121,7 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
         var urls = getContextPath();
         $.ajax({
             type: 'POST',
-            url: urls + '/manager/deleteNavication/',
+            url: urls + '/manage/deleteNavication/',
             data: {id: id},
             dataType: "json",
             headers: {
@@ -144,7 +144,7 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
     function changeLockStatus(managerId, status) {
         $.ajax({
             type: 'POST',
-            url: '/Manager/ChangeLockStatus/',
+            url: '/Manage/ChangeLockStatus/',
             data: {Id: managerId, Status: status},
             dataType: "json",
             headers: {

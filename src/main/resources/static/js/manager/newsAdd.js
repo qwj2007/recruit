@@ -18,7 +18,7 @@ layui.use(['form', 'layer', 'laydate'], function () {
         //获取防伪标记
         $.ajax({
             type: 'POST',
-            url: urls + '/manager/editnews',
+            url: urls + '/manage/editnews',
             data: {
                 id: $("#id").val(),//主键
                 title: $("#title").val(),

@@ -9,7 +9,7 @@ layui.use(['form', 'layer', 'laydate'], function () {
         //获取防伪标记
         $.ajax({
             type: 'POST',
-            url: urls + '/manager/editnnavication',
+            url: urls + '/manage/editnnavication',
             data: {
                 name: $("#nameid").val(),//主键
                 url: $("#url").val(),

@@ -15,7 +15,7 @@ function userlogin() {
                 window.location.href=url+"/Register/Personcenter";
             }
             else if (msg == "manager") {
-                location.href = url+'/manager/index';
+                location.href = url+'/manage/index';
             }
             else {
                 alert("登录失败！");

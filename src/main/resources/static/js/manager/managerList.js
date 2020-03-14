@@ -9,7 +9,7 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
     //招聘信息
     var tableIns = table.render({
         elem: '#managerList',
-        url: urls+'/manager/loadRecruitData/',
+        url: urls+'/manage/loadRecruitData/',
         cellMinWidth: 95,
         page: true,
         height: "full-125",
@@ -47,7 +47,7 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
 
     //添加用户
     function addManager(edit) {
-        var urls=getContextPath()+"/manager/edit";
+        var urls=getContextPath()+"/manage/edit";
         var tit = "添加招聘信息";
         if (edit) {
             tit = "编辑招聘信息";
@@ -129,7 +129,7 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
         var urls=getContextPath();
         $.ajax({
             type: 'POST',
-            url: urls+'/manager/deleteRecurit/',
+            url: urls+'/manage/deleteRecurit/',
             data: { id: id },
             dataType: "json",
             headers: {
@@ -152,7 +152,7 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
     function changeLockStatus(managerId,status) {
         $.ajax({
             type: 'POST',
-            url: '/Manager/ChangeLockStatus/',
+            url: '/Manage/ChangeLockStatus/',
             data: { Id: managerId, Status: status },
             dataType: "json",
             headers: {

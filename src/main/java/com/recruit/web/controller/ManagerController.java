@@ -2,10 +2,10 @@ package com.recruit.web.controller;
 
 
 import com.alibaba.fastjson.JSON;
-import com.recruit.web.common.LoginUtil;
+
 import com.recruit.web.pojo.*;
 import com.recruit.web.service.*;
-import com.recruit.web.service.impl.DeliveryStatusServiceImpl;
+
 import com.recruit.web.util.ClientIp;
 import com.recruit.web.util.CookieManager;
 import com.recruit.web.util.FileUpload;
@@ -20,11 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
+
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.io.*;
+
 
 
 /**
@@ -32,7 +31,7 @@ import java.io.*;
  * 时间：2020/3/7
  */
 @Controller
-@RequestMapping("manager")
+@RequestMapping("manage")
 public class ManagerController {
     @Autowired
     private IMenuService menuService;
@@ -58,7 +57,7 @@ public class ManagerController {
 
     @RequestMapping("userinfoList")
     public String userinfoList() {
-        return "/manager/userinfoList";
+        return "/manage/userinfoList";
     }
 
     @RequestMapping("loadUserinfo")
@@ -118,7 +117,7 @@ public class ManagerController {
 
     @RequestMapping("employeeList")
     public String employeeList() {
-        return "/manager/employeeList";
+        return "/manage/employeeList";
     }
 
     @RequestMapping("loadEmployee")
@@ -181,7 +180,7 @@ public class ManagerController {
             employee = new Employee();
         }
         model.addAttribute("employee", employee);
-        return "manager/employeeedit";
+        return "manage/employeeedit";
     }
 
     @ResponseBody
@@ -234,7 +233,7 @@ public class ManagerController {
         String username = CookieManager.getInstance().getCookie(request, "employeename");
         model.addAttribute("employeeid", userid);
         model.addAttribute("employeename", username);
-        return "/manager/index";
+        return "/manage/index";
     }
 
     @RequestMapping("/main")
@@ -246,7 +245,7 @@ public class ManagerController {
         param.setLoginTime(df.format(new Date()));
         param.setLoginCount(1);
         model.addAttribute("loginParam", param);
-        return "/manager/main";
+        return "/manage/main";
     }
 
     @RequestMapping("getMenu")
@@ -260,7 +259,7 @@ public class ManagerController {
     @RequestMapping("recruitlist")
     public String recruitlist(Model model) {
 
-        return "manager/recruitlist";
+        return "manage/recruitlist";
     }
 
     @RequestMapping("edit")
@@ -271,7 +270,7 @@ public class ManagerController {
             recruitinfo = new Recruitinfo();
         }
         model.addAttribute("recruitinfo", recruitinfo);
-        return "manager/recruitedit";
+        return "manage/recruitedit";
     }
 
     @RequestMapping("editrecruit")
@@ -368,7 +367,7 @@ public class ManagerController {
 
     @RequestMapping("newsinfo")
     public String getNewsInfo() {
-        return "manager/newsinfo";
+        return "manage/newsinfo";
     }
 
     @ResponseBody
@@ -426,7 +425,7 @@ public class ManagerController {
             news = new News();
         }
         model.addAttribute("news", news);
-        return "manager/newsedit";
+        return "manage/newsedit";
     }
 
 
@@ -447,7 +446,7 @@ public class ManagerController {
 
     @RequestMapping("resumeList")
     public String resumeList() {
-        return "manager/resumeList";
+        return "manage/resumeList";
     }
 
     @RequestMapping("passornopass")
@@ -473,7 +472,7 @@ public class ManagerController {
 
     @RequestMapping("navicationList")
     public String navicationList() {
-        String url = "/manager/navicationList";
+        String url = "/manage/navicationList";
         return url;
     }
 
@@ -493,7 +492,7 @@ public class ManagerController {
 
     @RequestMapping("navicationEdit")
     public String navicationEdit() {
-        return "/manager/navicationedit";
+        return "/manage/navicationedit";
     }
 
     @RequestMapping("editnnavication")
@@ -555,7 +554,7 @@ public class ManagerController {
             baseinfo = new Baseinfo();
         }
         model.addAttribute("baseinfo", baseinfo);
-        return "manager/baseinfo";
+        return "manage/baseinfo";
     }
 
     /**
@@ -607,7 +606,7 @@ public class ManagerController {
             emailset = new Emailset();
         }
         model.addAttribute("emailinfo", emailset);
-        return "manager/email";
+        return "manage/email";
     }
 
 
