@@ -57,7 +57,7 @@ public class ManagerController {
 
     @RequestMapping("userinfoList")
     public String userinfoList() {
-        return "/manage/userinfoList";
+        return "manage/userinfolist";
     }
 
     @RequestMapping("loadUserinfo")
@@ -117,7 +117,7 @@ public class ManagerController {
 
     @RequestMapping("employeeList")
     public String employeeList() {
-        return "/manage/employeeList";
+        return "/manage/employeelist";
     }
 
     @RequestMapping("loadEmployee")
@@ -245,7 +245,7 @@ public class ManagerController {
         param.setLoginTime(df.format(new Date()));
         param.setLoginCount(1);
         model.addAttribute("loginParam", param);
-        return "/manage/main";
+        return "manage/main";
     }
 
     @RequestMapping("getMenu")
@@ -446,7 +446,7 @@ public class ManagerController {
 
     @RequestMapping("resumeList")
     public String resumeList() {
-        return "manage/resumeList";
+        return "manage/resumelist";
     }
 
     @RequestMapping("passornopass")
