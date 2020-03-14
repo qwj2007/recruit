@@ -1,7 +1,9 @@
 package com.recruit.web.common;
 
+import com.recruit.web.pojo.Baseinfo;
 import com.recruit.web.pojo.Navigation;
 import com.recruit.web.pojo.Resumes;
+import com.recruit.web.service.IBaseInfoService;
 import com.recruit.web.service.INavigationService;
 import com.recruit.web.service.IResumesService;
 import com.recruit.web.util.CookieManager;
@@ -31,10 +33,16 @@ public class LoginUtil {
     @Autowired
     private static INavigationService staticnavigationService;
 
+    @Autowired
+    private IBaseInfoService baseInfoService;
+    @Autowired
+    private  static IBaseInfoService staticBaseInfoService;
+
     @PostConstruct
     public void init() {
         staticresume = resumesService;
         staticnavigationService = navigationService;
+        staticBaseInfoService=baseInfoService;
     }
 
     public static Boolean isLogin(HttpServletRequest request, Model model) {
@@ -45,6 +53,15 @@ public class LoginUtil {
         } else {
             model.addAttribute("menus", new ArrayList<Navigation>());
         }
+
+        Baseinfo baseinfo=staticBaseInfoService.selectBaseInfo();
+        if(baseinfo!=null){
+            model.addAttribute("baseinfo", baseinfo);
+        }
+        else{
+            model.addAttribute("baseinfo", new Baseinfo());
+        }
+
         String userid = CookieManager.getInstance().getCookie(request, "userid");
         String username = CookieManager.getInstance().getCookie(request, "username");
         if (userid == null || userid == "") {

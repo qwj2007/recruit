@@ -20,4 +20,9 @@ public class HrnoticeServiceImpl implements IHrnoticeService {
     public List<Hrnotice> GetHrnoticeByUserId(String userid) {
         return hrnoticeMapper.selectNoticeCountByUserId(userid);
     }
+
+    @Override
+    public Hrnotice selectByPrimaryKey(Integer id) {
+        return hrnoticeMapper.selectByPrimaryKey(id);
+    }
 }

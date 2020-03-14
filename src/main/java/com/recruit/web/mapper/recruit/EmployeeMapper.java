@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Mapper
 @Repository
 public interface EmployeeMapper {
@@ -21,4 +23,10 @@ public interface EmployeeMapper {
     int updateByPrimaryKey(Employee record);
 
     Employee getEmployeeByNamePwd(@Param("userid") String userid,@Param("password") String password);
+    List<Employee>getEmployeeAll();
+
+    int updateBatch(@Param("id") List<Integer> id);
+    int updatePwd(@Param("id") List<Integer> id);
+
+
 }

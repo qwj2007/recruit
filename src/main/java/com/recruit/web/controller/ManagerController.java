@@ -50,6 +50,183 @@ public class ManagerController {
     private IBaseInfoService baseInfoService;
     @Autowired
     private IEmailsetService emailsetService;
+    @Autowired
+    private IEmployeeService employeeService;
+
+    @Autowired
+    private IUserinfoService userinfoService;
+
+    @RequestMapping("userinfoList")
+    public String userinfoList() {
+        return "/manager/userinfoList";
+    }
+
+    @RequestMapping("loadUserinfo")
+    @ResponseBody
+    public String loadUserInfo() {
+        List<Userinfo> list = userinfoService.getUserAll();
+        TableDataModel tableDataModel = new TableDataModel();
+        tableDataModel.setCount(list.size());
+        tableDataModel.setMsg("操作成功");
+        tableDataModel.setData(list);
+        String jsons = JSON.toJSONString(tableDataModel);
+        System.out.println(jsons);
+        return jsons;
+    }
+    @ResponseBody
+    @RequestMapping("deleteUserInfo")
+    public String deleteUserInfo(HttpServletRequest request) {
+
+        String ids = request.getParameter("id");
+        List<Integer> idss = new ArrayList<>();
+        for (String idd : ids.split(",")) {
+            idss.add(Integer.parseInt(idd));
+        }
+
+        Integer i = userinfoService.deleteUser(idss);
+        ResultMsg msg = new ResultMsg();
+        if (i > 0) {
+            msg.setMsg("操作成功");
+            msg.setResultCode("1");
+        } else {
+            msg.setMsg("操作失败");
+            msg.setResultCode("0");
+        }
+        return JSON.toJSONString(msg);
+    }
+
+    @ResponseBody
+    @RequestMapping("updateUserPwd")
+    public String updateUserPwd(HttpServletRequest request) {
+
+        String ids = request.getParameter("id");
+        List<Integer> idss = new ArrayList<>();
+        for (String idd : ids.split(",")) {
+            idss.add(Integer.parseInt(idd));
+        }
+        Integer i = userinfoService.updatePwd(idss);
+        ResultMsg msg = new ResultMsg();
+        if (i > 0) {
+            msg.setMsg("操作成功");
+            msg.setResultCode("1");
+        } else {
+            msg.setMsg("操作失败");
+            msg.setResultCode("0");
+        }
+        return JSON.toJSONString(msg);
+    }
+
+    @RequestMapping("employeeList")
+    public String employeeList() {
+        return "/manager/employeeList";
+    }
+
+    @RequestMapping("loadEmployee")
+    @ResponseBody
+    public String loadEmployee() {
+        List<Employee> list = employeeService.getEmployeeAll();
+        TableDataModel tableDataModel = new TableDataModel();
+        tableDataModel.setCount(list.size());
+        tableDataModel.setMsg("操作成功");
+        tableDataModel.setData(list);
+        String jsons = JSON.toJSONString(tableDataModel);
+        System.out.println(jsons);
+        return jsons;
+    }
+
+    @RequestMapping("editEmployee")
+    @ResponseBody
+    public String editEmployee(HttpServletRequest request, Model model) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String userid = request.getParameter("userid");
+        String truename = request.getParameter("truename");
+        String sex = request.getParameter("sex");
+        String email = request.getParameter("email");
+        String createuserid = CookieManager.getInstance().getCookie(request, "employeeid");
+        Employee employee = new Employee();
+        employee.setCreateuserid(createuserid);
+        employee.setEmail(email);
+        employee.setId(id);
+        employee.setIsactive(true);
+        employee.setSex(sex);
+        employee.setTruename(truename);
+        employee.setPassword("111111");
+        employee.setUserid(userid);
+        Integer count = 0;
+        ResultMsg msg = new ResultMsg();
+        if (id > 0) {
+            employee.setUpdatetime(new Date());
+            count = employeeService.updateByPrimaryKeySelective(employee);
+        } else {
+            employee.setCreatetime(new Date());
+            count = employeeService.insertSelective(employee);
+        }
+        if (count > 0) {
+            msg.setMsg("操作成功");
+            msg.setResultCode("1");
+
+        } else {
+            msg.setMsg("操作失败");
+            msg.setResultCode("0");
+        }
+        String jsons = JSON.toJSONString(msg);
+        return jsons;
+    }
+
+    @RequestMapping("eidtEmployeepage")
+    public String eidtEmployeepage(HttpServletRequest request, Model model) {
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        Employee employee = employeeService.selectByPrimaryKey(id);
+        if (employee == null) {
+            employee = new Employee();
+        }
+        model.addAttribute("employee", employee);
+        return "manager/employeeedit";
+    }
+
+    @ResponseBody
+    @RequestMapping("deleteEmployee")
+    public String deleteEmployee(HttpServletRequest request) {
+
+        String ids = request.getParameter("id");
+        List<Integer> idss = new ArrayList<>();
+        for (String idd : ids.split(",")) {
+            idss.add(Integer.parseInt(idd));
+        }
+
+        Integer i = employeeService.updateBatch(idss);
+        ResultMsg msg = new ResultMsg();
+        if (i > 0) {
+            msg.setMsg("操作成功");
+            msg.setResultCode("1");
+        } else {
+            msg.setMsg("操作失败");
+            msg.setResultCode("0");
+        }
+        return JSON.toJSONString(msg);
+    }
+
+    @ResponseBody
+    @RequestMapping("updatePwd")
+    public String updatePwd(HttpServletRequest request) {
+
+        String ids = request.getParameter("id");
+        List<Integer> idss = new ArrayList<>();
+        for (String idd : ids.split(",")) {
+            idss.add(Integer.parseInt(idd));
+        }
+
+        Integer i = employeeService.updatePwd(idss);
+        ResultMsg msg = new ResultMsg();
+        if (i > 0) {
+            msg.setMsg("操作成功");
+            msg.setResultCode("1");
+        } else {
+            msg.setMsg("操作失败");
+            msg.setResultCode("0");
+        }
+        return JSON.toJSONString(msg);
+    }
 
     @RequestMapping("/index")
     public String Index(HttpServletRequest request, Model model) {
@@ -424,12 +601,12 @@ public class ManagerController {
     }
 
     @RequestMapping("emailinfo")
-    public String getEmail(HttpServletRequest request,Model model) {
+    public String getEmail(HttpServletRequest request, Model model) {
         Emailset emailset = emailsetService.selectOneEmail();
-        if(emailset==null){
-            emailset=new Emailset();
+        if (emailset == null) {
+            emailset = new Emailset();
         }
-        model.addAttribute("emailinfo",emailset);
+        model.addAttribute("emailinfo", emailset);
         return "manager/email";
     }
 
@@ -464,6 +641,7 @@ public class ManagerController {
         }
         return JSON.toJSONString(msg);
     }
+
 
 }
 

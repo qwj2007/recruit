@@ -9,5 +9,6 @@ import java.util.List;
  * 时间：2019/11/1
  */
 public interface IHrnoticeService {
-    public List<Hrnotice> GetHrnoticeByUserId(String userid);
+     List<Hrnotice> GetHrnoticeByUserId(String userid);
+     Hrnotice selectByPrimaryKey(Integer id);
 }

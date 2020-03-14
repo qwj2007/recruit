@@ -3,7 +3,7 @@ package com.recruit.web.pojo;
 import java.util.Date;
 
 public class Employee {
-    private Integer id;
+    private Integer id=0;
 
     private String userid;
 

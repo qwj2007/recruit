@@ -1,9 +1,11 @@
 package com.recruit.web.controller;
 
 import com.recruit.web.common.LoginUtil;
+import com.recruit.web.pojo.Hrnotice;
 import com.recruit.web.pojo.News;
 import com.recruit.web.pojo.Recruitinfo;
 import com.recruit.web.pojo.Userinfo;
+import com.recruit.web.service.IHrnoticeService;
 import com.recruit.web.service.INewsService;
 import com.recruit.web.service.IRecruitInfoService;
 import com.recruit.web.service.IUserinfoService;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,6 +34,8 @@ public class RecruitInfoController {
     private INewsService newsService;
     @Autowired
     private IUserinfoService userinfoService;
+    @Autowired
+    private IHrnoticeService hrnoticeService;
 
     @RequestMapping("/recruitlist")
     public String getMoreRecruit(Model model, HttpServletRequest request) {
@@ -86,6 +91,30 @@ public class RecruitInfoController {
             return "2";
         }
         return "ok";
+    }
+
+    @RequestMapping("/noticeinfo")
+    public String noticeinfo(Model model, HttpServletRequest request) {
+        Boolean isok = LoginUtil.isLogin(request, model);
+        if (!isok) {
+            return "redict:/";
+        }
+        Integer userid = Integer.parseInt(request.getParameter("id"));
+        List<Hrnotice> list = hrnoticeService.GetHrnoticeByUserId(userid.toString());
+        model.addAttribute("noticelist", list == null ? new ArrayList<Hrnotice>() : list);
+        return "noticeList";
+    }
+
+    @RequestMapping("/noticeDetail")
+    public String noticeDetail(Model model, HttpServletRequest request) {
+        Boolean isok = LoginUtil.isLogin(request, model);
+        if (!isok) {
+            return "redict:/";
+        }
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        Hrnotice hrnotice = hrnoticeService.selectByPrimaryKey(id);
+        model.addAttribute("noticeinfo", hrnotice);
+        return "noticedetail";
     }
 
 }

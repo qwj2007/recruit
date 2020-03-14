@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout/commoncss::common_head(~{::title},~{::link})">
     <meta charset="UTF-8">
-    <title>通知公告</title>
+    <title>人事通知</title>
     <link rel="stylesheet" th:href="@{/css/announcelist.css}" type="text/css">
 </head>
 <body>
@@ -11,18 +11,15 @@
     <div class="annnounce-content container">
         <div class="article-hd">
             您的当前位置：<a th:href="@{/}">首页 ></a>
-            <a th:href="@{/center/newslist}">通知公告 ></a>
-            <span th:text="${newsinfo.title}"></span>
+            <a th:href="@{/center/noticeinfo(id=${noticeinfo.userid})}">人事通知 ></a>
+            <span th:text="${noticeinfo.title}"></span>
         </div>
         <div class="article-cd">
-            <h4 th:text="${newsinfo.title}"></h4>
+            <h4 th:text="${noticeinfo.title}"></h4>
             <div class="subtitle">
-                <p>发布时间：<span th:text="${#dates.format(newsinfo.createtime,'yyyy-MM-dd')}"></span>
-                    <span class="auth"> 作者：<span th:text="${newsinfo.author}"></span></span>
-                    浏览次数：<span th:text="${newsinfo.showcount}"></span>次</p>
+                <p>发布时间：<span th:text="${#dates.format(noticeinfo.createtimes,'yyyy-MM-dd')}"></span>
             </div>
-            <div class="regist-way" th:text="${newsinfo.contents}">
-
+            <div class="regist-way" th:text="${noticeinfo.contents}">
             </div>
         </div>
 

@@ -3,13 +3,13 @@ package com.recruit.web.pojo;
 import java.util.Date;
 
 public class Baseinfo {
-    private Integer id;
+    private Integer id=0;
 
     private String logourl;
 
     private String systemtitle;
 
-    private String footinfo;
+    private String footinfo="";
 
     private Boolean isactive;
 

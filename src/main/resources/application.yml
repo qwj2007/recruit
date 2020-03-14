@@ -3,6 +3,9 @@ server:
 spring:
   application:
     name: recruitweb
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
   datasource:
   #第一个数据源
     recruit:

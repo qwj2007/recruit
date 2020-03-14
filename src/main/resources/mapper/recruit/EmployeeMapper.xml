@@ -32,6 +32,13 @@
     where (userid = #{userid,jdbcType=VARCHAR} or email=#{userid,jdbcType=VARCHAR}) and password=#{password,jdbcType=VARCHAR} and isactive=1
   </select>
 
+  <select id="getEmployeeAll" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from employee
+    where  isactive=1
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from employee
     where id = #{id,jdbcType=INTEGER}
@@ -178,5 +185,25 @@
       photourl = #{photourl,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <update id="updateBatch">
+    update employee
+    set isactive = 0
+    where id in
+    <foreach collection="id" open="(" close=")" separator="," item="id" index="i">
+      #{id}
+    </foreach>
+  </update>
+
+
+  <update id="updatePwd">
+    update employee
+    set password='111111'
+    where isactive=1 and  id in
+    <foreach collection="id" open="(" close=")" separator="," item="id" index="i">
+      #{id}
+    </foreach>
   </update>
 </mapper>

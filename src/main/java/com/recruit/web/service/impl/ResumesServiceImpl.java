@@ -1,5 +1,6 @@
 package com.recruit.web.service.impl;
 
+import com.recruit.web.common.LoginUtil;
 import com.recruit.web.mapper.recruit.ResumesMapper;
 import com.recruit.web.pojo.*;
 import com.recruit.web.service.*;
@@ -95,6 +96,7 @@ public class ResumesServiceImpl implements IResumesService {
         if (userinfo != null) {
             model.addAttribute("userinfo", userinfo);
         }
+        LoginUtil.isLogin(request,model);
         Resumes resumes = resumesService.selctResumeByUserId(userid);
         ResumePicture resumePicture = new ResumePicture();
         resumePicture.setPic_train(cuohao);

@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Mapper
 @Repository
 public interface UserinfoMapper {
@@ -24,4 +26,7 @@ public interface UserinfoMapper {
     Userinfo getUserInfoByNamePwd(@Param("username") String username, @Param("pwd") String pwd);
 
     Userinfo  getUserInfo(@Param("username") String username, @Param("email") String email);
+    List<Userinfo> getUserAll();
+    int deleteUser(@Param("id") List<Integer> id);
+    int updatePwd(@Param("id") List<Integer> id);
 }

@@ -16,6 +16,24 @@ public class Userinfo {
     private Boolean isactive;
 
     private Date createtime;
+    private String truename;
+    private String phone;
+
+    public String getTruename() {
+        return truename;
+    }
+
+    public void setTruename(String truename) {
+        this.truename = truename;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public Integer getId() {
         return id;

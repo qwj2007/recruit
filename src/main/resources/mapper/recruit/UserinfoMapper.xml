@@ -1,110 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.recruit.web.mapper.recruit.UserinfoMapper">
-  <resultMap id="BaseResultMap" type="com.recruit.web.pojo.Userinfo">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="islock" jdbcType="BIT" property="islock" />
-    <result column="isactive" jdbcType="BIT" property="isactive" />
-    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.recruit.web.pojo.Userinfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="pwd" jdbcType="VARCHAR" property="pwd"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="islock" jdbcType="BIT" property="islock"/>
+        <result column="isactive" jdbcType="BIT" property="isactive"/>
+        <result column="createtime" jdbcType="TIMESTAMP" property="createtime"/>
+        <result column="truename" jdbcType="VARCHAR" property="truename"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, username, pwd, email, islock, isactive, createtime
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from userinfo
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from userinfo
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from userinfo
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.recruit.web.pojo.Userinfo">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into userinfo (username, pwd, email, 
-      islock, isactive, createtime
-      )
-    values (#{username,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{islock,jdbcType=BIT}, #{isactive,jdbcType=BIT}, #{createtime,jdbcType=TIMESTAMP}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.recruit.web.pojo.Userinfo">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into userinfo
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="username != null">
-        username,
-      </if>
-      <if test="pwd != null">
-        pwd,
-      </if>
-      <if test="email != null">
-        email,
-      </if>
-      <if test="islock != null">
-        islock,
-      </if>
-      <if test="isactive != null">
-        isactive,
-      </if>
-      <if test="createtime != null">
-        createtime,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="pwd != null">
-        #{pwd,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null">
-        #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="islock != null">
-        #{islock,jdbcType=BIT},
-      </if>
-      <if test="isactive != null">
-        #{isactive,jdbcType=BIT},
-      </if>
-      <if test="createtime != null">
-        #{createtime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.recruit.web.pojo.Userinfo">
-    update userinfo
-    <set>
-      <if test="username != null">
-        username = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="pwd != null">
-        pwd = #{pwd,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null">
-        email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="islock != null">
-        islock = #{islock,jdbcType=BIT},
-      </if>
-      <if test="isactive != null">
-        isactive = #{isactive,jdbcType=BIT},
-      </if>
-      <if test="createtime != null">
-        createtime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.recruit.web.pojo.Userinfo">
+    <insert id="insert" parameterType="com.recruit.web.pojo.Userinfo">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into userinfo (username, pwd, email,
+        islock, isactive, createtime
+        )
+        values (#{username,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
+        #{islock,jdbcType=BIT}, #{isactive,jdbcType=BIT}, #{createtime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.recruit.web.pojo.Userinfo">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into userinfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username != null">
+                username,
+            </if>
+            <if test="pwd != null">
+                pwd,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="islock != null">
+                islock,
+            </if>
+            <if test="isactive != null">
+                isactive,
+            </if>
+            <if test="createtime != null">
+                createtime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="pwd != null">
+                #{pwd,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="islock != null">
+                #{islock,jdbcType=BIT},
+            </if>
+            <if test="isactive != null">
+                #{isactive,jdbcType=BIT},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.recruit.web.pojo.Userinfo">
+        update userinfo
+        <set>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="pwd != null">
+                pwd = #{pwd,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="islock != null">
+                islock = #{islock,jdbcType=BIT},
+            </if>
+            <if test="isactive != null">
+                isactive = #{isactive,jdbcType=BIT},
+            </if>
+            <if test="createtime != null">
+                createtime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.recruit.web.pojo.Userinfo">
     update userinfo
     set username = #{username,jdbcType=VARCHAR},
       pwd = #{pwd,jdbcType=VARCHAR},
@@ -115,23 +117,48 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="getUserInfoByNamePwd" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="getUserInfoByNamePwd" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
     from userinfo
     where (username = #{username} or email=#{username}) and pwd=#{pwd} and isactive=1
   </select>
-  <select id="getUserInfo" parameterType="java.lang.String" resultMap="BaseResultMap">
-    SELECT
-    <include refid="Base_Column_List" />
-    FROM userinfo where isactive=1
-    <if test="username != null">
-      and username=#{username,jdbcType=VARCHAR}
-    </if>
-    <if test="email != null">
-    and email=#{email,jdbcType=VARCHAR}
-  </if>
-     limit 1
+    <select id="getUserInfo" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from userinfo
+        where isactive=1
+        <if test="username != null">
+            and username=#{username,jdbcType=VARCHAR}
+        </if>
+        <if test="email != null">
+            and email=#{email,jdbcType=VARCHAR}
+        </if>
+        limit 1
+    </select>
 
+    <select id="getUserAll" resultMap="BaseResultMap">
+    select a.*,b.truename,b.phone from userinfo a
+    LEFT JOIN  resumes b on a.id=b.userid
+    where a.isactive=1
   </select>
+
+    <update id="deleteUser">
+        update userinfo
+        set isactive = 0
+        where id in
+        <foreach collection="id" open="(" close=")" separator="," item="id" index="i">
+            #{id}
+        </foreach>
+    </update>
+
+
+    <update id="updatePwd">
+        update userinfo
+        set pwd='111111'
+        where isactive=1 and id in
+        <foreach collection="id" open="(" close=")" separator="," item="id" index="i">
+            #{id}
+        </foreach>
+    </update>
 </mapper>

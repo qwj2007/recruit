@@ -2,9 +2,12 @@
     <div class="rekit_1e8090 rekit_dc1e22">
         <div class="rekit_2365cd">
             <a href="/">
-                <img th:src="@{/uploadfiles/XiTongPeiZhi/b7102993-869c-4308-8536-f752b39a4df0.png}" class='png'/>
+                <img th:src="${baseinfo.logourl}" class="png"/>
+                <!--
+                <img th:src="@{/uploadfiles/XiTongPeiZhi/b7102993-869c-4308-8536-f752b39a4df0.png}" class='png'/>-->
             </a>
             <label>招聘频道</label>
+
         </div>
 
         <div  class="rekit_9b0454">
@@ -116,7 +119,8 @@
 <nav th:fragment="bottombar">
     <div class="foot rekit_c5bab6 rekit_7f6040 rekit_96a192">
         <div class="rekit_1e8090 rekit_470b42">
-            <div class="rekit_86e5c5">
+            <div class="rekit_86e5c5" th:html="${baseinfo.footinfo}">
+
                 <li>Copyright &copy; 2011 - 2016 Beijing Vocational College Of Transportation, All Rights Reserved.</li>
                 <li><span>地址：北京市大兴区黄村清源路北（邮编：102618）</span><span>电话：010-69204968</span>
                     <span>京ICP备14060689号</span><span>京公网安备11011502002538</span>

@@ -6,6 +6,8 @@ import com.recruit.web.service.IUserinfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * 作者：qiwj
  * 时间：2019/11/28
@@ -55,5 +57,20 @@ public class UserinfoServiceImpl implements IUserinfoService{
     @Override
     public int updateByPrimaryKey(Userinfo record) {
         return userinfoMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<Userinfo> getUserAll() {
+        return userinfoMapper.getUserAll();
+    }
+
+    @Override
+    public int deleteUser(List<Integer> id) {
+        return userinfoMapper.deleteUser(id);
+    }
+
+    @Override
+    public int updatePwd(List<Integer> id) {
+        return userinfoMapper.updatePwd(id);
     }
 }

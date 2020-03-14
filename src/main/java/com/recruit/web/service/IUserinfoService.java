@@ -1,6 +1,9 @@
 package com.recruit.web.service;
 
 import com.recruit.web.pojo.Userinfo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 作者：qiwj
@@ -21,4 +24,8 @@ public interface IUserinfoService {
     int updateByPrimaryKeySelective(Userinfo record);
 
     int updateByPrimaryKey(Userinfo record);
+    List<Userinfo> getUserAll();
+
+    int deleteUser( List<Integer> id);
+    int updatePwd(List<Integer> id);
 }

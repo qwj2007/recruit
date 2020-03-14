@@ -1,7 +1,10 @@
 package com.recruit.web.service;
 
 import com.recruit.web.pojo.Employee;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 作者：qiwj
@@ -9,5 +12,22 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface IEmployeeService {
-    Employee getEmployeeByUserIdPwd(String userid,String pwd);
+    Employee getEmployeeByUserIdPwd(String userid, String pwd);
+
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(Employee record);
+
+    int insertSelective(Employee record);
+
+    Employee selectByPrimaryKey(Integer id);
+
+    int updateByPrimaryKeySelective(Employee record);
+
+    int updateByPrimaryKey(Employee record);
+
+    List<Employee> getEmployeeAll();
+
+    int updateBatch(List<Integer> id);
+    int updatePwd( List<Integer> id);
 }
