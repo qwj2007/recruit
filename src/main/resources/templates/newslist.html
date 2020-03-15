@@ -10,8 +10,9 @@
 </head>
 <body>
 <div th:replace="layout/commonjs::common_js(~{::script})">
-    <script src="/js/slides.jquery.js"></script>
-    <script type="text/javascript" src="js/login.js"></script>
+    <script th:src="@{/js/slides.jquery.js}"></script>
+    <script th:src="@{/js/contextpath.js}" type="text/javascript"></script>
+    <script type="text/javascript" th:src="@{/js/login.js}"></script>
 </div>
 <div th:replace="layout/common::topbar"></div>
 <div class="annnounce-container">
