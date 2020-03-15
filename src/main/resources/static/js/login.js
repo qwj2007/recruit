@@ -1,11 +1,10 @@
 function userlogin() {
-
     var userName = document.getElementById("username").value; //账号
     var pwd = document.getElementById("userpwd").value; //密码
     var parm = { username: userName, pwd: pwd };
     var url=getContextPath();
     $.ajax({
-        url: "/index/login",
+        url: url+"/index/login",
         type: "post",
         data: parm,
         async: false,
