@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>首页</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="icon" th:href="@{favicon.ico}">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all"/>
+    <link rel="stylesheet" th:href="@{/css/index.css}" media="all"/>
+
+</head>
+<body>
+
+<blockquote class="layui-elem-quote quoteBox">
+    <form class="layui-form">
+        <div class="layui-inline" style="display: none">
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input searchVal" placeholder=""/>
+            </div>
+            <a class="layui-btn search_btn" data-type="reload">搜索</a>
+        </div>
+        <div class="layui-inline">
+            <a class="layui-btn layui-btn-normal addManager_btn"><i class="layui-icon">&#xe61f;</i>上传Banner图片</a>
+        </div>
+    </form>
+</blockquote>
+<table id="managerList" lay-filter="managerList">
+
+</table>
+<style type="text/css">
+    .layui-table-cell {
+        text-align: center;
+        height: auto;
+        white-space: normal;
+    }
+
+    .layui-table img {
+        max-width: 300px
+    }</style>
+<!--操作-->
+<script type="text/html" id="managerListBar">
+    {{#  if(d.isdisplay == true){ }}
+    <a class="layui-btn layui-btn-xs" lay-event="edit1">不显示</a>
+    {{#  }else if(d.isdisplay==false){ }}
+    <a class="layui-btn layui-btn-xs" lay-event="edit0">显示</a>
+    {{# }else { }}
+
+    {{# } }}
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+</script>
+
+<script th:src="@{/js/contextpath.js}"></script>
+<script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/js/manager/bannerList.js}"></script>
+</body>

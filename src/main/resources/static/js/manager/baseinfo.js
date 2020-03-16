@@ -44,7 +44,6 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'upload', 'layedit'], function ()
 
 
     form.on("submit(btn_addbaseinfo)", function (data) {
-        debugger
         //获取防伪标记
         $.ajax({
             type: 'POST',

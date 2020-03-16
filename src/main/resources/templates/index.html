@@ -45,18 +45,20 @@
     </div>
     <div class="rekit_1e8090 rekit_c727ac">
         <div class="rekit_417424">
-
+            <input id="PageContext" type="hidden" value="${pageContext.request.contextPath}"/>
             <div class="rekit_79bd0b slides" id="slides">
-                <div class="slides_container rekit_c7b371">
-                    <div class="slide">
+                <div class="slides_container rekit_c7b371" th:each="emp:${bannerList}">
+                    <div class="slide" >
                         <a rel='nofollow'>
-                            <img th:src="@{/images/banner01.png}" height='300' width='700'/></a>
-                        <input id="PageContext" type="hidden" value="${pageContext.request.contextPath}"/>
+                            <img th:src="${emp.imageurl}" src=""/>
+                            <!--<img th:src="@{/images/banner01.jpg}" height='300' width='700'/>-->
+                            </a>
                     </div>
+                    <!--
                     <div class="slide">
                         <a rel='nofollow'>
                             <img th:src="@{/images/banner02.png}" height='300' width='700'/></a>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>

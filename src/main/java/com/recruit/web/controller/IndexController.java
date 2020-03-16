@@ -34,15 +34,20 @@ public class IndexController {
     private IUserinfoService userinfoService;
     @Autowired
     private IEmployeeService employeeService;
+    @Autowired
+    private IBannerService bannerService;
 
     @RequestMapping("/")
     public String GetInfos(Model model, HttpServletRequest request) {
+        List<Banner> listbanner=bannerService.selectBanner();
+
         List<Recruitinfo> list = recruitInfoService.selectRecruitInfos();
         List<News> newslist = newsService.selectNews();
         LoginUtil.isLogin(request, model);
         //if(list!=null) {
         model.addAttribute("recruitinfos", list);
         model.addAttribute("news", newslist);
+        model.addAttribute("bannerList",listbanner);
         //}
         return "index";
     }

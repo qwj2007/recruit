@@ -10,7 +10,9 @@ import com.recruit.web.util.ClientIp;
 import com.recruit.web.util.CookieManager;
 import com.recruit.web.util.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,9 +23,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
 
 
 /**
@@ -55,6 +57,9 @@ public class ManagerController {
     @Autowired
     private IUserinfoService userinfoService;
 
+    @Autowired
+    private IBannerService bannerService;
+
     @RequestMapping("userinfoList")
     public String userinfoList() {
         return "manage/userinfolist";
@@ -72,6 +77,7 @@ public class ManagerController {
         System.out.println(jsons);
         return jsons;
     }
+
     @ResponseBody
     @RequestMapping("deleteUserInfo")
     public String deleteUserInfo(HttpServletRequest request) {
@@ -641,7 +647,74 @@ public class ManagerController {
         return JSON.toJSONString(msg);
     }
 
+    @RequestMapping("bannerlist")
+    public String bannerList() {
+        return "manage/bannerlist";
+    }
 
+    @RequestMapping("loadBanner")
+    @ResponseBody
+    public String loadBanner() {
+        List<Banner> list = bannerService.selectBanner();
+        TableDataModel tableDataModel = new TableDataModel();
+        tableDataModel.setCount(list.size());
+        tableDataModel.setMsg("操作成功");
+        tableDataModel.setCode("0");
+        tableDataModel.setData(list);
+        String jsons = JSON.toJSONString(tableDataModel);
+        System.out.println(jsons);
+        return jsons;
+    }
+
+    @RequestMapping("uploadbanner")
+    public String uploadbanner() {
+        return "manage/uploadbanner";
+    }
+
+    @RequestMapping(value = "saveBanner", method = {RequestMethod.POST})
+    @Transactional
+    @ResponseBody
+    public String saveBanner(HttpServletRequest request) {
+        /**
+         * 你应该在这里做service层的调用
+         * 你应该结果返回数据格式如定义返回格式：1代表成功，0代表失败
+         * 总之你应该规范
+         * 我这里直接返回1，代表成功。
+         */
+        ResultMsg msg = new ResultMsg();
+        try {
+            String urls = request.getParameter("imageurls");
+            String[] urlss = urls.split(",");
+            for (String linkurl : urlss) {
+                Banner banner = new Banner();
+                banner.setImageurl(linkurl);
+                bannerService.insertSelective(banner);
+                msg.setMsg("操作成功");
+                msg.setResultCode("1");
+            }
+        } catch (Exception e) {
+            msg.setMsg("操作异常");
+            msg.setResultCode("11");
+        }
+        return JSON.toJSONString(msg);
+    }
+
+    @ResponseBody
+    @RequestMapping("updateBanner")
+    public String updateBanner(HttpServletRequest request) {
+        ResultMsg msg = new ResultMsg();
+        int id = Integer.parseInt(request.getParameter("id"));
+        String flag = request.getParameter("flag");
+        int result = bannerService.updateByPrimaryKeySelective(id, flag);
+        if(result>0){
+            msg.setMsg("操作成功");
+            msg.setResultCode("1");
+        }else{
+            msg.setMsg("操作失败");
+            msg.setResultCode("0");
+        }
+        return JSON.toJSONString(msg);
+    }
 }
 
 
