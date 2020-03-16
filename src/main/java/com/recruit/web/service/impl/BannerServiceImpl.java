@@ -42,7 +42,7 @@ public class BannerServiceImpl implements IBannerService {
                 banner.setIsdisplay(true);
             }
             else if(isShow.equals("0")){
-                banner.setIsdisplay(true);
+                banner.setIsdisplay(false);
             }
         }
         return bannerMapper.updateByPrimaryKeySelective(banner);
