@@ -73,7 +73,8 @@ public class RecruitInfoController {
     }
 
     @RequestMapping("/register")
-    public String registerUserInfo() {
+    public String registerUserInfo(Model model, HttpServletRequest request) {
+        LoginUtil.isLogin(request, model);
         return "regist";
     }
 

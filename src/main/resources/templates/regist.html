@@ -20,8 +20,8 @@
 <body>
 <div th:replace="layout/commonjs::common_js(~{::script})">
     <!--[if IE 6]>
-    <script src="/Scripts/png.js"></script><![endif]-->
-    <script src="/js/register.js"></script>
+    <script th:src="@{/Scripts/png.js}"></script><![endif]-->
+    <script th:src="@{/js/register.js}"></script>
 </div>
 <div th:replace="layout/common::topbar">
 </div>
