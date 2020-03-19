@@ -58,7 +58,6 @@ public class ResumeController {
     public String GetNoticeCount(HttpServletRequest request) {
 
         String userid = CookieManager.getInstance().getCookie(request, "userid");
-        userid="22";
         if(userid==null||userid==""){
             return "0";
         }
