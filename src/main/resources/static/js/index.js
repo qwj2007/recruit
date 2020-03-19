@@ -1,7 +1,7 @@
-var $,tab,dataStr,layer;
-var url=getContextPath();
+var $, tab, dataStr, layer;
+var url = getContextPath();
 layui.config({
-    base: url+"/js/"
+    base: url + "/js/"
 }).extend({
     "bodyTab": "bodyTab"
 });
@@ -12,9 +12,10 @@ layui.use(['bodyTab', 'form', 'element', 'layer', 'jquery'], function () {
     layer = parent.layer === undefined ? layui.layer : top.layer;
     tab = layui.bodyTab({
         openTabNum: "50",  //最大可打开窗口数量
-        url: url+"/manage/getMenu/" //获取菜单json地址
+        url: url + "/manage/getMenu/" //获取菜单json地址
     });
     tab.render();
+
     //通过顶部菜单获取左侧二三级菜单   注：此处只做演示之用，实际开发中通过接口传参的方式获取导航数据
     function getData(json) {
         $.getJSON(tab.tabConfig.url, function (data) {
@@ -22,7 +23,7 @@ layui.use(['bodyTab', 'form', 'element', 'layer', 'jquery'], function () {
                 dataStr = data.contentManagement;
                 //重新渲染左侧菜单
                 tab.render();
-            }else if (json === "systemSettings") {
+            } else if (json === "systemSettings") {
                 dataStr = data.systemSettings;
                 //重新渲染左侧菜单
                 tab.render();
@@ -33,6 +34,7 @@ layui.use(['bodyTab', 'form', 'element', 'layer', 'jquery'], function () {
             }
         });
     }
+
     //页面加载时判断左侧菜单是否显示
     //通过顶部菜单获取左侧菜单
     $(".topLevelMenus li,.mobileTopLevelMenus dd").click(function () {
@@ -82,7 +84,7 @@ layui.use(['bodyTab', 'form', 'element', 'layer', 'jquery'], function () {
     $(".clearCache").click(function () {
         window.sessionStorage.clear();
         window.localStorage.clear();
-        var index = layer.msg('清除缓存中，请稍候', { icon: 16, time: false, shade: 0.8 });
+        var index = layer.msg('清除缓存中，请稍候', {icon: 16, time: false, shade: 0.8});
         setTimeout(function () {
             layer.close(index);
             layer.msg("缓存清除成功！");
@@ -132,12 +134,12 @@ layui.use(['bodyTab', 'form', 'element', 'layer', 'jquery'], function () {
 });
 
 //打开新窗口
-function addTab(_this){
-	tab.tabAdd(_this);
+function addTab(_this) {
+    tab.tabAdd(_this);
 }
 
 //捐赠弹窗
-function donation(){
+function donation() {
     layer.tab({
         area: ['260px', '380px'],
         tab: [{
@@ -145,14 +147,14 @@ function donation(){
             content: "<div style='padding:25px;overflow:hidden;background:#d2d0d0;'><img src='images/wechat.png' style='width:210px;height:286px'></div>"
         }, {
             title: "支付宝",
-                content: "<div style='padding:25px;overflow:hidden;background:#d2d0d0;'><img src='images/alipay.jpg'  style='width:210px;height:286px'></div>"
+            content: "<div style='padding:25px;overflow:hidden;background:#d2d0d0;'><img src='images/alipay.jpg'  style='width:210px;height:286px'></div>"
         }]
     });
 }
 
 //图片管理弹窗
-function showImg(){
-    $.getJSON('json/images.json', function(json){
+function showImg() {
+    $.getJSON('json/images.json', function (json) {
         var res = json;
         layer.photos({
             photos: res,

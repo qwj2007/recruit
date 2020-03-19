@@ -33,7 +33,7 @@ import java.util.*;
  * 时间：2020/3/7
  */
 @Controller
-@RequestMapping("manage")
+@RequestMapping(value = "manage")
 public class ManagerController {
     @Autowired
     private IMenuService menuService;
@@ -60,12 +60,13 @@ public class ManagerController {
     @Autowired
     private IBannerService bannerService;
 
-    @RequestMapping("userinfoList")
+    @RequestMapping(value = "userinfoList", produces = {"text/html;charset=UTF-8;", "application/json"})
     public String userinfoList() {
         return "manage/userinfolist";
     }
 
-    @RequestMapping("loadUserinfo")
+    @RequestMapping(value = "loadUserinfo", method = {RequestMethod.POST, RequestMethod.GET},
+            produces = {"text/html;charset=UTF-8;", "application/json"})
     @ResponseBody
     public String loadUserInfo() {
         List<Userinfo> list = userinfoService.getUserAll();
@@ -121,12 +122,12 @@ public class ManagerController {
         return JSON.toJSONString(msg);
     }
 
-    @RequestMapping("employeeList")
+    @RequestMapping(value = "employeeList", method = {RequestMethod.GET})
     public String employeeList() {
         return "/manage/employeelist";
     }
 
-    @RequestMapping("loadEmployee")
+    @RequestMapping(value = "loadEmployee", produces = {"text/html;charset=UTF-8;", "application/json"})
     @ResponseBody
     public String loadEmployee() {
         List<Employee> list = employeeService.getEmployeeAll();
@@ -139,7 +140,7 @@ public class ManagerController {
         return jsons;
     }
 
-    @RequestMapping("editEmployee")
+    @RequestMapping(value = "editEmployee")
     @ResponseBody
     public String editEmployee(HttpServletRequest request, Model model) {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -233,7 +234,7 @@ public class ManagerController {
         return JSON.toJSONString(msg);
     }
 
-    @RequestMapping("/index")
+    @RequestMapping(value = "/index", produces = {"text/html;charset=UTF-8;", "application/json"})
     public String Index(HttpServletRequest request, Model model) {
         String userid = CookieManager.getInstance().getCookie(request, "employeeid");
         String username = CookieManager.getInstance().getCookie(request, "employeename");
@@ -242,7 +243,7 @@ public class ManagerController {
         return "/manage/index";
     }
 
-    @RequestMapping("/main")
+    @RequestMapping(value = "/main", produces = {"text/html;charset=UTF-8;", "application/json"})
     public String main(HttpServletRequest request, Model model) {
 
         loginParam param = new loginParam();
@@ -254,7 +255,7 @@ public class ManagerController {
         return "manage/main";
     }
 
-    @RequestMapping("getMenu")
+    @RequestMapping(value = "getMenu", method = {RequestMethod.GET}, produces = {"text/html;charset=UTF-8;", "application/json"})
     @ResponseBody
     public String getMenu() {
         String jsons = menuService.getMenuJson();
@@ -262,7 +263,7 @@ public class ManagerController {
         return jsons;
     }
 
-    @RequestMapping("recruitlist")
+    @RequestMapping(value = "recruitlist", produces = {"text/html;charset=UTF-8;", "application/json"})
     public String recruitlist(Model model) {
 
         return "manage/recruitlist";
@@ -358,7 +359,7 @@ public class ManagerController {
         return JSON.toJSONString(msg);
     }
 
-    @RequestMapping("loadRecruitData")
+    @RequestMapping(value = "loadRecruitData", produces = {"text/html;charset=UTF-8;", "application/json"})
     @ResponseBody
     public String loadRecruitList() {
         List<Recruitinfo> list = recruitInfoService.selectAllRecruitInfos();
@@ -371,13 +372,13 @@ public class ManagerController {
         return jsons;
     }
 
-    @RequestMapping("newsinfo")
+    @RequestMapping(value = "newsinfo", produces = {"text/html;charset=UTF-8;", "application/json"})
     public String getNewsInfo() {
         return "manage/newsinfo";
     }
 
     @ResponseBody
-    @RequestMapping("loadNewsInfos")
+    @RequestMapping(value = "loadNewsInfos", produces = {"text/html;charset=UTF-8;", "application/json"})
     public String loadNewsInfos() {
         List<News> list = newsService.selectNewInfos();
         TableDataModel tableDataModel = new TableDataModel();
@@ -435,7 +436,7 @@ public class ManagerController {
     }
 
 
-    @RequestMapping("loadresumeList")
+    @RequestMapping(value = "loadresumeList",method = {RequestMethod.POST}, produces = {"text/html;charset=UTF-8;", "application/json"})
     @ResponseBody
     public String getResumeList() {
         List<Resumes> list = resumesService.selectResumeAll();
@@ -450,7 +451,7 @@ public class ManagerController {
         return jsons;
     }
 
-    @RequestMapping("resumeList")
+    @RequestMapping(value = "resumeList", method = {RequestMethod.GET}, produces = {"text/html;charset=UTF-8;", "application/json"})
     public String resumeList() {
         return "manage/resumelist";
     }
@@ -476,13 +477,13 @@ public class ManagerController {
         return jsons;
     }
 
-    @RequestMapping("navicationList")
+    @RequestMapping(value = "navicationList", produces = {"text/html;charset=UTF-8;", "application/json"})
     public String navicationList() {
         String url = "/manage/navicationList";
         return url;
     }
 
-    @RequestMapping("loadNavication")
+    @RequestMapping(value = "loadNavication", produces = {"text/html;charset=UTF-8;", "application/json"})
     @ResponseBody
     public String loadNavication() {
         List<Navigation> list = navigationService.selectNavigation();
@@ -553,7 +554,7 @@ public class ManagerController {
         return JSON.toJSONString(msg);
     }
 
-    @RequestMapping("baseinfo")
+    @RequestMapping(value = "baseinfo", produces = {"text/html;charset=UTF-8;", "application/json"})
     public String getBaseInfo(HttpServletRequest request, Model model) {
         Baseinfo baseinfo = baseInfoService.selectBaseInfo();
         if (baseinfo == null) {
@@ -647,12 +648,12 @@ public class ManagerController {
         return JSON.toJSONString(msg);
     }
 
-    @RequestMapping("bannerlist")
+    @RequestMapping(value = "bannerlist", produces = {"text/html;charset=UTF-8;", "application/json"})
     public String bannerList() {
         return "manage/bannerlist";
     }
 
-    @RequestMapping("loadBanner")
+    @RequestMapping(value = "loadBanner", produces = {"text/html;charset=UTF-8;", "application/json"})
     @ResponseBody
     public String loadBanner() {
         List<Banner> list = bannerService.selectBanner();
@@ -671,7 +672,7 @@ public class ManagerController {
         return "manage/uploadbanner";
     }
 
-    @RequestMapping(value = "saveBanner", method = {RequestMethod.POST})
+    @RequestMapping(value = "saveBanner", method = {RequestMethod.POST}, produces = {"text/html;charset=UTF-8;", "application/json"})
     @Transactional
     @ResponseBody
     public String saveBanner(HttpServletRequest request) {
@@ -706,10 +707,10 @@ public class ManagerController {
         int id = Integer.parseInt(request.getParameter("id"));
         String flag = request.getParameter("flag");
         int result = bannerService.updateByPrimaryKeySelective(id, flag);
-        if(result>0){
+        if (result > 0) {
             msg.setMsg("操作成功");
             msg.setResultCode("1");
-        }else{
+        } else {
             msg.setMsg("操作失败");
             msg.setResultCode("0");
         }

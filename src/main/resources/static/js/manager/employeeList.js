@@ -16,6 +16,7 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
         limits: [10, 15, 20, 25],
         limit: 10,
         id: "managerListTable",
+        method:'post',
         cols: [
             [
                 {type: "checkbox", fixed: "left", width: 50},
