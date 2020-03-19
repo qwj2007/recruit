@@ -18,4 +18,6 @@ public interface BannerMapper {
     int updateByPrimaryKey(Banner record);
 
     List<Banner> selectBanner();
+    List<Banner> selectBannerQT();
+
 }

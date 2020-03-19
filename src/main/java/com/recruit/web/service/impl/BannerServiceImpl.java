@@ -27,6 +27,13 @@ public class BannerServiceImpl implements IBannerService {
     }
 
     @Override
+    public List<Banner> selectBannerQT() {
+        List<Banner> list = bannerMapper.selectBannerQT();
+        if (list != null) return list;
+        else return new ArrayList<>();
+    }
+
+    @Override
     public int insertSelective(Banner record) {
         return bannerMapper.insertSelective(record);
     }

@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface IBannerService {
     List<Banner> selectBanner();
+    List<Banner> selectBannerQT();
     int insertSelective(Banner record);
     int updateByPrimaryKeySelective(int id, String isShow);
 }

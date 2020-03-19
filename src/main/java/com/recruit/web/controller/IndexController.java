@@ -39,8 +39,7 @@ public class IndexController {
 
     @RequestMapping("/")
     public String GetInfos(Model model, HttpServletRequest request) {
-        List<Banner> listbanner=bannerService.selectBanner();
-
+        List<Banner> listbanner=bannerService.selectBannerQT();
         List<Recruitinfo> list = recruitInfoService.selectRecruitInfos();
         List<News> newslist = newsService.selectNews();
         LoginUtil.isLogin(request, model);
