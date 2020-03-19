@@ -33,6 +33,8 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'upload', 'layedit'], function ()
             //上传成功
         }
         , error: function () {
+            debugger
+            // $("#hid_logourl").val(res.data.src);
             //演示失败状态，并实现重传
             var demoText = $('#demoText');
             demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
@@ -41,8 +43,6 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'upload', 'layedit'], function ()
             });
         }
     });
-
-
     form.on("submit(btn_addbaseinfo)", function (data) {
         //获取防伪标记
         $.ajax({

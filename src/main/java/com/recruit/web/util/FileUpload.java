@@ -1,5 +1,6 @@
 package com.recruit.web.util;
 
+import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,16 +34,16 @@ public class FileUpload {
     public static File getImgDirFile() {
         String os = System.getProperty("os.name");
         //文件保存路径
-        String filePath="";
-        if(os.toLowerCase().startsWith("win")){
+        String filePath = "";
+        if (os.toLowerCase().startsWith("win")) {
             //windows下的路径
-            filePath ="d:/pictureUpload/images/upload/";
-        }else {
+            filePath = "d:/pictureUpload/images/upload/";
+        } else {
             //linux下的路径
-            filePath="/usr/pictureUpload/images/upload/";
+            filePath = "/usr/pictureUpload/images/upload/";
         }
 
-       // String fileDirPath = new String("src/main/resources/" + IMG_PATH_PREFIX);
+        // String fileDirPath = new String("src/main/resources/" + IMG_PATH_PREFIX);
         String fileDirPath = new String(filePath);
         File fileDir = new File(fileDirPath);
         if (!fileDir.exists()) {
@@ -51,12 +52,13 @@ public class FileUpload {
         }
         return fileDir;
     }
-    public static Object headImg(@RequestParam(value = "file", required = false) MultipartFile file,
-                                 HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+    public static String headImg(
+            @RequestParam(value = "file", required = false) MultipartFile file,
+            HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
         String filepath = "";
         //保存上传
-        OutputStream out = null;
-        InputStream fileInput = null;
         String originalName = "";
         try {
             if (file != null) {
@@ -72,15 +74,6 @@ public class FileUpload {
             }
         } catch (Exception e) {
         } finally {
-            try {
-                if (out != null) {
-                    out.close();
-                }
-                if (fileInput != null) {
-                    fileInput.close();
-                }
-            } catch (IOException e) {
-            }
         }
         Map<String, Object> map2 = new HashMap<>();
         Map<String, Object> map = new HashMap<>();
@@ -88,7 +81,8 @@ public class FileUpload {
         map.put("msg", "");
         map.put("data", map2);
         map2.put("src", "../images/upload/" + originalName);
-        return map;
+        String result = JSON.toJSONString(map);
+        return result;
     }
 
 }

@@ -45,17 +45,18 @@ public class MyWebMvcConfig extends WebMvcConfigurationSupport {
     /*
     * 防止中文乱码
     * */
+
     @Override
     protected void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         super.configureMessageConverters(converters);
         converters.add(responseBodyConverter());
-    }
+    }//*/
 
     @Bean
     public HttpMessageConverter responseBodyConverter() {
         StringHttpMessageConverter converter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
         return converter;
-    }
+    }//*/
 
 
 }//*/

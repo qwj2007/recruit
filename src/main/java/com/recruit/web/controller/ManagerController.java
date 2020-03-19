@@ -569,11 +569,12 @@ public class ManagerController {
      *
      * @return {Result}
      */
-    @RequestMapping(value = "/uploadimage", method = {RequestMethod.POST})
+    @RequestMapping(value = "/uploadimage")
     @ResponseBody
-    public Object headImg(@RequestParam(value = "file", required = false) MultipartFile file,
+    public String headImg(@RequestParam(value = "file", required = false) MultipartFile file,
                           HttpServletRequest request, HttpServletResponse response) throws Exception {
-        return FileUpload.headImg(file, request, response);
+        String result= FileUpload.headImg(file, request, response);
+        return result;
     }
 
     @RequestMapping(value = "editbaseinfo", method = {RequestMethod.POST})
