@@ -1,9 +1,11 @@
 package com.recruit.web.common;
 
 import com.recruit.web.pojo.Baseinfo;
+import com.recruit.web.pojo.Hrnotice;
 import com.recruit.web.pojo.Navigation;
 import com.recruit.web.pojo.Resumes;
 import com.recruit.web.service.IBaseInfoService;
+import com.recruit.web.service.IHrnoticeService;
 import com.recruit.web.service.INavigationService;
 import com.recruit.web.service.IResumesService;
 import com.recruit.web.util.CookieManager;
@@ -36,13 +38,19 @@ public class LoginUtil {
     @Autowired
     private IBaseInfoService baseInfoService;
     @Autowired
-    private  static IBaseInfoService staticBaseInfoService;
+    private static IBaseInfoService staticBaseInfoService;
+
+    @Autowired
+    private IHrnoticeService hrnoticeService;
+    @Autowired
+    private static IHrnoticeService statichrnoticeservice;
 
     @PostConstruct
     public void init() {
         staticresume = resumesService;
         staticnavigationService = navigationService;
-        staticBaseInfoService=baseInfoService;
+        staticBaseInfoService = baseInfoService;
+        statichrnoticeservice = hrnoticeService;
     }
 
     public static Boolean isLogin(HttpServletRequest request, Model model) {
@@ -54,11 +62,10 @@ public class LoginUtil {
             model.addAttribute("menus", new ArrayList<Navigation>());
         }
 
-        Baseinfo baseinfo=staticBaseInfoService.selectBaseInfo();
-        if(baseinfo!=null){
+        Baseinfo baseinfo = staticBaseInfoService.selectBaseInfo();
+        if (baseinfo != null) {
             model.addAttribute("baseinfo", baseinfo);
-        }
-        else{
+        } else {
             model.addAttribute("baseinfo", new Baseinfo());
         }
 
@@ -79,6 +86,8 @@ public class LoginUtil {
 
         }
 
+        //  List<Hrnotice> list = statichrnoticeservice.GetHrnoticeByUserId(userid);
+        // model.addAttribute("hrnoticecount", list != null ? "("+list.size()+")" : "(0)");
         return true;
     }
 

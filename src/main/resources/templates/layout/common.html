@@ -50,11 +50,11 @@
     <script  th:inline="javascript">
         var urls = [[${#httpServletRequest.getContextPath()}]];
         $(function () {
-            url = urls + "/resume/getcount";
-            $.post(url, {}, function (data) {
+           var url = urls + "/resume/getcount";
+            $.get(url, function (data) {
                 $("#count").text("（" + data + "）");
             });
-        });
+        });//*/
         function ChangePassword() {
             location.href =urls+ '/resume/changepassword';
         }
@@ -102,7 +102,7 @@
                 </div>
                 <div class="port-rt">
                     <span class="name" th:text="${username}"></span>
-                    <span>HR 通知 <span class="orange" id="count">（11）</span></span>
+                    <span>HR 通知 <span class="orange" id="count" th:text="${hrnoticecount}"></span></span>
                 </div>
             </div>
             <div class="enter">

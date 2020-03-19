@@ -42,7 +42,6 @@
         }
     </style>
     <script type="text/javascript">
-        debugger
         var rooturl='[[${#httpServletRequest.getContextPath()}]]';
         function ChangePassword() {
             location.href = rooturl+'/resume/changepassword';
@@ -54,7 +53,7 @@
 
         $(function () {
             var url = rooturl+"/resume/getcount";
-            $.post(url, {}, function (data) {
+            $.get(url, function (data) {
                 $("#NoticeCount").text("（" + data + "）");
             });
         });

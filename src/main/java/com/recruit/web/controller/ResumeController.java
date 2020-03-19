@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -52,16 +53,21 @@ public class ResumeController {
     private IRecruitInfoService recruitInfoService;
 
 
-    @RequestMapping("/getcount")
+    @RequestMapping( value = "getcount")
     @ResponseBody
-    public Integer GetNoticeCount(HttpServletRequest request) {
+    public String GetNoticeCount(HttpServletRequest request) {
 
         String userid = CookieManager.getInstance().getCookie(request, "userid");
+        userid="22";
+        if(userid==null||userid==""){
+            return "0";
+        }
         List<Hrnotice> list = hrnoticeService.GetHrnoticeByUserId(userid);
         if (list != null) {
-            return list.size();
+            Integer count=list.size();
+            return Integer.toString(count);
         }
-        return 0;
+        return "0";
     }
 
     @RequestMapping("/applyjob")
