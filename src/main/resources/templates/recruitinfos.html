@@ -18,6 +18,7 @@
 </head>
 <body>
 <div th:replace="layout/commonjs::common_js(~{::script})">
+    <script th:src="@{/js/login.js}"></script>
     <script type="text/javascript">
         var rooturl='[[${#httpServletRequest.getContextPath()}]]';
         function ShengQing() {
