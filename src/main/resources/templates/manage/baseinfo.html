@@ -13,16 +13,22 @@
     <link rel="icon" th:href="@{favicon.ico}">
     <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all"/>
     <link rel="stylesheet" th:href="@{/css/index.css}" media="all"/>
+    <style type="text/css">
+        .layui-layedit {
+            height: 250px;
+        }
+    </style>
 </head>
 <body>
-<form class="layui-form layui-form-pane" style="width:50%;" >
+
+<form class="layui-form layui-form-pane" style="width:50%;">
     <div class="layui-form-item layui-row layui-col-xs12">
         <label class="layui-form-label">LOGO</label>
         <div class="layui-input-block">
             <div class="layui-upload">
                 <div class="layui-upload-list">
                     <img class="layui-upload-img" th:src="${baseinfo.logourl}"
-                         id="logourl" style="width: 750px;height: 30px;border: 1px"/>
+                         id="logourl" style="width: 750px;height: 30px;border: 1px solid #CCCCCC"/>
                     <p id="demoText"></p>
                     <input type="hidden" th:value="${baseinfo.logourl}" id="hid_logourl"/>
                     <input type="hidden" th:value="${baseinfo.id}" id="id"/>
@@ -33,26 +39,30 @@
     <div class="layui-form-item layui-row layui-col-xs12">
         <label class="layui-form-label">系统名称</label>
         <div class="layui-input-block">
-            <input type="text" name="systemtitle" class="layui-input" id="systemtitle" th:value="${baseinfo.systemtitle}"
+            <input type="text" name="systemtitle" class="layui-input" id="systemtitle"
+                   th:value="${baseinfo.systemtitle}"
                    placeholder=""/>
         </div>
     </div>
     <div class="layui-form-item layui-row layui-col-xs12" style="margin-bottom: 300px">
         <label class="layui-form-label">页脚信息</label>
         <div class="layui-input-block">
-            <textarea id="footinfo" style="display: none;border: 1px" th:text="${baseinfo.footinfo}">23213213213123123123
+ <textarea id="footinfobase" class="layui-textarea" style="display: none;width: 200px" th:text="${baseinfo.footinfo}">
             </textarea>
         </div>
     </div>
 
+
     <div class="layui-form-item layui-row layui-col-xs12">
         <div class="layui-input-block">
-            <button class="layui-btn layui-btn-sm" lay-submit="" lay-filter="btn_addbaseinfo" id="btn_addbaseinfo">确定</button>
+            <button class="layui-btn layui-btn-sm" lay-submit="" lay-filter="btn_addbaseinfo" id="btn_addbaseinfo">确定
+            </button>
         </div>
     </div>
-</form>
-<script th:src="@{/js/contextpath.js}"></script>
-<script type="text/javascript" th:src="@{/layui/layui.js}"></script>
-<script type="text/javascript" th:src="@{/js/manager/baseinfo.js}"></script>
+    <!--
+    </form>-->
+    <script th:src="@{/js/contextpath.js}"></script>
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <script type="text/javascript" th:src="@{/js/manager/baseinfo.js}"></script>
 
 </body>

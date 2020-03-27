@@ -7,7 +7,9 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'upload', 'layedit'], function ()
         table = layui.table,
         layedit = layui.layedit,
         upload = layui.upload;
-    var index = layedit.build('footinfo', {height: 180, border: 1}); //建立编辑器
+    //var index = layedit.build('footinfo', {height: 180, border: 1}); //建立编辑器
+    var index = layedit.build('footinfobase',{height:180}); //建立编辑器
+   // var index = layedit.build('demo'); //建立编辑器
     var uploadInst = upload.render({
         elem: '#logourl'
         , url: urls + '/manage/uploadimage' //改成您自己的上传接口
@@ -18,7 +20,6 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'upload', 'layedit'], function ()
             });
         }
         , done: function (res) {
-            debugger
             //如果上传失败
             if (res.code > 0) {
                 return layer.msg('上传失败');
