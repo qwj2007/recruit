@@ -58,3 +58,30 @@ function logout() {
 
     //location.href = '/Manage/Logout.aspx';
 }
+
+
+function managerlogout() {
+    var url=getContextPath();
+    $("#username").val("");
+    $("#userpwd").val("");
+    //document.getElementById("username").value = ''; //账号
+    //document.getElementById("userpwd").value = ''; //密码
+
+    $.ajax({
+        url: url+"/index/loginOut",
+        type: "post",
+        //data: parm,
+        async: false,
+        dataType: "text",
+        success: function (msg) {
+            if (msg == "1") {
+                window.location.href="/";
+            }
+            else if (msg == "0") {
+
+            }
+
+        }
+    });
+
+}

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 作者：qiwj
@@ -28,8 +29,8 @@ public class NewsServiceImpl implements INewsService {
     }
 
     @Override
-    public List<News> selectNewInfos() {
-        return newsMapper.selectNewInfos();
+    public List<News> selectNewInfos(Map<String,Object> map) {
+        return newsMapper.selectNewInfos(map);
     }
 
     @Override

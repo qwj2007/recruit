@@ -6,6 +6,7 @@ import com.recruit.web.pojo.Recruitinfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 作者：qiwj
@@ -16,7 +17,7 @@ public interface IRecruitInfoService {
      List<Recruitinfo> selectRecruitInfos();
      Recruitinfo  selectById(@Param("id") Integer id);
 
-     List<Recruitinfo>  selectAllRecruitInfos();
+     List<Recruitinfo>  selectAllRecruitInfos(Map<String,Object> map);
 
      Integer updateByPrimaryKeySelective(Recruitinfo record);
 

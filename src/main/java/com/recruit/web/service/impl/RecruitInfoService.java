@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 作者：qiwj
@@ -32,8 +33,8 @@ public class RecruitInfoService implements IRecruitInfoService {
     }
 
     @Override
-    public List<Recruitinfo> selectAllRecruitInfos() {
-        List<Recruitinfo> list=recruitinfoMapper.selectAllRecruitInfos();
+    public List<Recruitinfo> selectAllRecruitInfos(Map<String,Object> map) {
+        List<Recruitinfo> list=recruitinfoMapper.selectAllRecruitInfos(map);
         return list;
     }
 

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 作者：qiwj
@@ -20,8 +21,8 @@ public class BannerServiceImpl implements IBannerService {
     private BannerMapper bannerMapper;
 
     @Override
-    public List<Banner> selectBanner() {
-        List<Banner> list = bannerMapper.selectBanner();
+    public List<Banner> selectBanner(Map<String,Object> map) {
+        List<Banner> list = bannerMapper.selectBanner(map);
         if (list != null) return list;
         else return new ArrayList<>();
     }

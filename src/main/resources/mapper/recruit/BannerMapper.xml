@@ -19,11 +19,14 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
 
-    <select id="selectBanner" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectBanner"  resultMap="BaseResultMap" resultType="Map">
         select
         <include refid="Base_Column_List"/>
         from banner
         where isactive=1
+        <if test="start!=null and pagesize!=null">
+            limit #{start},#{pagesize}
+        </if>
     </select>
     <select id="selectBannerQT" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select

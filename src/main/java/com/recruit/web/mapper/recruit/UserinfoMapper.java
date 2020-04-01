@@ -7,6 +7,7 @@ import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 @Repository
@@ -26,7 +27,7 @@ public interface UserinfoMapper {
     Userinfo getUserInfoByNamePwd(@Param("username") String username, @Param("pwd") String pwd);
 
     Userinfo  getUserInfo(@Param("username") String username, @Param("email") String email);
-    List<Userinfo> getUserAll();
+    List<Userinfo> getUserAll(Map<String,Object> map);
     int deleteUser(@Param("id") List<Integer> id);
     int updatePwd(@Param("id") List<Integer> id);
 }

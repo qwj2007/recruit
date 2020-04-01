@@ -4,6 +4,7 @@ import com.recruit.web.pojo.Recruitinfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface RecruitinfoMapper {
 
@@ -23,7 +24,7 @@ public interface RecruitinfoMapper {
 
     Recruitinfo selectById(@Param("id") Integer id);
 
-    List<Recruitinfo> selectAllRecruitInfos();
+    List<Recruitinfo> selectAllRecruitInfos(Map<String,Object> map);
 
     Integer updateBatch(@Param("id") List<Integer> id);
 

@@ -68,10 +68,19 @@ public class ManagerController {
     @RequestMapping(value = "loadUserinfo", method = {RequestMethod.POST, RequestMethod.GET},
             produces = {"text/html;charset=UTF-8;", "application/json"})
     @ResponseBody
-    public String loadUserInfo() {
-        List<Userinfo> list = userinfoService.getUserAll();
+    public String loadUserInfo(HttpServletRequest request) {
+        String page=request.getParameter("page");
+        String pagesize=request.getParameter("limit");
+        Map<String,Object> map=new HashMap<>();
+        Map<String,Object> mapcount=new HashMap<>();
+        int start=(Integer.parseInt(page)-1)*Integer.parseInt(pagesize);
+        map.put("start",start);
+        map.put("pagesize",Integer.parseInt(pagesize));
+
+        List<Userinfo> list = userinfoService.getUserAll(map);
+        List<Userinfo> listcount = userinfoService.getUserAll(mapcount);
         TableDataModel tableDataModel = new TableDataModel();
-        tableDataModel.setCount(list.size());
+        tableDataModel.setCount(listcount.size());
         tableDataModel.setMsg("操作成功");
         tableDataModel.setData(list);
         String jsons = JSON.toJSONString(tableDataModel);
@@ -129,10 +138,19 @@ public class ManagerController {
 
     @RequestMapping(value = "loadEmployee", produces = {"text/html;charset=UTF-8;", "application/json"})
     @ResponseBody
-    public String loadEmployee() {
-        List<Employee> list = employeeService.getEmployeeAll();
+    public String loadEmployee(HttpServletRequest request) {
+        String page=request.getParameter("page");
+        String pagesize=request.getParameter("limit");
+        Map<String,Object> map=new HashMap<>();
+        Map<String,Object> mapcount=new HashMap<>();
+        int start=(Integer.parseInt(page)-1)*Integer.parseInt(pagesize);
+        map.put("start",start);
+        map.put("pagesize",Integer.parseInt(pagesize));
+
+        List<Employee> list = employeeService.getEmployeeAll(map);
+        List<Employee> listcount = employeeService.getEmployeeAll(map);
         TableDataModel tableDataModel = new TableDataModel();
-        tableDataModel.setCount(list.size());
+        tableDataModel.setCount(listcount.size());
         tableDataModel.setMsg("操作成功");
         tableDataModel.setData(list);
         String jsons = JSON.toJSONString(tableDataModel);
@@ -361,10 +379,18 @@ public class ManagerController {
 
     @RequestMapping(value = "loadRecruitData", produces = {"text/html;charset=UTF-8;", "application/json"})
     @ResponseBody
-    public String loadRecruitList() {
-        List<Recruitinfo> list = recruitInfoService.selectAllRecruitInfos();
+    public String loadRecruitList(HttpServletRequest request) {
+        String page=request.getParameter("page");
+        String pagesize=request.getParameter("limit");
+        Map<String,Object> map=new HashMap<>();
+        Map<String,Object> mapcount=new HashMap<>();
+        int start=(Integer.parseInt(page)-1)*Integer.parseInt(pagesize);
+        map.put("start",start);
+        map.put("pagesize",Integer.parseInt(pagesize));
+        List<Recruitinfo> listcount = recruitInfoService.selectAllRecruitInfos(mapcount);
+        List<Recruitinfo> list = recruitInfoService.selectAllRecruitInfos(map);
         TableDataModel tableDataModel = new TableDataModel();
-        tableDataModel.setCount(list.size());
+        tableDataModel.setCount(listcount.size());
         tableDataModel.setMsg("操作成功");
         tableDataModel.setData(list);
         String jsons = JSON.toJSONString(tableDataModel);
@@ -379,10 +405,19 @@ public class ManagerController {
 
     @ResponseBody
     @RequestMapping(value = "loadNewsInfos", produces = {"text/html;charset=UTF-8;", "application/json"})
-    public String loadNewsInfos() {
-        List<News> list = newsService.selectNewInfos();
+    public String loadNewsInfos(HttpServletRequest request) {
+        String page=request.getParameter("page");
+        String pagesize=request.getParameter("limit");
+        Map<String,Object> map=new HashMap<>();
+        Map<String,Object> mapcount=new HashMap<>();
+        int start=(Integer.parseInt(page)-1)*Integer.parseInt(pagesize);
+        map.put("start",start);
+        map.put("pagesize",Integer.parseInt(pagesize));
+
+        List<News> list = newsService.selectNewInfos(map);
+        List<News> listcount = newsService.selectNewInfos(mapcount);
         TableDataModel tableDataModel = new TableDataModel();
-        tableDataModel.setCount(list.size());
+        tableDataModel.setCount(listcount.size());
         tableDataModel.setMsg("操作成功");
         tableDataModel.setData(list);
         String jsons = JSON.toJSONString(tableDataModel);
@@ -493,10 +528,19 @@ public class ManagerController {
 
     @RequestMapping(value = "loadNavication", produces = {"text/html;charset=UTF-8;", "application/json"})
     @ResponseBody
-    public String loadNavication() {
-        List<Navigation> list = navigationService.selectNavigation();
+    public String loadNavication(HttpServletRequest request) {
+        String page=request.getParameter("page");
+        String pagesize=request.getParameter("limit");
+        Map<String,Object> map=new HashMap<>();
+        Map<String,Object> mapcount=new HashMap<>();
+        int start=(Integer.parseInt(page)-1)*Integer.parseInt(pagesize);
+        map.put("start",start);
+        map.put("pagesize",Integer.parseInt(pagesize));
+
+        List<Navigation> list = navigationService.selectNavigationAll(map);
+        List<Navigation> listcount = navigationService.selectNavigationAll(mapcount);
         TableDataModel tableDataModel = new TableDataModel();
-        tableDataModel.setCount(list.size());
+        tableDataModel.setCount(listcount.size());
         tableDataModel.setMsg("操作成功");
         tableDataModel.setCode("0");
         tableDataModel.setData(list);
@@ -664,10 +708,20 @@ public class ManagerController {
 
     @RequestMapping(value = "loadBanner", produces = {"text/html;charset=UTF-8;", "application/json"})
     @ResponseBody
-    public String loadBanner() {
-        List<Banner> list = bannerService.selectBanner();
+    public String loadBanner(HttpServletRequest request) {
+
+        String page=request.getParameter("page");
+        String pagesize=request.getParameter("limit");
+        Map<String,Object> map=new HashMap<>();
+        Map<String,Object> mapcount=new HashMap<>();
+        int start=(Integer.parseInt(page)-1)*Integer.parseInt(pagesize);
+        map.put("start",start);
+        map.put("pagesize",Integer.parseInt(pagesize));
+
+        List<Banner> list = bannerService.selectBanner(map);
+        List<Banner> listCount = bannerService.selectBanner(mapcount);
         TableDataModel tableDataModel = new TableDataModel();
-        tableDataModel.setCount(list.size());
+        tableDataModel.setCount(listCount.size());
         tableDataModel.setMsg("操作成功");
         tableDataModel.setCode("0");
         tableDataModel.setData(list);

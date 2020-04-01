@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
+
 @Mapper
 @Repository
 public interface NewsMapper {
@@ -22,6 +24,6 @@ public interface NewsMapper {
     int updateByPrimaryKey(News record);
 
     List<News> selectNews();
-    List<News>  selectNewInfos();
+    List<News>  selectNewInfos(Map<String,Object> map);
     Integer updateBatch(@Param("id") List<Integer> id);
 }

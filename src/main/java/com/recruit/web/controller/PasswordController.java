@@ -1,5 +1,6 @@
 package com.recruit.web.controller;
 
+import com.recruit.web.common.LoginUtil;
 import com.recruit.web.pojo.Emailset;
 import com.recruit.web.pojo.Userinfo;
 import com.recruit.web.service.IEmailsetService;
@@ -137,12 +138,14 @@ public class PasswordController {
     }
 
     @RequestMapping("/retrievePassword")
-    public String RetrievePassword() {
+    public String RetrievePassword(Model model,HttpServletRequest request) {
+        LoginUtil.isLogin(request, model);
         return "retrievepassword";
     }
 
     @RequestMapping("/modifypassword")
     public String modifypassword(HttpServletRequest request, Model model) throws Exception {
+        LoginUtil.isLogin(request, model);
         String email = request.getParameter("email");
         String de_email = EncodeBase64.decodeBase64(email);
         model.addAttribute("email", de_email);

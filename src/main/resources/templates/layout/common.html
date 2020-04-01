@@ -59,7 +59,7 @@
             location.href =urls+ '/resume/changepassword';
         }
     </script>
-    <div class="member" id="login" th:if="${showLogin}==0">
+    <div class="member" id="login" th:if="${showLogin}==0" style="width: 280px">
         <div class="rekit_fdcfc5">
             <label>
                 用户登录</label>
@@ -68,13 +68,13 @@
             <div class="rekit_761236">
                 <b></b>
                 <input type="text" name="username" id="username" class="textbox-text" autocomplete="off"
-                       placeholder="请输入用户名"/>
+                       placeholder="请输入用户名" style="width: 240px"/>
             </div>
             <br/>
             <div class="rekit_761237">
                 <b></b>
                 <input type="password" name="userpwd" id="userpwd" class="textbox-text" autocomplete="off"
-                       placeholder="请输入密码"/>
+                       placeholder="请输入密码" style="width: 240px"/>
             </div>
             <br/>
             <div class="rekit_fbb97b">
@@ -124,10 +124,11 @@
 
 
             </div>
+            <!--
             <div class="rekit_e8ddfa">
                 <a href="http://bszs.conac.cn/sitename?method=show&id=09ECC5E241486724E053022819AC98EE" target="_blank">
                     <img th:src="@{/images/blue.png}"/></a>
-            </div>
+            </div>-->
         </div>
     </div>
 </nav>

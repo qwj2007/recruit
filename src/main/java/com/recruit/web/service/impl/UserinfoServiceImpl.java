@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 作者：qiwj
@@ -60,8 +61,8 @@ public class UserinfoServiceImpl implements IUserinfoService{
     }
 
     @Override
-    public List<Userinfo> getUserAll() {
-        return userinfoMapper.getUserAll();
+    public List<Userinfo> getUserAll(Map<String,Object> map) {
+        return userinfoMapper.getUserAll(map);
     }
 
     @Override

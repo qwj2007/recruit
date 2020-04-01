@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 作者：qiwj
@@ -53,8 +54,8 @@ public class EmployeeSeviceImpl implements IEmployeeService {
     }
 
     @Override
-    public List<Employee> getEmployeeAll() {
-        return employeeMapper.getEmployeeAll();
+    public List<Employee> getEmployeeAll(Map<String,Object> map) {
+        return employeeMapper.getEmployeeAll( map);
     }
 
     @Override

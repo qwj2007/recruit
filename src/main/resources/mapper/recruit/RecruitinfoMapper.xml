@@ -16,6 +16,9 @@
 
     <select id="selectAllRecruitInfos" resultMap="BaseResultMap" resultType="Map">
     select * from recruitinfo where isactive=1
+        <if test="start!=null and pagesize!=null">
+            limit #{start},#{pagesize}
+        </if>
   </select>
 
     <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">

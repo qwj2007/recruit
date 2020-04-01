@@ -3,6 +3,7 @@ package com.recruit.web.service;
 import com.recruit.web.pojo.Navigation;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 作者：qiwj
@@ -19,11 +20,9 @@ public interface INavigationService {
 
     int insert(Navigation record);
 
-
+    List<Navigation> selectNavigationAll(Map<String,Object> map);
 
     Navigation selectByPrimaryKey(Integer id);
-
-
 
     int updateByPrimaryKey(Navigation record);
 

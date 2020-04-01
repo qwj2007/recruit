@@ -118,11 +118,11 @@
   </update>
 
     <select id="getUserInfoByNamePwd" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select
+        select
         <include refid="Base_Column_List"/>
-    from userinfo
-    where (username = #{username} or email=#{username}) and pwd=#{pwd} and isactive=1
-  </select>
+        from userinfo
+        where (username = #{username} or email=#{username}) and pwd=#{pwd} and isactive=1
+    </select>
     <select id="getUserInfo" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -137,11 +137,14 @@
         limit 1
     </select>
 
-    <select id="getUserAll" resultMap="BaseResultMap">
-    select a.*,b.truename,b.phone from userinfo a
-    LEFT JOIN  resumes b on a.id=b.userid
-    where a.isactive=1
-  </select>
+    <select id="getUserAll" resultMap="BaseResultMap" resultType="Map">
+        select a.*,b.truename,b.phone from userinfo a
+        LEFT JOIN resumes b on a.id=b.userid
+        where a.isactive=1
+        <if test="start!=null and pagesize!=null">
+            limit #{start},#{pagesize}
+        </if>
+    </select>
 
     <update id="deleteUser">
         update userinfo

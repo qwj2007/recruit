@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 作者：qiwj
@@ -16,10 +17,18 @@ import java.util.List;
 public class NavigationServiceImpl implements INavigationService {
     @Autowired
     private NavigationMapper navigationMapper;
+
     @Override
     public List<Navigation> selectNavigation() {
         return navigationMapper.selectNavigation();
     }
+
+
+    @Override
+    public List<Navigation> selectNavigationAll(Map<String,Object> map) {
+        return navigationMapper.selectNavigationAll(map);
+    }
+
 
     @Override
     public int insertSelective(Navigation record) {

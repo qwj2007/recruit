@@ -3,6 +3,7 @@ package com.recruit.web.mapper.recruit;
 import com.recruit.web.pojo.Navigation;
 
 import java.util.List;
+import java.util.Map;
 
 public interface NavigationMapper {
     int deleteByPrimaryKey(Integer id);
@@ -17,4 +18,6 @@ public interface NavigationMapper {
 
     int updateByPrimaryKey(Navigation record);
     List<Navigation> selectNavigation();
+    List<Navigation> selectNavigationAll(Map<String,Object> map);
+
 }

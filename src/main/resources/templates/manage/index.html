@@ -10,9 +10,14 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
-    <link rel="icon" th:href="@{favicon.ico}">
+    <link rel="icon" th:href="@{/images/favicon.ico}">
     <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all"/>
     <link rel="stylesheet" th:href="@{/css/index.css}" media="all"/>
+    <style type="text/css">
+        .icon-caidan:before {
+            content: "\e606";
+        }
+    </style>
 </head>
 <body class="main_body">
 <div class="layui-layout layui-layout-admin">
@@ -52,7 +57,7 @@
                                 class="layui-badge-dot"></span></a></dd>
                         <dd pc><a href="javascript:;" class="changeSkin"><i
                                 class="layui-icon">&#xe61b;</i><cite>更换皮肤</cite></a></dd>
-                        <dd><a href="javascript:void(0)" class="signOut" onclick="logout();">
+                        <dd><a href="javascript:void(0)" class="signOut" onclick="managerlogout();">
                             <i class="seraph icon-tuichu"></i><cite>退出</cite></a>
                         </dd>
                     </dl>

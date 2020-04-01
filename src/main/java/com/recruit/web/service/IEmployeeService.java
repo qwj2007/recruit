@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 作者：qiwj
@@ -26,7 +27,7 @@ public interface IEmployeeService {
 
     int updateByPrimaryKey(Employee record);
 
-    List<Employee> getEmployeeAll();
+    List<Employee> getEmployeeAll(Map<String,Object> map);
 
     int updateBatch(List<Integer> id);
     int updatePwd( List<Integer> id);

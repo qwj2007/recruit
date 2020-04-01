@@ -29,6 +29,16 @@
     from navigation where isactive=1 and isdisplay=1
     ORDER  by orders  limit 5
   </select>
+
+  <select id="selectNavigationAll" resultMap="BaseResultMap" resultType="Map">
+    SELECT
+    <include refid="Base_Column_List"></include>
+    from navigation where isactive=1 and isdisplay=1
+    ORDER  by orders
+    <if test="start!=null and pagesize!=null">
+       limit #{start},#{pagesize}
+    </if>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from navigation
     where id = #{id,jdbcType=INTEGER}
