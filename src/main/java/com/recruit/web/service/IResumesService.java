@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -29,5 +30,5 @@ public interface IResumesService {
 
     String PersoncenterCheck(HttpServletRequest request, Model model);
 
-    List<Resumes> selectResumeAll();
+    List<Resumes> selectResumeAll(Map<String,Object> map);
 }

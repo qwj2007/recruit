@@ -327,12 +327,20 @@ select *,TIMESTAMPDIFF(YEAR,resumes.workdate,now()) workage,userinfo.email
     FROM resumes resumes INNER JOIN userinfo userinfo on resumes.userid=userinfo.id and userinfo.isactive=1
     where resumes.userid=#{userid} LIMIT 1
   </select>
-
-    <select id="selectResumeAll"  resultMap="BaseResultMap" resultType="Map">
-select DISTINCT a.id ,a.truename,a.nation,a.sex,a.age,a.education,a.academicdegree,
-a.locationpersonnelrelationship,a.registeredresidence,c.title as applyworkname,b.recruitinfoid,b.id deliveryid,a.userid
-from resumes a inner join delivery b on a.id=b.resumeid and b.isactive=1
-inner JOIN recruitinfo c on b.recruitinfoid=c.id and c.isactive=1
+    <sql id="sqlResumeall">
+      SELECT  DISTINCT a.id ,a.truename,a.nation,a.sex,a.age,a.education,a.academicdegree,
+        a.locationpersonnelrelationship,a.registeredresidence,c.title as applyworkname,b.recruitinfoid,b.id deliveryid,a.userid
+        from resumes a inner join delivery b on a.id=b.resumeid and b.isactive=1
+        inner JOIN recruitinfo c on b.recruitinfoid=c.id and c.isactive=1
+        inner JOIN userinfo userinfo on a.userid=userinfo.id and userinfo.isactive=1
+    </sql>
+    <select id="selectResumeAll" resultMap="BaseResultMap" resultType="Map">
+        <include refid="sqlResumeall"></include>
+        <if test="start!=null and pagesize!=null">
+            limit #{start},#{pagesize}
+        </if>
 
     </select>
+
+
 </mapper>

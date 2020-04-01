@@ -438,10 +438,18 @@ public class ManagerController {
 
     @RequestMapping(value = "loadresumeList",method = {RequestMethod.POST}, produces = {"text/html;charset=UTF-8;", "application/json"})
     @ResponseBody
-    public String getResumeList() {
-        List<Resumes> list = resumesService.selectResumeAll();
+    public String getResumeList(HttpServletRequest request) {
+        String page=request.getParameter("page");
+        String pagesize=request.getParameter("limit");
+        Map<String,Object> map=new HashMap<>();
+        Map<String,Object> mapcount=new HashMap<>();
+        int start=(Integer.parseInt(page)-1)*Integer.parseInt(pagesize);
+        map.put("start",start);
+        map.put("pagesize",Integer.parseInt(pagesize));
+        List<Resumes> listAll=resumesService.selectResumeAll(mapcount);
+        List<Resumes> list = resumesService.selectResumeAll(map);
         TableDataModel tableDataModel = new TableDataModel();
-        tableDataModel.setCount(list.size());
+        tableDataModel.setCount(listAll.size());
         tableDataModel.setMsg("操作成功");
         tableDataModel.setCode("0");
         tableDataModel.setData(list);

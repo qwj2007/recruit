@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 作者：qiwj
@@ -155,7 +156,7 @@ public class ResumesServiceImpl implements IResumesService {
     }
 
     @Override
-    public List<Resumes> selectResumeAll() {
-        return resumesMapper.selectResumeAll();
+    public List<Resumes> selectResumeAll(Map<String,Object> map) {
+        return resumesMapper.selectResumeAll(map);
     }
 }
