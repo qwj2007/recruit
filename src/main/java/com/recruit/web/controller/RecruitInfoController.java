@@ -98,7 +98,7 @@ public class RecruitInfoController {
     public String noticeinfo(Model model, HttpServletRequest request) {
         Boolean isok = LoginUtil.isLogin(request, model);
         if (!isok) {
-            return "redict:/";
+            return "redirect:/";
         }
         Integer userid = Integer.parseInt(request.getParameter("id"));
         List<Hrnotice> list = hrnoticeService.GetHrnoticeByUserId(userid.toString());
