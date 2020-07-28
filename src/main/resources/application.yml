@@ -9,7 +9,7 @@ spring:
   datasource:
   #第一个数据源
     recruit:
-      url: jdbc:mysql://127.0.0.1:3306/recruit?serverTimezone=GMT&nullCatalogMeansCurrent=true&characterEncoding=UTF-8&&useSSL=false
+      url: jdbc:mysql://119.45.127.237:3306/recruit?serverTimezone=GMT&nullCatalogMeansCurrent=true&characterEncoding=UTF-8&&useSSL=false
       username: root
       password: Qwj2007@2008
       driver-class-name: com.mysql.jdbc.Driver
