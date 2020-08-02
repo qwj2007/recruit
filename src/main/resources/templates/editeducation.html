@@ -36,7 +36,8 @@
 </style>
 <div th:replace="layout/commonjs::common_js(~{})"></div>
 <script type="text/javascript">
-    var rooturl=[[${#httpServletRequest.getContextPath()}]];
+    //var rooturl=[[${#httpServletRequest.getContextPath()}]];
+    var rooturl="";
     function AddJiaoYuJingLi(flag) {
 
         var kssj = $('#gzsj').val();

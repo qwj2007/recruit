@@ -6,6 +6,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.nio.charset.Charset;
 import java.util.List;
@@ -14,15 +15,15 @@ import java.util.List;
  * 作者：qiwj
  * 时间：2020/3/19
  */
-@Configuration
-public class MyWebMvcConfig extends WebMvcConfigurationSupport {
+//@Configuration
+public class MyWebMvcConfig implements WebMvcConfigurer {
     /**
      * 解决springboot2.0静态资源无法直接访问问题
      *
      * @param registry
      */
     @Override
-    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
         String os = System.getProperty("os.name");
         System.out.println(os);
@@ -39,7 +40,7 @@ public class MyWebMvcConfig extends WebMvcConfigurationSupport {
             registry.addResourceHandler("/images/upload/**")
                     .addResourceLocations("file:/usr/pictureUpload/images/upload/");
         }
-        super.addResourceHandlers(registry);
+        //super.addResourceHandlers(registry);
     }
 
     /*
@@ -47,8 +48,8 @@ public class MyWebMvcConfig extends WebMvcConfigurationSupport {
     * */
 
     @Override
-    protected void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        super.configureMessageConverters(converters);
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        //super.configureMessageConverters(converters);
         converters.add(responseBodyConverter());
     }//*/
 

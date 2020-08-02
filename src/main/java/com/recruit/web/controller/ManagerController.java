@@ -254,8 +254,10 @@ public class ManagerController {
 
     @RequestMapping(value = "/index", produces = {"text/html;charset=UTF-8;", "application/json"})
     public String Index(HttpServletRequest request, Model model) {
-        String userid = CookieManager.getInstance().getCookie(request, "employeeid");
-        String username = CookieManager.getInstance().getCookie(request, "employeename");
+       // String userid = CookieManager.getInstance().getCookie(request, "employeeid");
+       // String username = CookieManager.getInstance().getCookie(request, "employeename");
+        String userid = CookieManager.getInstance().getCookie(request, "userid");
+        String username = CookieManager.getInstance().getCookie(request, "username");
         model.addAttribute("employeeid", userid);
         model.addAttribute("employeename", username);
         return "/manage/index";
@@ -507,11 +509,11 @@ public class ManagerController {
         String jsons = "";
         Integer status = 0;
         switch (type) {
-            case "1":
+            case "0":
                 status = 0;
                 jsons = "你的简历没有通过初选";
                 break;
-            case "0":
+            case "1":
                 status = 1;
                 jsons = "祝贺你，你的简历通过初选";
                 break;

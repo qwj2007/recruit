@@ -39,10 +39,11 @@ public class IndexController {
 
     @RequestMapping("/")
     public String GetInfos(Model model, HttpServletRequest request) {
+        LoginUtil.isLogin(request, model);
+
         List<Banner> listbanner=bannerService.selectBannerQT();
         List<Recruitinfo> list = recruitInfoService.selectRecruitInfos();
         List<News> newslist = newsService.selectNews();
-        LoginUtil.isLogin(request, model);
         //if(list!=null) {
         model.addAttribute("recruitinfos", list);
         model.addAttribute("news", newslist);
@@ -83,12 +84,14 @@ public class IndexController {
         } else {
             Employee employee = employeeService.getEmployeeByUserIdPwd(username.trim(), pwd.trim());
             if (employee != null) {
-                Cookie cookie = new Cookie("employeeid", employee.getUserid());
+                Cookie cookie = new Cookie("userid", employee.getUserid());
+                //Cookie cookie = new Cookie("employeeid", employee.getUserid());
                 cookie.setPath("/");
                 cookie.setDomain(request.getServerName());
                 cookie.setMaxAge(-1);//-1表示关闭浏览器，cookie就失效。
                 response.addCookie(cookie);
-                cookie = new Cookie("employeename", employee.getTruename());
+               // cookie = new Cookie("employeename", employee.getTruename());
+                cookie = new Cookie("username", employee.getTruename());
                 cookie.setDomain(request.getServerName());
                 cookie.setPath("/");
                 cookie.setMaxAge(-1);

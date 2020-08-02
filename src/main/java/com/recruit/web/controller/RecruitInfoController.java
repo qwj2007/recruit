@@ -39,7 +39,7 @@ public class RecruitInfoController {
 
     @RequestMapping("/recruitlist")
     public String getMoreRecruit(Model model, HttpServletRequest request) {
-        Boolean result = LoginUtil.isLogin(request, model);
+        LoginUtil.isLogin(request, model);
         List<Recruitinfo> list = recruitInfoService.selectRecruitInfos();
         model.addAttribute("recruitinfos", list);
         return "recruitlist";
@@ -47,7 +47,7 @@ public class RecruitInfoController {
 
     @RequestMapping("/newslist")
     public String getNewsMore(Model model, HttpServletRequest request) {
-        Boolean result = LoginUtil.isLogin(request, model);
+        LoginUtil.isLogin(request, model);
         List<News> list = newsService.selectNews();
         model.addAttribute("newslist", list);
         return "newslist";
@@ -96,10 +96,8 @@ public class RecruitInfoController {
 
     @RequestMapping("/noticeinfo")
     public String noticeinfo(Model model, HttpServletRequest request) {
-        Boolean isok = LoginUtil.isLogin(request, model);
-        if (!isok) {
-            return "redirect:/";
-        }
+      LoginUtil.isLogin(request, model);
+
         Integer userid = Integer.parseInt(request.getParameter("id"));
         List<Hrnotice> list = hrnoticeService.GetHrnoticeByUserId(userid.toString());
         model.addAttribute("noticelist", list == null ? new ArrayList<Hrnotice>() : list);
@@ -108,10 +106,7 @@ public class RecruitInfoController {
 
     @RequestMapping("/noticeDetail")
     public String noticeDetail(Model model, HttpServletRequest request) {
-        Boolean isok = LoginUtil.isLogin(request, model);
-        if (!isok) {
-            return "redict:/";
-        }
+        LoginUtil.isLogin(request, model);
         Integer id = Integer.parseInt(request.getParameter("id"));
         Hrnotice hrnotice = hrnoticeService.selectByPrimaryKey(id);
         model.addAttribute("noticeinfo", hrnotice);

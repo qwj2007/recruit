@@ -3,8 +3,6 @@
         <div class="rekit_2365cd">
             <a href="/">
                 <img th:src="${baseinfo.logourl}" class="png"/>
-                <!--
-                <img th:src="@{/uploadfiles/XiTongPeiZhi/b7102993-869c-4308-8536-f752b39a4df0.png}" class='png'/>-->
             </a>
             <label>招聘频道</label>
 
@@ -102,7 +100,9 @@
                 </div>
                 <div class="port-rt">
                     <span class="name" th:text="${username}"></span>
-                    <span>HR 通知 <span class="orange" id="count" th:text="${hrnoticecount}"></span></span>
+
+                    <span> <a th:href="@{/center/noticeinfo(id=${userid})}" class="orange">HR 通知 </a> <span class="orange" id="count" th:text="${hrnoticecount}"></span></span>
+                  <!--  <a th:href="@{/center/noticeinfo(id=${userid})}" class="orange">HR 通知 <span span class="orange" id="count" th:text="${hrnoticecount}">0</span></a>-->
                 </div>
             </div>
             <div class="enter">

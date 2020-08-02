@@ -37,7 +37,7 @@
 </style>
 <div th:replace="layout/commonjs::common_js(~{})"></div>
 <script type="text/javascript">
-    var rooturl=[[${#httpServletRequest.getContextPath()}]];
+    var rooturl="";//[[${#httpServletRequest.getContextPath()}]];
     function AddCertificate(flag) {
         var rq = $('#rq').val();
         var ZSMC = $('#ZSMC').val();

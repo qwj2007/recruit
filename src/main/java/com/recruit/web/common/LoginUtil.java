@@ -1,5 +1,7 @@
 package com.recruit.web.common;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.recruit.web.pojo.Baseinfo;
 import com.recruit.web.pojo.Hrnotice;
 import com.recruit.web.pojo.Navigation;
@@ -53,8 +55,7 @@ public class LoginUtil {
         statichrnoticeservice = hrnoticeService;
     }
 
-    public static Boolean isLogin(HttpServletRequest request, Model model) {
-        //获取导航信息
+    public static void isLogin(HttpServletRequest request, Model model) {
         List<Navigation> listNavication = staticnavigationService.selectNavigation();
         if (listNavication != null && listNavication.size() > 0) {
             model.addAttribute("menus", listNavication);
@@ -70,25 +71,19 @@ public class LoginUtil {
         }
 
         String userid = CookieManager.getInstance().getCookie(request, "userid");
-        String username = CookieManager.getInstance().getCookie(request, "username");
-        if (userid == null || userid == "") {
+        if (userid == ""||null==userid) {
             model.addAttribute("showLogin", 0);
             model.addAttribute("photourl", "");
 
-            return false;
         } else {
-            //已经登录
+            String username = CookieManager.getInstance().getCookie(request, "username");
             model.addAttribute("showLogin", 1);
             model.addAttribute("username", username);
             model.addAttribute("userid", userid);
             Resumes resumes = staticresume.selctResumeByUserId(userid);
             model.addAttribute("photourl", resumes != null ? resumes.getPhoto() : "");
-
         }
 
-        //  List<Hrnotice> list = statichrnoticeservice.GetHrnoticeByUserId(userid);
-        // model.addAttribute("hrnoticecount", list != null ? "("+list.size()+")" : "(0)");
-        return true;
     }
 
     public static String LoginOut(HttpServletRequest request, HttpServletResponse response) {
