@@ -11,7 +11,7 @@ spring:
     recruit:
       url: jdbc:mysql://127.0.0.1:3306/recruit?serverTimezone=GMT&nullCatalogMeansCurrent=true&characterEncoding=UTF-8&&useSSL=false
       username: root
-      password: root
+      password: 1qaz2wsx~
       driver-class-name: com.mysql.jdbc.Driver
       type: com.alibaba.druid.pool.DruidDataSource
   #第二个数据源
