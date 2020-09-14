@@ -21,7 +21,7 @@
                     <span class="auth"> 作者：<span th:text="${newsinfo.author}"></span></span>
                     浏览次数：<span th:text="${newsinfo.showcount}"></span>次</p>
             </div>
-            <div class="regist-way" th:text="${newsinfo.contents}">
+            <div class="regist-way" th:utext="${newsinfo.contents}">
 
             </div>
         </div>

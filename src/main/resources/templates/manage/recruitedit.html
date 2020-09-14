@@ -13,6 +13,11 @@
     <link rel="icon" th:href="@{favicon.ico}">
     <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all"/>
     <link rel="stylesheet" th:href="@{/css/index.css}" media="all"/>
+    <style type="text/css">
+        .layui-layedit {
+            height: 250px;
+        }
+    </style>
 </head>
 <body>
 <form class="layui-form layui-form-pane" style="width:90%;">
@@ -40,9 +45,12 @@
     <div class="layui-form-item layui-row layui-col-xs12">
         <label class="layui-form-label">内容</label>
         <div class="layui-input-block">
-            <textarea placeholder="请输入招聘内容" name="contents" id="contents" class="layui-textarea Remark" th:text="${recruitinfo.contents}"></textarea>
+            <textarea placeholder="请输入招聘内容" name="contents" id="contents"
+                      class="layui-textarea" style="display: none;" th:text="${recruitinfo.contents}"
+            ></textarea>
         </div>
     </div>
+
     <div class="layui-form-item layui-row layui-col-xs12">
         <div class="layui-input-block">
             <button class="layui-btn layui-btn-sm" lay-submit="" lay-filter="addManager">确定</button>

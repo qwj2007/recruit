@@ -1,5 +1,6 @@
-layui.use(['form', 'layer','laydate'], function () {
+layui.use(['form', 'layer','laydate','layedit'], function () {
     var laydate = layui.laydate;
+    var layedit=layui.layedit;
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery;
@@ -13,6 +14,8 @@ layui.use(['form', 'layer','laydate'], function () {
         elem: '#endtime'
         ,format: 'yyyy-MM-dd'
     });
+
+    var index = layedit.build('contents',{height:100}); //建立编辑器
     form.on("submit(addManager)", function (data) {
 
         //获取防伪标记
@@ -24,7 +27,8 @@ layui.use(['form', 'layer','laydate'], function () {
                 title: $("#title").val(),
                 begintime: $("#begintime").val(),
                 endtime: $("#endtime").val(),
-                contents: $("#contents").val()
+                //contents: $("#contents").val()
+                contents:layedit.getContent(index)
             },
             dataType: "json",
             headers: {

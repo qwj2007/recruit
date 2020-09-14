@@ -72,7 +72,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'upload', 'layedit'], function ()
                 }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                debugger
+
                 layer.alert('操作失败！！！' + XMLHttpRequest.status + "|" + XMLHttpRequest.readyState + "|" + textStatus, {icon: 5});
             }
         });
