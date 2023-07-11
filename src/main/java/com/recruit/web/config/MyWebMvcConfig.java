@@ -17,6 +17,7 @@ import java.util.List;
  */
 //@Configuration
 public class MyWebMvcConfig implements WebMvcConfigurer {
+
     /**
      * 解决springboot2.0静态资源无法直接访问问题
      *

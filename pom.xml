@@ -133,6 +133,7 @@
     </dependencies>
 
     <build>
+        <defaultGoal>compile</defaultGoal>
         <finalName>ROOT</finalName>
         <plugins>
             <plugin>

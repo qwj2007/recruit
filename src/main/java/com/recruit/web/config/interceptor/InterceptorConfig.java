@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import sun.net.www.content.image.png;
+
 
 /**
  * 作者：qiwj
@@ -60,12 +60,13 @@ public class InterceptorConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
         String os = System.getProperty("os.name");
         System.out.println(os);
+        String imagePath="file:D:/pictureUpload/images/upload/";
         if (os.toLowerCase().startsWith("win")) {
             //windows下保存路径
             //项目图片访问路径
             //将所有d:/pictureUpload/images/upload/ 访问都映射到/images/upload/**路径下
             registry.addResourceHandler("/images/upload/**")
-                    .addResourceLocations("file:D:/pictureUpload/images/upload/");
+                    .addResourceLocations(imagePath);
         } else {
             //linux下保存路径
             //项目图片访问路径

@@ -1,6 +1,4 @@
 package com.recruit.web.config.aop;
-
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
@@ -39,7 +37,7 @@ public class LogAspect {
 
         } catch (Throwable e) {
             long end = System.currentTimeMillis();
-            logger.info("【调用方法】 " + joinPoint + "\t【耗时】 : " + (end - start) + " ms with exception : " + e.getMessage());
+            logger.error("【调用方法】 " + joinPoint + "\t【耗时】 : " + (end - start) + " ms with exception : " + e.getMessage());
             throw e;
         }
     }

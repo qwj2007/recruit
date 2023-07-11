@@ -1,9 +1,6 @@
 package com.recruit.web.config.interceptor;
 
-import com.alibaba.fastjson.JSON;
-import com.recruit.web.pojo.Baseinfo;
-import com.recruit.web.pojo.Navigation;
-import com.recruit.web.pojo.Resumes;
+
 import com.recruit.web.service.IBaseInfoService;
 import com.recruit.web.service.IHrnoticeService;
 import com.recruit.web.service.INavigationService;
@@ -14,16 +11,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
+
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 
 /**
  * 作者：qiwj
